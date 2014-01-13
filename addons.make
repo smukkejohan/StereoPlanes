@@ -1,0 +1,3 @@
+ofxBox2d
+ofxStereoCamera
+ofxSyphon
