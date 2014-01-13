@@ -6,7 +6,8 @@
 #include "ofxOscParameterSync.h"
 #include "ofxXmlSettings.h"
 #include "ofxOscReceiver.h"
-#include "ofxStereoCamera.h"
+//#include "ofxStereoCamera.h"
+#include "ofxCoolGlasses.h"
 #include "ofxGLWarper.h"
 
 
@@ -16,7 +17,9 @@ public:
     // TODO frustrum - dynamicly calculate
     // TODO viewer world location - inherit from world
 
-    ofxStereoCamera<ofCamera> cam;
+    //ofxStereoCamera<ofCamera> cam;
+    
+    ofxCoolGlasses cam;
     
     int width;
     int height;
@@ -26,7 +29,6 @@ public:
     ofxGLWarper warpRight;
     
     StereoPlane(string n) {
-        cout<<"constructor"<<name<<endl;
         name = n;
     };
     
@@ -35,6 +37,7 @@ public:
     
     ofxXmlSettings * settings;
     
+    ofVec3f observerPosition;
     
     // Corners
     ofPoint wlTopLeft;
@@ -61,14 +64,18 @@ public:
         }
         
         width = w; height = h;
+        
         cam.setup(w, h);
-        cam.setScale(1, -1, 1);
+        
+        observerPosition.set(0,0,0);
+        
         cam.setPhysicalFocusDistance(120);
         cam.setFocusDistance(50);
-        cam.setNearClip(0.1);
-        cam.setOutputMode(ofxStereoCameraOutputMode::SIDE_BY_SIDE);
         
-        cam.setPosition(0, 0, 2);
+        cam.setPosition(ofVec3f(0, 0, 2));
+        //cam.setOf
+        
+        
         //cam.setupPerspective();
         //cam.lookAt(ofVec3f(0,0,0));
         
@@ -145,26 +152,34 @@ public:
     }
     
     void beginLeft(){
+        warpLeft.begin();
+        if(warpLeft.isActive()) warpLeft.draw();
         cam.beginLeft();
     }
     
     void endLeft(){
         cam.endLeft();
+        warpLeft.end();
     }
     
     void beginRight(){
+        warpRight.begin();
+        if(warpRight.isActive()) warpRight.draw();
         cam.beginRight();
     }
     
     void endRight(){
         cam.endRight();
+        warpRight.end();
     }
     
     void drawLeft() {
         
         warpLeft.begin();
         if(warpLeft.isActive()) warpLeft.draw();
-        cam.getLeftFbo()->draw(0,0);
+        
+        //cam.getLeftFbo()->draw(0,0);
+        //cam.left.draw();
         warpLeft.end();
         
         /*if(controlSide < 2) {
@@ -180,7 +195,8 @@ public:
         
         warpRight.begin();
         if(warpRight.isActive()) warpRight.draw();
-        cam.getRightFbo()->draw(0,0);
+        //cam.getRightFbo()->draw(0,0);
+        cam.right.draw();
         warpRight.end();
         
         /*if(controlSide < 2) {
@@ -204,8 +220,17 @@ public:
     }
     
     void update() {
-        cam.setFocusDistance(cam.getGlobalPosition().length());
-        cam.update(ofRectangle(0, 0, width, height));
+        
+        
+        
+        observerPosition.set(ofMap(fmodf(ofGetElapsedTimef(),1), 0, 1, -1, 1), 0, 2);
+        cam.setPosition(observerPosition);
+        cam.setFocusDistance( cam.left.getGlobalPosition().length() );
+        
+        //cam.setPosition(headPosition);
+        ///cam.setupOffAxisViewPortal(ofVec3f(0,0,0), ofVec3f(0, height, 0), ofVec3f(width,height,0));
+        
+        cam.update(ofRectangle(0, 0, 1, 1));
     }
     
     

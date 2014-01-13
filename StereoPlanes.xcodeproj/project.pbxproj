@@ -147,6 +147,7 @@
 
 /* Begin PBXFileReference section */
 		00E4168327B058F211D9776C /* ofxBox2dCircle.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxBox2dCircle.h; path = ../../../addons/ofxBox2d/src/ofxBox2dCircle.h; sourceTree = SOURCE_ROOT; };
+		042128171884956E00F516C5 /* ofxCoolGlasses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCoolGlasses.h; sourceTree = "<group>"; };
 		049BD563187DD1C60069585F /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		049BD57F187DD1C70069585F /* glm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glm.c; sourceTree = "<group>"; };
 		049BD580187DD1C70069585F /* glm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glm.h; sourceTree = "<group>"; };
@@ -336,7 +337,6 @@
 		1D96594EB6BCE7C4A6758E77 /* b2PolygonShape.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2PolygonShape.h; path = ../../../addons/ofxBox2d/libs/Box2D/Collision/Shapes/b2PolygonShape.h; sourceTree = SOURCE_ROOT; };
 		209BCEF79F286C9203801938 /* b2GearJoint.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2GearJoint.h; path = ../../../addons/ofxBox2d/libs/Box2D/Dynamics/Joints/b2GearJoint.h; sourceTree = SOURCE_ROOT; };
 		229CB9C8AF92D3460F8D554A /* ofxBox2d.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxBox2d.cpp; path = ../../../addons/ofxBox2d/src/ofxBox2d.cpp; sourceTree = SOURCE_ROOT; };
-		2A75FE96C07EEB62D92097AF /* ofxStereoCamera.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxStereoCamera.h; path = ../../../addons/ofxStereoCamera/src/ofxStereoCamera.h; sourceTree = SOURCE_ROOT; };
 		2ED05F6D627B4E70FA2E7678 /* b2PolygonContact.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2PolygonContact.h; path = ../../../addons/ofxBox2d/libs/Box2D/Dynamics/Contacts/b2PolygonContact.h; sourceTree = SOURCE_ROOT; };
 		3B2388BEE23F8A1DD0AADBC6 /* ofxBox2dBaseShape.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxBox2dBaseShape.cpp; path = ../../../addons/ofxBox2d/src/ofxBox2dBaseShape.cpp; sourceTree = SOURCE_ROOT; };
 		3C9685D59F4D73A3593DEF83 /* ofxBox2dUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxBox2dUtils.h; path = ../../../addons/ofxBox2d/src/ofxBox2dUtils.h; sourceTree = SOURCE_ROOT; };
@@ -1053,22 +1053,6 @@
 			name = Box2D;
 			sourceTree = "<group>";
 		};
-		121FED5B19E443CEED0D8B9A /* ofxStereoCamera */ = {
-			isa = PBXGroup;
-			children = (
-				14D64CBCFE3CAFD5538861F8 /* src */,
-			);
-			name = ofxStereoCamera;
-			sourceTree = "<group>";
-		};
-		14D64CBCFE3CAFD5538861F8 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				2A75FE96C07EEB62D92097AF /* ofxStereoCamera.h */,
-			);
-			name = src;
-			sourceTree = "<group>";
-		};
 		5492A1491D9E6E88EBB3BE2B /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -1216,7 +1200,6 @@
 				049BD5A1187DD46D0069585F /* ofxSyphon */,
 				049BD562187DD1C60069585F /* ofxObjLoader */,
 				BD1B24C549BFA7D54BC59DE3 /* ofxBox2d */,
-				121FED5B19E443CEED0D8B9A /* ofxStereoCamera */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -1305,6 +1288,7 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
+				042128171884956E00F516C5 /* ofxCoolGlasses.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

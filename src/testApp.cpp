@@ -16,9 +16,7 @@ void testApp::setup()
     
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
-    
     ofSetBackgroundAuto(true);
-    
     ofBackground(0);
     
     leftOutputServer.setName("Left");
@@ -45,11 +43,9 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-
     for(int i=0; i<planes.size(); i++) {
         planes[i]->update();
     }
-    
 }
 
 
@@ -60,7 +56,7 @@ void testApp::drawFloor() {
     ofBackground(0,0,0,255);
     
     ofSetColor(255,255,255,100);
-    ofDrawGrid(1);
+    ofDrawGrid(10);
     
     ofPushMatrix();
     
@@ -90,7 +86,6 @@ void testApp::drawFloor() {
             }
         }
     }*/
-    
 }
 
 //--------------------------------------------------------------
@@ -101,15 +96,21 @@ void testApp::draw()
     
     floor->beginLeft();
         drawFloor();
+    ofPushStyle();
+    ofFill();
+    ofSetColor(255,255,255,64);
+    ofRect(0,0, 1024, 768);
+    ofPopStyle();
     floor->endLeft();
+    
     floor->beginRight();
         drawFloor();
     floor->endRight();
     
-    
     wall->beginLeft();
         drawFloor();
     wall->endLeft();
+    
     wall->beginRight();
         drawFloor();
     wall->endRight();
@@ -125,9 +126,9 @@ void testApp::draw()
     //cam.getLeftFbo()->draw(0, 0, ofGetWidth()/2, ofGetHeight()/2);
     //gui.draw();
     
-    for(int i=0; i<planes.size(); i++) {
-        planes[i]->draw();
-    }
+    //for(int i=0; i<planes.size(); i++) {
+    //    planes[i]->draw();
+    //}
     
     //fbo.end();
     
@@ -167,12 +168,7 @@ void testApp::keyPressed(int key)
         
         activePlane->deactivateControl();
         activePlane = planes[activePlaneIndex];
-        
-        
-        
     }
-    
-    
     
 }
 
@@ -188,7 +184,6 @@ void testApp::mouseMoved(int x, int y)
 {
     ofVec3f mousePoint(x - ofGetWidth()/2,y-ofGetHeight()/2, 400);
     points.push_back(mousePoint);
-
 }
 
 //--------------------------------------------------------------
@@ -236,5 +231,4 @@ void testApp::exit() {
     
     settings.save("stereoplanes.xml");
     cout<<"exit"<<endl;
-    
 }
