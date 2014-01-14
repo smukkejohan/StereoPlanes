@@ -56,6 +56,22 @@ void testApp::setup()
     
     oscReceiver.setup(9001);
     
+    
+    // Voronoi wall
+    vbounds.set(-2, -2, 4, 4);
+    voronoi.setBounds(vbounds);
+    
+    int n = 80;
+    for(int i=0; i<n; i++) {
+        vpts.push_back(ofRandomPointInRect(vbounds));
+    }
+
+    voronoi.clear();
+    for(int i=0; i<vpts.size(); i++) {
+        voronoi.addPoint(vpts[i]);
+    }
+    voronoi.generateVoronoi();
+    
 }
 
 //--------------------------------------------------------------
@@ -95,12 +111,65 @@ void testApp::update()
     }
     
     
+    
+    
+    
     for(int i=0; i<planes.size(); i++) {
         planes[i]->cam.setPosition(camPos.get());
         planes[i]->cam.setPhysicalEyeSeparation(eyeSeperation.get());
         planes[i]->update();
         //cout<<camPos.get()<<endl;
     }
+    
+}
+
+
+void testApp::drawVoronoiWall() {
+    
+    glPushMatrix();
+    
+    ofNoFill();
+    
+    light.enable();
+    dirLight.enable();
+    
+    //voronoi.draw();
+    voronoi.getPoints().size();
+    
+    
+    
+    for(int i=0; i < voronoi.cells.size(); i++) {
+        
+        ofMesh vcell;
+        vcell.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+        
+        for(int v=0; v<voronoi.cells[i].pts.size(); v++) {
+            vcell.addVertex(voronoi.cells[i].pts[v]);
+            
+            ofColor col;
+            if(i%2 == 0) {
+                col.set(255,255,50);
+            } else {
+                col.set(50,255,255);
+            }
+            
+            vcell.addColor(col);
+        }
+        ofPushMatrix();
+        
+        
+        ofTranslate(0, 0, ofSignedNoise(ofGetElapsedTimef()/20 +i)/5);
+        vcell.draw();
+        vcell.drawWireframe();
+        
+        ofPopMatrix();
+    }
+    
+    light.disable();
+    dirLight.disable();
+    
+    ofDisableLighting();
+    glPopMatrix();
     
 }
 
@@ -171,19 +240,19 @@ void testApp::draw()
     ofClear(0, 0, 0);
     
     floor->beginLeft();
-        drawFloor();
+    drawFloor();
     floor->endLeft();
     
     floor->beginRight();
-        drawFloor();
+    drawFloor();
     floor->endRight();
     
     wall->beginLeft();
-        drawFloor();
+    drawVoronoiWall();
     wall->endLeft();
     
     wall->beginRight();
-        drawFloor();
+    drawVoronoiWall();
     wall->endRight();
     
     ofDisableDepthTest();

@@ -8,6 +8,8 @@
 #include "ofxOscReceiver.h"
 //#include "ofxStereoCamera.h"
 #include "StereoPlane.h"
+#include "ofxVoronoi.h"
+#include "Utils.h"
 
 class testApp : public ofBaseApp
 {
@@ -29,6 +31,7 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
+    
     void exit();
         
 	ofxSyphonServer leftOutputServer;
@@ -69,19 +72,23 @@ public:
     ofFbo fbo;
     StereoPlane * floor;
     StereoPlane * wall;
-    
     StereoPlane * activePlane;
     int activePlaneIndex;
     
     //StereoPlane thing;
     
     void drawFloor();
-    
     vector<StereoPlane *> planes;
-    
     ofxXmlSettings settings;
     
     ofLight light;
     ofLight dirLight;
+    
+    void drawVoronoiWall();
+    
+    vector <ofVec3f> vpts;
+    ofRectangle      vbounds;
+    ofxVoronoi       voronoi;
+    
     
 };
