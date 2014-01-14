@@ -38,6 +38,10 @@ void testApp::setup()
     activePlaneIndex = 0;
     activePlane = planes[activePlaneIndex];
     
+    //light.setPointLight();
+    light.setPosition(0, 0, 10);
+    light.setSpotlight();
+    
 }
 
 //--------------------------------------------------------------
@@ -60,7 +64,8 @@ void testApp::drawFloor() {
     
     ofPushMatrix();
     //ofRotateX(ofGetElapsedTimef()*100);
-    ofNoFill();
+    
+    ofFill();
     ofSetColor(255,255,255,255);
     //ofDrawBox(0.1);
     //ofDrawBox(0.2);
@@ -70,7 +75,6 @@ void testApp::drawFloor() {
     //ofDrawBox(1.5);
     ofPopMatrix();
    
-    
     glPopMatrix();
 }
 
@@ -79,6 +83,10 @@ void testApp::draw()
 {
     ofEnableDepthTest();
     ofBackground(ofColor(0,0,0));
+    
+    fbo.begin();
+    
+    ofClear(0, 0, 0);
     
     floor->beginLeft();
         drawFloor();
@@ -118,11 +126,17 @@ void testApp::draw()
         }
     }
     
-    //fbo.end();
+    fbo.end();
     
-    //sbsOutputServer.publishTexture(&fbo.getTextureReference());
+    sbsOutputServer.publishTexture(&fbo.getTextureReference());
     //sbsOutputServer.publishScreen();
     //fbo.draw(0,0);
+    
+    ofPushMatrix();
+    ofScale(0.8,0.8,0.8);
+    fbo.draw(0, 0);
+    ofPopMatrix();
+    
     
     ofSetColor(255);
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 40, 40);

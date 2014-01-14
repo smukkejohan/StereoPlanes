@@ -380,4 +380,9 @@ public:
     ofxXmlSettings settings;
     
     
+    ofLight light;
+    ofLight dirLight;
+    
+    
+    
 };
