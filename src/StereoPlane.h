@@ -80,24 +80,24 @@ public:
         
         
         //        cam.setupPerspective();
+                
+        warpLeft.setup(0,0, ofGetWidth(), ofGetHeight());
+        warpRight.setup(0,0, ofGetWidth(), ofGetHeight());
         
-        warpLeft.setup(0,0, w, h);
-        warpRight.setup(0,0, w, h);
-        
-        lTL.set(0, 0);
-        lTR.set(w, 0);
-        lBL.set(0, h);
-        lBR.set(w, h);
+        lTL.set(0             , 0);
+        lTR.set(ofGetWidth()/2, 0);
+        lBL.set(0             , ofGetHeight());
+        lBR.set(ofGetWidth()/2, ofGetHeight());
         
         warpLeft.setCorner(ofxGLWarper::TOP_LEFT,     lTL);
         warpLeft.setCorner(ofxGLWarper::TOP_RIGHT,    lTR);
         warpLeft.setCorner(ofxGLWarper::BOTTOM_LEFT,  lBL);
         warpLeft.setCorner(ofxGLWarper::BOTTOM_RIGHT, lBR);
         
-        rTL.set(w,   0);
-        rTR.set(w*2, 0);
-        rBL.set(w,   h);
-        rBR.set(w*2, h);
+        rTL.set(ofGetWidth()/2, 0);
+        rTR.set(ofGetWidth()  , 0);
+        rBL.set(ofGetWidth()/2, ofGetHeight());
+        rBR.set(ofGetWidth(), ofGetHeight());
         
         warpRight.setCorner(ofxGLWarper::TOP_LEFT,     rTL);
         warpRight.setCorner(ofxGLWarper::TOP_RIGHT,    rTR);
@@ -228,7 +228,7 @@ public:
         
         warpLeft.begin();
         if(warpLeft.isActive()) warpLeft.draw();
-        cam.leftFbo.draw(0,0);
+        cam.leftFbo.draw(0,0,ofGetWidth(),ofGetHeight());
         warpLeft.end();
         
     }
@@ -237,7 +237,7 @@ public:
         
         warpRight.begin();
         if(warpRight.isActive()) warpRight.draw();
-        cam.rightFbo.draw(0,0);
+        cam.rightFbo.draw(0,0,ofGetWidth(),ofGetHeight());
         warpRight.end();
         
     }
