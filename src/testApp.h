@@ -45,7 +45,6 @@ public:
     
     float centerBulge;
     
-    
     ofxOscReceiver oscReceiver;
     ofxOscSender oscSender;
     

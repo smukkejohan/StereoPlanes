@@ -132,10 +132,13 @@ public:
     
     void drawGrid() {
         
+        ofPushMatrix();
+        ofSetColor(255);
         ofFill();
+        
         glDisable(GL_DEPTH_TEST);
-        for(int x = 0; x < width; x+=20){
-            for(int y = 0; y < width; y+=20){
+        for(int x = 0; x < 40; x++){
+            for(int y = 0; y < 40; y++){
                 if(fmodf(x+y+.0,40) > 0){
                     ofSetColor(255);
                 } else {
@@ -144,17 +147,22 @@ public:
                 ofRect(x, y, 20, 20);
             }
         }
+        ofPopMatrix();
         
     }
     
     void drawGrids() {
         
         warpLeft.begin();
+        cam.left.begin();
         drawGrid();
+        cam.left.end();
         warpLeft.end();
         
         warpRight.begin();
+        cam.right.begin();
         drawGrid();
+        cam.right.end();
         warpRight.end();
         
     }
@@ -235,16 +243,13 @@ public:
     
     void update() {
         //observerPosition.set(sin(ofGetElapsedTimef()), cos(ofGetElapsedTimef()), -1);
-        //////cam.setPosition(observerPosition);
-        //        cam.setFocusDistance( cam.left.getGlobalPosition().length() );
-        
+        //cam.setPosition(observerPosition);
+        //cam.setFocusDistance( cam.left.getGlobalPosition().length() );
         cam.update(ofRectangle(-1, -1, 2, 2));
     }
     
-    
     void drawInfo() {
         ofDrawBitmapString(name, 10, 10);
-        
     }
     
     void onCornerChangeLW(ofxGLWarper::CornerLocation & cornerLocation){
