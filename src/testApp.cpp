@@ -78,7 +78,7 @@ void testApp::update()
             pos.y = m.getArgAsFloat(0);
 			camPos.set(pos);
             
-		} else if(m.getAddress() == "/Camera/z"){
+		} else if(m.getAddress() == "/Cameraz/x"){
             
             ofVec3f pos = camPos.get();
             pos.z = m.getArgAsFloat(0);
@@ -108,11 +108,13 @@ void testApp::update()
 void testApp::drawFloor() {
     
     glPushMatrix();
-    glEnable (GL_FOG);
+   
+    /*glEnable (GL_FOG);
     glFogi (GL_FOG_MODE, GL_EXP2);
     glHint (GL_FOG_HINT, GL_NICEST);
     
     glFogi(GL_FOG_DENSITY, 1);
+    */
     
     light.enable();
     dirLight.enable();
@@ -120,7 +122,7 @@ void testApp::drawFloor() {
 //  ofBackground(0,0,0,255);
     
     ofSetColor(255,255,255,100);
-    //ofDrawGrid(1);
+    ofDrawGrid(1);
     
     ofPushMatrix();
     //ofRotateX(ofGetElapsedTimef()*100);
@@ -131,9 +133,11 @@ void testApp::drawFloor() {
     //ofDrawBox(0.2);
     ofSetLineWidth(6);
     ofSetBoxResolution(10);
-    ofRotateX(ofGetElapsedTimef()*10);
-    ofRotateY(ofGetElapsedTimef()*33);
-    ofDrawBox(0.5);
+    ofRotateZ(ofGetElapsedTimef()*10);
+    //ofRotateY(ofGetElapsedTimef()*33);
+    
+    ofTranslate(0, 0, -0.1);
+    ofDrawBox(0.2);
     //ofDrawBox(1);
     //ofDrawBox(1.5);
     ofPopMatrix();
@@ -142,7 +146,8 @@ void testApp::drawFloor() {
     dirLight.disable();
     
     
-    glDisable(GL_FOG);
+    //glDisable(GL_FOG);
+    
     ofDisableLighting();
     glPopMatrix();
     
