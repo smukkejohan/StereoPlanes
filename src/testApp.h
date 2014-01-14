@@ -9,6 +9,8 @@
 //#include "ofxStereoCamera.h"
 #include "StereoPlane.h"
 #include "ofxBullet.h"
+#include "ofxVoronoi.h"
+#include "Utils.h"
 
 class testApp : public ofBaseApp
 {
@@ -30,6 +32,7 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
+    
     void exit();
         
 	ofxSyphonServer leftOutputServer;
@@ -56,7 +59,7 @@ public:
     ofParameter<float> eyeSeperation;
     ofParameter<ofVec2f> dancerPos;
     
-    ofxOscParameterSync sync;
+//    ofxOscParameterSync sync;
     
     ofParameterGroup parameters;
     
@@ -71,16 +74,13 @@ public:
     ofFbo fbo;
     StereoPlane * floor;
     StereoPlane * wall;
-    
     StereoPlane * activePlane;
     int activePlaneIndex;
     
     //StereoPlane thing;
     
     void drawFloor();
-    
     vector<StereoPlane *> planes;
-    
     ofxXmlSettings settings;
     
     ofLight light;
@@ -90,4 +90,10 @@ public:
 	ofxBulletBox				ground;
 	vector<ofxBulletSphere*>     spheres;
     bool addSphere = false;
+    void drawVoronoiWall();
+    void drawBulletFloor();
+    vector <ofVec3f> vpts;
+    ofRectangle      vbounds;
+    ofxVoronoi       voronoi;
+
 };

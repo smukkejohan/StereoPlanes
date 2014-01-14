@@ -50,7 +50,7 @@ void testApp::setup()
     parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
     parameters.add(eyeSeperation.set("Eye Seperation", 6.5, 0., 7.));
     
-    sync.setup(parameters, 9002, "localhost", 8000);
+//    sync.setup(parameters, 9002, "localhost", 8000);
     
     gui.setup(parameters);
     
@@ -63,9 +63,26 @@ void testApp::setup()
 	ground.setProperties(.25, .95);
 	ground.add();
 
-//	world.enableGrabbing();
-//	world.enableDebugDraw();
-//	world.setCamera(&camera);
+    //  TODO: Operator grabbing of bullet objects from first view?
+    //	world.enableGrabbing();
+    //	world.enableDebugDraw();
+    //	world.setCamera(&camera);
+    
+    // Voronoi wall
+    vbounds.set(-2, -2, 4, 4);
+    voronoi.setBounds(vbounds);
+    
+    int n = 80;
+    for(int i=0; i<n; i++) {
+        vpts.push_back(ofRandomPointInRect(vbounds));
+    }
+
+    voronoi.clear();
+    for(int i=0; i<vpts.size(); i++) {
+        voronoi.addPoint(vpts[i]);
+    }
+    voronoi.generateVoronoi();
+    
 }
 
 //--------------------------------------------------------------
@@ -86,7 +103,7 @@ void testApp::update()
             pos.y = m.getArgAsFloat(0);
 			camPos.set(pos);
             
-		} else if(m.getAddress() == "/Camera/z"){
+		} else if(m.getAddress() == "/Cameraz/x"){
             
             ofVec3f pos = camPos.get();
             pos.z = m.getArgAsFloat(0);
@@ -97,6 +114,9 @@ void testApp::update()
             
 		}
     }
+    
+    
+    
     
     
     for(int i=0; i<planes.size(); i++) {
@@ -119,17 +139,68 @@ void testApp::update()
 }
 
 
+void testApp::drawVoronoiWall() {
+    
+    glPushMatrix();
+    
+    ofNoFill();
+    
+    light.enable();
+    dirLight.enable();
+    
+    //voronoi.draw();
+    voronoi.getPoints().size();
+    
+    
+    
+    for(int i=0; i < voronoi.cells.size(); i++) {
+        
+        ofMesh vcell;
+        vcell.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+        
+        for(int v=0; v<voronoi.cells[i].pts.size(); v++) {
+            vcell.addVertex(voronoi.cells[i].pts[v]);
+            
+            ofColor col;
+            if(i%2 == 0) {
+                col.set(255,255,50);
+            } else {
+                col.set(50,255,255);
+            }
+            
+            vcell.addColor(col);
+        }
+        ofPushMatrix();
+        
+        
+        ofTranslate(0, 0, ofSignedNoise(ofGetElapsedTimef()/20 +i)/5);
+        vcell.draw();
+        vcell.drawWireframe();
+        
+        ofPopMatrix();
+    }
+    
+    light.disable();
+    dirLight.disable();
+    
+    ofDisableLighting();
+    glPopMatrix();
+    
+}
+
+
 void testApp::drawFloor() {
     
     //TODO: Add something that extends to close infront of the viewer.
     //TODO:
     
     glPushMatrix();
-    //glEnable (GL_FOG);
+    /*glEnable (GL_FOG);
     glFogi (GL_FOG_MODE, GL_EXP2);
     glHint (GL_FOG_HINT, GL_NICEST);
     
     glFogi(GL_FOG_DENSITY, 1);
+    */
     
     light.enable();
     dirLight.enable();
@@ -137,6 +208,7 @@ void testApp::drawFloor() {
 //  ofBackground(0,0,0,255);
     
     ofSetColor(255,255,255,100);
+
     //ofSetLineWidth(3);
     //ofDrawGrid(1);
     
@@ -148,6 +220,7 @@ void testApp::drawFloor() {
     //ofDrawBox(0.2);
     //ofSetLineWidth(6);
     ofSetBoxResolution(10);
+
     ofRotateX(ofGetElapsedTimef()*10);
     //ofDrawBox(0.5);
     
@@ -173,12 +246,11 @@ void testApp::drawFloor() {
         
     } ofPopMatrix();
 
-    
     light.disable();
     dirLight.disable();
     
-    
     //glDisable(GL_FOG);
+
     ofDisableLighting();
     glPopMatrix();
     
@@ -195,19 +267,19 @@ void testApp::draw()
     ofClear(0, 0, 0);
     
     floor->beginLeft();
-        drawFloor();
+    drawFloor();
     floor->endLeft();
     
     floor->beginRight();
-        drawFloor();
+    drawFloor();
     floor->endRight();
     
     wall->beginLeft();
-        drawFloor();
+    drawVoronoiWall();
     wall->endLeft();
     
     wall->beginRight();
-        drawFloor();
+    drawVoronoiWall();
     wall->endRight();
     
     ofDisableDepthTest();
