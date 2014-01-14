@@ -122,26 +122,33 @@ void testApp::drawFloor() {
 //  ofBackground(0,0,0,255);
     
     ofSetColor(255,255,255,100);
-    ofDrawGrid(1);
+
+    //ofSetLineWidth(3);
+    //ofDrawGrid(1);
     
     ofPushMatrix();
     //ofRotateX(ofGetElapsedTimef()*100);
-    
     ofFill();
     ofSetColor(255,255,255,255);
     //ofDrawBox(0.1);
     //ofDrawBox(0.2);
-    ofSetLineWidth(6);
+    //ofSetLineWidth(6);
     ofSetBoxResolution(10);
-    ofRotateZ(ofGetElapsedTimef()*10);
-    //ofRotateY(ofGetElapsedTimef()*33);
+
+    ofRotateX(ofGetElapsedTimef()*10);
+    ofDrawBox(0.5);
     
-    ofTranslate(0, 0, -0.1);
-    ofDrawBox(0.2);
+    ofPopMatrix();
+    ofRect(-1,-1, 2, 2);
+    
+    
+    for (int i = 0; i< 200; i++) {
+        ofDrawSphere(ofSignedNoise((ofGetElapsedTimef()*0.01)+i, 0, 0), ofSignedNoise((ofGetElapsedTimef()*0.01)+i, (ofGetElapsedTimef()*0.01)+i, 0), ofSignedNoise(0,0,(ofGetElapsedTimef()*0.01)+i)*0.5,  0.05);
+    }
+    
     //ofDrawBox(1);
     //ofDrawBox(1.5);
-    ofPopMatrix();
-   
+    
     light.disable();
     dirLight.disable();
     
