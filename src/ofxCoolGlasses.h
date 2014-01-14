@@ -24,13 +24,18 @@ public:
         
         right.setScale(1, 1, 1);
         right.setNearClip(0.1);
-
 	}
+    
+    
+    void setPosition(float x, float y, float z) {
+        setPosition(ofVec3f(x,y,z));
+    }
     
     void setPosition(ofVec3f pos) {
         left.setPosition(pos);
         right.setPosition(pos);
     }
+    
     
     void setupPerspective(){
         left.setupPerspective();

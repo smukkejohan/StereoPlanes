@@ -36,7 +36,7 @@ public:
     
     ofxXmlSettings * settings;
     
-    ofVec3f observerPosition;
+    //ofVec3f observerPosition;
     
     // Corners
     ofPoint wlTopLeft;
@@ -221,8 +221,6 @@ public:
         cam.rightFbo.draw(0,0);
         warpRight.end();
         
-        
-        
     }
     
     void draw(){
@@ -236,8 +234,8 @@ public:
     }
     
     void update() {
-        observerPosition.set(sin(ofGetElapsedTimef()), cos(ofGetElapsedTimef()), -1);
-        cam.setPosition(observerPosition);
+        //observerPosition.set(sin(ofGetElapsedTimef()), cos(ofGetElapsedTimef()), -1);
+        //////cam.setPosition(observerPosition);
         //        cam.setFocusDistance( cam.left.getGlobalPosition().length() );
         
         cam.update(ofRectangle(-1, -1, 2, 2));

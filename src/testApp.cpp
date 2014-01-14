@@ -51,14 +51,24 @@ void testApp::setup()
     dirLight.lookAt(ofVec3f(0,0,0));
     dirLight.setDiffuseColor(ofColor(191,191,170));
     
+    parameters.setName("Stereo");
+    parameters.add(camPos.set("cam", ofVec3f(0.,0.,-1), ofVec3f(-2,-2,-8.), ofVec3f(2,2,-0.5)));
+    
+    gui.setup(parameters);
+    
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
+    
     for(int i=0; i<planes.size(); i++) {
+        
+        planes[i]->cam.setPosition(camPos.get());
         planes[i]->update();
+        //cout<<camPos.get()<<endl;
     }
+    
 }
 
 
@@ -127,15 +137,9 @@ void testApp::draw()
     
     ofDisableDepthTest();
     
-    //fbo.begin();
     ofSetColor(255);
     ofSetLineWidth(2);
     ofFill();
-    
-    //leftOutputServer.publishTexture(&cam.getLeftTexture());
-    //rightOutputServer.publishTexture(&cam.getRightTexture());
-    //cam.getLeftFbo()->draw(0, 0, ofGetWidth()/2, ofGetHeight()/2);
-    //gui.draw();
     
     for(int i=0; i<planes.size(); i++) {
         planes[i]->draw();
@@ -150,17 +154,16 @@ void testApp::draw()
     fbo.end();
     
     sbsOutputServer.publishTexture(&fbo.getTextureReference());
-    //sbsOutputServer.publishScreen();
-    //fbo.draw(0,0);
     
     ofPushMatrix();
     fbo.draw(0, 0);
     ofPopMatrix();
     
-    
     ofSetColor(255);
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 40, 40);
     activePlane->drawInfo();
+    
+    gui.draw();
 
 }
 
@@ -205,8 +208,8 @@ void testApp::keyReleased(int key)
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y)
 {
-    ofVec3f mousePoint(x - ofGetWidth()/2,y-ofGetHeight()/2, 400);
-    points.push_back(mousePoint);
+    //ofVec3f mousePoint(x - ofGetWidth()/2,y-ofGetHeight()/2, 400);
+    //points.push_back(mousePoint);
 }
 
 //--------------------------------------------------------------

@@ -33,7 +33,6 @@ public:
         
 	ofxSyphonServer leftOutputServer;
 	ofxSyphonServer rightOutputServer;
-    
     ofxSyphonServer sbsOutputServer;
     
     ofLight directionalLight;
@@ -50,16 +49,16 @@ public:
     ofxOscReceiver oscReceiver;
     ofxOscSender oscSender;
     
-    ofParameter<bool>  strobeOn;
-    ofParameter<float> boxOneZ; // a fraction of clock
-    ofParameter<float> boxTwoZ;
+    //ofParameter<float> boxOneZ; // a fraction of clock
+    //ofParameter<float> boxTwoZ;
+    
+    ofParameter<ofVec3f> camPos;
     
     ofxOscParameterSync sync;
     
     ofParameterGroup parameters;
     
     ofxPanel gui;
-    
     void drawRibbon();
     
     //this holds all of our points
