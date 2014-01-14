@@ -43,7 +43,7 @@ void testApp::setup()
     light.setSpotlight();
     light.lookAt(ofVec3f(0,0,0));
     light.setDiffuseColor(ofColor(245,245,170));
-    light.setAmbientColor(ofColor(64,84,94));
+    light.setAmbientColor(ofColor(64,84,89));
     light.setSpecularColor(ofColor::white);
     
     dirLight.setSpotlight();
@@ -141,14 +141,14 @@ void testApp::draw()
     ofSetLineWidth(2);
     ofFill();
     
-    for(int i=0; i<planes.size(); i++) {
-        planes[i]->draw();
-    }
-    
     if(showGrid) {
         for(int i=0; i<planes.size(); i++) {
             planes[i]->drawGrids();
         }
+    }
+    
+    for(int i=0; i<planes.size(); i++) {
+        planes[i]->draw();
     }
     
     fbo.end();

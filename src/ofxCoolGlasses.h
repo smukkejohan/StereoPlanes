@@ -13,11 +13,11 @@ public:
     
 	void setup(int w, int h)
 	{
-		width = w;
-		height = h;
+        height = 2.;
+        width = height *(w/h);
         
-		leftFbo.allocate(width, height, GL_RGBA);
-		rightFbo.allocate(width, height, GL_RGBA);
+		leftFbo.allocate(w, h, GL_RGBA);
+		rightFbo.allocate(w, h, GL_RGBA);
         
         left.setScale(1, 1, 1);
         left.setNearClip(0.1);

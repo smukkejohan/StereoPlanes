@@ -65,8 +65,9 @@ public:
             settings->addTag(name);
         }
         
-        width = w; height = h;
-        
+        height = 2.;
+        width = height *(w/h);
+
         cam.setup(w, h);
         
         //observerPosition.set(0,0,2);
@@ -134,27 +135,45 @@ public:
         
         ofFill();
         glDisable(GL_DEPTH_TEST);
-        for(int x = 0; x < width; x+=20){
-            for(int y = 0; y < width; y+=20){
-                if(fmodf(x+y+.0,40) > 0){
+        
+        float chessSize = 0.05;
+        
+        ofPushMatrix();
+        
+        bool white = true;
+        
+        ofTranslate(-1, -1);
+        for(float x = 0; x < 2; x+=chessSize){
+            for(float y = 0; y < 2; y+=chessSize){
+                if(white){
                     ofSetColor(255);
                 } else {
                     ofSetColor(0);
                 }
-                ofRect(x, y, 20, 20);
+                white = !white;
+                ofRect(x, y, chessSize, chessSize);
             }
         }
+        ofPopMatrix();
         
+        
+        //ofSetColor(255,0,0);
+        //ofEllipse(0, 0, 1, 1);
+        ofDrawAxis(1);
     }
     
     void drawGrids() {
         
         warpLeft.begin();
+        cam.beginLeft();
         drawGrid();
+        cam.endLeft();
         warpLeft.end();
         
         warpRight.begin();
+        cam.beginRight();
         drawGrid();
+        cam.endRight();
         warpRight.end();
         
     }
