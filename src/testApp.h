@@ -10,7 +10,6 @@
 #include "ofxCoolGlasses.h"
 #include "ofxGLWarper.h"
 
-
 class StereoPlane {
     
 public:
@@ -54,6 +53,9 @@ public:
     ofPoint rTR;
     ofPoint rBL;
     ofPoint rBR;
+    
+    
+    ofxGLWarper::CornerLocation activeCorner;
     
     void setup(int w, int h, ofxXmlSettings * s) {
         
@@ -118,7 +120,6 @@ public:
         settings->popTag();
         
         settings->popTag();
-                
     };
     
     void controlDraw() {
@@ -129,12 +130,41 @@ public:
         }*/
     };
     
+    void drawGrid() {
+        
+        ofFill();
+            glDisable(GL_DEPTH_TEST);
+            for(int x = 0; x < width; x+=20){
+                for(int y = 0; y < width; y+=20){
+                    if(fmodf(x+y+.0,40) > 0){
+                        ofSetColor(255);
+                    } else {
+                        ofSetColor(0);
+                    }
+                    ofRect(x, y, 20, 20);
+                }
+            }
+        
+    }
+    
+    void drawGrids() {
+        
+        warpLeft.begin();
+        drawGrid();
+        warpLeft.end();
+        
+        warpRight.begin();
+        drawGrid();
+        warpRight.end();
+        
+    }
+    
+    
     int controlSide = 0; // 0: left, 1: right
     
     void activateLeftControl() {
         controlSide = 0;
         if (!warpLeft.isActive() )  warpLeft.activate();
-        
         if ( warpRight.isActive())  warpRight.deactivate();
     }
     
@@ -182,13 +212,6 @@ public:
         cam.leftFbo.draw(0,0);
         warpLeft.end();
         
-        /*if(controlSide < 2) {
-            ofNoFill();
-            ofCircle(lTL, 6);
-            ofCircle(lTR, 6);
-            ofCircle(lBL, 6);
-            ofCircle(lBR, 6);
-        }*/
     }
     
     void drawRight() {
@@ -198,13 +221,7 @@ public:
         cam.rightFbo.draw(0,0);
         warpRight.end();
         
-        /*if(controlSide < 2) {
-            ofNoFill();
-            ofCircle(rTL, 6);
-            ofCircle(rTR, 6);
-            ofCircle(rBL, 6);
-            ofCircle(rBR, 6);
-        }*/
+
         
     }
     
@@ -246,7 +263,6 @@ public:
             case ofxGLWarper::BOTTOM_RIGHT:
                 lBR = warpLeft.getCorner(cornerLocation);
                 break;
-                
         }
     }
     
@@ -349,7 +365,6 @@ public:
     ofVec3f center;
     
     ofFbo fbo;
-    
     StereoPlane * floor;
     StereoPlane * wall;
     
