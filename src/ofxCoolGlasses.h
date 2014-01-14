@@ -113,7 +113,6 @@ protected:
 	float physical_focus_distance_cm;
 
 	// parallel
-
 	float zNear, zFar;
 	float fovx_tan, fovy_tan;
 	float aspect;

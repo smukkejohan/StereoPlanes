@@ -34,7 +34,6 @@ void testApp::setup()
     activePlaneIndex = 0;
     activePlane = planes[activePlaneIndex];
     
-    //light.setPointLight();
     light.setPosition(2, 2, -2);
     light.setSpotlight();
     light.lookAt(ofVec3f(0,0,0));
@@ -72,12 +71,16 @@ void testApp::update()
 void testApp::drawFloor() {
     
     glPushMatrix();
+    glEnable (GL_FOG);
+    glFogi (GL_FOG_MODE, GL_EXP2);
+    glHint (GL_FOG_HINT, GL_NICEST);
     
-    ofEnableLighting();
+    glFogi(GL_FOG_DENSITY, 1);
+    
     light.enable();
     dirLight.enable();
     
-//    ofBackground(0,0,0,255);
+//  ofBackground(0,0,0,255);
     
     ofSetColor(255,255,255,100);
     //ofDrawGrid(1);
@@ -101,9 +104,11 @@ void testApp::drawFloor() {
     light.disable();
     dirLight.disable();
     
-    ofDisableLighting();
     
+    glDisable(GL_FOG);
+    ofDisableLighting();
     glPopMatrix();
+    
 }
 
 //--------------------------------------------------------------
