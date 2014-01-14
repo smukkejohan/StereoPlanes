@@ -53,6 +53,7 @@ public:
     //ofParameter<float> boxTwoZ;
     
     ofParameter<ofVec3f> camPos;
+    ofParameter<float> eyeSeperation;
     
     ofxOscParameterSync sync;
     

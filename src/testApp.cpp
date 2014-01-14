@@ -4,15 +4,11 @@
 
 // Syphon together with 3D primitive and NoFill does not run
 
-const int width = 1024*2;
-const int height = 768;
-
 vector<ofVec3f> points;
 
 //--------------------------------------------------------------
 void testApp::setup()
 {
-    ofSetWindowShape(width, height);
     
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
@@ -52,7 +48,8 @@ void testApp::setup()
     dirLight.setDiffuseColor(ofColor(191,191,170));
     
     parameters.setName("Stereo");
-    parameters.add(camPos.set("cam", ofVec3f(0.,0.,-1), ofVec3f(-2,-2,-8.), ofVec3f(2,2,-0.5)));
+    parameters.add(camPos.set("Cam position", ofVec3f(0.,0.,-1), ofVec3f(-2,-2,-8.), ofVec3f(2,2,-0.5)));
+    parameters.add(eyeSeperation.set("Eye Seperation", 6.5, 0., 7.));
     
     gui.setup(parameters);
     
@@ -63,8 +60,8 @@ void testApp::update()
 {
     
     for(int i=0; i<planes.size(); i++) {
-        
         planes[i]->cam.setPosition(camPos.get());
+        planes[i]->cam.setPhysicalEyeSeparation(eyeSeperation.get());
         planes[i]->update();
         //cout<<camPos.get()<<endl;
     }
