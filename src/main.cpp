@@ -6,7 +6,8 @@
 int main( ){    
     
     ofAppGlutWindow window;
-    window.setDoubleBuffering(false);
+//    window.setDoubleBuffering(false);
+    window.setGlutDisplayString("rgb alpha double samples>=8 depth");
     
     ofSetupOpenGL(&window, 1024*2, 720, OF_WINDOW);
     
