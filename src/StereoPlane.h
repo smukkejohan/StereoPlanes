@@ -65,8 +65,9 @@ public:
             settings->addTag(name);
         }
         
-        width = w; height = h;
-        
+        height = 2.;
+        width = height *(w/h);
+
         cam.setup(w, h);
         
         //observerPosition.set(0,0,2);
@@ -132,37 +133,47 @@ public:
     
     void drawGrid() {
         
-        ofPushMatrix();
-        ofSetColor(255);
         ofFill();
-        
         glDisable(GL_DEPTH_TEST);
-        for(int x = 0; x < 40; x++){
-            for(int y = 0; y < 40; y++){
-                if(fmodf(x+y+.0,40) > 0){
+        
+        float chessSize = 0.05;
+        
+        ofPushMatrix();
+        
+        bool white = true;
+        
+        ofTranslate(-1, -1);
+        for(float x = 0; x < 2; x+=chessSize){
+            for(float y = 0; y < 2; y+=chessSize){
+                if(white){
                     ofSetColor(255);
                 } else {
                     ofSetColor(0);
                 }
-                ofRect(x, y, 20, 20);
+                white = !white;
+                ofRect(x, y, chessSize, chessSize);
             }
         }
         ofPopMatrix();
         
+        
+        //ofSetColor(255,0,0);
+        //ofEllipse(0, 0, 1, 1);
+        ofDrawAxis(1);
     }
     
     void drawGrids() {
         
         warpLeft.begin();
-        cam.left.begin();
+        cam.beginLeft();
         drawGrid();
-        cam.left.end();
+        cam.endLeft();
         warpLeft.end();
         
         warpRight.begin();
-        cam.right.begin();
+        cam.beginRight();
         drawGrid();
-        cam.right.end();
+        cam.endRight();
         warpRight.end();
         
     }
@@ -243,13 +254,16 @@ public:
     
     void update() {
         //observerPosition.set(sin(ofGetElapsedTimef()), cos(ofGetElapsedTimef()), -1);
-        //cam.setPosition(observerPosition);
-        //cam.setFocusDistance( cam.left.getGlobalPosition().length() );
+        //////cam.setPosition(observerPosition);
+        //        cam.setFocusDistance( cam.left.getGlobalPosition().length() );
+        
         cam.update(ofRectangle(-1, -1, 2, 2));
     }
     
+    
     void drawInfo() {
         ofDrawBitmapString(name, 10, 10);
+        
     }
     
     void onCornerChangeLW(ofxGLWarper::CornerLocation & cornerLocation){
