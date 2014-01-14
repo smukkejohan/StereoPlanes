@@ -83,7 +83,8 @@ void testApp::drawFloor() {
 //  ofBackground(0,0,0,255);
     
     ofSetColor(255,255,255,100);
-    //ofDrawGrid(1);
+    ofSetLineWidth(3);
+    ofDrawGrid(1);
     
     ofPushMatrix();
     //ofRotateX(ofGetElapsedTimef()*100);
