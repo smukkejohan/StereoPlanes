@@ -50,13 +50,50 @@ void testApp::setup()
     parameters.add(camPos.set("Cam position", ofVec3f(0.,0.,-1), ofVec3f(-2,-2,-8.), ofVec3f(2,2,-0.5)));
     parameters.add(eyeSeperation.set("Eye Seperation", 6.5, 0., 7.));
     
+    sync.setup(parameters, 9002, "localhost", 8000);
+    
     gui.setup(parameters);
+    
+    oscReceiver.setup(9001);
     
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
+    
+    
+    while(oscReceiver.hasWaitingMessages()){
+		// get the next message
+		ofxOscMessage m;
+		oscReceiver.getNextMessage(&m);
+        
+		if(m.getAddress() == "/Camera/x"){
+            ofVec3f pos = camPos.get();
+            pos.x = m.getArgAsFloat(0);
+			camPos.set(pos);
+		
+		} else if(m.getAddress() == "/Camera/y"){
+            ofVec3f pos = camPos.get();
+            pos.y = m.getArgAsFloat(0);
+			camPos.set(pos);
+            
+		} else if(m.getAddress() == "/Camera/z"){
+            
+            ofVec3f pos = camPos.get();
+            pos.z = m.getArgAsFloat(0);
+			camPos.set(pos);
+            
+		} else if(m.getAddress() == "/eyeSeperation/x"){
+			eyeSeperation.set(m.getArgAsFloat(0));
+            
+		}
+        
+        
+        
+        
+    }
+    
     
     for(int i=0; i<planes.size(); i++) {
         planes[i]->cam.setPosition(camPos.get());
