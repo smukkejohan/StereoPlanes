@@ -133,7 +133,6 @@ void testApp::draw()
     //fbo.draw(0,0);
     
     ofPushMatrix();
-    ofScale(0.8,0.8,0.8);
     fbo.draw(0, 0);
     ofPopMatrix();
     
