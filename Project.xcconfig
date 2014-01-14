@@ -5,6 +5,14 @@ OF_PATH = ../../..
 //THIS HAS ALL THE HEADER AND LIBS FOR OF CORE
 #include "../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig"
 
+HEADER_BULLET = "$(OF_PATH)/addons/ofxBullet/libs/bullet2.8.1/include/**"
+
+LIB_BULLET_COLLISION_RELEASE = "$(OF_PATH)/addons/ofxBullet/libs/bullet2.8.1/lib/osx/i386/libBulletCollision.a"
+LIB_BULLET_DYNAMICS_RELEASE = "$(OF_PATH)/addons/ofxBullet/libs/bullet2.8.1/lib/osx/i386/libBulletDynamics.a"
+LIB_BULLET_MATH_RELEASE = "$(OF_PATH)/addons/ofxBullet/libs/bullet2.8.1/lib/osx/i386/libLinearMath.a"
+LIB_BULLET_MINI_CL_RELEASE = "$(OF_PATH)/addons/ofxBullet/libs/bullet2.8.1/lib/osx/i386/libMiniCL.a"
+LIB_BULLET_SOFT_BODY_RELEASE = "$(OF_PATH)/addons/ofxBullet/libs/bullet2.8.1/lib/osx/i386/libBulletSoftBody.a"
+
 //ICONS - NEW IN 0072 
 ICON_NAME_DEBUG = icon-debug.icns
 ICON_NAME_RELEASE = icon.icns
@@ -13,8 +21,13 @@ ICON_FILE_PATH = $(OF_PATH)/libs/openFrameworksCompiled/project/osx/
 //IF YOU WANT AN APP TO HAVE A CUSTOM ICON - PUT THEM IN YOUR DATA FOLDER AND CHANGE ICON_FILE_PATH to:
 //ICON_FILE_PATH = bin/data/
 
-OTHER_LDFLAGS = $(OF_CORE_LIBS) $(OF_OPENCV_LIBS)
-HEADER_SEARCH_PATHS = $(OF_CORE_HEADERS) $(OF_OPENCV_HEADERS)
-
 OF_OPENCV_HEADERS = "$(OF_PATH)/addons/ofxOpenCv/libs/opencv/include" "$(OF_PATH)/addons/ofxOpenCv/libs/opencv/include/opencv" "$(OF_PATH)/addons/ofxOpenCv/libs/opencv/include/opencv2"
 OF_OPENCV_LIBS = "$(OF_PATH)/addons/ofxOpenCv/libs/opencv/lib/osx/opencv.a"
+
+LIB_BULLET_ALL_RELEASE = $(LIB_BULLET_COLLISION_RELEASE) $(LIB_BULLET_DYNAMICS_RELEASE) $(LIB_BULLET_MATH_RELEASE) $(LIB_BULLET_MINI_CL_RELEASE) $(LIB_BULLET_SOFT_BODY_RELEASE)
+
+OTHER_LDFLAGS = $(OF_CORE_LIBS) $(LIB_BULLET_ALL_RELEASE) $(OF_OPENCV_LIBS)
+
+HEADER_SEARCH_PATHS = $(OF_CORE_HEADERS)
+
+USER_HEADER_SEARCH_PATHS = $(OF_OPENCV_HEADERS) $(HEADER_BULLET) "src"

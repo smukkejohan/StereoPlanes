@@ -3,11 +3,12 @@
 #include "ofMain.h"
 #include "ofxSyphon.h"
 #include "ofxGui.h"
-#include "ofxOscParameterSync.h"
+//#include "ofxOscParameterSync.h"
 #include "ofxXmlSettings.h"
 #include "ofxOscReceiver.h"
 //#include "ofxStereoCamera.h"
 #include "StereoPlane.h"
+#include "ofxBullet.h"
 
 class testApp : public ofBaseApp
 {
@@ -46,13 +47,14 @@ public:
     float centerBulge;
     
     ofxOscReceiver oscReceiver;
-    ofxOscSender oscSender;
+//    ofxOscSender oscSender;
     
     //ofParameter<float> boxOneZ; // a fraction of clock
     //ofParameter<float> boxTwoZ;
     
     ofParameter<ofVec3f> camPos;
     ofParameter<float> eyeSeperation;
+    ofParameter<ofVec2f> dancerPos;
     
     ofxOscParameterSync sync;
     
@@ -84,4 +86,8 @@ public:
     ofLight light;
     ofLight dirLight;
     
+    ofxBulletWorldRigid			world;
+	ofxBulletBox				ground;
+	vector<ofxBulletSphere*>     spheres;
+    bool addSphere = false;
 };

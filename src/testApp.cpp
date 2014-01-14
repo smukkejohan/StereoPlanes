@@ -9,7 +9,6 @@ vector<ofVec3f> points;
 //--------------------------------------------------------------
 void testApp::setup()
 {
-    
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
     ofSetBackgroundAuto(true);
@@ -48,6 +47,7 @@ void testApp::setup()
     
     parameters.setName("Stereo");
     parameters.add(camPos.set("Cam position", ofVec3f(0.,0.,-1), ofVec3f(-2,-2,-8.), ofVec3f(2,2,-0.5)));
+    parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
     parameters.add(eyeSeperation.set("Eye Seperation", 6.5, 0., 7.));
     
     sync.setup(parameters, 9002, "localhost", 8000);
@@ -56,14 +56,22 @@ void testApp::setup()
     
     oscReceiver.setup(9001);
     
+    world.setup();
+	world.setGravity(ofVec3f(0.f, 0.f, 9.8f));
+
+    ground.create( world.world, ofVec3f(0., 0, 0.5), 0., 100.f, 100.f, 1.f );
+	ground.setProperties(.25, .95);
+	ground.add();
+
+//	world.enableGrabbing();
+//	world.enableDebugDraw();
+//	world.setCamera(&camera);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-    
-    
-    while(oscReceiver.hasWaitingMessages()){
+       while(oscReceiver.hasWaitingMessages()){
 		// get the next message
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(&m);
@@ -88,10 +96,6 @@ void testApp::update()
 			eyeSeperation.set(m.getArgAsFloat(0));
             
 		}
-        
-        
-        
-        
     }
     
     
@@ -102,13 +106,26 @@ void testApp::update()
         //cout<<camPos.get()<<endl;
     }
     
+    if(addSphere){
+        ofxBulletSphere * sphere = new ofxBulletSphere();
+        sphere->create(world.world, ofVec3f(ofRandom(-0.1,0.1), ofRandom(-0.1,0.1), -1), 0.05, ofRandom(0.02,0.05));
+        spheres.push_back(sphere);
+        sphere->add();
+        addSphere = false;
+    }
+    
+    world.update();
+    
 }
 
 
 void testApp::drawFloor() {
     
+    //TODO: Add something that extends to close infront of the viewer.
+    //TODO:
+    
     glPushMatrix();
-    glEnable (GL_FOG);
+    //glEnable (GL_FOG);
     glFogi (GL_FOG_MODE, GL_EXP2);
     glHint (GL_FOG_HINT, GL_NICEST);
     
@@ -132,24 +149,36 @@ void testApp::drawFloor() {
     //ofSetLineWidth(6);
     ofSetBoxResolution(10);
     ofRotateX(ofGetElapsedTimef()*10);
-    ofDrawBox(0.5);
+    //ofDrawBox(0.5);
     
     ofPopMatrix();
     ofRect(-1,-1, 2, 2);
     
-    
+    /*
     for (int i = 0; i< 200; i++) {
         ofDrawSphere(ofSignedNoise((ofGetElapsedTimef()*0.01)+i, 0, 0), ofSignedNoise((ofGetElapsedTimef()*0.01)+i, (ofGetElapsedTimef()*0.01)+i, 0), ofSignedNoise(0,0,(ofGetElapsedTimef()*0.01)+i)*0.5,  0.05);
-    }
+    }*/
     
     //ofDrawBox(1);
     //ofDrawBox(1.5);
+    
+    ofPushMatrix(); {
+        //ofRotateY(90);
+        //world.drawDebug();
+        
+        for(int i=0; i<spheres.size(); i++) {
+            spheres[i]->draw();
+        }
+
+        
+    } ofPopMatrix();
+
     
     light.disable();
     dirLight.disable();
     
     
-    glDisable(GL_FOG);
+    //glDisable(GL_FOG);
     ofDisableLighting();
     glPopMatrix();
     
@@ -226,6 +255,8 @@ void testApp::keyPressed(int key)
 	} else if (key == 'd')
 	{
 		showDots =! showDots;
+	} else if(key == 's') {
+        addSphere = true;
 	} else if(key == 'r') {
         activePlane->activateRightControl();
     } else if(key == 'l') {
