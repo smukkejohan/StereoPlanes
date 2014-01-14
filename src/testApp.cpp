@@ -38,6 +38,19 @@ void testApp::setup()
     activePlaneIndex = 0;
     activePlane = planes[activePlaneIndex];
     
+    //light.setPointLight();
+    light.setPosition(2, 2, -2);
+    light.setSpotlight();
+    light.lookAt(ofVec3f(0,0,0));
+    light.setDiffuseColor(ofColor(245,245,170));
+    light.setAmbientColor(ofColor(64,84,94));
+    light.setSpecularColor(ofColor::white);
+    
+    dirLight.setSpotlight();
+    dirLight.setPosition(-1, -1, 1);
+    dirLight.lookAt(ofVec3f(0,0,0));
+    dirLight.setDiffuseColor(ofColor(191,191,170));
+    
 }
 
 //--------------------------------------------------------------
@@ -53,38 +66,37 @@ void testApp::drawFloor() {
     
     glPushMatrix();
     
+    ofEnableLighting();
+    light.enable();
+    dirLight.enable();
+    
 //    ofBackground(0,0,0,255);
     
     ofSetColor(255,255,255,100);
-    ofDrawGrid(1);
+    //ofDrawGrid(1);
     
     ofPushMatrix();
-    
     //ofRotateX(ofGetElapsedTimef()*100);
-    ofNoFill();
+    
+    ofFill();
     ofSetColor(255,255,255,255);
     //ofDrawBox(0.1);
     //ofDrawBox(0.2);
-    //ofDrawBox(0.5);
+    ofSetLineWidth(6);
+    ofSetBoxResolution(10);
+    ofRotateX(ofGetElapsedTimef()*10);
+    ofRotateY(ofGetElapsedTimef()*33);
+    ofDrawBox(0.5);
     //ofDrawBox(1);
     //ofDrawBox(1.5);
     ofPopMatrix();
+   
+    light.disable();
+    dirLight.disable();
+    
+    ofDisableLighting();
     
     glPopMatrix();
-    
-    /*if(showGrid){
-        glDisable(GL_DEPTH_TEST);
-        for(int x = 0; x < ofGetWidth(); x+=20){
-            for(int y = 0; y < ofGetWidth(); y+=20){
-                if(fmodf(x+y+.0,40) > 0){
-                    ofSetColor(255);
-                } else {
-                    ofSetColor(0);
-                }
-                ofRect(x, y, 20, 20);
-            }
-        }
-    }*/
 }
 
 //--------------------------------------------------------------
@@ -92,6 +104,10 @@ void testApp::draw()
 {
     ofEnableDepthTest();
     ofBackground(ofColor(0,0,0));
+    
+    fbo.begin();
+    
+    ofClear(0, 0, 0);
     
     floor->beginLeft();
         drawFloor();
@@ -109,6 +125,7 @@ void testApp::draw()
         drawFloor();
     wall->endRight();
     
+    ofDisableDepthTest();
     
     //fbo.begin();
     ofSetColor(255);
@@ -124,12 +141,24 @@ void testApp::draw()
         planes[i]->draw();
     }
     
-    //fbo.end();
+    if(showGrid) {
+        for(int i=0; i<planes.size(); i++) {
+            planes[i]->drawGrids();
+        }
+    }
     
-    //sbsOutputServer.publishTexture(&fbo.getTextureReference());
+    fbo.end();
+    
+    sbsOutputServer.publishTexture(&fbo.getTextureReference());
     //sbsOutputServer.publishScreen();
     //fbo.draw(0,0);
     
+    ofPushMatrix();
+    fbo.draw(0, 0);
+    ofPopMatrix();
+    
+    
+    ofSetColor(255);
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 40, 40);
     activePlane->drawInfo();
 
