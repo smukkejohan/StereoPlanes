@@ -67,17 +67,16 @@ public:
         
         cam.setup(w, h);
         
-        observerPosition.set(0,0,0);
+        //observerPosition.set(0,0,2);
         
         cam.setPhysicalFocusDistance(120);
         cam.setFocusDistance(50);
         
-        cam.setPosition(ofVec3f(0, 0, 2));
+//        cam.setPosition(ofVec3f(0, 0, 2));
         //cam.setOf
         
         
-        //cam.setupPerspective();
-        //cam.lookAt(ofVec3f(0,0,0));
+//        cam.setupPerspective();
         
         warpLeft.setup(0,0, w, h);
         warpRight.setup(0,0, w, h);
@@ -119,6 +118,7 @@ public:
         settings->popTag();
         
         settings->popTag();
+                
     };
     
     void controlDraw() {
@@ -152,34 +152,34 @@ public:
     }
     
     void beginLeft(){
-        warpLeft.begin();
-        if(warpLeft.isActive()) warpLeft.draw();
+        ofPushView();
+        glPushMatrix();
         cam.beginLeft();
     }
     
     void endLeft(){
         cam.endLeft();
-        warpLeft.end();
+        glPopMatrix();
+        ofPopView();
     }
     
     void beginRight(){
-        warpRight.begin();
-        if(warpRight.isActive()) warpRight.draw();
+        ofPushView();
+        glPushMatrix();
         cam.beginRight();
     }
     
     void endRight(){
         cam.endRight();
-        warpRight.end();
+        glPopMatrix();
+        ofPopView();
     }
     
     void drawLeft() {
         
         warpLeft.begin();
         if(warpLeft.isActive()) warpLeft.draw();
-        
-        //cam.getLeftFbo()->draw(0,0);
-        //cam.left.draw();
+        cam.leftFbo.draw(0,0);
         warpLeft.end();
         
         /*if(controlSide < 2) {
@@ -195,8 +195,7 @@ public:
         
         warpRight.begin();
         if(warpRight.isActive()) warpRight.draw();
-        //cam.getRightFbo()->draw(0,0);
-        cam.right.draw();
+        cam.rightFbo.draw(0,0);
         warpRight.end();
         
         /*if(controlSide < 2) {
@@ -220,17 +219,11 @@ public:
     }
     
     void update() {
-        
-        
-        
-        observerPosition.set(ofMap(fmodf(ofGetElapsedTimef(),1), 0, 1, -1, 1), 0, 2);
+        observerPosition.set(sin(ofGetElapsedTimef()), cos(ofGetElapsedTimef()), -1);
         cam.setPosition(observerPosition);
-        cam.setFocusDistance( cam.left.getGlobalPosition().length() );
-        
-        //cam.setPosition(headPosition);
-        ///cam.setupOffAxisViewPortal(ofVec3f(0,0,0), ofVec3f(0, height, 0), ofVec3f(width,height,0));
-        
-        cam.update(ofRectangle(0, 0, 1, 1));
+//        cam.setFocusDistance( cam.left.getGlobalPosition().length() );
+
+        cam.update(ofRectangle(-1, -1, 2, 2));
     }
     
     

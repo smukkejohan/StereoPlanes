@@ -28,11 +28,11 @@ void testApp::setup()
     settings.load("stereoplanes.xml");
     
     floor = new StereoPlane("floor");
-    floor->setup(1024, 768, &settings);
+    floor->setup(1024, 1024, &settings);
     planes.push_back(floor);
     
     wall = new StereoPlane("wall");
-    wall->setup(1024, 768, &settings);
+    wall->setup(1024, 1024, &settings);
     planes.push_back(wall);
     
     activePlaneIndex = 0;
@@ -53,17 +53,16 @@ void testApp::drawFloor() {
     
     glPushMatrix();
     
-    ofBackground(0,0,0,255);
+//    ofBackground(0,0,0,255);
     
     ofSetColor(255,255,255,100);
-    ofDrawGrid(10);
+    ofDrawGrid(1);
     
     ofPushMatrix();
     
     //ofRotateX(ofGetElapsedTimef()*100);
     ofNoFill();
     ofSetColor(255,255,255,255);
-    ofSetLineWidth(6);
     //ofDrawBox(0.1);
     //ofDrawBox(0.2);
     //ofDrawBox(0.5);
@@ -96,11 +95,6 @@ void testApp::draw()
     
     floor->beginLeft();
         drawFloor();
-    ofPushStyle();
-    ofFill();
-    ofSetColor(255,255,255,64);
-    ofRect(0,0, 1024, 768);
-    ofPopStyle();
     floor->endLeft();
     
     floor->beginRight();
@@ -126,14 +120,14 @@ void testApp::draw()
     //cam.getLeftFbo()->draw(0, 0, ofGetWidth()/2, ofGetHeight()/2);
     //gui.draw();
     
-    //for(int i=0; i<planes.size(); i++) {
-    //    planes[i]->draw();
-    //}
+    for(int i=0; i<planes.size(); i++) {
+        planes[i]->draw();
+    }
     
     //fbo.end();
     
     //sbsOutputServer.publishTexture(&fbo.getTextureReference());
-    sbsOutputServer.publishScreen();
+    //sbsOutputServer.publishScreen();
     //fbo.draw(0,0);
     
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 40, 40);
