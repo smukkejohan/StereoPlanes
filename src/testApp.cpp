@@ -55,6 +55,16 @@ void testApp::setup()
     parameters.add(dancerEllipseSize.set("Ellipse Size", 0., 0., .5));
     parameters.add(dancerEllipseBrightness.set("Ellipse Brightness", 0., 0., 1.));
     
+    
+    parameters.add(shivering.set("Shiver", 0, 0, 6));
+    parameters.add(wallSpeed.set("wallSpeed", 0, 0, 1));
+    parameters.add(subdivisions.set("Subdivisions", 4, 0, 400));
+    
+    
+    parameters.add(wallBreakPos.set("wallBreakPos", ofVec3f(0.1,0.5,0), ofVec3f(-1,-1,-1), ofVec3f(1,1,1)));
+    parameters.add(wallBreakReach.set("wallBreakReach", ofVec3f(0.2,2,1), ofVec3f(0,0,0), ofVec3f(2,2,2)));
+    parameters.add(wallBreakStrength.set("wallBreakStrength", 0, 0, 6));
+    
     //    sync.setup(parameters, 9002, "localhost", 8000);
     
     gui.setup(parameters);
@@ -64,7 +74,9 @@ void testApp::setup()
     // Bullet stuff
     
     world.setup();
-	world.setGravity(ofVec3f(0.f, 0.f, 9.8f));
+    
+    // gravity should be .98 for slowmo realism    
+	world.setGravity(ofVec3f(0.f, 0.f, .1f));
     
     ground.create( world.world, ofVec3f(0., 0, 0.5), 0., 100.f, 100.f, 1.f );
 	ground.setProperties(.25, .95);
@@ -103,21 +115,28 @@ void testApp::setup()
     
     
     // Voronoi wall
-    
-    vbounds.set(-2, -2, 4, 4);
+    vbounds.set(-0.9, -1, 1.8, 2);
     voronoi.setBounds(vbounds);
     
-    int n = 80;
+    genTheVoronoi();
+    
+} 
+
+
+void testApp::genTheVoronoi() {
+    int n = subdivisions.get();
     for(int i=0; i<n; i++) {
         vpts.push_back(ofRandomPointInRect(vbounds));
     }
+    
+    //vpts.push_back(ofVec3f(0,0,0));
     
     voronoi.clear();
     for(int i=0; i<vpts.size(); i++) {
         voronoi.addPoint(vpts[i]);
     }
     voronoi.generateVoronoi();
-    
+
 }
 
 //--------------------------------------------------------------
@@ -146,7 +165,6 @@ void testApp::update()
             
 		} else if(m.getAddress() == "/eyeSeperation/x"){
 			eyeSeperation.set(m.getArgAsFloat(0));
-            
 		}
     }
 
@@ -206,8 +224,8 @@ void testApp::update()
     
     if(addSphere){
         ofxBulletSphere * sphere = new ofxBulletSphere();
-        float mass = ofRandom(0.02,0.05);
-        sphere->create(world.world, ofVec3f(ofRandom(-0.1,0.1), ofRandom(-0.1,0.1), -1), mass, mass);
+        float mass = ofRandom(0.02,0.075);
+        sphere->create(world.world, ofVec3f(ofRandom(-0.25,0.25), ofRandom(-0.25,0.25), -1), mass, mass);
         sphere->setProperties(0.1, 0.1);
         spheres.push_back(sphere);
         sphere->add();
@@ -221,6 +239,24 @@ void testApp::update()
 
 void testApp::drawVoronoiWall() {
     
+    ofRectangle bounds = ofRectangle(wallBreakPos.get().x-wallBreakReach.get().x/2, wallBreakPos.get().y-wallBreakReach.get().y/2, wallBreakReach.get().x, wallBreakReach.get().y);
+    
+    
+    bool changed = false;
+    while(subdivisions.get() > voronoi.getPoints().size()) {
+        voronoi.addPoint(ofRandomPointInRect(vbounds));
+        changed = true;
+    }
+    
+    while(subdivisions.get() < voronoi.getPoints().size()) {
+        voronoi.getPoints().erase(voronoi.getPoints().begin());
+        changed = true;
+    }
+    
+    if(changed) {
+        voronoi.generateVoronoi();
+    }
+    
     //TODO:Factor out to seperate class
     
     glPushMatrix();
@@ -230,33 +266,83 @@ void testApp::drawVoronoiWall() {
     light.enable();
     dirLight.enable();
     
+    // draw a frame for the breaking wall
+    ofFill();
+    ofSetColor(200,230,200);
+    // left
+    /*ofRect(-1, -1, 0.1, 2);
+    ofRect(0.9, -1, 0.1, 2);
+    ofRect(-1, -1, 2, 0.1);
+    ofRect(-1, 0.9, 2, 2);
+    */
+    
+    
+    ofPushMatrix();
+    ofNoFill();
+    ofSetLineWidth(5);
+    ofSetColor(0);
+        ofTranslate(wallBreakPos.get().x, wallBreakPos.get().y);
+       // ofEllipse(0, 0, wallBreakReach.get().x, wallBreakReach.get().y);
+    
+    ofPopMatrix();
+    
+    //ofDrawRect(bounds.getPosition(), );
+    
+    
     //voronoi.draw();
-    voronoi.getPoints().size();
-    
-    
+    //voronoi.getPoints().size();
     
     for(int i=0; i < voronoi.cells.size(); i++) {
         
         ofMesh vcell;
         vcell.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
         
+        bool inbreakzone = false;
+        
         for(int v=0; v<voronoi.cells[i].pts.size(); v++) {
+            
             vcell.addVertex(voronoi.cells[i].pts[v]);
             
             ofColor col;
-            if(i%2 == 0) {
-                col.set(255,255,50);
-            } else {
-                col.set(50,255,255);
+            //if(i%2 == 0) {
+            //    col.set(ofMap(i,0,voronoi.cells.size(),255, 2),255,250);
+            //} else {
+                col.set(ofMap(0.0, -0.2, 0.2, 255,100));
+            //}
+            
+            if(bounds.inside(voronoi.cells[i].pts[v])) {
+                inbreakzone = false;
             }
             
             vcell.addColor(col);
         }
+        
         ofPushMatrix();
         
-        ofTranslate(0, 0, ofSignedNoise(ofGetElapsedTimef()/20 +i)/5);
-        vcell.draw();
-        vcell.drawWireframe();
+            if(inbreakzone) {
+                
+            }
+        
+       // ofRect(bounds.getPosition().x, bounds.getPosition().y, 0, bounds.getWidth(), bounds.getHeight());
+        
+        
+            if(!bounds.inside(vcell.getCentroid())) {
+                
+
+                float z = ofSignedNoise(ofGetElapsedTimef() * wallSpeed.get() + i*2) * wallBreakStrength.get();
+                ofTranslate(0, 0, z);
+                ofRotateY( ofSignedNoise(ofGetElapsedTimef()*90 + i) * shivering);
+                
+                for(int c=0; c<vcell.getColors().size(); c++) {
+                    vcell.getColors()[c];
+                    
+                    vcell.setColor(c, ofColor(ofMap(z, -0.2, 0.2, 255,100)));
+                                             
+                }
+                
+                vcell.draw();
+                
+            }
         
         ofPopMatrix();
     }
@@ -266,7 +352,7 @@ void testApp::drawVoronoiWall() {
     
     ofDisableLighting();
     glPopMatrix();
-    
+
 }
 
 void testApp::drawBulletFloor(){
@@ -283,6 +369,10 @@ void testApp::drawBulletFloor(){
         // dancerCylinder.draw();
         
     } ofPopMatrix();
+    
+    
+    //ofRect(-2, -2, 4, 4);
+    
     
 }
 
@@ -479,7 +569,6 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 {
     
 }
-
 
 void testApp::exit() {
     

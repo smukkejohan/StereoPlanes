@@ -48,7 +48,6 @@
 		04A6C9271882166800B17C45 /* ofxCvHaarFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A6C91A1882166800B17C45 /* ofxCvHaarFinder.cpp */; };
 		04A6C9281882166800B17C45 /* ofxCvImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A6C91C1882166800B17C45 /* ofxCvImage.cpp */; };
 		04A6C9291882166800B17C45 /* ofxCvShortImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A6C91F1882166800B17C45 /* ofxCvShortImage.cpp */; };
-		7A7941581884B0FD00A346F2 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A7941571884B0FD00A346F2 /* Syphon.framework */; };
 		7AF1C6BD1885DE7000B38D3B /* ofxBulletJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C6881885D44800B38D3B /* ofxBulletJoint.cpp */; };
 		7AF1C6BE1885DE7000B38D3B /* ofxBulletWorldRigid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C68E1885D44800B38D3B /* ofxBulletWorldRigid.cpp */; };
 		7AF1C6BF1885DE7000B38D3B /* GLDebugDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C6911885D44800B38D3B /* GLDebugDrawer.cpp */; };
@@ -61,7 +60,6 @@
 		7AF1C6C61885DE7000B38D3B /* ofxBulletCylinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C6A01885D44800B38D3B /* ofxBulletCylinder.cpp */; };
 		7AF1C6C71885DE7000B38D3B /* ofxBulletSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C6A21885D44800B38D3B /* ofxBulletSphere.cpp */; };
 		7AF1C6C81885DE7000B38D3B /* ofxBulletStaticPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C6A41885D44800B38D3B /* ofxBulletStaticPlane.cpp */; };
-		7AF1C6F51885EA9500B38D3B /* libvoro++_2d32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF1C6D81885EA9500B38D3B /* libvoro++_2d32.a */; };
 		7AF1C6F61885EA9500B38D3B /* Voronoi2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C6DF1885EA9500B38D3B /* Voronoi2D.cpp */; };
 		7AF1C6F71885EA9500B38D3B /* ofxVoronoi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C6E21885EA9500B38D3B /* ofxVoronoi.cpp */; };
 		7AF1C7351885EAD500B38D3B /* FontManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C7001885EAD500B38D3B /* FontManager.cpp */; };
@@ -441,7 +439,6 @@
 				049BD5DA187DD4D60069585F /* Syphon.framework in Frameworks */,
 				E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */,
 				E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */,
-				7AF1C6F51885EA9500B38D3B /* libvoro++_2d32.a in Frameworks */,
 				04A6C9221882166800B17C45 /* opencv.a in Frameworks */,
 				E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */,
 				E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */,
@@ -452,7 +449,6 @@
 				E45BE97F0E8CC7DD009D7055 /* CoreAudio.framework in Frameworks */,
 				E45BE9800E8CC7DD009D7055 /* CoreFoundation.framework in Frameworks */,
 				E45BE9810E8CC7DD009D7055 /* CoreServices.framework in Frameworks */,
-				7A7941581884B0FD00A346F2 /* Syphon.framework in Frameworks */,
 				E45BE9830E8CC7DD009D7055 /* OpenGL.framework in Frameworks */,
 				E45BE9840E8CC7DD009D7055 /* QuickTime.framework in Frameworks */,
 				E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */,
