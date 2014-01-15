@@ -47,10 +47,12 @@ void testApp::setup()
     
     parameters.setName("Stereo");
     parameters.add(camPos.set("Cam position", ofVec3f(0.,0.,-1), ofVec3f(-2,-2,-8.), ofVec3f(2,2,-0.5)));
-    parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
     parameters.add(eyeSeperation.set("Eye Seperation", 6.5, 0., 7.));
+    parameters.add(dancerEllipseSize.set("Dancer Ellipse Size", 0., 0., .5));
+    parameters.add(dancerEllipseBrightness.set("Dancer Ellipse Brightness", 0., 0., 1.));
+    parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
     
-//    sync.setup(parameters, 9002, "localhost", 8000);
+    //    sync.setup(parameters, 9002, "localhost", 8000);
     
     gui.setup(parameters);
     
@@ -58,11 +60,13 @@ void testApp::setup()
     
     world.setup();
 	world.setGravity(ofVec3f(0.f, 0.f, 9.8f));
-
+    
     ground.create( world.world, ofVec3f(0., 0, 0.5), 0., 100.f, 100.f, 1.f );
 	ground.setProperties(.25, .95);
 	ground.add();
-
+    
+    
+    
     //  TODO: Operator grabbing of bullet objects from first view?
     //	world.enableGrabbing();
     //	world.enableDebugDraw();
@@ -76,7 +80,7 @@ void testApp::setup()
     for(int i=0; i<n; i++) {
         vpts.push_back(ofRandomPointInRect(vbounds));
     }
-
+    
     voronoi.clear();
     for(int i=0; i<vpts.size(); i++) {
         voronoi.addPoint(vpts[i]);
@@ -88,7 +92,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-       while(oscReceiver.hasWaitingMessages()){
+    while(oscReceiver.hasWaitingMessages()){
 		// get the next message
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(&m);
@@ -97,7 +101,7 @@ void testApp::update()
             ofVec3f pos = camPos.get();
             pos.x = m.getArgAsFloat(0);
 			camPos.set(pos);
-		
+            
 		} else if(m.getAddress() == "/Camera/y"){
             ofVec3f pos = camPos.get();
             pos.y = m.getArgAsFloat(0);
@@ -114,11 +118,8 @@ void testApp::update()
             
 		}
     }
-    
-    
-    
-    
-    
+
+    //TODO: Camera frustrums share position, but with individual viewports
     for(int i=0; i<planes.size(); i++) {
         planes[i]->cam.setPosition(camPos.get());
         planes[i]->cam.setPhysicalEyeSeparation(eyeSeperation.get());
@@ -140,6 +141,8 @@ void testApp::update()
 
 
 void testApp::drawVoronoiWall() {
+    
+    //TODO:Factor out to seperate class
     
     glPushMatrix();
     
@@ -188,53 +191,10 @@ void testApp::drawVoronoiWall() {
     
 }
 
+void testApp::drawBulletFloor(){
+    
+    //TODO:Factor out to seperate class
 
-void testApp::drawFloor() {
-    
-    //TODO: Add something that extends to close infront of the viewer.
-    //TODO:
-    
-    glPushMatrix();
-    /*glEnable (GL_FOG);
-    glFogi (GL_FOG_MODE, GL_EXP2);
-    glHint (GL_FOG_HINT, GL_NICEST);
-    
-    glFogi(GL_FOG_DENSITY, 1);
-    */
-    
-    light.enable();
-    dirLight.enable();
-    
-//  ofBackground(0,0,0,255);
-    
-    ofSetColor(255,255,255,100);
-
-    //ofSetLineWidth(3);
-    //ofDrawGrid(1);
-    
-    ofPushMatrix();
-    //ofRotateX(ofGetElapsedTimef()*100);
-    ofFill();
-    ofSetColor(255,255,255,255);
-    //ofDrawBox(0.1);
-    //ofDrawBox(0.2);
-    //ofSetLineWidth(6);
-    ofSetBoxResolution(10);
-
-    ofRotateX(ofGetElapsedTimef()*10);
-    //ofDrawBox(0.5);
-    
-    ofPopMatrix();
-    ofRect(-1,-1, 2, 2);
-    
-    /*
-    for (int i = 0; i< 200; i++) {
-        ofDrawSphere(ofSignedNoise((ofGetElapsedTimef()*0.01)+i, 0, 0), ofSignedNoise((ofGetElapsedTimef()*0.01)+i, (ofGetElapsedTimef()*0.01)+i, 0), ofSignedNoise(0,0,(ofGetElapsedTimef()*0.01)+i)*0.5,  0.05);
-    }*/
-    
-    //ofDrawBox(1);
-    //ofDrawBox(1.5);
-    
     ofPushMatrix(); {
         //ofRotateY(90);
         //world.drawDebug();
@@ -242,17 +202,62 @@ void testApp::drawFloor() {
         for(int i=0; i<spheres.size(); i++) {
             spheres[i]->draw();
         }
-
+        
         
     } ofPopMatrix();
-
-    light.disable();
-    dirLight.disable();
     
-    //glDisable(GL_FOG);
+}
 
-    ofDisableLighting();
-    glPopMatrix();
+void testApp::drawFloor() {
+    
+    glPushMatrix();{
+        
+        ofEnableLighting();
+        light.enable();
+        dirLight.enable();
+        
+        //TODO: Find better fog parameters...
+        /*glEnable (GL_FOG);
+         glFogi (GL_FOG_MODE, GL_EXP2);
+         glHint (GL_FOG_HINT, GL_NICEST);
+         glFogi(GL_FOG_DENSITY, 1);
+         */
+        
+        /** A rotating box intersects the floor
+        ofPushMatrix();
+        ofFill();
+        ofSetColor(255,255,255,255);
+        ofSetBoxResolution(10);
+        ofRotateX(ofGetElapsedTimef()*10);
+        ofDrawBox(0.5);
+        ofPopMatrix();
+        **/
+        
+        // A WHITE FLOOR
+        ofSetColor(255,255,255,255);
+        ofRect(-1,-1, 2, 2);
+        
+        drawBulletFloor();
+        
+        /** Some random moving balls
+         for (int i = 0; i< 200; i++) {
+            ofDrawSphere(ofSignedNoise((ofGetElapsedTimef()*0.01)+i, 0, 0), ofSignedNoise((ofGetElapsedTimef()*0.01)+i, (ofGetElapsedTimef()*0.01)+i, 0), ofSignedNoise(0,0,(ofGetElapsedTimef()*0.01)+i)*0.5,  0.05);
+         }
+         **/
+        
+        
+        light.disable();
+        dirLight.disable();
+        ofDisableLighting();
+        
+        ofDisableDepthTest();
+        ofSetColor(0,0,0,255);
+        ofEllipse(dancerPos->x, dancerPos->y, 0.02, 0.02);
+        ofEnableDepthTest();
+        
+        //glDisable(GL_FOG);
+        
+    } glPopMatrix();
     
 }
 
@@ -311,13 +316,13 @@ void testApp::draw()
     activePlane->drawInfo();
     
     gui.draw();
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-
+    
 	if (key == 'f')
 	{
 		ofToggleFullscreen();

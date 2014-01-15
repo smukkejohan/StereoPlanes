@@ -57,6 +57,8 @@ public:
     
     ofParameter<ofVec3f> camPos;
     ofParameter<float> eyeSeperation;
+    ofParameter<float> dancerEllipseSize;
+    ofParameter<float> dancerEllipseBrightness;
     ofParameter<ofVec2f> dancerPos;
     
 //    ofxOscParameterSync sync;
