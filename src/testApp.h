@@ -107,5 +107,8 @@ public:
     ofRectangle      vbounds;
     ofxVoronoi       voronoi;
     
+    
+    float wallTime = 0;
+    
 
 };

@@ -52,17 +52,13 @@ void testApp::setup()
     parameters.add(dancerEllipseBrightness.set("Dancer Ellipse Brightness", 0., 0., 1.));
     parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
     
-    
     parameters.add(shivering.set("Shiver", 0, 0, 6));
-    parameters.add(wallSpeed.set("wallSpeed", 0, 0, 1));
+    parameters.add(wallSpeed.set("wallSpeed", 0, 0, 2));
     parameters.add(subdivisions.set("Subdivisions", 4, 0, 400));
-    
     
     parameters.add(wallBreakPos.set("wallBreakPos", ofVec3f(0.1,0.5,0), ofVec3f(-1,-1,-1), ofVec3f(1,1,1)));
     parameters.add(wallBreakReach.set("wallBreakReach", ofVec3f(0.2,2,1), ofVec3f(0,0,0), ofVec3f(2,2,2)));
-    parameters.add(wallBreakStrength.set("wallBreakStrength", 0, 0, 6));
-    
-    //    sync.setup(parameters, 9002, "localhost", 8000);
+    parameters.add(wallBreakStrength.set("wallBreakStrength", 0, 0, 1.8));
     
     gui.setup(parameters);
     
@@ -74,8 +70,6 @@ void testApp::setup()
     ground.create( world.world, ofVec3f(0., 0, 0.5), 0., 100.f, 100.f, 1.f );
 	ground.setProperties(.25, .95);
 	ground.add();
-    
-    
     
     //  TODO: Operator grabbing of bullet objects from first view?
     //	world.enableGrabbing();
@@ -133,6 +127,11 @@ void testApp::update()
             
 		} else if(m.getAddress() == "/eyeSeperation/x"){
 			eyeSeperation.set(m.getArgAsFloat(0));
+            
+		} else if(m.getAddress() == "/Dancer/x"){
+            dancerPos.set(ofVec2f(m.getArgAsFloat(0), dancerPos.get().y));
+		} else if(m.getAddress() == "/Dancer/y"){
+            dancerPos.set(ofVec2f(dancerPos.get().x, m.getArgAsFloat(0)));
 		}
     }
 
@@ -153,6 +152,10 @@ void testApp::update()
     }
     
     world.update();
+    
+    
+    
+    wallTime += 0.01 * wallSpeed;
     
 }
 
@@ -250,9 +253,9 @@ void testApp::drawVoronoiWall() {
             if(!bounds.inside(vcell.getCentroid())) {
                 
 
-                float z = ofSignedNoise(ofGetElapsedTimef() * wallSpeed.get() + i*2) * wallBreakStrength.get();
+                float z = ofSignedNoise(wallTime + i) * wallBreakStrength.get();
                 ofTranslate(0, 0, z);
-                ofRotateY( ofSignedNoise(ofGetElapsedTimef()*90 + i) * shivering);
+                //ofRotateY( ofSignedNoise(ofGetElapsedTimef()*2 + i) * shivering);
                 
                 for(int c=0; c<vcell.getColors().size(); c++) {
                     vcell.getColors()[c];
