@@ -72,18 +72,22 @@ void testApp::setup()
     vbounds.set(-2, -2, 4, 4);
     voronoi.setBounds(vbounds);
     
-    int n = 80;
+    int n = 100;
     for(int i=0; i<n; i++) {
         vpts.push_back(ofRandomPointInRect(vbounds));
     }
 
+    
+    vpts.push_back(ofVec3f(0,0,0));
+
+    
     voronoi.clear();
     for(int i=0; i<vpts.size(); i++) {
         voronoi.addPoint(vpts[i]);
     }
     voronoi.generateVoronoi();
     
-}
+} 
 
 //--------------------------------------------------------------
 void testApp::update()
@@ -156,9 +160,11 @@ void testApp::drawVoronoiWall() {
     for(int i=0; i < voronoi.cells.size(); i++) {
         
         ofMesh vcell;
+        
         vcell.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
         
         for(int v=0; v<voronoi.cells[i].pts.size(); v++) {
+            
             vcell.addVertex(voronoi.cells[i].pts[v]);
             
             ofColor col;
@@ -166,18 +172,33 @@ void testApp::drawVoronoiWall() {
                 col.set(255,255,50);
             } else {
                 col.set(50,255,255);
-            }
+            
             
             vcell.addColor(col);
         }
         ofPushMatrix();
         
+        ofTranslate(0, 0, ofSignedNoise(ofGetElapsedTimef()/8 + i*2)*0.6);
+            ofScale(0.9, 0.9, 1);
+            //ofRotateX(ofSignedNoise(ofGetElapsedTimef()/8 +i)*80);
+            ofRotateY(ofSignedNoise(ofGetElapsedTimef()/8 +i)*20);
+        //vcell.draw();
+            ofSetLineWidth(10);
+        //vcell.setMode(OF_PRIMITIVE_LINE_STRI);
+            vcell.draw();
         
-        ofTranslate(0, 0, ofSignedNoise(ofGetElapsedTimef()/20 +i)/5);
-        vcell.draw();
-        vcell.drawWireframe();
+            ofPushMatrix();
+                ofTranslate(0, 0, 0.05);
+                //
+                //vcell.draw();
+            
+            
+            ofPopMatrix();
+        //vcell.drawWireframe();
+        
         
         ofPopMatrix();
+        }
     }
     
     light.disable();
