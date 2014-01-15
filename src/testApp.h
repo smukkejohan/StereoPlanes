@@ -61,6 +61,15 @@ public:
     ofParameter<float> dancerEllipseBrightness;
     ofParameter<ofVec2f> dancerPos;
     
+    ofParameter<float> shivering;
+    ofParameter<int> subdivisions;
+    ofParameter<float> wallSpeed;
+    
+    ofParameter<ofVec3f> wallBreakPos;
+    ofParameter<ofVec3f> wallBreakReach;
+    ofParameter<float> wallBreakStrength;
+    
+    void genTheVoronoi();
 //    ofxOscParameterSync sync;
     
     ofParameterGroup parameters;
@@ -97,5 +106,6 @@ public:
     vector <ofVec3f> vpts;
     ofRectangle      vbounds;
     ofxVoronoi       voronoi;
+    
 
 };
