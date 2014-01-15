@@ -79,19 +79,30 @@ public:
     StereoPlane * activePlane;
     int activePlaneIndex;
     
-    //StereoPlane thing;
-    
     void drawFloor();
     vector<StereoPlane *> planes;
     ofxXmlSettings settings;
     
+    // Lights
     ofLight light;
     ofLight dirLight;
     
+    // Bullet
     ofxBulletWorldRigid			world;
 	ofxBulletBox				ground;
-	vector<ofxBulletSphere*>     spheres;
+    ofxBulletBox                wallBack;
+    ofxBulletBox                wallLeft;
+    ofxBulletBox                wallRight;
+    ofxBulletBox                wallFront;
+    ofxBulletBox                dancerCylinder;
+    btGeneric6DofConstraint *   dancerConstraint;
+	vector<ofxBulletSphere*>    spheres;
+    
+    float dancerHeight;
+    
     bool addSphere = false;
+
+    // Voronoi
     void drawVoronoiWall();
     void drawBulletFloor();
     vector <ofVec3f> vpts;
