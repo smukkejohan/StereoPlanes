@@ -120,14 +120,14 @@ void testApp::update()
             
             for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
                 voronoiWall->breakPoints[i].pos.x = m.getArgAsFloat(i);
-                voronoiWall->breakPoints[i].pressure += 0.01;
+                voronoiWall->breakPoints[i].pressure += 0.001;
             }
             
         } else if(m.getAddress() == "/voronoi/y"){
             
             for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
                 voronoiWall->breakPoints[i].pos.y = m.getArgAsFloat(i);
-                voronoiWall->breakPoints[i].pressure += 0.01;
+                voronoiWall->breakPoints[i].pressure += 0.001;
             }
             
         } else if(m.getAddress() == "/voronoi/z"){

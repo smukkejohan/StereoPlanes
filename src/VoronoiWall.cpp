@@ -99,14 +99,19 @@ void VoronoiWall::draw() {
             }
             
             if(!inBreakpoint) {
-                cells[i].offset.z * 0.998;
+                cells[i].offset.z * 0.6978;
             }
             
-            for(int c=0; c<cells[i].mesh.getColors().size(); c++) {
-                
-                cells[i].mesh.setColor(c, ofColor(ofMap(cells[i].offset.z, -0.2, 0.2, 255,100)));
-                
-            }
+        } else {
+            
+            cells[i].offset.z = 0;
+            
+        }
+        
+        
+        for(int c=0; c<cells[i].mesh.getColors().size(); c++) {
+            
+            cells[i].mesh.setColor(c, ofColor(ofMap(cells[i].offset.z, -0.2, 0.2, 255,100)));
             
         }
         
@@ -115,17 +120,15 @@ void VoronoiWall::draw() {
         cells[i].mesh.draw();
         ofPopMatrix();
         
-        
     }
     
     for(int b=0; b<breakPoints.size(); b++) {
         ofPushMatrix();
         ofTranslate(0, 0, -0.1);
         ofSetColor(0,0,0,20);
-        ofCircle(breakPoints[b].pos, breakPoints[b].radius);
+        //ofCircle(breakPoints[b].pos, breakPoints[b].radius);
         ofPopMatrix();
     }
-    
     
     //light.disable();
     //dirLight.disable();
@@ -170,10 +173,7 @@ void VoronoiWall::updateCells() {
 
             cells.push_back(cell);
         }
-        
     }
-    
-
     
 }
 
@@ -196,12 +196,11 @@ void VoronoiWall::update() {
     
     wallTime += 0.01 * wallSpeed;
     
-    
     for(int b=0; b<breakPoints.size(); b++) {
         
 
-        if(breakPoints[b].pressure > 1) {
-            breakPoints[b].pressure = 1;
+        if(breakPoints[b].pressure > 4) {
+            breakPoints[b].pressure = 4;
         }
            
         breakPoints[b].pressure *= 0.98;
