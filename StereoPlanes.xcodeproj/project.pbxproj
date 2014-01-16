@@ -1421,9 +1421,9 @@
 			isa = PBXGroup;
 			children = (
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
-				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				043C51CF1888664100ADD204 /* BoxFloor.cpp */,
 				043C51D01888664100ADD204 /* BoxFloor.h */,
+				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				042128171884956E00F516C5 /* ofxCoolGlasses.h */,
 				04144F2D188585D000C28505 /* StereoPlane.h */,

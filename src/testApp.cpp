@@ -116,7 +116,27 @@ void testApp::update()
 		} else if(m.getAddress() == "/Dancer/y"){
             dancerPos.set(ofVec2f(dancerPos.get().x, m.getArgAsFloat(0)));
             
-		}
+		} else if(m.getAddress() == "/voronoi/x"){
+            
+            for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
+                voronoiWall->breakPoints[i].pos.x = m.getArgAsFloat(i);
+                voronoiWall->breakPoints[i].pressure += 0.01;
+            }
+            
+        } else if(m.getAddress() == "/voronoi/y"){
+            
+            for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
+                voronoiWall->breakPoints[i].pos.y = m.getArgAsFloat(i);
+                voronoiWall->breakPoints[i].pressure += 0.01;
+            }
+            
+        } else if(m.getAddress() == "/voronoi/z"){
+            
+            for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
+                //voronoiWall->breakPoints[i].pressure = m.getArgAsFloat(i);
+            }
+            
+        }
     }
 
     //TODO: Camera frustrums share position, but with individual viewports
@@ -226,12 +246,12 @@ void testApp::draw()
     
     floor->beginLeft();
     //drawFloor();
-    boxFloor->draw( dancerPos.get() );
+    //boxFloor->draw( dancerPos.get() );
     floor->endLeft();
     
     floor->beginRight();
     //drawFloor();
-    boxFloor->draw( dancerPos.get() );
+    //boxFloor->draw( dancerPos.get() );
     floor->endRight();
     
     wall->beginLeft();

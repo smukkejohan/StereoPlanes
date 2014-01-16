@@ -26,11 +26,14 @@ void VoronoiWall::setup(ofParameterGroup * params) {
     params->add(wallBreakReach.set("wallBreakReach", ofVec3f(0.2,2,1), ofVec3f(0,0,0), ofVec3f(2,2,2)));
     params->add(wallBreakStrength.set("wallBreakStrength", 0, 0, 1.8));
     
-    
     params->add(breakPointRadius.set("breakPointRadius", 0.2, 0, 1.4));
     
     for(int i=0; i<5; i++) {
         BreakPoint br;
+        br.pos = ofVec3f(0,0,0);
+        br.radius = 0.25;
+        br.pressure = 0;
+        
         breakPoints.push_back(br);
     }
     
@@ -44,8 +47,6 @@ void VoronoiWall::draw() {
     updateCells();
     
     ofRectangle bounds = ofRectangle(wallBreakPos.get().x-wallBreakReach.get().x/2, wallBreakPos.get().y-wallBreakReach.get().y/2, wallBreakReach.get().x, wallBreakReach.get().y);
-    
-    //TODO:Factor out to seperate class
     
     glPushMatrix();
     ofNoFill();
@@ -69,7 +70,6 @@ void VoronoiWall::draw() {
     ofSetColor(0);
     ofTranslate(wallBreakPos.get().x, wallBreakPos.get().y);
     // ofEllipse(0, 0, wallBreakReach.get().x, wallBreakReach.get().y);
-    
     ofPopMatrix();
     //ofDrawRect(bounds.getPosition(), );
     
@@ -85,23 +85,27 @@ void VoronoiWall::draw() {
             }
             
             
+            bool inBreakpoint = false;
             for(int b=0; b<breakPoints.size(); b++) {
                 
                 //todo: break more with distance
                 
-               /* if(breakPoints[i].pos.distance(cells[i].pos) < breakPoints[i].radius) {
-                    
-                    cells[i].offset.z += breakPoints[i].pressure;
+               if(breakPoints[b].pos.distance(cells[i].mesh.getCentroid()) < breakPoints[b].radius) {
+                   cells[i].offset.z = ofMap(breakPoints[b].pos.distance(cells[i].mesh.getCentroid()), 0, breakPoints[b].radius, breakPoints[b].pressure, 0);
                     // todo: map reverse distance to center multiply by pressure
+                    inBreakpoint = true;
                     
-                } else {
-                    cells[i].offset.z *= 0.998;
-                }*/
+                }
+            }
+            
+            if(!inBreakpoint) {
+                cells[i].offset.z * 0.998;
             }
             
             for(int c=0; c<cells[i].mesh.getColors().size(); c++) {
+                
                 cells[i].mesh.setColor(c, ofColor(ofMap(cells[i].offset.z, -0.2, 0.2, 255,100)));
-                cells[i].mesh.setColor(c, ofColor(255));
+                
             }
             
         }
@@ -110,7 +114,18 @@ void VoronoiWall::draw() {
         ofTranslate(cells[i].offset);
         cells[i].mesh.draw();
         ofPopMatrix();
+        
+        
     }
+    
+    for(int b=0; b<breakPoints.size(); b++) {
+        ofPushMatrix();
+        ofTranslate(0, 0, -0.1);
+        ofSetColor(0,0,0,20);
+        ofCircle(breakPoints[b].pos, breakPoints[b].radius);
+        ofPopMatrix();
+    }
+    
     
     //light.disable();
     //dirLight.disable();
@@ -180,7 +195,21 @@ void VoronoiWall::genTheVoronoi() {
 void VoronoiWall::update() {
     
     wallTime += 0.01 * wallSpeed;
+    
+    
+    for(int b=0; b<breakPoints.size(); b++) {
+        
 
+        if(breakPoints[b].pressure > 1) {
+            breakPoints[b].pressure = 1;
+        }
+           
+        breakPoints[b].pressure *= 0.98;
+        // radius ? ofMap(breakPoints[b].pressure, 0, 1, 0.2, 0.8);
+        
+    }
+
+    
     
 }
 
