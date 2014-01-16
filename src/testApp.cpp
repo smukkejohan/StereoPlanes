@@ -49,23 +49,19 @@ void testApp::setup()
     dirLight.setDiffuseColor(ofColor(191,191,170));
     
     parameters.setName("Stereo");
-    parameters.add(camPos.set("Cam position", ofVec3f(0.,0.,-1), ofVec3f(-2,-2,-8.), ofVec3f(2,2,-0.5)));
+    parameters.add(camPos.set("Cam position", ofVec3f(0.,0.,-1), ofVec3f(-3,-3,-8.), ofVec3f(3,3,-0.25)));
     parameters.add(eyeSeperation.set("Eye Seperation", 6.5, 0., 7.));
     parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
     parameters.add(dancerEllipseSize.set("Ellipse Size", 0., 0., .5));
     parameters.add(dancerEllipseBrightness.set("Ellipse Brightness", 0., 0., 1.));
     
-    
     parameters.add(shivering.set("Shiver", 0, 0, 6));
-    parameters.add(wallSpeed.set("wallSpeed", 0, 0, 1));
+    parameters.add(wallSpeed.set("wallSpeed", 0, 0, 2));
     parameters.add(subdivisions.set("Subdivisions", 4, 0, 400));
-    
     
     parameters.add(wallBreakPos.set("wallBreakPos", ofVec3f(0.1,0.5,0), ofVec3f(-1,-1,-1), ofVec3f(1,1,1)));
     parameters.add(wallBreakReach.set("wallBreakReach", ofVec3f(0.2,2,1), ofVec3f(0,0,0), ofVec3f(2,2,2)));
-    parameters.add(wallBreakStrength.set("wallBreakStrength", 0, 0, 6));
-    
-    //    sync.setup(parameters, 9002, "localhost", 8000);
+    parameters.add(wallBreakStrength.set("wallBreakStrength", 0, 0, 1.8));
     
     gui.setup(parameters);
     
@@ -76,26 +72,26 @@ void testApp::setup()
     world.setup();
     
     // gravity should be .98 for slowmo realism    
-	world.setGravity(ofVec3f(0.f, 0.f, .1f));
+	world.setGravity(ofVec3f(0.f, 0.f, .4f));
     
     ground.create( world.world, ofVec3f(0., 0, 0.5), 0., 100.f, 100.f, 1.f );
 	ground.setProperties(.25, .95);
 	ground.add();
 
-    wallBack.create( world.world, ofVec3f(0., -1.5, 0), 0., 100.f, 1.f, 100.f );
-	wallBack.setProperties(.75, .95);
+    wallBack.create( world.world, ofVec3f(0., -1.45, 0), 0., 100.f, 1.f, 100.f );
+	wallBack.setProperties(.75, .75);
 	wallBack.add();
     
     wallLeft.create( world.world, ofVec3f(-1.5, 0, 0), 0., 1.f, 100.f, 100.f );
-	wallLeft.setProperties(.75, .95);
+	wallLeft.setProperties(.75, .75);
 	wallLeft.add();
     
     wallRight.create( world.world, ofVec3f(1.5, 0, 0), 0., 1.f, 100.f, 100.f );
-	wallRight.setProperties(.75, .95);
+	wallRight.setProperties(.75, .75);
 	wallRight.add();
     
     wallFront.create( world.world, ofVec3f(0., 1.5, 0), 0., 100.f, 1.f, 100.f );
-	wallFront.setProperties(.75, .95);
+	wallFront.setProperties(.75, .75);
 	wallFront.add();
 /*
  ofxBulletCylinder::create( btDiscreteDynamicsWorld* a_world, ofVec3f a_loc, ofQuaternion a_rot, float a_mass, float a_radius, float a_height ) {
@@ -165,6 +161,11 @@ void testApp::update()
             
 		} else if(m.getAddress() == "/eyeSeperation/x"){
 			eyeSeperation.set(m.getArgAsFloat(0));
+            
+		} else if(m.getAddress() == "/Dancer/x"){
+            dancerPos.set(ofVec2f(m.getArgAsFloat(0), dancerPos.get().y));
+		} else if(m.getAddress() == "/Dancer/y"){
+            dancerPos.set(ofVec2f(dancerPos.get().x, m.getArgAsFloat(0)));
 		}
     }
 
@@ -225,7 +226,7 @@ void testApp::update()
     if(addSphere){
         ofxBulletSphere * sphere = new ofxBulletSphere();
         float mass = ofRandom(0.02,0.075);
-        sphere->create(world.world, ofVec3f(ofRandom(-0.25,0.25), ofRandom(-0.25,0.25), -1), mass, mass);
+        sphere->create(world.world, ofVec3f(ofRandom(-0.25,0.25), ofRandom(-0.25,0.25), -1), mass*0.1, mass);
         sphere->setProperties(0.1, 0.1);
         spheres.push_back(sphere);
         sphere->add();
@@ -234,12 +235,16 @@ void testApp::update()
     
     world.update();
     
+    
+    
+    wallTime += 0.01 * wallSpeed;
+    
 }
 
 
 void testApp::drawVoronoiWall() {
     
-    ofRectangle bounds = ofRectangle(wallBreakPos.get().x-wallBreakReach.get().x/2, wallBreakPos.get().y-wallBreakReach.get().y/2, wallBreakReach.get().x, wallBreakReach.get().y);
+    ofRectangle bounds = ofRectangle(wallBreakPos.get().x-wallBreakReach.get().x/2, wallBreakPos.get().y-wallBreakReach.get ().y/2, wallBreakReach.get().x, wallBreakReach.get().y);
     
     
     bool changed = false;
@@ -329,9 +334,9 @@ void testApp::drawVoronoiWall() {
             if(!bounds.inside(vcell.getCentroid())) {
                 
 
-                float z = ofSignedNoise(ofGetElapsedTimef() * wallSpeed.get() + i*2) * wallBreakStrength.get();
+                float z = ofSignedNoise(wallTime + i) * wallBreakStrength.get();
                 ofTranslate(0, 0, z);
-                ofRotateY( ofSignedNoise(ofGetElapsedTimef()*90 + i) * shivering);
+                //ofRotateY( ofSignedNoise(ofGetElapsedTimef()*2 + i) * shivering);
                 
                 for(int c=0; c<vcell.getColors().size(); c++) {
                     vcell.getColors()[c];
