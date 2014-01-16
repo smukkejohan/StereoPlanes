@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		04298A4A1887385700864E68 /* VoronoiWall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04298A491887385700864E68 /* VoronoiWall.cpp */; };
 		043C51C8188825F400ADD204 /* CeilingPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043C51C7188825F400ADD204 /* CeilingPlane.cpp */; };
+		043C51CB188827D500ADD204 /* Ribbon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043C51C9188827D500ADD204 /* Ribbon.cpp */; };
 		049BD5D0187DD46D0069585F /* SyphonNameboundClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BD5C1187DD46D0069585F /* SyphonNameboundClient.m */; };
 		049BD5D1187DD46D0069585F /* ofxSyphonClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049BD5C6187DD46D0069585F /* ofxSyphonClient.mm */; };
 		049BD5D2187DD46D0069585F /* ofxSyphonServer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049BD5C8187DD46D0069585F /* ofxSyphonServer.mm */; };
@@ -141,6 +142,8 @@
 		04298A491887385700864E68 /* VoronoiWall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VoronoiWall.cpp; sourceTree = "<group>"; };
 		043C51C6188825E800ADD204 /* CeilingPlane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CeilingPlane.h; sourceTree = "<group>"; };
 		043C51C7188825F400ADD204 /* CeilingPlane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CeilingPlane.cpp; sourceTree = "<group>"; };
+		043C51C9188827D500ADD204 /* Ribbon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ribbon.cpp; sourceTree = "<group>"; };
+		043C51CA188827D500ADD204 /* Ribbon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ribbon.h; sourceTree = "<group>"; };
 		049BD5A2187DD46D0069585F /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		049BD5BE187DD46D0069585F /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Syphon.framework; sourceTree = "<group>"; };
 		049BD5C0187DD46D0069585F /* SyphonNameboundClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyphonNameboundClient.h; sourceTree = "<group>"; };
@@ -1423,6 +1426,8 @@
 				04298A491887385700864E68 /* VoronoiWall.cpp */,
 				043C51C6188825E800ADD204 /* CeilingPlane.h */,
 				043C51C7188825F400ADD204 /* CeilingPlane.cpp */,
+				043C51C9188827D500ADD204 /* Ribbon.cpp */,
+				043C51CA188827D500ADD204 /* Ribbon.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1544,6 +1549,7 @@
 				04A6C9251882166800B17C45 /* ofxCvFloatImage.cpp in Sources */,
 				04A6C85818809A7500B17C45 /* tinyxml.cpp in Sources */,
 				04A6C9271882166800B17C45 /* ofxCvHaarFinder.cpp in Sources */,
+				043C51CB188827D500ADD204 /* Ribbon.cpp in Sources */,
 				049BD5D1187DD46D0069585F /* ofxSyphonClient.mm in Sources */,
 				7AF1C7411885EAD500B38D3B /* ofxTimer.cpp in Sources */,
 				7AF1C73D1885EAD500B38D3B /* GuiMoviePlayer.cpp in Sources */,

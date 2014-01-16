@@ -12,6 +12,20 @@
 #include "ofxVoronoi.h"
 #include "Utils.h"
 
+
+struct BreakPoint {
+    ofVec3f pos;
+    float radius;
+    float pressure;
+};
+
+struct Cell {
+    
+    ofMesh mesh;
+    ofVec3f offset;
+    
+};
+
 class VoronoiWall {
 
 public:
@@ -31,14 +45,20 @@ public:
     ofParameter<float> wallBreakStrength;
     
     
+    ofParameter<float> breakPointRadius;
+    
+    ofParameter<bool> autoOn;
+    
     vector <ofVec3f> vpts;
     ofRectangle      vbounds;
     ofxVoronoi       voronoi;
     
     float wallTime = 0;
     void drawVoronoiWall3d();
+    void updateCells();
     
-    
+    vector<BreakPoint> breakPoints;
+    vector<Cell> cells;
     
     
 };

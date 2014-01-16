@@ -10,6 +10,8 @@
 #include "StereoPlane.h"
 #include "ofxBullet.h"
 #include "VoronoiWall.h"
+#include "CeilingPlane.h"
+#include "Ribbon.h"
 
 class testApp : public ofBaseApp
 {
@@ -95,6 +97,8 @@ public:
     
     
     VoronoiWall * voronoiWall;
+    CeilingPlane * ceilingPlane;
+    Ribbon * ribbon;
     
 
 };

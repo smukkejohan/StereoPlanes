@@ -53,9 +53,13 @@ void testApp::setup()
     parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
     
     voronoiWall = new VoronoiWall();
-    
     voronoiWall->setup(&parameters);
     
+    ceilingPlane = new CeilingPlane();
+    ceilingPlane->setup(&parameters);
+    
+    //ribbon = new Ribbon();
+    //ribbon->setup(&parameters);
     
     gui.setup(parameters);
     
@@ -132,7 +136,7 @@ void testApp::update()
     world.update();
     
     voronoiWall->update();
-    
+    //ribbon->update();
     
 }
 
@@ -152,11 +156,6 @@ void testApp::drawBulletFloor(){
         
         
     } ofPopMatrix();
-    
-    
-    //ofRect(-2, -2, 4, 4);
-    
-    
 }
 
 void testApp::drawFloor() {
@@ -223,19 +222,21 @@ void testApp::draw()
     ofClear(0, 0, 0);
     
     floor->beginLeft();
-    drawFloor();
+    //drawFloor();
     floor->endLeft();
     
     floor->beginRight();
-    drawFloor();
+    //drawFloor();
     floor->endRight();
     
     wall->beginLeft();
     voronoiWall->draw();
+    //ribbon->draw();
     wall->endLeft();
     
     wall->beginRight();
     voronoiWall->draw();
+    //ribbon->draw();
     wall->endRight();
     
     ofDisableDepthTest();
