@@ -12,6 +12,7 @@
 #include "VoronoiWall.h"
 #include "CeilingPlane.h"
 #include "Ribbon.h"
+#include "BoxFloor.h"
 
 class testApp : public ofBaseApp
 {
@@ -99,6 +100,7 @@ public:
     VoronoiWall * voronoiWall;
     CeilingPlane * ceilingPlane;
     Ribbon * ribbon;
+    BoxFloor * boxFloor;
     
 
 };

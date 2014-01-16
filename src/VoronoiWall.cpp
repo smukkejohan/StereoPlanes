@@ -81,7 +81,7 @@ void VoronoiWall::draw() {
         if(!bounds.inside(cells[i].mesh.getCentroid())) {
             
             if(autoOn.get()) {
-                cells[i].pos.z = ofSignedNoise(wallTime + i) * wallBreakStrength.get();
+                cells[i].offset.z = ofSignedNoise(wallTime + i) * wallBreakStrength.get();
             }
             
             
@@ -89,27 +89,26 @@ void VoronoiWall::draw() {
                 
                 //todo: break more with distance
                 
-                if(breakPoints[i].pos.distance(cells[i].pos) < breakPoints[i].radius) {
+               /* if(breakPoints[i].pos.distance(cells[i].pos) < breakPoints[i].radius) {
                     
-                    cells[i].pos.z += breakPoints[i].pressure;
+                    cells[i].offset.z += breakPoints[i].pressure;
                     // todo: map reverse distance to center multiply by pressure
                     
                 } else {
-                    cells[i].pos.z *= 0.998;
-                }
+                    cells[i].offset.z *= 0.998;
+                }*/
             }
             
             for(int c=0; c<cells[i].mesh.getColors().size(); c++) {
-                cells[i].mesh.setColor(c, ofColor(ofMap(cells[i].pos.z, -0.2, 0.2, 255,100)));
+                cells[i].mesh.setColor(c, ofColor(ofMap(cells[i].offset.z, -0.2, 0.2, 255,100)));
                 cells[i].mesh.setColor(c, ofColor(255));
             }
             
         }
         
         ofPushMatrix();
-        //ofTranslate(cells[i].pos);
+        ofTranslate(cells[i].offset);
         cells[i].mesh.draw();
-        //ofCircle(cells[i].pos.x, cells[i].pos.y, 0.1);
         ofPopMatrix();
     }
     
@@ -151,7 +150,8 @@ void VoronoiWall::updateCells() {
                 cell.mesh.addColor(col);
             }
             
-            cell.pos = cell.mesh.getCentroid();
+            cell.offset = ofVec3f(0,0,0);
+            
 
             cells.push_back(cell);
         }
