@@ -56,6 +56,10 @@ void testApp::setup()
     
     voronoiWall->setup(&parameters);
     
+    boxFloor = new BoxFloor();
+    
+    boxFloor->setup(&parameters);
+    
     
     gui.setup(parameters);
     
@@ -132,6 +136,7 @@ void testApp::update()
     world.update();
     
     voronoiWall->update();
+    boxFloor->update();
     
     
 }
@@ -223,11 +228,13 @@ void testApp::draw()
     ofClear(0, 0, 0);
     
     floor->beginLeft();
-    drawFloor();
+    //drawFloor();
+    boxFloor->draw( dancerPos.get() );
     floor->endLeft();
     
     floor->beginRight();
-    drawFloor();
+    //drawFloor();
+    boxFloor->draw( dancerPos.get() );
     floor->endRight();
     
     wall->beginLeft();

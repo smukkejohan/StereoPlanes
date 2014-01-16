@@ -10,6 +10,7 @@
 #include "StereoPlane.h"
 #include "ofxBullet.h"
 #include "VoronoiWall.h"
+#include "BoxFloor.h"
 
 class testApp : public ofBaseApp
 {
@@ -95,6 +96,7 @@ public:
     
     
     VoronoiWall * voronoiWall;
+    BoxFloor * boxFloor;
     
 
 };
