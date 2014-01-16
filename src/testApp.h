@@ -9,8 +9,10 @@
 //#include "ofxStereoCamera.h"
 #include "StereoPlane.h"
 #include "ofxBullet.h"
-#include "ofxVoronoi.h"
-#include "Utils.h"
+#include "VoronoiWall.h"
+#include "CeilingPlane.h"
+#include "Ribbon.h"
+#include "BoxFloor.h"
 
 class testApp : public ofBaseApp
 {
@@ -61,16 +63,7 @@ public:
     ofParameter<float> dancerEllipseBrightness;
     ofParameter<ofVec2f> dancerPos;
     
-    ofParameter<float> shivering;
-    ofParameter<int> subdivisions;
-    ofParameter<float> wallSpeed;
-    
-    ofParameter<ofVec3f> wallBreakPos;
-    ofParameter<ofVec3f> wallBreakReach;
-    ofParameter<float> wallBreakStrength;
-    
-    void genTheVoronoi();
-//    ofxOscParameterSync sync;
+    //    ofxOscParameterSync sync;
     
     ofParameterGroup parameters;
     
@@ -111,15 +104,13 @@ public:
     
     bool addSphere = false;
 
-    // Voronoi
-    void drawVoronoiWall();
     void drawBulletFloor();
-    vector <ofVec3f> vpts;
-    ofRectangle      vbounds;
-    ofxVoronoi       voronoi;
     
     
-    float wallTime = 0;
+    VoronoiWall * voronoiWall;
+    CeilingPlane * ceilingPlane;
+    Ribbon * ribbon;
+    BoxFloor * boxFloor;
     
 
 };

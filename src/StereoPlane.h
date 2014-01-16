@@ -54,7 +54,6 @@ public:
     ofPoint rBL;
     ofPoint rBR;
     
-    
     ofxGLWarper::CornerLocation activeCorner;
     
     void setup(int w, int h, ofxXmlSettings * s) {
