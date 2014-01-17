@@ -10,15 +10,16 @@
 
 
 
-void VoronoiWall::setup(ofParameterGroup * params) {
+void VoronoiWall::setup(ofParameterGroup * params, ofRectangle bounds) {
     
     // Voronoi wall
-    vbounds.set(-0.9, -1, 1.8, 2);
+    
+    vbounds = bounds;
     voronoi.setBounds(vbounds);
     
     genTheVoronoi();
     
-    params->add(shivering.set("Shiver", 0, 0, 6));
+   // params->add(shivering.set("Shiver", 0, 0, 6));
     params->add(wallSpeed.set("wallSpeed", 0, 0, 2));
     params->add(subdivisions.set("Subdivisions", 4, 0, 400));
     
@@ -95,9 +96,7 @@ void VoronoiWall::draw() {
                 
                if(breakPoints[b].pos.distance(cells[i].mesh.getCentroid()) < breakPoints[b].radius) {
                    cells[i].offset.z = ofMap(breakPoints[b].pos.distance(cells[i].mesh.getCentroid()), 0, breakPoints[b].radius, breakPoints[b].pressure, 0);
-                    // todo: map reverse distance to center multiply by pressure
                     inBreakpoint = true;
-                    
                 }
             }
             
@@ -113,14 +112,17 @@ void VoronoiWall::draw() {
         
         
         for(int c=0; c<cells[i].mesh.getColors().size(); c++) {
-            
             cells[i].mesh.setColor(c, ofColor(ofMap(cells[i].offset.z, -0.2, 0.2, 255,100)));
-            
+            //cells[i].mesh.setColor(c,cells[i].color);
+
         }
         
         ofPushMatrix();
         ofTranslate(cells[i].offset);
         cells[i].mesh.draw();
+        
+        
+        
         ofPopMatrix();
         
     }
@@ -129,7 +131,7 @@ void VoronoiWall::draw() {
         ofPushMatrix();
         ofTranslate(0, 0, -0.1);
         ofSetColor(0,0,0,20);
-        //ofCircle(breakPoints[b].pos, breakPoints[b].radius);
+        ofCircle(breakPoints[b].pos, breakPoints[b].radius);
         ofPopMatrix();
     }
     
@@ -174,8 +176,9 @@ void VoronoiWall::updateCells() {
             }
             
             cell.offset = ofVec3f(0,0,0);
+            int r = ofRandom(0,255);
+            cell.color = ofColor(ofRandom(r/2,r), ofRandom(r/2,r), r);
             
-
             cells.push_back(cell);
         }
     }
@@ -206,8 +209,8 @@ void VoronoiWall::update() {
         for(int b=0; b<breakPoints.size(); b++) {
         
 
-        if(breakPoints[b].pressure > 4) {
-            breakPoints[b].pressure = 4;
+        if(breakPoints[b].pressure > 6) {
+            breakPoints[b].pressure = 6;
         }
            
         breakPoints[b].pressure *= 0.98;

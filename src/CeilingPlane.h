@@ -16,6 +16,8 @@ public:
     void setup(ofParameterGroup * params);
     void update();
     void draw(ofFbo * fbo);
+    void begin();
+    void end();
     
     // plane on top shift height
     

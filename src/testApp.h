@@ -109,6 +109,7 @@ public:
     
     
     VoronoiWall * voronoiWall;
+    VoronoiWall * voronoiPlaza;
     CeilingPlane * ceilingPlane;
     Ribbon * ribbon;
     BoxFloor * boxFloor;

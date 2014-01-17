@@ -23,13 +23,14 @@ struct Cell {
     
     ofMesh mesh;
     ofVec3f offset;
+    ofColor color;
     
 };
 
 class VoronoiWall {
 
 public:
-    void setup(ofParameterGroup * params);
+    void setup(ofParameterGroup * params, ofRectangle bounds = ofRectangle(-0.9, -1, 1.8, 2));
     void draw();
     void update();
     void genTheVoronoi();

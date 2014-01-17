@@ -62,7 +62,11 @@ void testApp::setup()
     
     voronoiWall = new VoronoiWall();
     //voronoiWall->active = false;
-    voronoiWall->setup(&parameters);
+    voronoiWall->setup(&parameters,  ofRectangle(-1,-1, 2, 2));
+    
+    voronoiPlaza = new VoronoiWall();
+    //voronoiWall->active = false;
+    voronoiPlaza->setup(&parameters, ofRectangle(-3,-3, 6, 6));
     
     ceilingPlane = new CeilingPlane();
     ceilingPlane->setup(&parameters);
@@ -106,7 +110,6 @@ void testApp::setup()
     dancerCylinder.create(world.world,ofVec3f(0, 0, -dancerHeight/2.),/* ofQuaternion(0, ofVec3f(0, 0,1)),*/ 1. ,fmaxf(dancerEllipseSize, 0.25),fmaxf(dancerEllipseSize, 0.25), fmaxf(dancerEllipseSize, dancerHeight));
 
     
-    
     //  TODO: Operator grabbing of bullet objects from first view?
     //	world.enableGrabbing();
     //	world.enableDebugDraw();
@@ -122,7 +125,10 @@ void testApp::update()
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(&m);
         
+        //cout<<m.getAddress()<<endl;
+        
 		if(m.getAddress() == "/Floor/Camera/x"){
+            
             ofVec3f pos = camPosFloor.get();
             pos.x = m.getArgAsFloat(0);
 			camPosFloor.set(pos);
@@ -137,18 +143,18 @@ void testApp::update()
             ofVec3f pos = camPosFloor.get();
             pos.z = m.getArgAsFloat(0);
 			camPosFloor.set(pos);
-        }
-            else if(m.getAddress() == "/Wall/Camera/x"){
+            
+        } else if(m.getAddress() == "/Wall/Camera/x"){
                 ofVec3f pos = camPosWall.get();
                 pos.x = m.getArgAsFloat(0);
                 camPosWall.set(pos);
                 
-            } else if(m.getAddress() == "/Wall/Camera/y"){
+        } else if(m.getAddress() == "/Wall/Camera/y"){
                 ofVec3f pos = camPosWall.get();
                 pos.y = m.getArgAsFloat(0);
                 camPosWall.set(pos);
                 
-            } else if(m.getAddress() == "/Wall/Cameraz/x"){
+        } else if(m.getAddress() == "/Wall/Cameraz/x"){
                 
                 ofVec3f pos = camPosWall.get();
                 pos.z = m.getArgAsFloat(0);
@@ -163,26 +169,46 @@ void testApp::update()
 		} else if(m.getAddress() == "/Dancer/y"){
             dancerPos.set(ofVec2f(dancerPos.get().x, m.getArgAsFloat(0)));
             
-		} else if(m.getAddress() == "/voronoi/x"){
+		} else if(m.getAddress() == "/Voronoi/x"){
             
             for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
                 voronoiWall->breakPoints[i].pos.x = m.getArgAsFloat(i);
                 voronoiWall->breakPoints[i].pressure += 0.001;
+                
+                voronoiPlaza->breakPoints[i].pos.x = m.getArgAsFloat(i);
+                voronoiPlaza->breakPoints[i].pressure += 0.001;
             }
-        } else if(m.getAddress() == "/voronoi/y"){
+        } else if(m.getAddress() == "/Voronoi/y"){
             
             for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
                 voronoiWall->breakPoints[i].pos.y = m.getArgAsFloat(i);
                 voronoiWall->breakPoints[i].pressure += 0.001;
+                
+                voronoiPlaza->breakPoints[i].pos.y = m.getArgAsFloat(i);
+                voronoiPlaza->breakPoints[i].pressure += 0.001;
             }
             
-        } else if(m.getAddress() == "/voronoi/z"){
+        } else if(m.getAddress() == "/Voronoi/z"){
             
             for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
                 //voronoiWall->breakPoints[i].pressure = m.getArgAsFloat(i);
             }
             
+        } else if(m.getAddress() == "/planerot/x"){
+            ofVec3f rot = ceilingPlane->rotation.get();
+            rot.x = m.getArgAsFloat(0);
+            ceilingPlane->rotation.set(rot);
+            
+        } else if(m.getAddress() == "/breakstrength1/x"){
+
+            voronoiPlaza->wallBreakStrength.set(m.getArgAsFloat(0));
+            voronoiWall->wallBreakStrength.set(m.getArgAsFloat(0));
+        } else {
+            
+            
+            
         }
+
     }
 
     dancerCylinder.setActivationState( DISABLE_DEACTIVATION );
@@ -262,6 +288,7 @@ void testApp::update()
     world.update();
     
     voronoiWall->update();
+    voronoiPlaza->update();
     //ribbon->update();
     boxFloor->update();
     ceilingPlane->update();
@@ -366,13 +393,21 @@ void testApp::draw()
     
     wall->beginLeft();
     //voronoiWall->draw();
-    ceilingPlane->draw(&floor->cam.leftFbo);
+    ceilingPlane->begin();
+    voronoiPlaza->draw();
+    ceilingPlane->end();
     //ribbon->draw();
     wall->endLeft();
     
     wall->beginRight();
     //voronoiWall->draw();
-    ceilingPlane->draw(&floor->cam.leftFbo);
+    
+    
+    ceilingPlane->begin();
+    voronoiPlaza->draw();
+    ceilingPlane->end();
+    
+    
     //ribbon->draw();
     wall->endRight();
     

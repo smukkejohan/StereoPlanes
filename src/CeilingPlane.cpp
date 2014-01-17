@@ -23,25 +23,8 @@ void CeilingPlane::setup(ofParameterGroup * params) {
     
     params->add(rotation.set("Plane rotation", ofVec3f(0,0,0), ofVec3f(-360,-360,-360), ofVec3f(360,360,360)));
     
-    fbo.allocate(400, 400);
+    fbo.allocate(1000, 1000);
     
-    fbo.begin();
-    
-    ofBackground(255);
-    
-    ofSetColor(0);
-    
-    //voro.setup
-    
-    for(int i=0; i<600; i++) {
-        ofCircle(ofRandom(400), ofRandom(400), ofRandom(6));
-    }
-    
-    /*for(int i=0; i<30; i++) {
-        ofCircle(ofSignedNoise(ofGetElapsedTimef()/100+i)*dimensions.get().x, ofSignedNoise(ofGetElapsedTimef()/140+i)*dimensions.get().y, dimensions.get().y/40);
-    }*/
-    
-    fbo.end();
     
 }
 
@@ -53,7 +36,7 @@ void CeilingPlane::update() {
 
 
 
-void CeilingPlane::draw(ofFbo * content) {
+void CeilingPlane::begin() {
     
     ofPushMatrix();
     //ofSetRectMode(OF_RECTMODE_CENTER);
@@ -63,14 +46,18 @@ void CeilingPlane::draw(ofFbo * content) {
     ofRotateX(rotation.get().x);
     ofRotateY(rotation.get().y);
     ofRotateZ(rotation.get().z);
-    
     ofSetColor(255, 255, 200);
     //ofRect(0,0,dimensions.get().x,dimensions.get().y);
     
     ofSetColor(255);
 
-    content->draw(0,0,dimensions.get().x,dimensions.get().y);
     
+    
+}
+
+
+void CeilingPlane::end() {
+
     //ofSetRectMode(OF_RECTMODE_CORNER);
     ofPopMatrix();
     
