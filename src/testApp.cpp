@@ -64,8 +64,8 @@ void testApp::setup()
     //ribbon = new Ribbon();
     //ribbon->setup(&parameters);
     boxFloor = new BoxFloor();
-    
     boxFloor->setup(&parameters);
+
     gui.setup(parameters);
     
     oscReceiver.setup(9001);
@@ -324,21 +324,21 @@ void testApp::draw()
     
     floor->beginLeft();
     //drawFloor();
-    //boxFloor->draw( dancerPos.get() );
+    boxFloor->draw( dancerPos.get() );
     floor->endLeft();
     
     floor->beginRight();
     //drawFloor();
-    //boxFloor->draw( dancerPos.get() );
+    boxFloor->draw( dancerPos.get() );
     floor->endRight();
     
     wall->beginLeft();
-    voronoiWall->draw();
+    //voronoiWall->draw();
     //ribbon->draw();
     wall->endLeft();
     
     wall->beginRight();
-    voronoiWall->draw();
+    //voronoiWall->draw();
     //ribbon->draw();
     wall->endRight();
     
