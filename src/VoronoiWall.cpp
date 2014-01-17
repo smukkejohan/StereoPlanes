@@ -8,8 +8,6 @@
 
 #include "VoronoiWall.h"
 
-
-
 void VoronoiWall::setup(ofParameterGroup * params, ofRectangle bounds) {
     
     // Voronoi wall
@@ -131,7 +129,7 @@ void VoronoiWall::draw() {
         ofPushMatrix();
         ofTranslate(0, 0, -0.1);
         ofSetColor(0,0,0,20);
-        ofCircle(breakPoints[b].pos, breakPoints[b].radius);
+        //ofCircle(breakPoints[b].pos, breakPoints[b].radius);
         ofPopMatrix();
     }
     

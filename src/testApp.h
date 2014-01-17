@@ -124,5 +124,10 @@ public:
     Lines * lines;
     
     
+    
+    int currentScene = 0;
     ofParameter<int> scene = 0;
+    
+    void setupScene();
+    
 };

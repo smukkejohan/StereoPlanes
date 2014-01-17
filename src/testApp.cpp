@@ -4,12 +4,19 @@
 
 // Syphon together with 3D primitive and NoFill does not run
 
-
 vector<ofVec3f> points;
 
 //--------------------------------------------------------------
 void testApp::setup()
 {
+    // 0 bubbles Ã
+    // 1 mesh Ã
+    // 2 Boxes Ã
+    // 3 Voronoi Ã
+    // 4 Voronoi falling
+    
+    currentScene = 0;
+    
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
     ofSetBackgroundAuto(true);
@@ -62,21 +69,19 @@ void testApp::setup()
     parameters.add(meshOffsetFloor.set("Mesh Offset Floor", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
     parameters.add(meshOffsetWall.set("Mesh Offset Wall", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
     
-    //parameters.add();
+    //parameters.add(scene.set("Scene", 0, 0, 5));
     
     
     
+    if(currentScene == 3 || currentScene == 4) {
+        voronoiWall = new VoronoiWall();
+        voronoiWall->setup(&parameters,  ofRectangle(-1,-1, 2, 2));
+    }
     
-    voronoiWall = new VoronoiWall();
-    //voronoiWall->setup(&parameters);
     
-    voronoiWall = new VoronoiWall();
+    //voronoiPlaza = new VoronoiWall();
     //voronoiWall->active = false;
-    voronoiWall->setup(&parameters,  ofRectangle(-1,-1, 2, 2));
-    
-    voronoiPlaza = new VoronoiWall();
-    //voronoiWall->active = false;
-    voronoiPlaza->setup(&parameters, ofRectangle(-3,-3, 6, 6));
+    //voronoiPlaza->setup(&parameters, ofRectangle(-3,-3, 6, 6));
     
     ceilingPlane = new CeilingPlane();
     //ceilingPlane->setup(&parameters);
@@ -84,18 +89,21 @@ void testApp::setup()
     //ribbon = new Ribbon();
     //ribbon->setup(&parameters);
     
-    boxFloor = new BoxFloor();
-    //boxFloor->setup(&parameters);
+    if(currentScene == 1) {
+        wireMesh = new WireMesh();
+        wireMesh->setup(&parameters);
+    }
+    
+    if(currentScene == 2) {
+        boxFloor = new BoxFloor();
+        //boxFloor->setup(&parameters);
 
-    wireMesh = new WireMesh();
-    wireMesh->setup(&parameters);
-    boxFloor->setup(&parameters);
+        boxFloor->setup(&parameters);
+    }
     
-    lines = new Lines();
-    lines->setup(&parameters);
     
-    gui.setup(parameters);
-    
+    //lines = new Lines();
+    //lines->setup(&parameters);
     
     oscReceiver.setup(9001);
     
@@ -134,11 +142,26 @@ void testApp::setup()
     //	world.enableDebugDraw();
     //	world.setCamera(&camera);
     
+    gui.setup(parameters);
+    
+    
+}
+
+void testApp::setupScene() {
+    
+    if(currentScene == 0) {
+        
+    } else if(currentScene == 1) {
+        
+    }
+    
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
+    
+    
     while(oscReceiver.hasWaitingMessages()){
 		// get the next message
 		ofxOscMessage m;
@@ -189,22 +212,28 @@ void testApp::update()
             dancerPos.set(ofVec2f(dancerPos.get().x, m.getArgAsFloat(0)));
             
 		} else if(m.getAddress() == "/Voronoi/x"){
-            
+            if(currentScene == 3) {
             for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
                 voronoiWall->breakPoints[i].pos.x = m.getArgAsFloat(i);
                 voronoiWall->breakPoints[i].pressure += 0.001;
                 
-                voronoiPlaza->breakPoints[i].pos.x = m.getArgAsFloat(i);
-                voronoiPlaza->breakPoints[i].pressure += 0.001;
+                //voronoiPlaza->breakPoints[i].pos.x = m.getArgAsFloat(i);
+                //voronoiPlaza->breakPoints[i].pressure += 0.001;
+            }
             }
         } else if(m.getAddress() == "/Voronoi/y"){
+            if(currentScene == 3) {
             
-            for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
-                voronoiWall->breakPoints[i].pos.y = m.getArgAsFloat(i);
-                voronoiWall->breakPoints[i].pressure += 0.001;
+                for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
                 
-                voronoiPlaza->breakPoints[i].pos.y = m.getArgAsFloat(i);
-                voronoiPlaza->breakPoints[i].pressure += 0.001;
+                    voronoiWall->breakPoints[i].pos.y = m.getArgAsFloat(i);
+                
+                    voronoiWall->breakPoints[i].pressure += 0.001;
+                
+                //voronoiPlaza->breakPoints[i].pos.y = m.getArgAsFloat(i);
+                //voronoiPlaza->breakPoints[i].pressure += 0.001;
+            
+                }
             }
             
         } else if(m.getAddress() == "/Voronoi/z"){
@@ -219,9 +248,10 @@ void testApp::update()
             ceilingPlane->rotation.set(rot);
             
         } else if(m.getAddress() == "/breakstrength1/x"){
-
+            if(currentScene == 3) {
             voronoiPlaza->wallBreakStrength.set(m.getArgAsFloat(0));
             voronoiWall->wallBreakStrength.set(m.getArgAsFloat(0));
+            }
             
         } else if(m.getAddress() == "/OffsetWall/x"){
             meshOffsetWall.set(ofVec3f(m.getArgAsFloat(0), meshOffsetWall.get().y, meshOffsetWall.get().z));
@@ -312,15 +342,26 @@ void testApp::update()
         addSphere = false;
     }
     
-    world.update();
+    if(currentScene == 0) {
+        world.update();
+    } else if(currentScene == 1) {
+        wireMesh->update(dancerPos.get());
+    }
     
-    voronoiWall->update();
-    voronoiPlaza->update();
+    if(currentScene == 3) {
+        voronoiWall->update();
+    }
+    //voronoiPlaza->update();
     //ribbon->update();
-    boxFloor->update();
-    wireMesh->update(dancerPos.get());
+    
+    if(currentScene == 2) {
+        boxFloor->update();
+    }
+    
     ceilingPlane->update();
     lines->update();
+    
+    
 }
 
 
@@ -349,23 +390,6 @@ void testApp::drawFloor() {
         light.enable();
         dirLight.enable();
         
-        //TODO: Find better fog parameters...
-        /*glEnable (GL_FOG);
-         glFogi (GL_FOG_MODE, GL_EXP2);
-         glHint (GL_FOG_HINT, GL_NICEST);
-         glFogi(GL_FOG_DENSITY, 1);
-         */
-        
-        /** A rotating box intersects the floor
-         ofPushMatrix();
-         ofFill();
-         ofSetColor(255,255,255,255);
-         ofSetBoxResolution(10);
-         ofRotateX(ofGetElapsedTimef()*10);
-         ofDrawBox(0.5);
-         ofPopMatrix();
-         **/
-        
         // A WHITE FLOOR
         ofSetColor(255,255,255,255);
         ofRect(-1,-1, 2, 2);
@@ -387,8 +411,6 @@ void testApp::drawFloor() {
         ofEllipse(dancerPos->x, dancerPos->y, 0.02, 0.02);
         ofEnableDepthTest();
         
-        //glDisable(GL_FOG);
-        
     } glPopMatrix();
     
 }
@@ -401,10 +423,7 @@ void testApp::draw()
 {
     ofEnableDepthTest();
     ofBackground(ofColor(0,0,0));
-    
 
-    
-    
     fbo.begin();
     
     ofClear(0, 0, 0);
@@ -446,20 +465,37 @@ void testApp::draw()
     
     floor->beginLeft(); {
         ofPushMatrix();
+        
+        
+        if(currentScene == 0) {
+            drawFloor();
+        }
+        
+        if(currentScene == 2) {
+            boxFloor->draw( dancerPos.get() );
+        }
+        
         /* this will rotate the floor to match the screen space
          ofTranslate(0, -1);
          ofRotate(90, 1, 0, 0);
          ofTranslate(0, 1);
          */
         //voronoiWall->draw();
-        //boxFloor->draw( dancerPos.get() );
-        //lines->draw();
-        wireMesh->draw(meshOffsetFloor.get());
+        //
         ofPopMatrix();
     } floor->endLeft();
     
     floor->beginRight(); {
         ofPushMatrix();
+        
+        if(currentScene == 0) {
+            drawFloor();
+        }
+        
+        if(currentScene == 2) {
+            boxFloor->draw( dancerPos.get() );
+        }
+        
         /* this will rotate the floor to match the screen space
          ofTranslate(0, -1);
          ofRotate(90, 1, 0, 0);
@@ -468,7 +504,7 @@ void testApp::draw()
         //voronoiWall->draw();
         //boxFloor->draw( dancerPos.get() );
         //lines->draw();
-        wireMesh->draw(meshOffsetFloor.get());
+        //wireMesh->draw(meshOffsetFloor.get());
         ofPopMatrix();
     } floor->endRight();
     
@@ -479,15 +515,29 @@ void testApp::draw()
         //lines->draw();
         //ceilingPlane->draw();
         //ribbon->draw();
-        wireMesh->draw(meshOffsetWall.get());
+        
+        if(currentScene == 1) {
+            wireMesh->draw(meshOffsetFloor.get());
+        }
+        
+        if(currentScene == 3) {
+            voronoiWall->draw();
+        }
+        
+        
     } wall->endLeft();
     
     wall->beginRight(); {
-        //voronoiWall->draw();
-        //ceilingPlane->draw();
-        //ribbon->draw();
-        //lines->draw();
-        wireMesh->draw(meshOffsetWall.get());
+        
+        if(currentScene == 1) {
+            wireMesh->draw(meshOffsetFloor.get());
+        }
+        
+        if(currentScene == 3) {
+            voronoiWall->draw();
+        }
+        
+        
     } wall->endRight();
     
     
