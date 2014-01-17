@@ -22,5 +22,5 @@ public:
     
     ofParameter<ofVec3f> position;
     ofParameter<ofVec3f> dimensions;
-    
+    ofParameter<ofVec3f> rotation;
 };

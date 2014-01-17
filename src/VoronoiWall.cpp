@@ -44,6 +44,9 @@ void VoronoiWall::setup(ofParameterGroup * params) {
 
 void VoronoiWall::draw() {
     
+    
+    if(active) {
+    
     updateCells();
     
     ofRectangle bounds = ofRectangle(wallBreakPos.get().x-wallBreakReach.get().x/2, wallBreakPos.get().y-wallBreakReach.get().y/2, wallBreakReach.get().x, wallBreakReach.get().y);
@@ -135,6 +138,8 @@ void VoronoiWall::draw() {
     
     //ofDisableLighting();
     glPopMatrix();
+        
+    }
     
 }
 
@@ -194,9 +199,11 @@ void VoronoiWall::genTheVoronoi() {
 
 void VoronoiWall::update() {
     
-    wallTime += 0.01 * wallSpeed;
+    if(active) {
     
-    for(int b=0; b<breakPoints.size(); b++) {
+        wallTime += 0.01 * wallSpeed;
+    
+        for(int b=0; b<breakPoints.size(); b++) {
         
 
         if(breakPoints[b].pressure > 4) {
@@ -206,11 +213,10 @@ void VoronoiWall::update() {
         breakPoints[b].pressure *= 0.98;
         // radius ? ofMap(breakPoints[b].pressure, 0, 1, 0.2, 0.8);
         
+        }
     }
-
-    
-    
 }
+
 
 void VoronoiWall::drawVoronoiWall3d() {
 

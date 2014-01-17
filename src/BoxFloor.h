@@ -27,7 +27,7 @@ public:
     ofParameter<float> distance;
     ofParameter<bool> bRotation;
     
-    ofLight light;
+    ofLight boxLight;
     
     vector <float> rotation;
 

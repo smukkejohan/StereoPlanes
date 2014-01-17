@@ -14,7 +14,7 @@
 #include "Ribbon.h"
 #include "BoxFloor.h"
 #include "WireMesh.h"
-
+#include "Lines.h"
 
 class testApp : public ofBaseApp
 {
@@ -59,7 +59,8 @@ public:
     //ofParameter<float> boxOneZ; // a fraction of clock
     //ofParameter<float> boxTwoZ;
     
-    ofParameter<ofVec3f> camPos;
+    ofParameter<ofVec3f> camPosWall;
+    ofParameter<ofVec3f> camPosFloor;
     ofParameter<float> eyeSeperation;
     ofParameter<float> dancerEllipseSize;
     ofParameter<float> dancerEllipseBrightness;
@@ -116,5 +117,6 @@ public:
     WireMesh * wireMesh;
     ofParameter<ofVec3f> meshOffsetWall;
     ofParameter<ofVec3f> meshOffsetFloor;
+    Lines * lines;
 
 };

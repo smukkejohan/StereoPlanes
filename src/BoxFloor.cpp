@@ -18,8 +18,8 @@ void BoxFloor::setup(ofParameterGroup * params) {
     params->add(distance.set("Distance", 0.2, 0, 0.6));
     params->add(bRotation.set("Rotation", false, false, true));
     
-    light.setPointLight();
-    light.setPosition(0, 0, lightHeight);
+    boxLight.setPointLight();
+    boxLight.setPosition(0, 0, lightHeight);
     
     for (int i = 0; i < 400; i++) {
         rotation.push_back(ofRandom(90));
@@ -29,20 +29,13 @@ void BoxFloor::setup(ofParameterGroup * params) {
 
 void BoxFloor::update() {
     
-    light.setPosition(0, 0, lightHeight);
+    boxLight.setPosition(0, 0, lightHeight);
 }
 
 
 void BoxFloor::draw( ofVec2f dancerPos ) {
     
-    
-    glEnable(GL_DEPTH_TEST);
-    //ofEnableLighting();
-    light.enable();
-    
-    //h = 100 * sin (ofGetElapsedTimeMillis() * 0.001);
-    
-    //cam.begin();
+    boxLight.enable();
     
     for (float x = -1; x < 1; x += 0.1) {
         for (float y = -1; y < 1; y += 0.1) {
@@ -60,11 +53,5 @@ void BoxFloor::draw( ofVec2f dancerPos ) {
             ofPopMatrix();
         }
     }
-    
-    //cam.end();
-    
-    light.disable();
-    //ofDisableLighting();
-    glDisable(GL_DEPTH_TEST);
     
 }
