@@ -18,16 +18,18 @@ void testApp::setup()
     rightOutputServer.setName("Right");
     sbsOutputServer.setName("Side By Side");
     
-    fbo.allocate(ofGetWidth(), ofGetHeight());
+    fbo.allocate(2048, 768);
     
     settings.load("stereoplanes.xml");
     
     floor = new StereoPlane("floor");
-    floor->setup(1024, 1024, &settings);
+    floor->setup(512, 768, &settings);
+    floor->pos = ofVec2f(0,0);
     planes.push_back(floor);
     
     wall = new StereoPlane("wall");
-    wall->setup(1024, 1024, &settings);
+    wall->setup(512, 768, &settings);
+    wall->pos = ofVec2f(1024,0);
     planes.push_back(wall);
     
     activePlaneIndex = 0;
@@ -53,6 +55,7 @@ void testApp::setup()
     parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
     
     voronoiWall = new VoronoiWall();
+    //voronoiWall->active = false;
     voronoiWall->setup(&parameters);
     
     ceilingPlane = new CeilingPlane();
@@ -78,8 +81,6 @@ void testApp::setup()
     //	world.enableGrabbing();
     //	world.enableDebugDraw();
     //	world.setCamera(&camera);
-    
-
     
 } 
 
@@ -122,7 +123,6 @@ void testApp::update()
                 voronoiWall->breakPoints[i].pos.x = m.getArgAsFloat(i);
                 voronoiWall->breakPoints[i].pressure += 0.001;
             }
-            
         } else if(m.getAddress() == "/voronoi/y"){
             
             for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
@@ -160,6 +160,7 @@ void testApp::update()
     voronoiWall->update();
     //ribbon->update();
     boxFloor->update();
+    ceilingPlane->update();
     
 }
 
@@ -218,7 +219,6 @@ void testApp::drawFloor() {
          }
          **/
         
-        
         light.disable();
         dirLight.disable();
         ofDisableLighting();
@@ -245,22 +245,24 @@ void testApp::draw()
     ofClear(0, 0, 0);
     
     floor->beginLeft();
-    //drawFloor();
+    voronoiWall->draw();
     //boxFloor->draw( dancerPos.get() );
     floor->endLeft();
     
     floor->beginRight();
-    //drawFloor();
+    voronoiWall->draw();
     //boxFloor->draw( dancerPos.get() );
     floor->endRight();
     
     wall->beginLeft();
-    voronoiWall->draw();
+    //voronoiWall->draw();
+    ceilingPlane->draw();
     //ribbon->draw();
     wall->endLeft();
     
     wall->beginRight();
-    voronoiWall->draw();
+    //voronoiWall->draw();
+    ceilingPlane->draw();
     //ribbon->draw();
     wall->endRight();
     
@@ -281,16 +283,17 @@ void testApp::draw()
     }
     
     fbo.end();
-    
     sbsOutputServer.publishTexture(&fbo.getTextureReference());
     
     ofPushMatrix();
+    ofScale(0.5,0.5);
+    ofRect(0,0,2048,768);
     fbo.draw(0, 0);
     ofPopMatrix();
     
     ofSetColor(255);
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 40, 40);
-    activePlane->drawInfo();
+    //activePlane->drawInfo();
     
     gui.draw();
     

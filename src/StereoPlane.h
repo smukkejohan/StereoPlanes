@@ -22,10 +22,16 @@ public:
     
     int width;
     int height;
+    
+    int camWidth; // resolution
+    int camHeight;
+    
     string name;
     
-    ofxGLWarper warpLeft;
-    ofxGLWarper warpRight;
+    ofVec2f pos;
+    
+    //ofxGLWarper warpLeft;
+    //ofxGLWarper warpRight;
     
     StereoPlane(string n) {
         name = n;
@@ -39,6 +45,7 @@ public:
     //ofVec3f observerPosition;
     
     // Corners
+    /*
     ofPoint wlTopLeft;
     ofPoint wlTR;
     ofPoint wlBL;
@@ -53,6 +60,7 @@ public:
     ofPoint rTR;
     ofPoint rBL;
     ofPoint rBR;
+     */
     
     ofxGLWarper::CornerLocation activeCorner;
     
@@ -64,9 +72,12 @@ public:
             settings->addTag(name);
         }
         
-        height = 2.;
-        width = height *(w/h);
-
+        camHeight = 2.;
+        camWidth = height *(w/h);
+        
+        width = w;
+        height = h;
+        
         cam.setup(w, h);
         
         //observerPosition.set(0,0,2);
@@ -77,9 +88,8 @@ public:
         //        cam.setPosition(ofVec3f(0, 0, 2));
         //cam.setOf
         
-        
         //        cam.setupPerspective();
-                
+        /*
         warpLeft.setup(0,0, ofGetWidth(), ofGetHeight());
         warpRight.setup(0,0, ofGetWidth(), ofGetHeight());
         
@@ -97,7 +107,9 @@ public:
         rTR.set(ofGetWidth()  , 0);
         rBL.set(ofGetWidth()/2, ofGetHeight());
         rBR.set(ofGetWidth(), ofGetHeight());
+        */
         
+        /*
         warpRight.setCorner(ofxGLWarper::TOP_LEFT,     rTL);
         warpRight.setCorner(ofxGLWarper::TOP_RIGHT,    rTR);
         warpRight.setCorner(ofxGLWarper::BOTTOM_LEFT,  rBL);
@@ -120,14 +132,7 @@ public:
         settings->popTag();
         
         settings->popTag();
-    };
-    
-    void controlDraw() {
-        /*if(controlSide == 0) {
-         drawLeftControl();
-         } else {
-         drawRightControl();
-         }*/
+        */
     };
     
     void drawGrid() {
@@ -162,19 +167,17 @@ public:
     }
     
     void drawGrids() {
-        
-        warpLeft.begin();
+        //warpLeft.begin();
         cam.beginLeft();
         drawGrid();
         cam.endLeft();
-        warpLeft.end();
+        //warpLeft.end();
         
-        warpRight.begin();
+        //warpRight.begin();
         cam.beginRight();
         drawGrid();
         cam.endRight();
-        warpRight.end();
-        
+        //warpRight.end();
     }
     
     
@@ -182,20 +185,19 @@ public:
     
     void activateLeftControl() {
         controlSide = 0;
-        if (!warpLeft.isActive() )  warpLeft.activate();
-        if ( warpRight.isActive())  warpRight.deactivate();
+        //if (!warpLeft.isActive() )  warpLeft.activate();
+        //if ( warpRight.isActive())  warpRight.deactivate();
     }
     
     void activateRightControl() {
         controlSide = 1;
-        if (!warpRight.isActive() ) warpRight.activate();
-        
-        if ( warpLeft.isActive())   warpLeft.deactivate();
+        //if (!warpRight.isActive() ) warpRight.activate();
+        //if ( warpLeft.isActive())   warpLeft.deactivate();
     }
     
     void deactivateControl() {
-        if (warpRight.isActive() ) warpRight.deactivate();
-        if ( warpLeft.isActive())   warpLeft.deactivate();
+        //if (warpRight.isActive() ) warpRight.deactivate();
+        //if ( warpLeft.isActive())   warpLeft.deactivate();
         controlSide = 2;
     }
     
@@ -225,23 +227,33 @@ public:
     
     void drawLeft() {
         
-        warpLeft.begin();
-        if(warpLeft.isActive()) warpLeft.draw();
-        cam.leftFbo.draw(0,0,ofGetWidth(),ofGetHeight());
-        warpLeft.end();
+        ofPushMatrix();
+        ofTranslate(pos.x, pos.y);
+        //ofNoFill();
+        //ofRect(0,0,width,height);
+        //warpLeft.begin();
+        //if(warpLeft.isActive()) warpLeft.draw();
+        cam.leftFbo.draw(0,0,width,height);
+        //warpLeft.end();
+        ofPopMatrix();
         
     }
     
     void drawRight() {
-        
-        warpRight.begin();
-        if(warpRight.isActive()) warpRight.draw();
-        cam.rightFbo.draw(0,0,ofGetWidth(),ofGetHeight());
-        warpRight.end();
+        ofPushMatrix();
+        ofTranslate(pos.x + width, pos.y);
+        //ofNoFill();
+        //ofRect(0,0,width,height);
+        //warpRight.begin();
+        //if(warpRight.isActive()) warpRight.draw();
+        cam.rightFbo.draw(0,0,width,height);
+        //warpRight.end();
+        ofPopMatrix();
         
     }
     
     void draw(){
+        ofSetColor(255);
         if(controlSide == 1) {
             drawRight();
             drawLeft();
@@ -265,6 +277,7 @@ public:
         
     }
     
+    /*
     void onCornerChangeLW(ofxGLWarper::CornerLocation & cornerLocation){
         switch (cornerLocation) {
             case ofxGLWarper::TOP_LEFT:
@@ -298,7 +311,7 @@ public:
                 break;
         }
     }
-    
+    */
     
     void exit() {
         
@@ -306,12 +319,15 @@ public:
         
         settings->pushTag(name);
         
+        /*
         settings->pushTag("warpLeft");
         warpLeft.saveToXml(*settings);
         settings->popTag();
         settings->pushTag("warpRight");
         warpRight.saveToXml(*settings);
         settings->popTag();
+        */
+        
         settings->popTag();
     }
     
