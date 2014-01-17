@@ -49,7 +49,8 @@ void testApp::setup()
     dirLight.setDiffuseColor(ofColor(191,191,170));
     
     parameters.setName("Stereo");
-    parameters.add(camPos.set("Cam position", ofVec3f(0.,0.,-1), ofVec3f(-3,-3,-8.), ofVec3f(3,3,-0.25)));
+    parameters.add(camPosWall.set("Wall Cam", ofVec3f(0.,0.,-1), ofVec3f(-3,-3,-8.), ofVec3f(3,3,-0.25)));
+    parameters.add(camPosFloor.set("Floor Cam", ofVec3f(0.,0.,-1), ofVec3f(-3,-3,-8.), ofVec3f(3,3,-0.25)));
     parameters.add(eyeSeperation.set("Eye Seperation", 6.5, 0., 7.));
     parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
     parameters.add(dancerEllipseSize.set("Ellipse Size", 0., 0., .5));
@@ -123,22 +124,38 @@ void testApp::update()
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(&m);
         
-		if(m.getAddress() == "/Camera/x"){
-            ofVec3f pos = camPos.get();
+		if(m.getAddress() == "/Floor/Camera/x"){
+            ofVec3f pos = camPosFloor.get();
             pos.x = m.getArgAsFloat(0);
-			camPos.set(pos);
+			camPosFloor.set(pos);
             
-		} else if(m.getAddress() == "/Camera/y"){
-            ofVec3f pos = camPos.get();
+		} else if(m.getAddress() == "/Floor/Camera/y"){
+            ofVec3f pos = camPosFloor.get();
             pos.y = m.getArgAsFloat(0);
-			camPos.set(pos);
+			camPosFloor.set(pos);
             
-		} else if(m.getAddress() == "/Cameraz/x"){
+		} else if(m.getAddress() == "/Floor/Cameraz/x"){
             
-            ofVec3f pos = camPos.get();
+            ofVec3f pos = camPosFloor.get();
             pos.z = m.getArgAsFloat(0);
-			camPos.set(pos);
+			camPosFloor.set(pos);
             
+            if(m.getAddress() == "/Wall/Camera/x"){
+                ofVec3f pos = camPosWall.get();
+                pos.x = m.getArgAsFloat(0);
+                camPosWall.set(pos);
+                
+            } else if(m.getAddress() == "/Wall/Camera/y"){
+                ofVec3f pos = camPosWall.get();
+                pos.y = m.getArgAsFloat(0);
+                camPosWall.set(pos);
+                
+            } else if(m.getAddress() == "/Wall/Cameraz/x"){
+                
+                ofVec3f pos = camPosWall.get();
+                pos.z = m.getArgAsFloat(0);
+                camPosWall.set(pos);
+                
 		} else if(m.getAddress() == "/eyeSeperation/x"){
 			eyeSeperation.set(m.getArgAsFloat(0));
             
@@ -173,7 +190,7 @@ void testApp::update()
 
     dancerCylinder.setActivationState( DISABLE_DEACTIVATION );
 
-    // this is a hack, thigs should not be moved like this in bullet, but it will do for now.
+    // This is a hack, thigs should not be moved like this in bullet, but it will do for now. This kind of movement makes jutters in the collisions.
     
     btTransform tr = dancerCylinder.getRigidBody()->getCenterOfMassTransform();
     dancerCylinder.getRigidBody()->translate(btVector3(dancerPos->x, dancerPos->y, -dancerHeight/2.)-tr.getOrigin());
@@ -217,13 +234,25 @@ void testApp::update()
     
     dancerConstraint->getFrameOffsetA().setOrigin(btVector3(dancerPos->x, dancerPos->y, -.5));
 */
-    //TODO: Camera frustrums share position, but with individual viewports
+    planes[0]->cam.setPosition(camPosFloor.get());
+    planes[1]->cam.setPosition(camPosWall.get());
+    
     for(int i=0; i<planes.size(); i++) {
-        planes[i]->cam.setPosition(camPos.get());
         planes[i]->cam.setPhysicalEyeSeparation(eyeSeperation.get());
         planes[i]->update();
         //cout<<camPos.get()<<endl;
     }
+
+    /*
+    //TODO: Camera frustrums share position, but with individual viewports
+    planes[1]->cam.setPosition(camPos.get());
+    planes[1]->update();
+    
+    ofVec4f camInScreenSpace = planes[1]->warpLeft.fromWarpToScreenCoord(camPos.get().x, camPos.get().y, camPos.get().z);
+    ofVec4f camInFloorSpace = planes[0]->warpLeft.fromScreenToWarpCoord(camInScreenSpace.x, camInScreenSpace.y, camInScreenSpace.z);
+    planes[0]->cam.setPosition(camInScreenSpace.x, camInScreenSpace.y, camInScreenSpace.z);
+    planes[0]->update();
+    */
     
     if(addSphere){
         ofxBulletSphere * sphere = new ofxBulletSphere();
