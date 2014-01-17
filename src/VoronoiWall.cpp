@@ -26,33 +26,29 @@ void VoronoiWall::setup(ofParameterGroup * params) {
     params->add(wallBreakReach.set("wallBreakReach", ofVec3f(0.2,2,1), ofVec3f(0,0,0), ofVec3f(2,2,2)));
     params->add(wallBreakStrength.set("wallBreakStrength", 0, 0, 1.8));
     
+    params->add(breakPointRadius.set("breakPointRadius", 0.2, 0, 1.4));
+    
+    for(int i=0; i<5; i++) {
+        BreakPoint br;
+        br.pos = ofVec3f(0,0,0);
+        br.radius = 0.25;
+        br.pressure = 0;
+        
+        breakPoints.push_back(br);
+    }
+    
+    params->add(autoOn);
 
 }
 
 
 void VoronoiWall::draw() {
     
+    updateCells();
+    
     ofRectangle bounds = ofRectangle(wallBreakPos.get().x-wallBreakReach.get().x/2, wallBreakPos.get().y-wallBreakReach.get().y/2, wallBreakReach.get().x, wallBreakReach.get().y);
     
-    bool changed = false;
-    while(subdivisions.get() > voronoi.getPoints().size()) {
-        voronoi.addPoint(ofRandomPointInRect(vbounds));
-        changed = true;
-    }
-    
-    while(subdivisions.get() < voronoi.getPoints().size()) {
-        voronoi.getPoints().erase(voronoi.getPoints().begin());
-        changed = true;
-    }
-    
-    if(changed) {
-        voronoi.generateVoronoi();
-    }
-    
-    //TODO:Factor out to seperate class
-    
     glPushMatrix();
-    
     ofNoFill();
     
     //light.enable();
@@ -74,79 +70,110 @@ void VoronoiWall::draw() {
     ofSetColor(0);
     ofTranslate(wallBreakPos.get().x, wallBreakPos.get().y);
     // ofEllipse(0, 0, wallBreakReach.get().x, wallBreakReach.get().y);
-    
     ofPopMatrix();
-    
     //ofDrawRect(bounds.getPosition(), );
     
-    
-    //voronoi.draw();
-    //voronoi.getPoints().size();
-    
-    for(int i=0; i < voronoi.cells.size(); i++) {
+    for(int i=0; i < cells.size(); i++) {
         
-        ofMesh vcell;
-        vcell.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
-        
-        bool inbreakzone = false;
-        
-        for(int v=0; v<voronoi.cells[i].pts.size(); v++) {
-            
-            vcell.addVertex(voronoi.cells[i].pts[v]);
-            
-            ofColor col;
-            //if(i%2 == 0) {
-            //    col.set(ofMap(i,0,voronoi.cells.size(),255, 2),255,250);
-            //} else {
-            col.set(ofMap(0.0, -0.2, 0.2, 255,100));
-            //}
-            
-            if(bounds.inside(voronoi.cells[i].pts[v])) {
-                inbreakzone = false;
-            }
-            
-            vcell.addColor(col);
-        }
-        
-        ofPushMatrix();
-        
-        
-        if(inbreakzone) {
-            
-        }
         
         // ofRect(bounds.getPosition().x, bounds.getPosition().y, 0, bounds.getWidth(), bounds.getHeight());
         
-        
-        if(!bounds.inside(vcell.getCentroid())) {
+        if(!bounds.inside(cells[i].mesh.getCentroid())) {
             
-            
-            float z = ofSignedNoise(wallTime + i) * wallBreakStrength.get();
-            ofTranslate(0, 0, z);
-            //ofRotateY( ofSignedNoise(ofGetElapsedTimef()*2 + i) * shivering);
-            
-            for(int c=0; c<vcell.getColors().size(); c++) {
-                vcell.getColors()[c];
-                
-                vcell.setColor(c, ofColor(ofMap(z, -0.2, 0.2, 255,100)));
-                
+            if(autoOn.get()) {
+                cells[i].offset.z = ofSignedNoise(wallTime + i) * wallBreakStrength.get();
             }
             
-            vcell.draw();
+            
+            bool inBreakpoint = false;
+            for(int b=0; b<breakPoints.size(); b++) {
+                
+                //todo: break more with distance
+                
+               if(breakPoints[b].pos.distance(cells[i].mesh.getCentroid()) < breakPoints[b].radius) {
+                   cells[i].offset.z = ofMap(breakPoints[b].pos.distance(cells[i].mesh.getCentroid()), 0, breakPoints[b].radius, breakPoints[b].pressure, 0);
+                    // todo: map reverse distance to center multiply by pressure
+                    inBreakpoint = true;
+                    
+                }
+            }
+            
+            if(!inBreakpoint) {
+                cells[i].offset.z * 0.6978;
+            }
+            
+        } else {
+            
+            cells[i].offset.z = 0;
             
         }
         
         
+        for(int c=0; c<cells[i].mesh.getColors().size(); c++) {
+            
+            cells[i].mesh.setColor(c, ofColor(ofMap(cells[i].offset.z, -0.2, 0.2, 255,100)));
+            
+        }
         
+        ofPushMatrix();
+        ofTranslate(cells[i].offset);
+        cells[i].mesh.draw();
+        ofPopMatrix();
+        
+    }
+    
+    for(int b=0; b<breakPoints.size(); b++) {
+        ofPushMatrix();
+        ofTranslate(0, 0, -0.1);
+        ofSetColor(0,0,0,20);
+        //ofCircle(breakPoints[b].pos, breakPoints[b].radius);
         ofPopMatrix();
     }
     
     //light.disable();
     //dirLight.disable();
     
-    ofDisableLighting();
+    //ofDisableLighting();
     glPopMatrix();
+    
+}
 
+void VoronoiWall::updateCells() {
+    
+    bool changed = false;
+    while(subdivisions.get() > voronoi.getPoints().size()) {
+        voronoi.addPoint(ofRandomPointInRect(vbounds));
+        changed = true;
+    }
+    
+    while(subdivisions.get() < voronoi.getPoints().size()) {
+        voronoi.getPoints().erase(voronoi.getPoints().begin());
+        changed = true;
+    }
+    
+    if(changed) {
+        cells.clear();
+        
+        voronoi.generateVoronoi();
+        
+        for(int i=0; i<voronoi.cells.size(); i++) {
+            
+            Cell cell;
+            cell.mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+            
+            for(int v=0; v<voronoi.cells[i].pts.size(); v++) {
+                cell.mesh.addVertex(voronoi.cells[i].pts[v]);
+                ofColor col; // move to draw
+                col.set(ofMap(0.0, -0.2, 0.2, 255,100));
+                cell.mesh.addColor(col);
+            }
+            
+            cell.offset = ofVec3f(0,0,0);
+            
+
+            cells.push_back(cell);
+        }
+    }
     
 }
 
@@ -161,18 +188,30 @@ void VoronoiWall::genTheVoronoi() {
     for(int i=0; i<vpts.size(); i++) {
         voronoi.addPoint(vpts[i]);
     }
-    voronoi.generateVoronoi();
     
+    voronoi.generateVoronoi();
 }
 
 void VoronoiWall::update() {
     
-    
     wallTime += 0.01 * wallSpeed;
+    
+    for(int b=0; b<breakPoints.size(); b++) {
+        
 
+        if(breakPoints[b].pressure > 4) {
+            breakPoints[b].pressure = 4;
+        }
+           
+        breakPoints[b].pressure *= 0.98;
+        // radius ? ofMap(breakPoints[b].pressure, 0, 1, 0.2, 0.8);
+        
+    }
+
+    
     
 }
 
 void VoronoiWall::drawVoronoiWall3d() {
-    
+
 }

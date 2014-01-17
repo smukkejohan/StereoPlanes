@@ -10,6 +10,8 @@
 #include "StereoPlane.h"
 #include "ofxBullet.h"
 #include "VoronoiWall.h"
+#include "CeilingPlane.h"
+#include "Ribbon.h"
 #include "BoxFloor.h"
 
 class testApp : public ofBaseApp
@@ -79,23 +81,35 @@ public:
     StereoPlane * activePlane;
     int activePlaneIndex;
     
-    //StereoPlane thing;
-    
     void drawFloor();
     vector<StereoPlane *> planes;
     ofxXmlSettings settings;
     
+    // Lights
     ofLight light;
     ofLight dirLight;
     
+    // Bullet
     ofxBulletWorldRigid			world;
 	ofxBulletBox				ground;
-	vector<ofxBulletSphere*>     spheres;
+    ofxBulletBox                wallBack;
+    ofxBulletBox                wallLeft;
+    ofxBulletBox                wallRight;
+    ofxBulletBox                wallFront;
+    ofxBulletBox                dancerCylinder;
+    btGeneric6DofConstraint *   dancerConstraint;
+	vector<ofxBulletSphere*>    spheres;
+    
+    float dancerHeight;
+    
     bool addSphere = false;
+
     void drawBulletFloor();
     
     
     VoronoiWall * voronoiWall;
+    CeilingPlane * ceilingPlane;
+    Ribbon * ribbon;
     BoxFloor * boxFloor;
     
 

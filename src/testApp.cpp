@@ -1,6 +1,7 @@
 #include "testApp.h"
 #include <OpenGL/OpenGL.h>
 #include <ofGLUtils.h>
+#include "ofxBulletWorldRigid.h"
 
 // Syphon together with 3D primitive and NoFill does not run
 
@@ -13,6 +14,8 @@ void testApp::setup()
     ofSetVerticalSync(true);
     ofSetBackgroundAuto(true);
     ofBackground(0);
+    
+    dancerHeight = 0.5;
     
     leftOutputServer.setName("Left");
     rightOutputServer.setName("Right");
@@ -46,40 +49,71 @@ void testApp::setup()
     dirLight.setDiffuseColor(ofColor(191,191,170));
     
     parameters.setName("Stereo");
-    parameters.add(camPos.set("Cam position", ofVec3f(0.,0.,-1), ofVec3f(-2,-2,-8.), ofVec3f(2,2,-0.5)));
+    parameters.add(camPos.set("Cam position", ofVec3f(0.,0.,-1), ofVec3f(-3,-3,-8.), ofVec3f(3,3,-0.25)));
     parameters.add(eyeSeperation.set("Eye Seperation", 6.5, 0., 7.));
-    parameters.add(dancerEllipseSize.set("Dancer Ellipse Size", 0., 0., .5));
-    parameters.add(dancerEllipseBrightness.set("Dancer Ellipse Brightness", 0., 0., 1.));
     parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
+    parameters.add(dancerEllipseSize.set("Ellipse Size", 0., 0., .5));
+    parameters.add(dancerEllipseBrightness.set("Ellipse Brightness", 0., 0., 1.));
     
     voronoiWall = new VoronoiWall();
-    
     voronoiWall->setup(&parameters);
     
+    ceilingPlane = new CeilingPlane();
+    ceilingPlane->setup(&parameters);
+    
+    //ribbon = new Ribbon();
+    //ribbon->setup(&parameters);
     boxFloor = new BoxFloor();
     
     boxFloor->setup(&parameters);
-    
-    
     gui.setup(parameters);
     
     oscReceiver.setup(9001);
     
+    // Bullet stuff
+    
     world.setup();
-	world.setGravity(ofVec3f(0.f, 0.f, 9.8f));
+    
+    // gravity should be .98 for slowmo realism    
+	world.setGravity(ofVec3f(0.f, 0.f, .4f));
     
     ground.create( world.world, ofVec3f(0., 0, 0.5), 0., 100.f, 100.f, 1.f );
 	ground.setProperties(.25, .95);
 	ground.add();
+
+    wallBack.create( world.world, ofVec3f(0., -1.45, 0), 0., 100.f, 1.f, 100.f );
+	wallBack.setProperties(.75, .75);
+	wallBack.add();
+    
+    wallLeft.create( world.world, ofVec3f(-1.5, 0, 0), 0., 1.f, 100.f, 100.f );
+	wallLeft.setProperties(.75, .75);
+	wallLeft.add();
+    
+    wallRight.create( world.world, ofVec3f(1.5, 0, 0), 0., 1.f, 100.f, 100.f );
+	wallRight.setProperties(.75, .75);
+	wallRight.add();
+    
+    wallFront.create( world.world, ofVec3f(0., 1.5, 0), 0., 100.f, 1.f, 100.f );
+	wallFront.setProperties(.75, .75);
+	wallFront.add();
+/*
+ ofxBulletCylinder::create( btDiscreteDynamicsWorld* a_world, ofVec3f a_loc, ofQuaternion a_rot, float a_mass, float a_radius, float a_height ) {
+ btTransform tr	= ofGetBtTransformFromVec3f( a_loc );
+ tr.setRotation( btQuaternion(btVector3(a_rot.x(), a_rot.y(), a_rot.z()), a_rot.w()) );
+
+ */
+    dancerCylinder.create(world.world,ofVec3f(0, 0, -dancerHeight/2.),/* ofQuaternion(0, ofVec3f(0, 0,1)),*/ 1. ,fmaxf(dancerEllipseSize, 0.25),fmaxf(dancerEllipseSize, 0.25), fmaxf(dancerEllipseSize, dancerHeight));
+
+    dancerCylinder.setProperties(.75, .0);
+    dancerCylinder.add();
     
     //  TODO: Operator grabbing of bullet objects from first view?
     //	world.enableGrabbing();
     //	world.enableDebugDraw();
     //	world.setCamera(&camera);
     
+}
 
-    
-} 
 
 //--------------------------------------------------------------
 void testApp::update()
@@ -114,9 +148,75 @@ void testApp::update()
 		} else if(m.getAddress() == "/Dancer/y"){
             dancerPos.set(ofVec2f(dancerPos.get().x, m.getArgAsFloat(0)));
             
-		}
+		} else if(m.getAddress() == "/voronoi/x"){
+            
+            for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
+                voronoiWall->breakPoints[i].pos.x = m.getArgAsFloat(i);
+                voronoiWall->breakPoints[i].pressure += 0.001;
+            }
+            
+        } else if(m.getAddress() == "/voronoi/y"){
+            
+            for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
+                voronoiWall->breakPoints[i].pos.y = m.getArgAsFloat(i);
+                voronoiWall->breakPoints[i].pressure += 0.001;
+            }
+            
+        } else if(m.getAddress() == "/voronoi/z"){
+            
+            for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
+                //voronoiWall->breakPoints[i].pressure = m.getArgAsFloat(i);
+            }
+            
+        }
     }
 
+    dancerCylinder.setActivationState( DISABLE_DEACTIVATION );
+
+    // this is a hack, thigs should not be moved like this in bullet, but it will do for now.
+    
+    btTransform tr = dancerCylinder.getRigidBody()->getCenterOfMassTransform();
+    dancerCylinder.getRigidBody()->translate(btVector3(dancerPos->x, dancerPos->y, -dancerHeight/2.)-tr.getOrigin());
+
+/* Instead this code should be the correct way of moving objects in bullet, however, right now it's not working.
+ 
+ btTransform tr;
+    tr.setIdentity();
+    //    tr.setRotation(btQuaternion(btVector3(1.0, 0, 0), 90));
+    dancerCylinder.getRigidBody()->tran
+    tr.
+    tr.setOrigin(btVector3(dancerPos->x, dancerPos->y, -.5));
+    
+    if(dancerConstraint != NULL){
+            world.world->removeConstraint( dancerConstraint );
+            delete dancerConstraint;
+            dancerConstraint = NULL;
+    }
+    
+    dancerConstraint = new btGeneric6DofConstraint(*dancerCylinder.getRigidBody(), tr, false);
+    dancerConstraint->setLinearLowerLimit(btVector3(0,0,0));
+    dancerConstraint->setLinearUpperLimit(btVector3(0,0,0));
+    dancerConstraint->setAngularLowerLimit(btVector3(0,0,0));
+    dancerConstraint->setAngularUpperLimit(btVector3(0,0,0));
+    
+    world.world->addConstraint(dancerConstraint);
+    
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,0);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,1);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,2);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,3);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,4);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,5);
+    
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,0);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,1);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,2);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,3);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,4);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,5);
+    
+    dancerConstraint->getFrameOffsetA().setOrigin(btVector3(dancerPos->x, dancerPos->y, -.5));
+*/
     //TODO: Camera frustrums share position, but with individual viewports
     for(int i=0; i<planes.size(); i++) {
         planes[i]->cam.setPosition(camPos.get());
@@ -127,7 +227,9 @@ void testApp::update()
     
     if(addSphere){
         ofxBulletSphere * sphere = new ofxBulletSphere();
-        sphere->create(world.world, ofVec3f(ofRandom(-0.1,0.1), ofRandom(-0.1,0.1), -1), 0.05, ofRandom(0.02,0.05));
+        float mass = ofRandom(0.02,0.075);
+        sphere->create(world.world, ofVec3f(ofRandom(-0.25,0.25), ofRandom(-0.25,0.25), -1), mass*0.1, mass);
+        sphere->setProperties(0.1, 0.1);
         spheres.push_back(sphere);
         sphere->add();
         addSphere = false;
@@ -136,32 +238,25 @@ void testApp::update()
     world.update();
     
     voronoiWall->update();
+    //ribbon->update();
     boxFloor->update();
     
-    
 }
-
-
 
 void testApp::drawBulletFloor(){
     
     //TODO:Factor out to seperate class
 
     ofPushMatrix(); {
-        //ofRotateY(90);
         //world.drawDebug();
         
         for(int i=0; i<spheres.size(); i++) {
             spheres[i]->draw();
         }
         
+        // dancerCylinder.draw();
         
     } ofPopMatrix();
-    
-    
-    //ofRect(-2, -2, 4, 4);
-    
-    
 }
 
 void testApp::drawFloor() {
@@ -207,8 +302,8 @@ void testApp::drawFloor() {
         ofDisableLighting();
         
         ofDisableDepthTest();
-        ofSetColor(0,0,0,255);
-        ofEllipse(dancerPos->x, dancerPos->y, 0.02, 0.02);
+        ofSetColor(255*dancerEllipseBrightness,255*dancerEllipseBrightness,255*dancerEllipseBrightness,255);
+        ofEllipse(dancerPos->x, dancerPos->y, dancerEllipseSize, dancerEllipseSize);
         ofEnableDepthTest();
         
         //glDisable(GL_FOG);
@@ -229,20 +324,22 @@ void testApp::draw()
     
     floor->beginLeft();
     //drawFloor();
-    boxFloor->draw( dancerPos.get() );
+    //boxFloor->draw( dancerPos.get() );
     floor->endLeft();
     
     floor->beginRight();
     //drawFloor();
-    boxFloor->draw( dancerPos.get() );
+    //boxFloor->draw( dancerPos.get() );
     floor->endRight();
     
     wall->beginLeft();
     voronoiWall->draw();
+    //ribbon->draw();
     wall->endLeft();
     
     wall->beginRight();
     voronoiWall->draw();
+    //ribbon->draw();
     wall->endRight();
     
     ofDisableDepthTest();

@@ -30,11 +30,11 @@ void BoxFloor::setup(ofParameterGroup * params) {
 void BoxFloor::update() {
     
     light.setPosition(0, 0, lightHeight);
-
 }
 
 
 void BoxFloor::draw( ofVec2f dancerPos ) {
+    
     
     glEnable(GL_DEPTH_TEST);
     //ofEnableLighting();
