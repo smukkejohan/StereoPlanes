@@ -4,6 +4,7 @@
 
 // Syphon together with 3D primitive and NoFill does not run
 
+
 vector<ofVec3f> points;
 
 //--------------------------------------------------------------
@@ -26,6 +27,8 @@ void testApp::setup()
     floor->setup(512, 768, &settings);
     floor->pos = ofVec2f(0,0);
     planes.push_back(floor);
+    
+    shareTexture.allocate(512,768);
     
     wall = new StereoPlane("wall");
     wall->setup(512, 768, &settings);
@@ -234,35 +237,41 @@ void testApp::drawFloor() {
     
 }
 
+
+
+
 //--------------------------------------------------------------
 void testApp::draw()
 {
     ofEnableDepthTest();
     ofBackground(ofColor(0,0,0));
     
+
+    
+    
     fbo.begin();
     
     ofClear(0, 0, 0);
-    
     floor->beginLeft();
     voronoiWall->draw();
     //boxFloor->draw( dancerPos.get() );
     floor->endLeft();
     
     floor->beginRight();
+    //voronoiWall->draw();
     voronoiWall->draw();
     //boxFloor->draw( dancerPos.get() );
     floor->endRight();
     
     wall->beginLeft();
     //voronoiWall->draw();
-    ceilingPlane->draw();
+    ceilingPlane->draw(&floor->cam.leftFbo);
     //ribbon->draw();
     wall->endLeft();
     
     wall->beginRight();
     //voronoiWall->draw();
-    ceilingPlane->draw();
+    ceilingPlane->draw(&floor->cam.leftFbo);
     //ribbon->draw();
     wall->endRight();
     
@@ -296,7 +305,6 @@ void testApp::draw()
     //activePlane->drawInfo();
     
     gui.draw();
-    
 }
 
 //--------------------------------------------------------------

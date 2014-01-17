@@ -112,5 +112,7 @@ public:
     Ribbon * ribbon;
     BoxFloor * boxFloor;
     
+    ofFbo shareTexture;
+    
 
 };
