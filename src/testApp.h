@@ -13,6 +13,7 @@
 #include "CeilingPlane.h"
 #include "Ribbon.h"
 #include "BoxFloor.h"
+#include "Lines.h"
 
 class testApp : public ofBaseApp
 {
@@ -112,6 +113,7 @@ public:
     CeilingPlane * ceilingPlane;
     Ribbon * ribbon;
     BoxFloor * boxFloor;
-    
+    Lines * lines;
+
 
 };

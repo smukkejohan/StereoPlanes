@@ -69,7 +69,12 @@ void testApp::setup()
     boxFloor = new BoxFloor();
     
     boxFloor->setup(&parameters);
+    
+    lines = new Lines();
+    lines->setup(&parameters);
+    
     gui.setup(parameters);
+    
     
     oscReceiver.setup(9001);
     
@@ -262,7 +267,7 @@ void testApp::update()
     //ribbon->update();
     boxFloor->update();
     ceilingPlane->update();
-    
+    lines->update();
 }
 
 
@@ -346,25 +351,29 @@ void testApp::draw()
     ofClear(0, 0, 0);
     
     floor->beginLeft();
-    voronoiWall->draw();
+    //voronoiWall->draw();
     //boxFloor->draw( dancerPos.get() );
+    lines->draw();
     floor->endLeft();
     
     floor->beginRight();
-    voronoiWall->draw();
+    //voronoiWall->draw();
     //boxFloor->draw( dancerPos.get() );
+    lines->draw();
     floor->endRight();
     
     wall->beginLeft();
     //voronoiWall->draw();
-    ceilingPlane->draw();
+    lines->draw();
+    //ceilingPlane->draw();
     //ribbon->draw();
     wall->endLeft();
     
     wall->beginRight();
     //voronoiWall->draw();
-    ceilingPlane->draw();
+    //ceilingPlane->draw();
     //ribbon->draw();
+    lines->draw();
     wall->endRight();
     
     ofDisableDepthTest();
