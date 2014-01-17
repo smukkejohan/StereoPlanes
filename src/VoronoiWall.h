@@ -60,5 +60,7 @@ public:
     vector<BreakPoint> breakPoints;
     vector<Cell> cells;
     
+    bool active = true;
+    
     
 };

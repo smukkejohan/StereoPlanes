@@ -77,14 +77,12 @@ public:
 		ofFloatColor c = ofGetCurrentRenderer()->getBgColor();
 		ofClear(c);
         left.begin();
-
 	}
 
 	void endLeft()
 	{
         left.end();
         leftFbo.end();
-
 	}
 
 	void beginRight()

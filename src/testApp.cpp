@@ -1,7 +1,6 @@
 #include "testApp.h"
 #include <OpenGL/OpenGL.h>
 #include <ofGLUtils.h>
-#include "ofxBulletWorldRigid.h"
 
 // Syphon together with 3D primitive and NoFill does not run
 
@@ -15,22 +14,22 @@ void testApp::setup()
     ofSetBackgroundAuto(true);
     ofBackground(0);
     
-    dancerHeight = 0.5;
-    
     leftOutputServer.setName("Left");
     rightOutputServer.setName("Right");
     sbsOutputServer.setName("Side By Side");
     
-    fbo.allocate(ofGetWidth(), ofGetHeight());
+    fbo.allocate(2048, 768);
     
     settings.load("stereoplanes.xml");
     
     floor = new StereoPlane("floor");
-    floor->setup(1024, 1024, &settings);
+    floor->setup(512, 768, &settings);
+    floor->pos = ofVec2f(0,0);
     planes.push_back(floor);
     
     wall = new StereoPlane("wall");
-    wall->setup(1024, 1024, &settings);
+    wall->setup(512, 768, &settings);
+    wall->pos = ofVec2f(1024,0);
     planes.push_back(wall);
     
     activePlaneIndex = 0;
@@ -49,14 +48,17 @@ void testApp::setup()
     dirLight.setDiffuseColor(ofColor(191,191,170));
     
     parameters.setName("Stereo");
+
     parameters.add(camPosWall.set("Wall Cam", ofVec3f(0.,0.,-1), ofVec3f(-3,-3,-8.), ofVec3f(3,3,-0.25)));
     parameters.add(camPosFloor.set("Floor Cam", ofVec3f(0.,0.,-1), ofVec3f(-3,-3,-8.), ofVec3f(3,3,-0.25)));
+
     parameters.add(eyeSeperation.set("Eye Seperation", 6.5, 0., 7.));
+    parameters.add(dancerEllipseSize.set("Dancer Ellipse Size", 0., 0., .5));
+    parameters.add(dancerEllipseBrightness.set("Dancer Ellipse Brightness", 0., 0., 1.));
     parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
-    parameters.add(dancerEllipseSize.set("Ellipse Size", 0., 0., .5));
-    parameters.add(dancerEllipseBrightness.set("Ellipse Brightness", 0., 0., 1.));
     
     voronoiWall = new VoronoiWall();
+    //voronoiWall->active = false;
     voronoiWall->setup(&parameters);
     
     ceilingPlane = new CeilingPlane();
@@ -71,50 +73,43 @@ void testApp::setup()
     
     oscReceiver.setup(9001);
     
-    // Bullet stuff
-    
     world.setup();
-    
-    // gravity should be .98 for slowmo realism    
-	world.setGravity(ofVec3f(0.f, 0.f, .4f));
+	world.setGravity(ofVec3f(0.f, 0.f, 9.8f));
     
     ground.create( world.world, ofVec3f(0., 0, 0.5), 0., 100.f, 100.f, 1.f );
 	ground.setProperties(.25, .95);
 	ground.add();
+    
+    wallBack.create( world.world, ofVec3f(0., -1.45, 0), 0., 100.f, 1.f, 100.f);
+       wallBack.setProperties(.75, .75);
+       wallBack.add();
 
-    wallBack.create( world.world, ofVec3f(0., -1.45, 0), 0., 100.f, 1.f, 100.f );
-	wallBack.setProperties(.75, .75);
-	wallBack.add();
-    
     wallLeft.create( world.world, ofVec3f(-1.5, 0, 0), 0., 1.f, 100.f, 100.f );
-	wallLeft.setProperties(.75, .75);
-	wallLeft.add();
-    
+       wallLeft.setProperties(.75, .75);
+       wallLeft.add();
+
     wallRight.create( world.world, ofVec3f(1.5, 0, 0), 0., 1.f, 100.f, 100.f );
-	wallRight.setProperties(.75, .75);
-	wallRight.add();
-    
+       wallRight.setProperties(.75, .75);
+       wallRight.add();
+
     wallFront.create( world.world, ofVec3f(0., 1.5, 0), 0., 100.f, 1.f, 100.f );
-	wallFront.setProperties(.75, .75);
-	wallFront.add();
+       wallFront.setProperties(.75, .75);
+       wallFront.add();
 /*
  ofxBulletCylinder::create( btDiscreteDynamicsWorld* a_world, ofVec3f a_loc, ofQuaternion a_rot, float a_mass, float a_radius, float a_height ) {
- btTransform tr	= ofGetBtTransformFromVec3f( a_loc );
+ btTransform tr        = ofGetBtTransformFromVec3f( a_loc );
  tr.setRotation( btQuaternion(btVector3(a_rot.x(), a_rot.y(), a_rot.z()), a_rot.w()) );
-
- */
+*/
     dancerCylinder.create(world.world,ofVec3f(0, 0, -dancerHeight/2.),/* ofQuaternion(0, ofVec3f(0, 0,1)),*/ 1. ,fmaxf(dancerEllipseSize, 0.25),fmaxf(dancerEllipseSize, 0.25), fmaxf(dancerEllipseSize, dancerHeight));
 
-    dancerCylinder.setProperties(.75, .0);
-    dancerCylinder.add();
+    
     
     //  TODO: Operator grabbing of bullet objects from first view?
     //	world.enableGrabbing();
     //	world.enableDebugDraw();
     //	world.setCamera(&camera);
     
-}
-
+} 
 
 //--------------------------------------------------------------
 void testApp::update()
@@ -139,8 +134,8 @@ void testApp::update()
             ofVec3f pos = camPosFloor.get();
             pos.z = m.getArgAsFloat(0);
 			camPosFloor.set(pos);
-            
-            if(m.getAddress() == "/Wall/Camera/x"){
+        }
+            else if(m.getAddress() == "/Wall/Camera/x"){
                 ofVec3f pos = camPosWall.get();
                 pos.x = m.getArgAsFloat(0);
                 camPosWall.set(pos);
@@ -171,7 +166,6 @@ void testApp::update()
                 voronoiWall->breakPoints[i].pos.x = m.getArgAsFloat(i);
                 voronoiWall->breakPoints[i].pressure += 0.001;
             }
-            
         } else if(m.getAddress() == "/voronoi/y"){
             
             for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
@@ -256,9 +250,7 @@ void testApp::update()
     
     if(addSphere){
         ofxBulletSphere * sphere = new ofxBulletSphere();
-        float mass = ofRandom(0.02,0.075);
-        sphere->create(world.world, ofVec3f(ofRandom(-0.25,0.25), ofRandom(-0.25,0.25), -1), mass*0.1, mass);
-        sphere->setProperties(0.1, 0.1);
+        sphere->create(world.world, ofVec3f(ofRandom(-0.1,0.1), ofRandom(-0.1,0.1), -1), 0.05, ofRandom(0.02,0.05));
         spheres.push_back(sphere);
         sphere->add();
         addSphere = false;
@@ -269,21 +261,24 @@ void testApp::update()
     voronoiWall->update();
     //ribbon->update();
     boxFloor->update();
+    ceilingPlane->update();
     
 }
+
+
 
 void testApp::drawBulletFloor(){
     
     //TODO:Factor out to seperate class
 
     ofPushMatrix(); {
+        //ofRotateY(90);
         //world.drawDebug();
         
         for(int i=0; i<spheres.size(); i++) {
             spheres[i]->draw();
         }
         
-        // dancerCylinder.draw();
         
     } ofPopMatrix();
 }
@@ -325,14 +320,13 @@ void testApp::drawFloor() {
          }
          **/
         
-        
         light.disable();
         dirLight.disable();
         ofDisableLighting();
         
         ofDisableDepthTest();
-        ofSetColor(255*dancerEllipseBrightness,255*dancerEllipseBrightness,255*dancerEllipseBrightness,255);
-        ofEllipse(dancerPos->x, dancerPos->y, dancerEllipseSize, dancerEllipseSize);
+        ofSetColor(0,0,0,255);
+        ofEllipse(dancerPos->x, dancerPos->y, 0.02, 0.02);
         ofEnableDepthTest();
         
         //glDisable(GL_FOG);
@@ -352,22 +346,24 @@ void testApp::draw()
     ofClear(0, 0, 0);
     
     floor->beginLeft();
-    //drawFloor();
+    voronoiWall->draw();
     //boxFloor->draw( dancerPos.get() );
     floor->endLeft();
     
     floor->beginRight();
-    //drawFloor();
+    voronoiWall->draw();
     //boxFloor->draw( dancerPos.get() );
     floor->endRight();
     
     wall->beginLeft();
-    voronoiWall->draw();
+    //voronoiWall->draw();
+    ceilingPlane->draw();
     //ribbon->draw();
     wall->endLeft();
     
     wall->beginRight();
-    voronoiWall->draw();
+    //voronoiWall->draw();
+    ceilingPlane->draw();
     //ribbon->draw();
     wall->endRight();
     
@@ -388,16 +384,17 @@ void testApp::draw()
     }
     
     fbo.end();
-    
     sbsOutputServer.publishTexture(&fbo.getTextureReference());
     
     ofPushMatrix();
+    ofScale(0.5,0.5);
+    ofRect(0,0,2048,768);
     fbo.draw(0, 0);
     ofPopMatrix();
     
     ofSetColor(255);
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 40, 40);
-    activePlane->drawInfo();
+    //activePlane->drawInfo();
     
     gui.draw();
     

@@ -19,12 +19,17 @@ public:
     
     //ofParameterGroup * parameters;
     
+    ofParameter<float> surfaceHeight;
     ofParameter<float> waveHeight;
     ofParameter<float> speed;
     ofParameter<float> plateauHeight;
     ofParameter<float> lightHeight;
+    ofParameter<float> distance;
+    ofParameter<bool> bRotation;
     
-    ofLight light;
+    ofLight boxLight;
+    
+    vector <float> rotation;
 
     
 };
