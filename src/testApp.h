@@ -13,6 +13,8 @@
 #include "CeilingPlane.h"
 #include "Ribbon.h"
 #include "BoxFloor.h"
+#include "WireMesh.h"
+#include "Lines.h"
 
 class testApp : public ofBaseApp
 {
@@ -116,5 +118,11 @@ public:
     
     ofFbo shareTexture;
     
-
+    WireMesh * wireMesh;
+    ofParameter<ofVec3f> meshOffsetWall;
+    ofParameter<ofVec3f> meshOffsetFloor;
+    Lines * lines;
+    
+    
+    ofParameter<int> scene = 0;
 };

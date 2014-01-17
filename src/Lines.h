@@ -20,8 +20,8 @@ public:
     
     ofParameter<float> angle;
     ofParameter<float> width;
+    ofParameter<float> distance;
     ofParameter<float> randomWidth;
     ofParameter<ofVec3f> origin;
     ofParameter<float> randomDepth;
-    ofParameter<bool> autoOn;
 };
