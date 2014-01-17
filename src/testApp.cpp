@@ -51,7 +51,10 @@ void testApp::setup()
     dirLight.setDiffuseColor(ofColor(191,191,170));
     
     parameters.setName("Stereo");
-    parameters.add(camPos.set("Cam position", ofVec3f(0.,0.,-1), ofVec3f(-2,-2,-8.), ofVec3f(2,2,-0.5)));
+
+    parameters.add(camPosWall.set("Wall Cam", ofVec3f(0.,0.,-1), ofVec3f(-3,-3,-8.), ofVec3f(3,3,-0.25)));
+    parameters.add(camPosFloor.set("Floor Cam", ofVec3f(0.,0.,-1), ofVec3f(-3,-3,-8.), ofVec3f(3,3,-0.25)));
+
     parameters.add(eyeSeperation.set("Eye Seperation", 6.5, 0., 7.));
     parameters.add(dancerEllipseSize.set("Dancer Ellipse Size", 0., 0., .5));
     parameters.add(dancerEllipseBrightness.set("Dancer Ellipse Brightness", 0., 0., 1.));
@@ -80,6 +83,30 @@ void testApp::setup()
 	ground.setProperties(.25, .95);
 	ground.add();
     
+    wallBack.create( world.world, ofVec3f(0., -1.45, 0), 0., 100.f, 1.f, 100.f);
+       wallBack.setProperties(.75, .75);
+       wallBack.add();
+
+    wallLeft.create( world.world, ofVec3f(-1.5, 0, 0), 0., 1.f, 100.f, 100.f );
+       wallLeft.setProperties(.75, .75);
+       wallLeft.add();
+
+    wallRight.create( world.world, ofVec3f(1.5, 0, 0), 0., 1.f, 100.f, 100.f );
+       wallRight.setProperties(.75, .75);
+       wallRight.add();
+
+    wallFront.create( world.world, ofVec3f(0., 1.5, 0), 0., 100.f, 1.f, 100.f );
+       wallFront.setProperties(.75, .75);
+       wallFront.add();
+/*
+ ofxBulletCylinder::create( btDiscreteDynamicsWorld* a_world, ofVec3f a_loc, ofQuaternion a_rot, float a_mass, float a_radius, float a_height ) {
+ btTransform tr        = ofGetBtTransformFromVec3f( a_loc );
+ tr.setRotation( btQuaternion(btVector3(a_rot.x(), a_rot.y(), a_rot.z()), a_rot.w()) );
+*/
+    dancerCylinder.create(world.world,ofVec3f(0, 0, -dancerHeight/2.),/* ofQuaternion(0, ofVec3f(0, 0,1)),*/ 1. ,fmaxf(dancerEllipseSize, 0.25),fmaxf(dancerEllipseSize, 0.25), fmaxf(dancerEllipseSize, dancerHeight));
+
+    
+    
     //  TODO: Operator grabbing of bullet objects from first view?
     //	world.enableGrabbing();
     //	world.enableDebugDraw();
@@ -95,22 +122,38 @@ void testApp::update()
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(&m);
         
-		if(m.getAddress() == "/Camera/x"){
-            ofVec3f pos = camPos.get();
+		if(m.getAddress() == "/Floor/Camera/x"){
+            ofVec3f pos = camPosFloor.get();
             pos.x = m.getArgAsFloat(0);
-			camPos.set(pos);
+			camPosFloor.set(pos);
             
-		} else if(m.getAddress() == "/Camera/y"){
-            ofVec3f pos = camPos.get();
+		} else if(m.getAddress() == "/Floor/Camera/y"){
+            ofVec3f pos = camPosFloor.get();
             pos.y = m.getArgAsFloat(0);
-			camPos.set(pos);
+			camPosFloor.set(pos);
             
-		} else if(m.getAddress() == "/Cameraz/x"){
+		} else if(m.getAddress() == "/Floor/Cameraz/x"){
             
-            ofVec3f pos = camPos.get();
+            ofVec3f pos = camPosFloor.get();
             pos.z = m.getArgAsFloat(0);
-			camPos.set(pos);
-            
+			camPosFloor.set(pos);
+        }
+            else if(m.getAddress() == "/Wall/Camera/x"){
+                ofVec3f pos = camPosWall.get();
+                pos.x = m.getArgAsFloat(0);
+                camPosWall.set(pos);
+                
+            } else if(m.getAddress() == "/Wall/Camera/y"){
+                ofVec3f pos = camPosWall.get();
+                pos.y = m.getArgAsFloat(0);
+                camPosWall.set(pos);
+                
+            } else if(m.getAddress() == "/Wall/Cameraz/x"){
+                
+                ofVec3f pos = camPosWall.get();
+                pos.z = m.getArgAsFloat(0);
+                camPosWall.set(pos);
+                
 		} else if(m.getAddress() == "/eyeSeperation/x"){
 			eyeSeperation.set(m.getArgAsFloat(0));
             
@@ -142,13 +185,71 @@ void testApp::update()
         }
     }
 
-    //TODO: Camera frustrums share position, but with individual viewports
+    dancerCylinder.setActivationState( DISABLE_DEACTIVATION );
+
+    // This is a hack, thigs should not be moved like this in bullet, but it will do for now. This kind of movement makes jutters in the collisions.
+    
+    btTransform tr = dancerCylinder.getRigidBody()->getCenterOfMassTransform();
+    dancerCylinder.getRigidBody()->translate(btVector3(dancerPos->x, dancerPos->y, -dancerHeight/2.)-tr.getOrigin());
+
+/* Instead this code should be the correct way of moving objects in bullet, however, right now it's not working.
+ 
+ btTransform tr;
+    tr.setIdentity();
+    //    tr.setRotation(btQuaternion(btVector3(1.0, 0, 0), 90));
+    dancerCylinder.getRigidBody()->tran
+    tr.
+    tr.setOrigin(btVector3(dancerPos->x, dancerPos->y, -.5));
+    
+    if(dancerConstraint != NULL){
+            world.world->removeConstraint( dancerConstraint );
+            delete dancerConstraint;
+            dancerConstraint = NULL;
+    }
+    
+    dancerConstraint = new btGeneric6DofConstraint(*dancerCylinder.getRigidBody(), tr, false);
+    dancerConstraint->setLinearLowerLimit(btVector3(0,0,0));
+    dancerConstraint->setLinearUpperLimit(btVector3(0,0,0));
+    dancerConstraint->setAngularLowerLimit(btVector3(0,0,0));
+    dancerConstraint->setAngularUpperLimit(btVector3(0,0,0));
+    
+    world.world->addConstraint(dancerConstraint);
+    
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,0);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,1);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,2);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,3);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,4);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,5);
+    
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,0);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,1);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,2);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,3);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,4);
+    dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,5);
+    
+    dancerConstraint->getFrameOffsetA().setOrigin(btVector3(dancerPos->x, dancerPos->y, -.5));
+*/
+    planes[0]->cam.setPosition(camPosFloor.get());
+    planes[1]->cam.setPosition(camPosWall.get());
+    
     for(int i=0; i<planes.size(); i++) {
-        planes[i]->cam.setPosition(camPos.get());
         planes[i]->cam.setPhysicalEyeSeparation(eyeSeperation.get());
         planes[i]->update();
         //cout<<camPos.get()<<endl;
     }
+
+    /*
+    //TODO: Camera frustrums share position, but with individual viewports
+    planes[1]->cam.setPosition(camPos.get());
+    planes[1]->update();
+    
+    ofVec4f camInScreenSpace = planes[1]->warpLeft.fromWarpToScreenCoord(camPos.get().x, camPos.get().y, camPos.get().z);
+    ofVec4f camInFloorSpace = planes[0]->warpLeft.fromScreenToWarpCoord(camInScreenSpace.x, camInScreenSpace.y, camInScreenSpace.z);
+    planes[0]->cam.setPosition(camInScreenSpace.x, camInScreenSpace.y, camInScreenSpace.z);
+    planes[0]->update();
+    */
     
     if(addSphere){
         ofxBulletSphere * sphere = new ofxBulletSphere();

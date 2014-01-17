@@ -57,7 +57,8 @@ public:
     //ofParameter<float> boxOneZ; // a fraction of clock
     //ofParameter<float> boxTwoZ;
     
-    ofParameter<ofVec3f> camPos;
+    ofParameter<ofVec3f> camPosWall;
+    ofParameter<ofVec3f> camPosFloor;
     ofParameter<float> eyeSeperation;
     ofParameter<float> dancerEllipseSize;
     ofParameter<float> dancerEllipseBrightness;
