@@ -54,18 +54,23 @@ void testApp::setup()
     parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
     parameters.add(dancerEllipseSize.set("Ellipse Size", 0., 0., .5));
     parameters.add(dancerEllipseBrightness.set("Ellipse Brightness", 0., 0., 1.));
-    
+    parameters.add(meshOffsetFloor.set("Mesh Offset Floor", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
+    parameters.add(meshOffsetWall.set("Mesh Offset Wall", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
+   
     voronoiWall = new VoronoiWall();
-    voronoiWall->setup(&parameters);
+    //voronoiWall->setup(&parameters);
     
     ceilingPlane = new CeilingPlane();
-    ceilingPlane->setup(&parameters);
+    //ceilingPlane->setup(&parameters);
     
     //ribbon = new Ribbon();
     //ribbon->setup(&parameters);
-    boxFloor = new BoxFloor();
     
-    boxFloor->setup(&parameters);
+    boxFloor = new BoxFloor();
+    //boxFloor->setup(&parameters);
+
+    wireMesh = new WireMesh();
+    wireMesh->setup(&parameters);
     gui.setup(parameters);
     
     oscReceiver.setup(9001);
@@ -169,6 +174,19 @@ void testApp::update()
             }
             
         }
+        
+        else if(m.getAddress() == "/OffsetWall/x"){
+            meshOffsetWall.set(ofVec3f(m.getArgAsFloat(0), meshOffsetWall.get().y, meshOffsetWall.get().z));
+            
+		} else if(m.getAddress() == "/OffsetWall/y"){
+            meshOffsetWall.set(ofVec3f(meshOffsetWall.get().x, m.getArgAsFloat(0), meshOffsetWall.get().z));
+        }
+        else if(m.getAddress() == "/OffsetFloor/x"){
+            meshOffsetFloor.set(ofVec3f(m.getArgAsFloat(0), meshOffsetFloor.get().y, meshOffsetWall.get().z));
+            
+		} else if(m.getAddress() == "/OffsetFloor/y"){
+            meshOffsetFloor.set(ofVec3f(meshOffsetFloor.get().x, m.getArgAsFloat(0), meshOffsetWall.get().z));
+        }
     }
 
     dancerCylinder.setActivationState( DISABLE_DEACTIVATION );
@@ -240,6 +258,7 @@ void testApp::update()
     voronoiWall->update();
     //ribbon->update();
     boxFloor->update();
+    wireMesh->update(dancerPos.get());
     
 }
 
@@ -325,22 +344,38 @@ void testApp::draw()
     floor->beginLeft();
     //drawFloor();
     //boxFloor->draw( dancerPos.get() );
+    
+//    ofPushMatrix();
+//    ofTranslate(0, -1, 0);
+//    ofRotate(90, 1, 0, 0);
+//    ofTranslate(0, 1,0);
+    wireMesh->draw(meshOffsetFloor.get());
+//    ofPopMatrix();
     floor->endLeft();
     
     floor->beginRight();
     //drawFloor();
     //boxFloor->draw( dancerPos.get() );
+    //ofPushMatrix();
+    //ofTranslate(0, -1, 0);
+    //ofRotate(90, 1, 0, 0);
+    //ofTranslate(0, 1,0);
+    wireMesh->draw(meshOffsetFloor.get());
+    //ofPopMatrix();
     floor->endRight();
     
     wall->beginLeft();
-    voronoiWall->draw();
+    //voronoiWall->draw();
     //ribbon->draw();
+    wireMesh->draw(meshOffsetWall.get());
     wall->endLeft();
     
     wall->beginRight();
-    voronoiWall->draw();
+    //voronoiWall->draw();
     //ribbon->draw();
+    wireMesh->draw(meshOffsetWall.get());
     wall->endRight();
+    
     
     ofDisableDepthTest();
     

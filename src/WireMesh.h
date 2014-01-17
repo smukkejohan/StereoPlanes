@@ -2,13 +2,40 @@
 //  WireMesh.h
 //  StereoPlanes
 //
-//  Created by Maria Paula Saba dos Reis on 1/17/14.
+//  Created by Maria Paula Saba on 1/17/14.
 //
 //
 
-#ifndef __StereoPlanes__WireMesh__
-#define __StereoPlanes__WireMesh__
+#pragma once
 
-#include <iostream>
+#include "ofMain.h"
 
-#endif /* defined(__StereoPlanes__WireMesh__) */
+class WireMesh {
+    
+public:
+    void setup(ofParameterGroup * params);
+    void draw( ofVec3f off);
+    void update( ofVec2f dancerPos );
+    void createMesh();
+    void resetMesh();
+    void createVertex();
+    //ofParameterGroup * parameters;
+
+
+    ofParameter<bool> reset;
+    ofParameter<float> speed;
+    ofParameter<float> numVerts;
+    ofParameter<float> threshold;
+    ofParameter<ofVec3f> offset;
+    ofParameter<float> bgColor;
+    ofParameter<float> lineWidth;
+    ofParameter<bool> triangles;
+    ofParameter<float> dancerZ;
+    ofParameter<bool> createVert;
+
+    
+
+    ofMesh mesh;
+    vector<ofColor> colors;
+
+};
