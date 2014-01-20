@@ -14,8 +14,9 @@ void testApp::setup()
     // 2 Boxes Ã
     // 3 Voronoi Ã
     // 4 Voronoi falling
+    // 5 CommonPerspectiveTest
     
-    currentScene = 0;
+    currentScene = 5;
     
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
@@ -34,9 +35,7 @@ void testApp::setup()
     floor->setup(512, 768, &settings);
     floor->pos = ofVec2f(0,0);
     planes.push_back(floor);
-    
-    shareTexture.allocate(512,768);
-    
+        
     wall = new StereoPlane("wall");
     wall->setup(512, 768, &settings);
     wall->pos = ofVec2f(1024,0);
@@ -79,11 +78,19 @@ void testApp::setup()
     }
     
     
+    if(currentScene == 5) {
+        cmpTest = new CommonPerspectiveTest();
+        cmpTest->setup(&parameters);
+        
+        floor->cam.setPosition(0,2,0.5);
+        
+    }
+    
     //voronoiPlaza = new VoronoiWall();
     //voronoiWall->active = false;
     //voronoiPlaza->setup(&parameters, ofRectangle(-3,-3, 6, 6));
     
-    ceilingPlane = new CeilingPlane();
+    //ceilingPlane = new CeilingPlane();
     //ceilingPlane->setup(&parameters);
     
     //ribbon = new Ribbon();
@@ -217,8 +224,8 @@ void testApp::update()
                 voronoiWall->breakPoints[i].pos.x = m.getArgAsFloat(i);
                 voronoiWall->breakPoints[i].pressure += 0.001;
                 
-                //voronoiPlaza->breakPoints[i].pos.x = m.getArgAsFloat(i);
-                //voronoiPlaza->breakPoints[i].pressure += 0.001;
+                voronoiPlaza->breakPoints[i].pos.x = m.getArgAsFloat(i);
+                voronoiPlaza->breakPoints[i].pressure += 0.001;
             }
             }
         } else if(m.getAddress() == "/Voronoi/y"){
@@ -230,8 +237,8 @@ void testApp::update()
                 
                     voronoiWall->breakPoints[i].pressure += 0.001;
                 
-                //voronoiPlaza->breakPoints[i].pos.y = m.getArgAsFloat(i);
-                //voronoiPlaza->breakPoints[i].pressure += 0.001;
+                voronoiPlaza->breakPoints[i].pos.y = m.getArgAsFloat(i);
+                voronoiPlaza->breakPoints[i].pressure += 0.001;
             
                 }
             }
@@ -267,6 +274,7 @@ void testApp::update()
         }
 
     }
+    
     
     dancerCylinder.setActivationState( DISABLE_DEACTIVATION );
     
@@ -344,7 +352,9 @@ void testApp::update()
     
     if(currentScene == 0) {
         world.update();
-    } else if(currentScene == 1) {
+    }
+    
+    if(currentScene == 1) {
         wireMesh->update(dancerPos.get());
     }
     
@@ -356,6 +366,10 @@ void testApp::update()
     
     if(currentScene == 2) {
         boxFloor->update();
+    }
+    
+    if(currentScene == 5) {
+        cmpTest->update();
     }
     
     ceilingPlane->update();
@@ -428,39 +442,6 @@ void testApp::draw()
     
     ofClear(0, 0, 0);
 
-    
-    /*
-    floor->beginLeft();
-    voronoiWall->draw();
-    //boxFloor->draw( dancerPos.get() );
-    floor->endLeft();
-    
-    floor->beginRight();
-    //voronoiWall->draw();
-    voronoiWall->draw();
-    //boxFloor->draw( dancerPos.get() );
-    floor->endRight();
-    
-    wall->beginLeft();
-    //voronoiWall->draw();
-    ceilingPlane->begin();
-    voronoiPlaza->draw();
-    ceilingPlane->end();
-    //ribbon->draw();
-    wall->endLeft();
-    
-    wall->beginRight();
-    //voronoiWall->draw();
-    
-    ceilingPlane->begin();
-    voronoiPlaza->draw();
-    ceilingPlane->end();
-    
-    
-    //ribbon->draw();
-    wall->endRight();
-     */
-
 #pragma mark DRAW FLOOR
     
     floor->beginLeft(); {
@@ -475,6 +456,15 @@ void testApp::draw()
             boxFloor->draw( dancerPos.get() );
         }
         
+        if(currentScene == 1) {
+            wireMesh->draw(meshOffsetFloor.get());
+        }
+        
+        
+        if(currentScene == 5) {
+            cmpTest->drawFloor();
+        }
+        
         /* this will rotate the floor to match the screen space
          ofTranslate(0, -1);
          ofRotate(90, 1, 0, 0);
@@ -482,6 +472,7 @@ void testApp::draw()
          */
         //voronoiWall->draw();
         //
+        //voronoiWall->draw();
         ofPopMatrix();
     } floor->endLeft();
     
@@ -496,6 +487,14 @@ void testApp::draw()
             boxFloor->draw( dancerPos.get() );
         }
         
+        if(currentScene == 1) {
+            wireMesh->draw(meshOffsetFloor.get());
+        }
+        
+        if(currentScene == 5) {
+            cmpTest->drawFloor();
+        }
+        //voronoiWall->draw();
         /* this will rotate the floor to match the screen space
          ofTranslate(0, -1);
          ofRotate(90, 1, 0, 0);
@@ -511,17 +510,17 @@ void testApp::draw()
 #pragma mark DRAW WALL
 
     wall->beginLeft(); {
-        //voronoiWall->draw();
-        //lines->draw();
-        //ceilingPlane->draw();
-        //ribbon->draw();
         
         if(currentScene == 1) {
-            wireMesh->draw(meshOffsetFloor.get());
+            wireMesh->draw(meshOffsetWall.get());
         }
         
         if(currentScene == 3) {
-            voronoiWall->draw();
+            //voronoiWall->draw();
+        }
+        
+        if(currentScene == 5) {
+            cmpTest->drawWall();
         }
         
         
@@ -530,11 +529,15 @@ void testApp::draw()
     wall->beginRight(); {
         
         if(currentScene == 1) {
-            wireMesh->draw(meshOffsetFloor.get());
+            wireMesh->draw(meshOffsetWall.get());
         }
         
         if(currentScene == 3) {
-            voronoiWall->draw();
+            //voronoiWall->draw();
+        }
+        
+        if(currentScene == 5) {
+            cmpTest->drawWall();
         }
         
         

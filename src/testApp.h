@@ -15,6 +15,7 @@
 #include "BoxFloor.h"
 #include "WireMesh.h"
 #include "Lines.h"
+#include "CommonPerspectiveTest.h"
 
 class testApp : public ofBaseApp
 {
@@ -115,6 +116,8 @@ public:
     CeilingPlane * ceilingPlane;
     Ribbon * ribbon;
     BoxFloor * boxFloor;
+    CommonPerspectiveTest * cmpTest;
+    
     
     ofFbo shareTexture;
     
