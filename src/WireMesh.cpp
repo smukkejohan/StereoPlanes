@@ -65,12 +65,14 @@ void WireMesh::draw( ofVec3f off ) {
     
     glEnable(GL_DEPTH_TEST);
     
-    ofSetColor(bgColor);
-    ofFill();
-    ofRect(-10, -10, 5, 20, 20);
+    //ofSetColor(bgColor);
+    //ofFill();
+    //ofRect(-10, -10, 5, 20, 20);
 
     ofPushMatrix();
     ofTranslate(off.x, off.y, off.z);
+    
+    //ofDrawGrid(6);
     
     ofSetLineWidth(lineWidth);
     mesh.draw();

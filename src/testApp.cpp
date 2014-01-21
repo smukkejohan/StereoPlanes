@@ -16,7 +16,7 @@ void testApp::setup()
     // 4 Voronoi falling
     // 5 CommonPerspectiveTest
     
-    currentScene = 5;
+    currentScene = 1;
     
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
@@ -321,7 +321,9 @@ void testApp::update()
      dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,5);
      
      dancerConstraint->getFrameOffsetA().setOrigin(btVector3(dancerPos->x, dancerPos->y, -.5));
+    
      */
+    
     planes[0]->cam.setPosition(camPosFloor.get());
     planes[1]->cam.setPosition(camPosWall.get());
     
@@ -457,12 +459,18 @@ void testApp::draw()
         }
         
         if(currentScene == 1) {
+            ofPushMatrix();
+            cmpTest->transformFloor();
             wireMesh->draw(meshOffsetFloor.get());
+            ofPopMatrix();
         }
         
         
         if(currentScene == 5) {
             cmpTest->drawFloor();
+            
+            
+            
         }
         
         /* this will rotate the floor to match the screen space
@@ -488,7 +496,10 @@ void testApp::draw()
         }
         
         if(currentScene == 1) {
+            ofPushMatrix();
+            cmpTest->transformFloor();
             wireMesh->draw(meshOffsetFloor.get());
+            ofPopMatrix();
         }
         
         if(currentScene == 5) {
@@ -512,7 +523,10 @@ void testApp::draw()
     wall->beginLeft(); {
         
         if(currentScene == 1) {
-            wireMesh->draw(meshOffsetWall.get());
+            ofPushMatrix();
+            cmpTest->transformWall();
+            wireMesh->draw(meshOffsetFloor.get());
+            ofPopMatrix();
         }
         
         if(currentScene == 3) {
@@ -529,7 +543,10 @@ void testApp::draw()
     wall->beginRight(); {
         
         if(currentScene == 1) {
-            wireMesh->draw(meshOffsetWall.get());
+            ofPushMatrix();
+            cmpTest->transformWall();
+            wireMesh->draw(meshOffsetFloor.get());
+            ofPopMatrix();
         }
         
         if(currentScene == 3) {

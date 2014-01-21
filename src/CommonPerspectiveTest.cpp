@@ -10,7 +10,10 @@
 
 void CommonPerspectiveTest::setup(ofParameterGroup * params) {
     
-    box.set(1.00);
+    box.set(0.40);
+    cyl.setHeight(0.4);
+    cyl.setRadius(0.015);
+    cyl.setResolution(40, 4);
     
     ofLogo.loadImage("of.png");
     
@@ -21,11 +24,7 @@ void CommonPerspectiveTest::setup(ofParameterGroup * params) {
     light.setAmbientColor(ofColor(64,84,89));
     light.setSpecularColor(ofColor::white);
     
-    
-    
-    
 }
-
 
 void CommonPerspectiveTest::draw() {
     
@@ -34,58 +33,54 @@ void CommonPerspectiveTest::draw() {
     light.enable();
     
     ofPushMatrix();
+    ofTranslate(0, -1.2, -0.2);
+     ofLogo.bind();
+    ofDrawBox(0.7, 0.05, 1);
+    ofLogo.unbind();
+
+    ofPopMatrix();
     
-    ofScale(0.5,0.5,0.5);
+    ofPushMatrix();
+    ofTranslate(0, 1.2);
+    //ofLogo.bind();
+    ofDrawBox(0.7, 0.05, 1);
+    //ofLogo.unbind();
+    
+    ofPopMatrix();
+    
+    
+    ofPushMatrix();
     
     //light.draw();
-    
     //ofRotateX(40);
-    ofRotateY(ofGetElapsedTimef()*61);
-    ofRotateX(ofGetElapsedTimef()*60);
-    ofRotateZ(ofGetElapsedTimef()*62);
+    
+    ofRotateY(90);
+    //ofRotateX(ofGetElapsedTimef()*7);
+    //ofRotateZ(ofGetElapsedTimef()*8);
     
     ofFill();
     ofSetColor(255);
     
-    ofLogo.bind();
-    box.draw();
-    ofLogo.unbind();
+   
+    //box.draw();
+    
+    ofSetColor(255, 255, 255);
+    
+    for(int i=0; i<360;i+=4 ) {
+        ofPushMatrix();
+        
+        ofRotateX(i);
+        cyl.setHeight((sin(ofGetElapsedTimef()+i/360.0)+1) / 10);
+        
+        ofRotateZ(sin(ofGetElapsedTimef()+i)*12);
+        ofTranslate(0,-0.6);
+        
+        cyl.draw();
+        ofPopMatrix();
+    }
     
     
-    ofPushMatrix();
-    ofTranslate(-1, 0);
-    ofLogo.bind();
-    box.draw();
-    ofLogo.unbind();
-    ofPopMatrix();
-    
-    ofPushMatrix();
-    ofTranslate(1, 0);
-    ofLogo.bind();
-    box.draw();
-    ofLogo.unbind();
-    ofPopMatrix();
-    
-    ofPushMatrix();
-    ofTranslate(0, 1);
-    ofLogo.bind();
-    box.draw();
-    ofLogo.unbind();
-    ofPopMatrix();
-    
-    ofPushMatrix();
-    ofTranslate(0, -1);
-    ofLogo.bind();
-    box.draw();
-    ofLogo.unbind();
-    ofPopMatrix();
-    
-    
-    
-    ofNoFill();
-    ofSetColor(255,0,255);
-    ofSetLineWidth(10);
-    box.draw();
+    ofDrawGrid(6);
     
     ofPopMatrix();
     
@@ -108,6 +103,16 @@ void CommonPerspectiveTest::drawWall() {
     glPopMatrix();
 }
 
+void CommonPerspectiveTest::transformWall() {
+    ofTranslate(0,1);
+}
+
+void CommonPerspectiveTest::transformFloor() {
+    ofTranslate(0,-1);
+    // this will rotate the floor to match the screen space
+    ofRotate(90, 1, 0, 0);
+    
+}
 
 void CommonPerspectiveTest::drawFloor() {
     glPushMatrix();
@@ -115,12 +120,11 @@ void CommonPerspectiveTest::drawFloor() {
     
     ofTranslate(0,-1);
     //ofScale(4,4,4);
-    //ofTranslate(0,-0.5, -0.5);
     
     // this will rotate the floor to match the screen space
-     //ofTranslate(0, -1);
+    //ofTranslate(0, -1);
     ofRotate(90, 1, 0, 0);
-     //ofTranslate(0, 1);
+    //ofTranslate(0, 1);
     
     draw();
     

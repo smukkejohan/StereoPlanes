@@ -17,10 +17,17 @@ public:
     void setup(ofParameterGroup * params);
     void draw();
     void update();
+    
+    void transformWall();
+    void transformFloor();
+    
     ofBoxPrimitive box;
+    ofCylinderPrimitive cyl;
     
     ofTexture tex;
     ofImage ofLogo;
     ofLight light;
+    
+    
     
 };
