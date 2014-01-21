@@ -65,8 +65,7 @@ void testApp::setup()
     parameters.add(dancerEllipseSize.set("Dancer Ellipse Size", 0., 0., .5));
     parameters.add(dancerEllipseBrightness.set("Dancer Ellipse Brightness", 0., 0., 1.));
     parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
-    parameters.add(meshOffsetFloor.set("Mesh Offset Floor", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
-    parameters.add(meshOffsetWall.set("Mesh Offset Wall", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
+
     
     //parameters.add(scene.set("Scene", 0, 0, 5));
     
@@ -260,17 +259,6 @@ void testApp::update()
             voronoiWall->wallBreakStrength.set(m.getArgAsFloat(0));
             }
             
-        } else if(m.getAddress() == "/OffsetWall/x"){
-            meshOffsetWall.set(ofVec3f(m.getArgAsFloat(0), meshOffsetWall.get().y, meshOffsetWall.get().z));
-            
-		} else if(m.getAddress() == "/OffsetWall/y"){
-            meshOffsetWall.set(ofVec3f(meshOffsetWall.get().x, m.getArgAsFloat(0), meshOffsetWall.get().z));
-        }
-        else if(m.getAddress() == "/OffsetFloor/x"){
-            meshOffsetFloor.set(ofVec3f(m.getArgAsFloat(0), meshOffsetFloor.get().y, meshOffsetWall.get().z));
-            
-		} else if(m.getAddress() == "/OffsetFloor/y"){
-            meshOffsetFloor.set(ofVec3f(meshOffsetFloor.get().x, m.getArgAsFloat(0), meshOffsetWall.get().z));
         }
 
     }
@@ -461,7 +449,7 @@ void testApp::draw()
         if(currentScene == 1) {
             ofPushMatrix();
             cmpTest->transformFloor();
-            wireMesh->draw(meshOffsetFloor.get());
+            wireMesh->draw();
             ofPopMatrix();
         }
         
@@ -498,7 +486,7 @@ void testApp::draw()
         if(currentScene == 1) {
             ofPushMatrix();
             cmpTest->transformFloor();
-            wireMesh->draw(meshOffsetFloor.get());
+            wireMesh->draw();
             ofPopMatrix();
         }
         
@@ -514,7 +502,7 @@ void testApp::draw()
         //voronoiWall->draw();
         //boxFloor->draw( dancerPos.get() );
         //lines->draw();
-        //wireMesh->draw(meshOffsetFloor.get());
+        //wireMesh->draw();
         ofPopMatrix();
     } floor->endRight();
     
@@ -525,7 +513,7 @@ void testApp::draw()
         if(currentScene == 1) {
             ofPushMatrix();
             cmpTest->transformWall();
-            wireMesh->draw(meshOffsetFloor.get());
+            wireMesh->draw();
             ofPopMatrix();
         }
         
@@ -545,7 +533,7 @@ void testApp::draw()
         if(currentScene == 1) {
             ofPushMatrix();
             cmpTest->transformWall();
-            wireMesh->draw(meshOffsetFloor.get());
+            wireMesh->draw();
             ofPopMatrix();
         }
         
