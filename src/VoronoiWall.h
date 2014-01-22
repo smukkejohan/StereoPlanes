@@ -12,6 +12,7 @@
 //#include "ofxVoronoi.h"
 //#include "Utils.h"
 #include "ofxVoro.h"
+#include "ContentScene.h"
 
 
 struct BreakPoint {
@@ -24,20 +25,19 @@ struct Cell {
     ofMesh mesh;
     ofVec3f offset;
     ofColor color;
-    
 };
 
-class VoronoiWall {
+class VoronoiWall : public ContentScene {
 
 public:
-    void setup(ofParameterGroup * params, ofRectangle bounds = ofRectangle(-0.9, -1, 1.8, 2));
+    void setup();
     void draw();
     void update();
     void genTheVoronoi();
     
     //ofParameterGroup * parameters;
     
-    ofParameter<float> shivering;
+    /*ofParameter<float> shivering;
     ofParameter<int> subdivisions;
     ofParameter<float> wallSpeed;
     
@@ -45,10 +45,10 @@ public:
     ofParameter<ofVec3f> wallBreakReach;
     ofParameter<float> wallBreakStrength;
     
-    
     ofParameter<float> breakPointRadius;
     ofParameter<bool> autoOn;
-    
+    */
+     
     vector <ofVec3f> vpts;
     ofRectangle      vbounds;
     //ofxVoronoi       voronoi;

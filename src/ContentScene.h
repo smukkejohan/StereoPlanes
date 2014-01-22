@@ -48,7 +48,8 @@ public:
     }
     
     
-    void setupScene() {
+    void setupScene(int _index) {
+        index = _index;
         setup();
     }
     
@@ -68,7 +69,6 @@ public:
             glPushMatrix();ofPushMatrix();ofPushStyle();
             debugDraw(_surfaceId);
             ofPopStyle();ofPopMatrix();glPopMatrix();
-            
         }
     }
     

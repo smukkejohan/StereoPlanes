@@ -68,10 +68,8 @@ public:
     ofVec2f dancerPos;
     
     //    ofxOscParameterSync sync;
-    
     //ofParameterGroup parameters;
     //ofxPanel gui;
-    
     
     bool hideGUI;
     
@@ -126,10 +124,13 @@ public:
     CommonPerspectiveTest * cmpTest;
     */
     
-    // Scenes
+    
     void drawScenes(int _surfaceId=0);
     
+    // Scenes
     TestScene * testScene;
+    VoronoiWall * voronoiWall;
+    
     vector<ContentScene*> contentScenes;
     
     //WireMesh * wireMesh;

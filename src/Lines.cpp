@@ -31,7 +31,6 @@ void Lines::draw() {
     ofRotateZ(angle.get());
     
     ofSetColor(255, 255, 255, 255);
-
     ofSetRectMode(OF_RECTMODE_CENTER);
     
     float dist = distance.get();

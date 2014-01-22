@@ -74,13 +74,18 @@ void testApp::setup()
     camPosWall = ofVec3f(0, 0, -1);
     
     testScene = new TestScene();
-    testScene->setupScene();
     contentScenes.push_back(testScene);
     
-    // add all parameterGroups from scenes to parameters
-    //gui.setup(parameters);
+    voronoiWall = new VoronoiWall();
+    contentScenes.push_back(voronoiWall);
     
-    float dim = 16;
+    for(int i=0; i<contentScenes.size(); i++) {
+        contentScenes[i]->setupScene(i);
+    }
+    
+    // add all parameterGroups from scenes to parameters
+    // gui.setup(parameters);
+    
     float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
     float width = 255-xInit;
     hideGUI = false;
@@ -92,7 +97,7 @@ void testApp::setup()
     
     gui->setFont("GUI/Arial.ttf");
     gui->setWidgetFontSize(OFX_UI_FONT_SMALL);
-    gui->setColorBack(ofColor(30, 30, 30,200));
+    gui->setColorBack(ofColor(10, 10, 10,220));
     
     gui->addLabel("Stereo", OFX_UI_FONT_LARGE);
     gui->addFPSSlider("FPS");

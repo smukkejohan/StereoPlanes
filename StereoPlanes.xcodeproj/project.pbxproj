@@ -66,6 +66,7 @@
 		0420B5BC188F8E4F0086D388 /* ofxUIWaveform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B557188F8E4F0086D388 /* ofxUIWaveform.cpp */; };
 		0420B5BD188F8E4F0086D388 /* ofxUIWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B559188F8E4F0086D388 /* ofxUIWidget.cpp */; };
 		0420B5BE188F8E4F0086D388 /* ofxUIWidgetWithLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B55B188F8E4F0086D388 /* ofxUIWidgetWithLabel.cpp */; };
+		0420B5FF189023E80086D388 /* VoronoiWall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B5FD189023E80086D388 /* VoronoiWall.cpp */; };
 		043C51C8188825F400ADD204 /* CeilingPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043C51C7188825F400ADD204 /* CeilingPlane.cpp */; };
 		043C51CB188827D500ADD204 /* Ribbon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043C51C9188827D500ADD204 /* Ribbon.cpp */; };
 		043C51D11888664100ADD204 /* BoxFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043C51CF1888664100ADD204 /* BoxFloor.cpp */; };
@@ -334,6 +335,8 @@
 		0420B55B188F8E4F0086D388 /* ofxUIWidgetWithLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUIWidgetWithLabel.cpp; sourceTree = "<group>"; };
 		0420B55C188F8E4F0086D388 /* ofxUIWidgetWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWidgetWithLabel.h; sourceTree = "<group>"; };
 		0420B55D188F8E4F0086D388 /* ofxUIWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWrapper.h; sourceTree = "<group>"; };
+		0420B5FD189023E80086D388 /* VoronoiWall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VoronoiWall.cpp; sourceTree = "<group>"; };
+		0420B5FE189023E80086D388 /* VoronoiWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoronoiWall.h; sourceTree = "<group>"; };
 		042128171884956E00F516C5 /* ofxCoolGlasses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCoolGlasses.h; sourceTree = "<group>"; };
 		043C51C6188825E800ADD204 /* CeilingPlane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CeilingPlane.h; sourceTree = "<group>"; };
 		043C51C7188825F400ADD204 /* CeilingPlane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CeilingPlane.cpp; sourceTree = "<group>"; };
@@ -1707,6 +1710,8 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				0420B5FD189023E80086D388 /* VoronoiWall.cpp */,
+				0420B5FE189023E80086D388 /* VoronoiWall.h */,
 				A153D8D01889E19E001524BF /* Lines.cpp */,
 				A153D8D11889E19E001524BF /* Lines.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
@@ -1937,6 +1942,7 @@
 				0420B5B8188F8E4F0086D388 /* ofxUITextInput.cpp in Sources */,
 				0420B5BE188F8E4F0086D388 /* ofxUIWidgetWithLabel.cpp in Sources */,
 				04A6C849188099E700B17C45 /* ofxGuiGroup.cpp in Sources */,
+				0420B5FF189023E80086D388 /* VoronoiWall.cpp in Sources */,
 				043C51D11888664100ADD204 /* BoxFloor.cpp in Sources */,
 				7AF1C73F1885EAD500B38D3B /* GuiSlider.cpp in Sources */,
 				04A6C9261882166800B17C45 /* ofxCvGrayscaleImage.cpp in Sources */,

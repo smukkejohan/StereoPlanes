@@ -10,7 +10,6 @@
 #include "ofMain.h"
 #include "ofxVoro.h"
 
-
 class Voro3D {
 public:
     
