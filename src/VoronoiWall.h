@@ -33,6 +33,7 @@ public:
     void draw(int _surfaceId);
     void update();
     void genTheVoronoi();
+    void setGui(ofxUICanvas * gui, float width);
     
     //ofParameterGroup * parameters;
     
@@ -53,6 +54,7 @@ public:
     
     float wallBreakStrength;
     float breakPointRadius;
+    float wallSpeed;
     
     int nCells;
     bool autoOn = true;

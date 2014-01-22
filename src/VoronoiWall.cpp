@@ -6,6 +6,15 @@
 //
 //
 
+// TODO:
+// Knock wall over
+// set to floor
+// Set solid space
+// break at points
+// Create dark space
+// Increase decrease number of cells
+
+
 #include "VoronoiWall.h"
 
 void VoronoiWall::setup() {
@@ -15,9 +24,9 @@ void VoronoiWall::setup() {
     // Voronoi wall
     
     vbounds.set(-1, 0, 1, 1);
-    depth = 0.2;
+    depth = 0.02;
     
-    nCells = 400;
+    nCells = 40;
     
     
     light.setPosition(2, 2, -2);
@@ -36,9 +45,7 @@ void VoronoiWall::setup() {
     
     genTheVoronoi();
     
-   // params->add(shivering.set("Shiver", 0, 0, 6));
-    /*params->add(wallSpeed.set("wallSpeed", 0, 0, 2));
-    params->add(subdivisions.set("Subdivisions", 4, 0, 400));
+/*    params->add(subdivisions.set("Subdivisions", 4, 0, 400));
     
     params->add(wallBreakPos.set("wallBreakPos", ofVec3f(0.1,0.5,0), ofVec3f(-1,-1,-1), ofVec3f(1,1,1)));
     params->add(wallBreakReach.set("wallBreakReach", ofVec3f(0.2,2,1), ofVec3f(0,0,0), ofVec3f(2,2,2)));
@@ -59,6 +66,17 @@ void VoronoiWall::setup() {
     params->add(autoOn);*/
 
 }
+
+void VoronoiWall::setGui(ofxUICanvas * gui, float width){
+    ContentScene::setGui(gui, width);
+    
+    gui->addToggle(indexStr+"Animate", &autoOn);
+    gui->addSlider(indexStr+"Break strength", 0, 1.8, &wallBreakStrength);
+    gui->addSlider(indexStr+"Speed", 0, 2, &wallSpeed);
+    
+    
+}
+
 
 
 void VoronoiWall::draw(int _surfaceId) {
@@ -106,20 +124,15 @@ void VoronoiWall::draw(int _surfaceId) {
                 }
                 
             } else {
-                
                 cells[i].offset.z = 0;
-                
-            }
-            
-            
-            for(int c=0; c<cells[i].mesh.getColors().size(); c++) {
-                cells[i].mesh.setColor(c, ofColor(ofMap(cells[i].offset.z, -0.2, 0.2, 255,100)));
-                cells[i].mesh.setColor(c,cells[i].color);
-                
             }
             
             ofPushMatrix();
             ofTranslate(cells[i].offset);
+            
+            ofColor col = ofColor(ofMap(cells[i].offset.z, -0.4, 0.4, 255,100));
+            col.a = 225;
+            ofSetColor(col);
             cells[i].mesh.draw();
             
             ofPopMatrix();
@@ -135,7 +148,6 @@ void VoronoiWall::draw(int _surfaceId) {
     }
     
     /*updateCells();
-    
     ofRectangle bounds = ofRectangle(wallBreakPos.get().x-wallBreakReach.get().x/2, wallBreakPos.get().y-wallBreakReach.get().y/2, wallBreakReach.get().x, wallBreakReach.get().y);
     
     glPushMatrix();
@@ -192,9 +204,7 @@ void VoronoiWall::draw(int _surfaceId) {
             }
             
         } else {
-            
             cells[i].offset.z = 0;
-            
         }
         
         
@@ -297,7 +307,6 @@ void VoronoiWall::genTheVoronoi() {
         
         cell.offset = ofVec3f(0,0,0);
         int r = ofRandom(0,255);
-        cell.color = ofColor(ofRandom(r/2,r), ofRandom(r/2,r), r);
         cell.mesh = cellMeshes[i];
         
         cells.push_back(cell);
@@ -326,25 +335,17 @@ void VoronoiWall::genTheVoronoi() {
 }
 
 void VoronoiWall::update() {
-    /*
-    if(active) {
     
         wallTime += 0.01 * wallSpeed;
     
         for(int b=0; b<breakPoints.size(); b++) {
 
-        if(breakPoints[b].pressure > 6) {
-            breakPoints[b].pressure = 6;
-        }
+            if(breakPoints[b].pressure > 6) {
+                breakPoints[b].pressure = 6;
+            }
            
-        breakPoints[b].pressure *= 0.98;
-        // radius ? ofMap(breakPoints[b].pressure, 0, 1, 0.2, 0.8);
+            breakPoints[b].pressure *= 0.98;
+            // radius ? ofMap(breakPoints[b].pressure, 0, 1, 0.2, 0.8);
         
         }
-    }
-    */
-}
-
-
-void VoronoiWall::drawVoronoiWall3d() {
 }
