@@ -14,7 +14,6 @@
 #include "ofxVoro.h"
 #include "ContentScene.h"
 
-
 struct BreakPoint {
     ofVec3f pos;
     float radius;
@@ -31,7 +30,7 @@ class VoronoiWall : public ContentScene {
 
 public:
     void setup();
-    void draw();
+    void draw(int _surfaceId);
     void update();
     void genTheVoronoi();
     
@@ -48,9 +47,22 @@ public:
     ofParameter<float> breakPointRadius;
     ofParameter<bool> autoOn;
     */
-     
+    
+    ofVec3f wallBreakPos;
+    ofVec3f wallBreakReach;
+    
+    float wallBreakStrength;
+    float breakPointRadius;
+    
+    int nCells;
+    bool autoOn = true;
+    
+    
     vector <ofVec3f> vpts;
     ofRectangle      vbounds;
+    float depth;
+    
+    ofBoxPrimitive bounds;
     //ofxVoronoi       voronoi;
     
     float wallTime = 0;
@@ -61,6 +73,12 @@ public:
     vector<Cell> cells;
     
     bool active = true;
+    
+    vector<ofMesh>  cellMeshes;
+    
+    ofLight light;
+    ofLight dirLight;
+
     
     
 };

@@ -28,6 +28,4 @@ public:
     ofImage ofLogo;
     ofLight light;
     
-    
-    
 };

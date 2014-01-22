@@ -10,7 +10,6 @@
 
 
 void Lines::setup(ofParameterGroup * params) {
-    
     params->add(angle.set("lines angle", 0, 0, 90));
     params->add(width.set("lines width", 2, 0, 100));
     params->add(distance.set("lines distance", 10, 0.1, 100));
