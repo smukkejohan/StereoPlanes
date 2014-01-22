@@ -33,21 +33,11 @@ public:
     void draw(int _surfaceId);
     void update();
     void genTheVoronoi();
+    
     void setGui(ofxUICanvas * gui, float width);
+    void guiEvent(ofxUIEventArgs &e);
     
-    //ofParameterGroup * parameters;
-    
-    /*ofParameter<float> shivering;
-    ofParameter<int> subdivisions;
-    ofParameter<float> wallSpeed;
-    
-    ofParameter<ofVec3f> wallBreakPos;
-    ofParameter<ofVec3f> wallBreakReach;
-    ofParameter<float> wallBreakStrength;
-    
-    ofParameter<float> breakPointRadius;
-    ofParameter<bool> autoOn;
-    */
+    void receiveOsc(ofxOscMessage * m, string rest);
     
     ofVec3f wallBreakPos;
     ofVec3f wallBreakReach;
@@ -56,16 +46,14 @@ public:
     float breakPointRadius;
     float wallSpeed;
     
-    int nCells;
+    float nCells;
     bool autoOn = true;
-    
     
     vector <ofVec3f> vpts;
     ofRectangle      vbounds;
     float depth;
     
     ofBoxPrimitive bounds;
-    //ofxVoronoi       voronoi;
     
     float wallTime = 0;
     void drawVoronoiWall3d();
@@ -73,9 +61,7 @@ public:
     
     vector<BreakPoint> breakPoints;
     vector<Cell> cells;
-    
-    bool active = true;
-    
+        
     vector<ofMesh>  cellMeshes;
     
     ofLight light;

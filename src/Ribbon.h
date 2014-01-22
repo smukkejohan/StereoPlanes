@@ -27,4 +27,5 @@ public:
     ofParameter<ofVec2f> autoAmp;
     ofParameter<ofVec2f> autoSpeed;
     ofParameter<bool> autoOn;
+    
 };

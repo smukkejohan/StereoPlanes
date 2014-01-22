@@ -28,12 +28,11 @@ void VoronoiWall::setup() {
     
     nCells = 40;
     
-    
     light.setPosition(2, 2, -2);
     light.setSpotlight();
     light.lookAt(ofVec3f(0,0,0));
     light.setDiffuseColor(ofColor(245,245,170));
-    light.setAmbientColor(ofColor(64,84,89));
+    light.setAmbientColor(ofColor(84,104,89));
     light.setSpecularColor(ofColor::white);
     
     dirLight.setSpotlight();
@@ -42,10 +41,9 @@ void VoronoiWall::setup() {
     dirLight.setDiffuseColor(ofColor(191,191,170));
     
     //voronoi.setBounds(vbounds);
-    
     genTheVoronoi();
     
-/*    params->add(subdivisions.set("Subdivisions", 4, 0, 400));
+/*  params->add(subdivisions.set("Subdivisions", 4, 0, 400));
     
     params->add(wallBreakPos.set("wallBreakPos", ofVec3f(0.1,0.5,0), ofVec3f(-1,-1,-1), ofVec3f(1,1,1)));
     params->add(wallBreakReach.set("wallBreakReach", ofVec3f(0.2,2,1), ofVec3f(0,0,0), ofVec3f(2,2,2)));
@@ -62,8 +60,16 @@ void VoronoiWall::setup() {
         
         breakPoints.push_back(br);
     }
+*/
     
-    params->add(autoOn);*/
+    
+    for(int i=0; i<5; i++) {
+        BreakPoint br;
+        br.pos = ofVec3f(0,0,0);
+        br.radius = 0.25;
+        br.pressure = 0;
+        breakPoints.push_back(br);
+    }
 
 }
 
@@ -74,9 +80,12 @@ void VoronoiWall::setGui(ofxUICanvas * gui, float width){
     gui->addSlider(indexStr+"Break strength", 0, 1.8, &wallBreakStrength);
     gui->addSlider(indexStr+"Speed", 0, 2, &wallSpeed);
     
+    gui->addSlider(indexStr+"Cells", 0, 200, 20);
+    
+    gui->add2DPad(indexStr+"Solid pos", ofVec2f(-1, -1), ofVec2f(1,1), ofVec2f(0, 0));
+    gui->add2DPad(indexStr+"Solid reach", ofVec2f(0, 0), ofVec2f(4,4), ofVec2f(0.5, 0.5));
     
 }
-
 
 
 void VoronoiWall::draw(int _surfaceId) {
@@ -92,7 +101,6 @@ void VoronoiWall::draw(int _surfaceId) {
         //cellMeshes[i].drawWireframe();
         ofPopStyle();
     }*/
-        
         
         light.enable();
         dirLight.enable();
@@ -141,9 +149,6 @@ void VoronoiWall::draw(int _surfaceId) {
         light.disable();
         dirLight.disable();
 
-        
-        
-        
         
     }
     
@@ -241,22 +246,26 @@ void VoronoiWall::draw(int _surfaceId) {
 }
 
 void VoronoiWall::updateCells() {
-    /*
+    
     bool changed = false;
-    while(subdivisions.get() > voronoi.getPoints().size()) {
-        voronoi.addPoint(ofRandomPointInRect(vbounds));
+    if(nCells != cells.size()) {
+        genTheVoronoi();
+    }
+    
+    
+    /*while(nCells > voronoi.getPoints().size()) {
+        //voronoi.addPoint(ofRandomPointInRect(vbounds));
         changed = true;
     }
     
-    while(subdivisions.get() < voronoi.getPoints().size()) {
-        voronoi.getPoints().erase(voronoi.getPoints().begin());
+    while(nCells < voronoi.getPoints().size()) {
+        //voronoi.getPoints().erase(voronoi.getPoints().begin());
         changed = true;
     }
     
     if(changed) {
         cells.clear();
         
-        voronoi.generateVoronoi();
         
         for(int i=0; i<voronoi.cells.size(); i++) {
      
@@ -276,6 +285,8 @@ void VoronoiWall::updateCells() {
             
             cells.push_back(cell);
         }
+        
+        
     }*/
     
 }
@@ -299,6 +310,8 @@ void VoronoiWall::genTheVoronoi() {
     
     
     cellMeshes = getCellsFromContainer(con);
+    
+    cells.clear();
     
     for (int i=0; i < cellMeshes.size(); i++) {
         
@@ -328,24 +341,46 @@ void VoronoiWall::genTheVoronoi() {
         voronoi.addPoint(vpts[i]);
     }
     
-    
     voro::wall
-    
     voronoi.generateVoronoi();*/
 }
 
 void VoronoiWall::update() {
     
-        wallTime += 0.01 * wallSpeed;
+    wallTime += 0.01 * wallSpeed;
     
-        for(int b=0; b<breakPoints.size(); b++) {
+    for(int b=0; b<breakPoints.size(); b++) {
 
-            if(breakPoints[b].pressure > 6) {
-                breakPoints[b].pressure = 6;
-            }
-           
-            breakPoints[b].pressure *= 0.98;
-            // radius ? ofMap(breakPoints[b].pressure, 0, 1, 0.2, 0.8);
-        
+        if(breakPoints[b].pressure > 6) {
+            breakPoints[b].pressure = 6;
         }
+           
+        breakPoints[b].pressure *= 0.98;
+        // radius ? ofMap(breakPoints[b].pressure, 0, 1, 0.2, 0.8);
+        
+    }
+    
+    updateCells();
+}
+
+void VoronoiWall::guiEvent(ofxUIEventArgs &e)
+{
+    
+    string name = e.getName();
+	int kind = e.getKind();
+	//cout << "got event from: " << name << endl;
+    
+    if(name==indexStr+"Cells") {
+        ofxUISlider *slider = e.getSlider();
+        nCells = round(slider->getScaledValue());
+        slider->setValue(nCells);
+    }
+}
+
+void VoronoiWall::receiveOsc(ofxOscMessage * m, string rest) {
+    
+    if(rest == "/spped/x" ) {
+        wallSpeed = m->getArgAsFloat(0);
+    }
+    
 }

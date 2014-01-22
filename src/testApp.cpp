@@ -284,6 +284,7 @@ void testApp::draw()
     
     
     // Draw interface and monitor view
+    ofBackground(60,60,60);
     
     ofPushMatrix();
     ofTranslate(300, 20);
@@ -420,5 +421,10 @@ void testApp::guiEvent(ofxUIEventArgs &e)
         camPosWall.x = pad->getScaledValue().x;
         camPosWall.y = pad->getScaledValue().y;
     }
+    
+    for(int i=0; i<contentScenes.size(); i++) {
+        contentScenes[i]->guiEvent(e);
+    }
+    
     
 }

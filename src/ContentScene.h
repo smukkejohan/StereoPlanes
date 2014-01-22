@@ -46,6 +46,7 @@ public:
         
     }
     
+    virtual void guiEvent(ofxUIEventArgs &e) {};
     
     void setupScene(int _index) {
         index = _index;
@@ -80,14 +81,11 @@ public:
         //cout<<adrSplit[1]<<"   "<<rest<<endl;
         
         if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
-            
             if(rest == "/enable/x" ) {
                 enabled = m->getArgAsInt32(0);
             }
-            
             receiveOsc(m, rest);
         }
     }
-    
     
 };
