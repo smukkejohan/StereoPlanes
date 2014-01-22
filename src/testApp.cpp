@@ -79,6 +79,9 @@ void testApp::setup()
     voronoiWall = new VoronoiWall();
     contentScenes.push_back(voronoiWall);
     
+    boxFloor = new BoxFloor();
+    contentScenes.push_back(boxFloor);
+    
     for(int i=0; i<contentScenes.size(); i++) {
         contentScenes[i]->setupScene(i);
     }

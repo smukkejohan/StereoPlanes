@@ -8,18 +8,21 @@
 
 #include "BoxFloor.h"
 
-void BoxFloor::setup(ofParameterGroup * params) {
+void BoxFloor::setup() {
     
-    params->add(surfaceHeight.set("Surface Height", 0.0, -2.0, 2.0));
-    params->add(waveHeight.set("Boxes Height", 0.5, 0, 1));
-    params->add(speed.set("Boxes Speed", 0.0003, 0, 0.001));
-    params->add(plateauHeight.set("Plateau Height", 0.5, 0, 1));
-    params->add(lightHeight.set("Light Height", -0.3, -1.0, 0));
-    params->add(distance.set("Distance", 0.2, 0, 0.6));
-    params->add(bRotation.set("Rotation", false, false, true));
+//    params->add(surfaceHeight.set("Surface Height", 0.0, -2.0, 2.0));
+//    params->add(waveHeight.set("Boxes Height", 0.5, 0, 1));
+//    params->add(speed.set("Boxes Speed", 0.0003, 0, 0.001));
+//    params->add(plateauHeight.set("Plateau Height", 0.5, 0, 1));
+//    params->add(lightHeight.set("Light Height", -0.3, -1.0, 0));
+//    params->add(distance.set("Distance", 0.2, 0, 0.6));
+//    params->add(bRotation.set("Rotation", false, false, true));
+    
+    name = "Box Floor";
+    oscAddress = "/boxfloor";
     
     boxLight.setPointLight();
-    boxLight.setPosition(0, 0, lightHeight);
+    boxLight.setPosition(0, 0, -1);
     
     for (int i = 0; i < 400; i++) {
         rotation.push_back(ofRandom(90));
@@ -32,7 +35,7 @@ void BoxFloor::update() {
 }
 
 
-void BoxFloor::draw( ofVec2f dancerPos ) {
+void BoxFloor::draw( int _surfaceId ) {
     
     boxLight.enable();
     
@@ -52,5 +55,7 @@ void BoxFloor::draw( ofVec2f dancerPos ) {
             ofPopMatrix();
         }
     }
+    
+    boxLight.disable();
     
 }

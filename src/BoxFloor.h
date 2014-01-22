@@ -7,15 +7,15 @@
 //
 
 #pragma once
-
+#include "ContentScene.h"
 #include "ofMain.h"
 
-class BoxFloor {
+class BoxFloor : public ContentScene {
     
 public:
-    void setup(ofParameterGroup * params);
-    void draw( ofVec2f dancerPos );
+    void setup();
     void update();
+    void draw( int _surfaceId );
     
     //ofParameterGroup * parameters;
     
@@ -30,6 +30,8 @@ public:
     ofLight boxLight;
     
     vector <float> rotation;
+    
+    ofVec2f dancerPos;
 
     
 };

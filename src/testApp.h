@@ -130,6 +130,7 @@ public:
     // Scenes
     TestScene * testScene;
     VoronoiWall * voronoiWall;
+    BoxFloor * boxFloor;
     
     vector<ContentScene*> contentScenes;
     
