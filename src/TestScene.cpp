@@ -8,20 +8,59 @@
 
 #include "TestScene.h"
 
-void TestScene::draw(int _sceneId) {
-    
-    ofSetColor(255,255,255);
-    ofRect(-1, -1, 1, 1);
-    ofDrawBox(1);
-    
-    ofSetColor(0,0,0);
-    ofDrawBitmapString(ofToString(_sceneId), 0,0);
-    
-}
-
 
 void TestScene::setup() {
+    name = "Test Scene";
+    light.setPointLight();
+    light.setPosition(-1, -1, -1);
+    
+    
 }
+
+
+void TestScene::draw(int _surfaceId) {
+    
+    // A scene can draw to multiple surfaces
+    if(_surfaceId == 0) {
+        
+        light.enable();
+                
+        // ofSetColor(0,255,0,250);
+        // FIXME: there is an alpha problem here, the box can't be seen through the rect if drawn
+        // ofRect(-1, -1, 2, 2);
+        
+        ofSetColor(255,255,255);
+        ofDrawGrid(1);
+        
+        ofPushMatrix();
+        ofRotateX(ofGetElapsedTimef()*10);
+        ofDrawBox(0.5);
+        ofPopMatrix();
+        
+        light.disable();
+    
+    }
+    
+    if(_surfaceId == 1) {
+        
+        light.enable();
+        
+        ofSetColor(255,255,255);
+        ofDrawGrid(1);
+        
+        ofPushMatrix();
+        ofRotateX(ofGetElapsedTimef()*10);
+        ofDrawSphere(0.5);
+        ofPopMatrix();
+        
+        light.disable();
+        
+    }
+    
+    
+}
+
+
 
 
 void TestScene::update() {

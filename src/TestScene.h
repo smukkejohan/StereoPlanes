@@ -17,4 +17,6 @@ public:
     void update();
     void setup();
     
+    ofLight light;
+    
 };

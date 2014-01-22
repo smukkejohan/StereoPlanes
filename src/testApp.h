@@ -19,6 +19,7 @@
 #include "Voro3D.h"
 #include "ContentScene.h"
 #include "TestScene.h"
+#include "ofxUI.h"
 
 class testApp : public ofBaseApp
 {
@@ -52,29 +53,31 @@ public:
     ofMaterial material;
     
     bool showGrid;
-    bool showDots;
-    bool setBulge;
-    
-    float centerBulge;
-    
+
     ofxOscReceiver oscReceiver;
 //    ofxOscSender oscSender;
     
     //ofParameter<float> boxOneZ; // a fraction of clock
     //ofParameter<float> boxTwoZ;
     
-    ofParameter<ofVec3f> camPosWall;
-    ofParameter<ofVec3f> camPosFloor;
-    ofParameter<float> eyeSeperation;
-    ofParameter<float> dancerEllipseSize;
-    ofParameter<float> dancerEllipseBrightness;
-    ofParameter<ofVec2f> dancerPos;
+    ofVec3f camPosWall;
+    ofVec3f camPosFloor;
+    float eyeSeperation;
+    
+    float dancerEllipseSize;
+    ofVec2f dancerPos;
     
     //    ofxOscParameterSync sync;
     
-    ofParameterGroup parameters;
+    //ofParameterGroup parameters;
+    //ofxPanel gui;
     
-    ofxPanel gui;
+    
+    bool hideGUI;
+    
+    ofxUIScrollableCanvas *gui;
+    void guiEvent(ofxUIEventArgs &e);
+    
     void drawRibbon();
     
     //this holds all of our points
@@ -115,30 +118,24 @@ public:
     
     void commonWorldDraw();
     
-    VoronoiWall * voronoiWall;
+    /*VoronoiWall * voronoiWall;
     VoronoiWall * voronoiPlaza;
     CeilingPlane * ceilingPlane;
     Ribbon * ribbon;
     BoxFloor * boxFloor;
     CommonPerspectiveTest * cmpTest;
-    
+    */
     
     // Scenes
-    
     void drawScenes(int _surfaceId=0);
     
     TestScene * testScene;
     vector<ContentScene*> contentScenes;
     
-    WireMesh * wireMesh;
-    ofParameter<ofVec3f> meshOffsetWall;
-    ofParameter<ofVec3f> meshOffsetFloor;
-    Lines * lines;
-    
-    Voro3D * voro3d;
-    
-    int currentScene = 0;
-    ofParameter<int> scene = 0;
-    
+    //WireMesh * wireMesh;
+    //ofParameter<ofVec3f> meshOffsetWall;
+    //ofParameter<ofVec3f> meshOffsetFloor;
+    //Lines * lines;
+    //Voro3D * voro3d;
     
 };

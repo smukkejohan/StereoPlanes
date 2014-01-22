@@ -8,17 +8,20 @@
 
 #pragma once
 #include "ofMain.h"
+#include "ofxUI.h"
 
 class ContentScene {
     
 public:
     
     int index;
-    string name;
+    string name = "untitled_scene";
     string oscAddress = "/default";
     
     // bool syphonDirect;
+    ofParameterGroup parameters;
     bool enabled = true;
+    
     
     ContentScene() {
     }
@@ -48,6 +51,17 @@ public:
         }*/
     //}
     
+    virtual void setGui(ofxUICanvas * gui, float width){
+        
+        string i = "["+ ofToString(index) + "] ";
+        
+        gui->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_SMALL));
+        gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
+        gui->addSpacer(width, 1);
+        gui->addToggle(i+"Enabled", &enabled);
+        
+    }
+    
     void setupScene() {
         // common setup for all scenes
         
@@ -62,8 +76,15 @@ public:
     
     void drawScene(int _surfaceId=0) {
         if(enabled) {
+            
+            glPushMatrix();ofPushMatrix();ofPushStyle();
             draw(_surfaceId);
+            ofPopStyle();ofPopMatrix();glPopMatrix();
+            
+            glPushMatrix();ofPushMatrix();ofPushStyle();
             debugDraw(_surfaceId);
+            ofPopStyle();ofPopMatrix();glPopMatrix();
+            
         }
     }
     

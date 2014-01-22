@@ -17,7 +17,6 @@ void Lines::setup(ofParameterGroup * params) {
     params->add(randomWidth.set("lines rand width", 0, 0, 1));
     params->add(origin.set("origin", ofVec3f(0,0,0), ofVec3f(-3,-3,-3), ofVec3f(3,3,3)));
     params->add(randomDepth.set("lines rand depth", 0, 0, 1));
-    
 }
 
 void Lines::update() {
