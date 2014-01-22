@@ -12,17 +12,18 @@ void WireMesh::setup(ofParameterGroup * params) {
     
 
     params->add(lineWidth.set("Line Width", 1, 0.1, 10));
-//    params->add(offset.set("Offset", ofVec3f(0, 0, 1), ofVec3f(-1,-1,-1), ofVec3f(2,2,2)));
+    params->add(offset.set("Offset", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
     params->add(speed.set("Speed", 0.0005, 0, 0.002));
     params->add(bgColor.set("Background Color", 150, 0, 255));
-    params->add(dancerZ.set("Dancer Attraction", 1, -2, 2));
-
+    params->add(whiteMesh.set("White Z Axis", 1, -5, 5));
+    params->add(blackMesh.set("Black Z Axis", 0.00000001, -5, 5));
+    params->add(shadowSize.set("Shadow Size", 0.4, 0.1, 3));
+    
     params->add(triangles.set("Fill", false, false, true));
     params->add(reset.set("Reset Mesh", false, false, true));
+    params->add(createVert.set("Create Vertex", false, false, true));
     params->add(numVerts.set("Number of Vertices", 250, 100, 600));
     params->add(threshold.set("Connection Threshold", 0.5, 0.1, 1));
-
-    params->add(createVert.set("Create Vertex", false, false, true));
  
     createMesh();
     
@@ -35,22 +36,21 @@ void WireMesh::update( ofVec2f dancerPos ) {
         
         ofVec3f vert = mesh.getVertex(i);
         float time = ofGetElapsedTimeMillis();
-        
         float tempNoise = ofNoise(vert.x + time*speed, vert.y);
         vert.z = tempNoise;
         
-        
-        mesh.setVertex(i, vert);
-        
-        if(ofDist(dancerPos.x,dancerPos.y, vert.x, vert.y) < 0.4){
+        //if it is close to the dancer
+        if(ofDist(dancerPos.x,dancerPos.y, vert.x, vert.y) < shadowSize){
             mesh.setColor(i, ofColor(0,0,0));
-            mesh.setVertex(i, ofVec3f(vert.x, vert.y, vert.z*dancerZ));
+            mesh.setVertex(i, ofVec3f(vert.x, vert.y, blackMesh));
+        
         }
         else{
             mesh.setColor(i, colors[i]);
+            mesh.setVertex(i, ofVec3f(vert.x, vert.y, vert.z*whiteMesh));
         }
-        
     }
+    
     
     if(reset){
         resetMesh();
@@ -61,7 +61,7 @@ void WireMesh::update( ofVec2f dancerPos ) {
 }
 
 
-void WireMesh::draw( ofVec3f off ) {
+void WireMesh::draw() {
     
     glEnable(GL_DEPTH_TEST);
     
@@ -70,7 +70,7 @@ void WireMesh::draw( ofVec3f off ) {
     //ofRect(-10, -10, 5, 20, 20);
 
     ofPushMatrix();
-    ofTranslate(off.x, off.y, off.z);
+    ofTranslate(offset->x, offset->y, offset->z);
     
     ofDrawGrid(6);
     

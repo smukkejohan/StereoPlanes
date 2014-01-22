@@ -14,7 +14,7 @@ class WireMesh {
     
 public:
     void setup(ofParameterGroup * params);
-    void draw( ofVec3f off);
+    void draw();
     void update( ofVec2f dancerPos );
     void createMesh();
     void resetMesh();
@@ -28,10 +28,13 @@ public:
     ofParameter<float> threshold;
     ofParameter<ofVec3f> offset;
     ofParameter<float> bgColor;
+    ofParameter<float> shadowSize;
     ofParameter<float> lineWidth;
     ofParameter<bool> triangles;
-    ofParameter<float> dancerZ;
+    ofParameter<float> whiteMesh;
+    ofParameter<float> blackMesh;
     ofParameter<bool> createVert;
+    ofParameter<bool> state;
 
     
 
