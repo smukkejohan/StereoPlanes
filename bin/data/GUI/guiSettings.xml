@@ -1,0 +1,42 @@
+<Widget>
+    <Kind>4</Kind>
+    <Name>FPS</Name>
+    <Value>29.349466324</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Eye seperation</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>11</Kind>
+    <Name>Floor cam</Name>
+    <XValue>-1.032388687</XValue>
+    <YValue>0.109311819</YValue>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Floor Z</Name>
+    <Value>-1.546558738</Value>
+</Widget>
+<Widget>
+    <Kind>11</Kind>
+    <Name>Wall cam</Name>
+    <XValue>-1.080971718</XValue>
+    <YValue>0.400809765</YValue>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Wall Z</Name>
+    <Value>-1.417004108</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[0] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[1] Enabled</Name>
+    <Value>1</Value>
+</Widget>
