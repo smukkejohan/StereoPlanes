@@ -37,18 +37,6 @@ void testApp::setup()
     activePlaneIndex = 0;
     activePlane = planes[activePlaneIndex];
     
-    light.setPosition(2, 2, -2);
-    light.setSpotlight();
-    light.lookAt(ofVec3f(0,0,0));
-    light.setDiffuseColor(ofColor(245,245,170));
-    light.setAmbientColor(ofColor(64,84,89));
-    light.setSpecularColor(ofColor::white);
-    
-    dirLight.setSpotlight();
-    dirLight.setPosition(-1, -1, 1);
-    dirLight.lookAt(ofVec3f(0,0,0));
-    dirLight.setDiffuseColor(ofColor(191,191,170));
-    
     oscReceiver.setup(9001);
     
     /*parameters.setName("Stereo");

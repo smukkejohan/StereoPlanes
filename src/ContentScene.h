@@ -16,6 +16,7 @@ class ContentScene {
 public:
     
     int index;
+    string indexStr;
     string name = "untitled_scene";
     string oscAddress = "/default";
     
@@ -38,18 +39,18 @@ public:
     
     virtual void setGui(ofxUICanvas * gui, float width){
         
-        string i = "["+ ofToString(index) + "] ";
-        
         gui->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_SMALL));
         gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
         gui->addSpacer(width, 1);
-        gui->addToggle(i+"Enabled", &enabled);
+        gui->addToggle(indexStr+"Enabled", &enabled);
         
     }
     
     
     void setupScene(int _index) {
         index = _index;
+        indexStr = "["+ ofToString(_index) + "] ";
+        
         setup();
     }
     
