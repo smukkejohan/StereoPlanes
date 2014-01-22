@@ -94,8 +94,6 @@ void testApp::setup()
     gui->setWidgetFontSize(OFX_UI_FONT_SMALL);
     gui->setColorBack(ofColor(30, 30, 30,200));
     
-    
-    
     gui->addLabel("Stereo", OFX_UI_FONT_LARGE);
     gui->addFPSSlider("FPS");
     
@@ -105,7 +103,7 @@ void testApp::setup()
     gui->addSlider("Floor Z", -2, 6, &camPosFloor.z);
     
     gui->add2DPad("Wall cam", ofVec2f(-3, 3), ofVec2f(-3,3), ofVec2f(0, 0));
-    gui->addSlider("Wall Z", -2, 6, &camPosWall.z);
+    gui->addSlider("Wall Z",  -2, 6, &camPosWall.z);
     
     //gui->add2DPad(<#string _name#>, <#ofxUIVec3f _rangeX#>, <#ofxUIVec3f _rangeY#>, <#ofxUIVec3f *_value#>)
     
@@ -137,6 +135,10 @@ void testApp::update()
 		// get the next message
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(&m);
+        
+        for(int i=0; i<contentScenes.size(); i++) {
+            contentScenes[i]->parseSceneOsc(&m);
+        }
         
         //cout<<m.getAddress()<<endl;
         

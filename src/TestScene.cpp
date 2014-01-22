@@ -11,6 +11,7 @@
 
 void TestScene::setup() {
     name = "Test Scene";
+    oscAddress = "/testscene";
     light.setPointLight();
     light.setPosition(-1, -1, -1);
     

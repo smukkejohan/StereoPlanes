@@ -9,6 +9,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxUI.h"
+#include "ofxOsc.h"
 
 class ContentScene {
     
@@ -31,25 +32,9 @@ public:
     virtual void setup(){}
     virtual void update(){}
     virtual void draw(int _surfaceId=0){}
+    virtual void debugDraw(int _surfaceId=0) {}
     virtual void exit(){}
-    
-    //virtual void parseOscMessage(ofxOscMessage * m){
-        /*
-        vector<string> adrSplit = ofSplitString(m->getAddress(), "/");
-        string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
-        //cout<<adrSplit[1]<<"   "<<rest<<endl;
-        
-        if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
-            
-            if( rest == "/opacity/x" ) {
-                opacity = m->getArgAsFloat(0);
-            } else if(rest == "/enable/x" ) {
-                enabled = m->getArgAsInt32(0);
-            } else if(rest == "/speed/x" ) {
-                speed =m->getArgAsFloat(0);
-            }
-        }*/
-    //}
+    virtual void receiveOsc(ofxOscMessage * m, string rest) {};
     
     virtual void setGui(ofxUICanvas * gui, float width){
         
@@ -62,9 +47,8 @@ public:
         
     }
     
+    
     void setupScene() {
-        // common setup for all scenes
-        
         setup();
     }
     
@@ -88,7 +72,20 @@ public:
         }
     }
     
-    virtual void debugDraw(int _surfaceId=0) {
+    void parseSceneOsc(ofxOscMessage * m){
+        
+        vector<string> adrSplit = ofSplitString(m->getAddress(), "/");
+        string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
+        //cout<<adrSplit[1]<<"   "<<rest<<endl;
+        
+        if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
+            
+            if(rest == "/enable/x" ) {
+                enabled = m->getArgAsInt32(0);
+            }
+            
+            receiveOsc(m, rest);
+        }
     }
     
     
