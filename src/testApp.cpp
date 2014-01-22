@@ -233,8 +233,9 @@ void testApp::draw()
         for(int i=0; i<planes.size(); i++) {
             planes[i]->draw();
         }
+        
     }fbo.end();
-    
+    sbsOutputServer.publishTexture(&fbo.getTextureReference());
     
     // Draw interface and monitor view
     ofBackground(60,60,60);
@@ -252,7 +253,7 @@ void testApp::draw()
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 20, 20);
     gui->draw();
     
-    sbsOutputServer.publishTexture(&fbo.getTextureReference());
+
 
 }
 
