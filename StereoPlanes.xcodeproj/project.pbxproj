@@ -7,11 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04298A4A1887385700864E68 /* VoronoiWall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04298A491887385700864E68 /* VoronoiWall.cpp */; };
+		0420B2CD188ECD290086D388 /* Voro3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B2CB188ECD290086D388 /* Voro3D.cpp */; };
+		0420B318188ECE3F0086D388 /* c_loops.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B2F6188ECE3F0086D388 /* c_loops.cpp */; };
+		0420B319188ECE3F0086D388 /* cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B2F8188ECE3F0086D388 /* cell.cpp */; };
+		0420B31A188ECE3F0086D388 /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B2FA188ECE3F0086D388 /* common.cpp */; };
+		0420B31B188ECE3F0086D388 /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B2FD188ECE3F0086D388 /* container.cpp */; };
+		0420B31C188ECE3F0086D388 /* container_prd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B2FF188ECE3F0086D388 /* container_prd.cpp */; };
+		0420B31D188ECE3F0086D388 /* pre_container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B301188ECE3F0086D388 /* pre_container.cpp */; };
+		0420B31E188ECE3F0086D388 /* unitcell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B304188ECE3F0086D388 /* unitcell.cpp */; };
+		0420B31F188ECE3F0086D388 /* v_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B306188ECE3F0086D388 /* v_base.cpp */; };
+		0420B320188ECE3F0086D388 /* v_compute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B308188ECE3F0086D388 /* v_compute.cpp */; };
+		0420B321188ECE3F0086D388 /* wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B30B188ECE3F0086D388 /* wall.cpp */; };
+		0420B322188ECE3F0086D388 /* ofxVoro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B311188ECE3F0086D388 /* ofxVoro.cpp */; };
+		0420B334188F1F490086D388 /* TestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0420B332188F1F490086D388 /* TestScene.cpp */; };
 		043C51C8188825F400ADD204 /* CeilingPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043C51C7188825F400ADD204 /* CeilingPlane.cpp */; };
 		043C51CB188827D500ADD204 /* Ribbon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043C51C9188827D500ADD204 /* Ribbon.cpp */; };
 		043C51D11888664100ADD204 /* BoxFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043C51CF1888664100ADD204 /* BoxFloor.cpp */; };
 		048AD35B188D734C007E345A /* CommonPerspectiveTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 048AD35A188D734C007E345A /* CommonPerspectiveTest.cpp */; };
+		048AD35E188E0B69007E345A /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A1C994E91889824600C30C90 /* Syphon.framework */; };
 		04A6C826188099DE00B17C45 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A6C800188099DE00B17C45 /* IpEndpointName.cpp */; };
 		04A6C827188099DE00B17C45 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A6C805188099DE00B17C45 /* NetworkingUtils.cpp */; };
 		04A6C828188099DE00B17C45 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A6C806188099DE00B17C45 /* UdpSocket.cpp */; };
@@ -59,8 +72,6 @@
 		7AF1C6C61885DE7000B38D3B /* ofxBulletCylinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C6A01885D44800B38D3B /* ofxBulletCylinder.cpp */; };
 		7AF1C6C71885DE7000B38D3B /* ofxBulletSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C6A21885D44800B38D3B /* ofxBulletSphere.cpp */; };
 		7AF1C6C81885DE7000B38D3B /* ofxBulletStaticPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C6A41885D44800B38D3B /* ofxBulletStaticPlane.cpp */; };
-		7AF1C6F61885EA9500B38D3B /* Voronoi2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C6DF1885EA9500B38D3B /* Voronoi2D.cpp */; };
-		7AF1C6F71885EA9500B38D3B /* ofxVoronoi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C6E21885EA9500B38D3B /* ofxVoronoi.cpp */; };
 		7AF1C7351885EAD500B38D3B /* FontManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C7001885EAD500B38D3B /* FontManager.cpp */; };
 		7AF1C7361885EAD500B38D3B /* GuiElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C7041885EAD500B38D3B /* GuiElement.cpp */; };
 		7AF1C7371885EAD500B38D3B /* GuiButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1C7071885EAD500B38D3B /* GuiButton.cpp */; };
@@ -132,6 +143,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */,
+				048AD35E188E0B69007E345A /* Syphon.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,9 +151,44 @@
 
 /* Begin PBXFileReference section */
 		04144F2D188585D000C28505 /* StereoPlane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StereoPlane.h; sourceTree = "<group>"; };
+		0420B2CB188ECD290086D388 /* Voro3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Voro3D.cpp; sourceTree = "<group>"; };
+		0420B2CC188ECD290086D388 /* Voro3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Voro3D.h; sourceTree = "<group>"; };
+		0420B2CF188ECE3F0086D388 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		0420B2F1188ECE3F0086D388 /* 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01.png; sourceTree = "<group>"; };
+		0420B2F2188ECE3F0086D388 /* 02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02.png; sourceTree = "<group>"; };
+		0420B2F3188ECE3F0086D388 /* 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03.png; sourceTree = "<group>"; };
+		0420B2F6188ECE3F0086D388 /* c_loops.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = c_loops.cpp; sourceTree = "<group>"; };
+		0420B2F7188ECE3F0086D388 /* c_loops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = c_loops.h; sourceTree = "<group>"; };
+		0420B2F8188ECE3F0086D388 /* cell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cell.cpp; sourceTree = "<group>"; };
+		0420B2F9188ECE3F0086D388 /* cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cell.h; sourceTree = "<group>"; };
+		0420B2FA188ECE3F0086D388 /* common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = common.cpp; sourceTree = "<group>"; };
+		0420B2FB188ECE3F0086D388 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		0420B2FC188ECE3F0086D388 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		0420B2FD188ECE3F0086D388 /* container.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = container.cpp; sourceTree = "<group>"; };
+		0420B2FE188ECE3F0086D388 /* container.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = container.h; sourceTree = "<group>"; };
+		0420B2FF188ECE3F0086D388 /* container_prd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = container_prd.cpp; sourceTree = "<group>"; };
+		0420B300188ECE3F0086D388 /* container_prd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = container_prd.h; sourceTree = "<group>"; };
+		0420B301188ECE3F0086D388 /* pre_container.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pre_container.cpp; sourceTree = "<group>"; };
+		0420B302188ECE3F0086D388 /* pre_container.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pre_container.h; sourceTree = "<group>"; };
+		0420B303188ECE3F0086D388 /* rad_option.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rad_option.h; sourceTree = "<group>"; };
+		0420B304188ECE3F0086D388 /* unitcell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitcell.cpp; sourceTree = "<group>"; };
+		0420B305188ECE3F0086D388 /* unitcell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unitcell.h; sourceTree = "<group>"; };
+		0420B306188ECE3F0086D388 /* v_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = v_base.cpp; sourceTree = "<group>"; };
+		0420B307188ECE3F0086D388 /* v_base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = v_base.h; sourceTree = "<group>"; };
+		0420B308188ECE3F0086D388 /* v_compute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = v_compute.cpp; sourceTree = "<group>"; };
+		0420B309188ECE3F0086D388 /* v_compute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = v_compute.h; sourceTree = "<group>"; };
+		0420B30A188ECE3F0086D388 /* voro++.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "voro++.h"; sourceTree = "<group>"; };
+		0420B30B188ECE3F0086D388 /* wall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wall.cpp; sourceTree = "<group>"; };
+		0420B30C188ECE3F0086D388 /* wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wall.h; sourceTree = "<group>"; };
+		0420B30D188ECE3F0086D388 /* worklist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = worklist.h; sourceTree = "<group>"; };
+		0420B30E188ECE3F0086D388 /* ofxaddons_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ofxaddons_thumbnail.png; sourceTree = "<group>"; };
+		0420B30F188ECE3F0086D388 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		0420B311188ECE3F0086D388 /* ofxVoro.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxVoro.cpp; sourceTree = "<group>"; };
+		0420B312188ECE3F0086D388 /* ofxVoro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxVoro.h; sourceTree = "<group>"; };
+		0420B330188F18470086D388 /* ContentScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentScene.h; sourceTree = "<group>"; };
+		0420B332188F1F490086D388 /* TestScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestScene.cpp; sourceTree = "<group>"; };
+		0420B333188F1F490086D388 /* TestScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestScene.h; sourceTree = "<group>"; };
 		042128171884956E00F516C5 /* ofxCoolGlasses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCoolGlasses.h; sourceTree = "<group>"; };
-		04298A48188735DA00864E68 /* VoronoiWall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoronoiWall.h; sourceTree = "<group>"; };
-		04298A491887385700864E68 /* VoronoiWall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VoronoiWall.cpp; sourceTree = "<group>"; };
 		043C51C6188825E800ADD204 /* CeilingPlane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CeilingPlane.h; sourceTree = "<group>"; };
 		043C51C7188825F400ADD204 /* CeilingPlane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CeilingPlane.cpp; sourceTree = "<group>"; };
 		043C51C9188827D500ADD204 /* Ribbon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ribbon.cpp; sourceTree = "<group>"; };
@@ -348,25 +395,6 @@
 		7AF1C6A31885D44800B38D3B /* ofxBulletSphere.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBulletSphere.h; sourceTree = "<group>"; };
 		7AF1C6A41885D44800B38D3B /* ofxBulletStaticPlane.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBulletStaticPlane.cpp; sourceTree = "<group>"; };
 		7AF1C6A51885D44800B38D3B /* ofxBulletStaticPlane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBulletStaticPlane.h; sourceTree = "<group>"; };
-		7AF1C6CB1885EA9500B38D3B /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		7AF1C6D11885EA9500B38D3B /* c_loops_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = c_loops_2d.hh; sourceTree = "<group>"; };
-		7AF1C6D21885EA9500B38D3B /* cell_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cell_2d.hh; sourceTree = "<group>"; };
-		7AF1C6D31885EA9500B38D3B /* cell_nc_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cell_nc_2d.hh; sourceTree = "<group>"; };
-		7AF1C6D41885EA9500B38D3B /* common.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = common.hh; sourceTree = "<group>"; };
-		7AF1C6D51885EA9500B38D3B /* config.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = config.hh; sourceTree = "<group>"; };
-		7AF1C6D61885EA9500B38D3B /* container_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = container_2d.hh; sourceTree = "<group>"; };
-		7AF1C6D71885EA9500B38D3B /* ctr_boundary_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ctr_boundary_2d.hh; sourceTree = "<group>"; };
-		7AF1C6D81885EA9500B38D3B /* libvoro++_2d32.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libvoro++_2d32.a"; sourceTree = "<group>"; };
-		7AF1C6D91885EA9500B38D3B /* rad_option.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rad_option.hh; sourceTree = "<group>"; };
-		7AF1C6DA1885EA9500B38D3B /* v_base_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = v_base_2d.hh; sourceTree = "<group>"; };
-		7AF1C6DB1885EA9500B38D3B /* v_compute_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = v_compute_2d.hh; sourceTree = "<group>"; };
-		7AF1C6DC1885EA9500B38D3B /* wall_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = wall_2d.hh; sourceTree = "<group>"; };
-		7AF1C6DD1885EA9500B38D3B /* worklist_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = worklist_2d.hh; sourceTree = "<group>"; };
-		7AF1C6DF1885EA9500B38D3B /* Voronoi2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Voronoi2D.cpp; sourceTree = "<group>"; };
-		7AF1C6E01885EA9500B38D3B /* Voronoi2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Voronoi2D.h; sourceTree = "<group>"; };
-		7AF1C6E21885EA9500B38D3B /* ofxVoronoi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxVoronoi.cpp; sourceTree = "<group>"; };
-		7AF1C6E31885EA9500B38D3B /* ofxVoronoi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxVoronoi.h; sourceTree = "<group>"; };
-		7AF1C6F41885EA9500B38D3B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		7AF1C6FE1885EAD500B38D3B /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		7AF1C7001885EAD500B38D3B /* FontManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontManager.cpp; sourceTree = "<group>"; };
 		7AF1C7011885EAD500B38D3B /* FontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontManager.h; sourceTree = "<group>"; };
@@ -479,6 +507,78 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0420B2CE188ECE3F0086D388 /* ofxVoro */ = {
+			isa = PBXGroup;
+			children = (
+				0420B2CF188ECE3F0086D388 /* .gitignore */,
+				0420B2F0188ECE3F0086D388 /* images */,
+				0420B2F4188ECE3F0086D388 /* libs */,
+				0420B30E188ECE3F0086D388 /* ofxaddons_thumbnail.png */,
+				0420B30F188ECE3F0086D388 /* README.md */,
+				0420B310188ECE3F0086D388 /* src */,
+			);
+			name = ofxVoro;
+			path = ../../../addons/ofxVoro;
+			sourceTree = "<group>";
+		};
+		0420B2F0188ECE3F0086D388 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				0420B2F1188ECE3F0086D388 /* 01.png */,
+				0420B2F2188ECE3F0086D388 /* 02.png */,
+				0420B2F3188ECE3F0086D388 /* 03.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		0420B2F4188ECE3F0086D388 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				0420B2F5188ECE3F0086D388 /* voro++ */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		0420B2F5188ECE3F0086D388 /* voro++ */ = {
+			isa = PBXGroup;
+			children = (
+				0420B2F6188ECE3F0086D388 /* c_loops.cpp */,
+				0420B2F7188ECE3F0086D388 /* c_loops.h */,
+				0420B2F8188ECE3F0086D388 /* cell.cpp */,
+				0420B2F9188ECE3F0086D388 /* cell.h */,
+				0420B2FA188ECE3F0086D388 /* common.cpp */,
+				0420B2FB188ECE3F0086D388 /* common.h */,
+				0420B2FC188ECE3F0086D388 /* config.h */,
+				0420B2FD188ECE3F0086D388 /* container.cpp */,
+				0420B2FE188ECE3F0086D388 /* container.h */,
+				0420B2FF188ECE3F0086D388 /* container_prd.cpp */,
+				0420B300188ECE3F0086D388 /* container_prd.h */,
+				0420B301188ECE3F0086D388 /* pre_container.cpp */,
+				0420B302188ECE3F0086D388 /* pre_container.h */,
+				0420B303188ECE3F0086D388 /* rad_option.h */,
+				0420B304188ECE3F0086D388 /* unitcell.cpp */,
+				0420B305188ECE3F0086D388 /* unitcell.h */,
+				0420B306188ECE3F0086D388 /* v_base.cpp */,
+				0420B307188ECE3F0086D388 /* v_base.h */,
+				0420B308188ECE3F0086D388 /* v_compute.cpp */,
+				0420B309188ECE3F0086D388 /* v_compute.h */,
+				0420B30A188ECE3F0086D388 /* voro++.h */,
+				0420B30B188ECE3F0086D388 /* wall.cpp */,
+				0420B30C188ECE3F0086D388 /* wall.h */,
+				0420B30D188ECE3F0086D388 /* worklist.h */,
+			);
+			path = "voro++";
+			sourceTree = "<group>";
+		};
+		0420B310188ECE3F0086D388 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				0420B311188ECE3F0086D388 /* ofxVoro.cpp */,
+				0420B312188ECE3F0086D388 /* ofxVoro.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		04A6C7FB188099DE00B17C45 /* ofxOsc */ = {
 			isa = PBXGroup;
 			children = (
@@ -1028,89 +1128,6 @@
 			path = shapes;
 			sourceTree = "<group>";
 		};
-		7AF1C6CA1885EA9500B38D3B /* ofxVoronoi */ = {
-			isa = PBXGroup;
-			children = (
-				7AF1C6CB1885EA9500B38D3B /* .gitignore */,
-				7AF1C6CC1885EA9500B38D3B /* addon */,
-				7AF1C6F41885EA9500B38D3B /* README.md */,
-			);
-			name = ofxVoronoi;
-			path = ../../../addons/ofxVoronoi;
-			sourceTree = "<group>";
-		};
-		7AF1C6CC1885EA9500B38D3B /* addon */ = {
-			isa = PBXGroup;
-			children = (
-				7AF1C6CD1885EA9500B38D3B /* ofxVoronoi */,
-			);
-			path = addon;
-			sourceTree = "<group>";
-		};
-		7AF1C6CD1885EA9500B38D3B /* ofxVoronoi */ = {
-			isa = PBXGroup;
-			children = (
-				7AF1C6CE1885EA9500B38D3B /* lib */,
-				7AF1C6E11885EA9500B38D3B /* src */,
-			);
-			path = ofxVoronoi;
-			sourceTree = "<group>";
-		};
-		7AF1C6CE1885EA9500B38D3B /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				7AF1C6CF1885EA9500B38D3B /* Voronoi */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		7AF1C6CF1885EA9500B38D3B /* Voronoi */ = {
-			isa = PBXGroup;
-			children = (
-				7AF1C6D01885EA9500B38D3B /* lib */,
-				7AF1C6DE1885EA9500B38D3B /* src */,
-			);
-			path = Voronoi;
-			sourceTree = "<group>";
-		};
-		7AF1C6D01885EA9500B38D3B /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				7AF1C6D11885EA9500B38D3B /* c_loops_2d.hh */,
-				7AF1C6D21885EA9500B38D3B /* cell_2d.hh */,
-				7AF1C6D31885EA9500B38D3B /* cell_nc_2d.hh */,
-				7AF1C6D41885EA9500B38D3B /* common.hh */,
-				7AF1C6D51885EA9500B38D3B /* config.hh */,
-				7AF1C6D61885EA9500B38D3B /* container_2d.hh */,
-				7AF1C6D71885EA9500B38D3B /* ctr_boundary_2d.hh */,
-				7AF1C6D81885EA9500B38D3B /* libvoro++_2d32.a */,
-				7AF1C6D91885EA9500B38D3B /* rad_option.hh */,
-				7AF1C6DA1885EA9500B38D3B /* v_base_2d.hh */,
-				7AF1C6DB1885EA9500B38D3B /* v_compute_2d.hh */,
-				7AF1C6DC1885EA9500B38D3B /* wall_2d.hh */,
-				7AF1C6DD1885EA9500B38D3B /* worklist_2d.hh */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		7AF1C6DE1885EA9500B38D3B /* src */ = {
-			isa = PBXGroup;
-			children = (
-				7AF1C6DF1885EA9500B38D3B /* Voronoi2D.cpp */,
-				7AF1C6E01885EA9500B38D3B /* Voronoi2D.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		7AF1C6E11885EA9500B38D3B /* src */ = {
-			isa = PBXGroup;
-			children = (
-				7AF1C6E21885EA9500B38D3B /* ofxVoronoi.cpp */,
-				7AF1C6E31885EA9500B38D3B /* ofxVoronoi.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		7AF1C6FD1885EAD500B38D3B /* Tools */ = {
 			isa = PBXGroup;
 			children = (
@@ -1350,9 +1367,9 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				0420B2CE188ECE3F0086D388 /* ofxVoro */,
 				A1C994CC1889824600C30C90 /* ofxSyphon */,
 				7AF1C6FD1885EAD500B38D3B /* Tools */,
-				7AF1C6CA1885EA9500B38D3B /* ofxVoronoi */,
 				7AF1C3BE1885D44600B38D3B /* ofxBullet */,
 				04A6C8A61882166800B17C45 /* ofxOpenCv */,
 				04A6C85E1882074400B17C45 /* ofxGLWarper */,
@@ -1438,14 +1455,17 @@
 				048AD35A188D734C007E345A /* CommonPerspectiveTest.cpp */,
 				042128171884956E00F516C5 /* ofxCoolGlasses.h */,
 				04144F2D188585D000C28505 /* StereoPlane.h */,
-				04298A48188735DA00864E68 /* VoronoiWall.h */,
-				04298A491887385700864E68 /* VoronoiWall.cpp */,
 				043C51C6188825E800ADD204 /* CeilingPlane.h */,
 				043C51C7188825F400ADD204 /* CeilingPlane.cpp */,
 				043C51C9188827D500ADD204 /* Ribbon.cpp */,
 				043C51CA188827D500ADD204 /* Ribbon.h */,
 				A1C99505188982A900C30C90 /* WireMesh.cpp */,
 				A1C99506188982A900C30C90 /* WireMesh.h */,
+				0420B2CB188ECD290086D388 /* Voro3D.cpp */,
+				0420B2CC188ECD290086D388 /* Voro3D.h */,
+				0420B330188F18470086D388 /* ContentScene.h */,
+				0420B332188F1F490086D388 /* TestScene.cpp */,
+				0420B333188F1F490086D388 /* TestScene.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1555,8 +1575,10 @@
 				7AF1C7401885EAD500B38D3B /* GuiStyle.cpp in Sources */,
 				7AF1C6C11885DE7000B38D3B /* ofxBulletBox.cpp in Sources */,
 				7AF1C6C21885DE7000B38D3B /* ofxBulletCapsule.cpp in Sources */,
+				0420B320188ECE3F0086D388 /* v_compute.cpp in Sources */,
 				7AF1C7361885EAD500B38D3B /* GuiElement.cpp in Sources */,
 				7AF1C7421885EAD500B38D3B /* binner.cpp in Sources */,
+				0420B318188ECE3F0086D388 /* c_loops.cpp in Sources */,
 				7AF1C6C31885DE7000B38D3B /* ofxBulletCone.cpp in Sources */,
 				7AF1C6C41885DE7000B38D3B /* ofxBulletConvexShape.cpp in Sources */,
 				7AF1C6C51885DE7000B38D3B /* ofxBulletCustomShape.cpp in Sources */,
@@ -1564,6 +1586,7 @@
 				7AF1C6C71885DE7000B38D3B /* ofxBulletSphere.cpp in Sources */,
 				7AF1C6C81885DE7000B38D3B /* ofxBulletStaticPlane.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				0420B334188F1F490086D388 /* TestScene.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				04A6C9251882166800B17C45 /* ofxCvFloatImage.cpp in Sources */,
 				04A6C85818809A7500B17C45 /* tinyxml.cpp in Sources */,
@@ -1573,34 +1596,39 @@
 				7AF1C7411885EAD500B38D3B /* ofxTimer.cpp in Sources */,
 				7AF1C73D1885EAD500B38D3B /* GuiMoviePlayer.cpp in Sources */,
 				04A6C848188099E700B17C45 /* ofxButton.cpp in Sources */,
+				0420B31C188ECE3F0086D388 /* container_prd.cpp in Sources */,
 				7AF1C7451885EAD500B38D3B /* Utils.cpp in Sources */,
 				04A6C82E188099DE00B17C45 /* OscTypes.cpp in Sources */,
 				04A6C85B18809A7500B17C45 /* ofxXmlSettings.cpp in Sources */,
+				0420B2CD188ECD290086D388 /* Voro3D.cpp in Sources */,
 				04A6C833188099DE00B17C45 /* ofxOscSender.cpp in Sources */,
 				7AF1C7391885EAD500B38D3B /* GuiGroup.cpp in Sources */,
 				04A6C84C188099E700B17C45 /* ofxSlider.cpp in Sources */,
 				04A6C82F188099DE00B17C45 /* ofxOscBundle.cpp in Sources */,
 				043C51C8188825F400ADD204 /* CeilingPlane.cpp in Sources */,
-				7AF1C6F61885EA9500B38D3B /* Voronoi2D.cpp in Sources */,
 				04A6C832188099DE00B17C45 /* ofxOscReceiver.cpp in Sources */,
-				7AF1C6F71885EA9500B38D3B /* ofxVoronoi.cpp in Sources */,
+				0420B31D188ECE3F0086D388 /* pre_container.cpp in Sources */,
 				A1C99507188982A900C30C90 /* WireMesh.cpp in Sources */,
 				04A6C85A18809A7500B17C45 /* tinyxmlparser.cpp in Sources */,
-				04298A4A1887385700864E68 /* VoronoiWall.cpp in Sources */,
 				04A6C84E188099E700B17C45 /* ofxToggle.cpp in Sources */,
 				04A6C84A188099E700B17C45 /* ofxLabel.cpp in Sources */,
 				04A6C828188099DE00B17C45 /* UdpSocket.cpp in Sources */,
 				04A6C8991882074500B17C45 /* ofxGLWarper.cpp in Sources */,
 				04A6C831188099DE00B17C45 /* ofxOscParameterSync.cpp in Sources */,
+				0420B31F188ECE3F0086D388 /* v_base.cpp in Sources */,
 				04A6C84D188099E700B17C45 /* ofxSliderGroup.cpp in Sources */,
 				7AF1C7351885EAD500B38D3B /* FontManager.cpp in Sources */,
+				0420B31E188ECE3F0086D388 /* unitcell.cpp in Sources */,
+				0420B31A188ECE3F0086D388 /* common.cpp in Sources */,
 				7AF1C7381885EAD500B38D3B /* GuiCheckBox.cpp in Sources */,
+				0420B31B188ECE3F0086D388 /* container.cpp in Sources */,
 				A1C994FD1889824600C30C90 /* ofxSyphonServer.mm in Sources */,
 				A153D8D21889E19E001524BF /* Lines.cpp in Sources */,
 				04A6C847188099E700B17C45 /* ofxBaseGui.cpp in Sources */,
 				A1C994FB1889824600C30C90 /* SyphonNameboundClient.m in Sources */,
 				04A6C9281882166800B17C45 /* ofxCvImage.cpp in Sources */,
 				04A6C827188099DE00B17C45 /* NetworkingUtils.cpp in Sources */,
+				0420B321188ECE3F0086D388 /* wall.cpp in Sources */,
 				04A6C9241882166800B17C45 /* ofxCvContourFinder.cpp in Sources */,
 				04A6C84B188099E700B17C45 /* ofxPanel.cpp in Sources */,
 				04A6C82D188099DE00B17C45 /* OscReceivedElements.cpp in Sources */,
@@ -1612,12 +1640,14 @@
 				7AF1C73F1885EAD500B38D3B /* GuiSlider.cpp in Sources */,
 				04A6C9261882166800B17C45 /* ofxCvGrayscaleImage.cpp in Sources */,
 				7AF1C73A1885EAD500B38D3B /* GuiManager.cpp in Sources */,
+				0420B319188ECE3F0086D388 /* cell.cpp in Sources */,
 				04A6C9231882166800B17C45 /* ofxCvColorImage.cpp in Sources */,
 				04A6C82A188099DE00B17C45 /* UdpSocketWin.cpp in Sources */,
 				7AF1C73E1885EAD500B38D3B /* GuiRangeSlider.cpp in Sources */,
 				04A6C82B188099DE00B17C45 /* OscOutboundPacketStream.cpp in Sources */,
 				A1C994FE1889824600C30C90 /* ofxSyphonServerDirectory.mm in Sources */,
 				04A6C829188099DE00B17C45 /* NetworkingUtilsWin.cpp in Sources */,
+				0420B322188ECE3F0086D388 /* ofxVoro.cpp in Sources */,
 				04A6C830188099DE00B17C45 /* ofxOscMessage.cpp in Sources */,
 				7AF1C73C1885EAD500B38D3B /* GuiLabel.cpp in Sources */,
 				7AF1C7441885EAD500B38D3B /* ofTextField.cpp in Sources */,
@@ -1817,6 +1847,9 @@
 					../../../addons/ofxSyphon/libs/Syphon/src,
 					../../../addons/ofxSyphon/src,
 					"$(OF_OPENCV_HEADERS)",
+					../../../addons/ofxVoro/src,
+					"../../../addons/ofxVoro/libs/voro++",
+					../../../addons/ofxVoro/libs,
 				);
 				ICON = "$(ICON_NAME_DEBUG)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
@@ -1942,6 +1975,9 @@
 					../../../addons/ofxSyphon/libs/Syphon/src,
 					../../../addons/ofxSyphon/src,
 					"$(OF_OPENCV_HEADERS)",
+					../../../addons/ofxVoro/src,
+					"../../../addons/ofxVoro/libs/voro++",
+					../../../addons/ofxVoro/libs,
 				);
 				ICON = "$(ICON_NAME_RELEASE)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";

@@ -72,7 +72,7 @@ void WireMesh::draw( ofVec3f off ) {
     ofPushMatrix();
     ofTranslate(off.x, off.y, off.z);
     
-    //ofDrawGrid(6);
+    ofDrawGrid(6);
     
     ofSetLineWidth(lineWidth);
     mesh.draw();

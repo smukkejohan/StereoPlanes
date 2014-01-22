@@ -9,22 +9,16 @@ vector<ofVec3f> points;
 //--------------------------------------------------------------
 void testApp::setup()
 {
-    // 0 bubbles Ã
-    // 1 mesh Ã
-    // 2 Boxes Ã
-    // 3 Voronoi Ã
-    // 4 Voronoi falling
-    // 5 CommonPerspectiveTest
     
-    currentScene = 1;
+    currentScene = 6;
     
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
     ofSetBackgroundAuto(true);
     ofBackground(0);
     
-    leftOutputServer.setName("Left");
-    rightOutputServer.setName("Right");
+    //leftOutputServer.setName("Left");
+    //rightOutputServer.setName("Right");
     sbsOutputServer.setName("Side By Side");
     
     fbo.allocate(2048, 768);
@@ -43,6 +37,10 @@ void testApp::setup()
     
     activePlaneIndex = 0;
     activePlane = planes[activePlaneIndex];
+    
+    testScene = new TestScene();
+    testScene->setupScene();
+    contentScenes.push_back(testScene);
     
     light.setPosition(2, 2, -2);
     light.setSpotlight();
@@ -65,104 +63,20 @@ void testApp::setup()
     parameters.add(dancerEllipseSize.set("Dancer Ellipse Size", 0., 0., .5));
     parameters.add(dancerEllipseBrightness.set("Dancer Ellipse Brightness", 0., 0., 1.));
     parameters.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
-    parameters.add(meshOffsetFloor.set("Mesh Offset Floor", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
-    parameters.add(meshOffsetWall.set("Mesh Offset Wall", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
+    
+    //parameters.add(meshOffsetFloor.set("Mesh Offset Floor", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
+    //parameters.add(meshOffsetWall.set("Mesh Offset Wall", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
     
     //parameters.add(scene.set("Scene", 0, 0, 5));
     
     
     
-    if(currentScene == 3 || currentScene == 4) {
-        voronoiWall = new VoronoiWall();
-        voronoiWall->setup(&parameters,  ofRectangle(-1,-1, 2, 2));
-    }
-    
-    
-    if(currentScene == 5) {
-        cmpTest = new CommonPerspectiveTest();
-        cmpTest->setup(&parameters);
-        
-        floor->cam.setPosition(0,2,0.5);
-        
-    }
-    
-    //voronoiPlaza = new VoronoiWall();
-    //voronoiWall->active = false;
-    //voronoiPlaza->setup(&parameters, ofRectangle(-3,-3, 6, 6));
-    
-    //ceilingPlane = new CeilingPlane();
-    //ceilingPlane->setup(&parameters);
-    
-    //ribbon = new Ribbon();
-    //ribbon->setup(&parameters);
-    
-    if(currentScene == 1) {
-        wireMesh = new WireMesh();
-        wireMesh->setup(&parameters);
-    }
-    
-    if(currentScene == 2) {
-        boxFloor = new BoxFloor();
-        //boxFloor->setup(&parameters);
-
-        boxFloor->setup(&parameters);
-    }
-    
-    
-    //lines = new Lines();
-    //lines->setup(&parameters);
     
     oscReceiver.setup(9001);
-    
-    world.setup();
-	world.setGravity(ofVec3f(0.f, 0.f, 9.8f));
-    
-    ground.create( world.world, ofVec3f(0., 0, 0.5), 0., 100.f, 100.f, 1.f );
-	ground.setProperties(.25, .95);
-	ground.add();
-    
-    wallBack.create( world.world, ofVec3f(0., -1.45, 0), 0., 100.f, 1.f, 100.f);
-    wallBack.setProperties(.75, .75);
-    wallBack.add();
-    
-    wallLeft.create( world.world, ofVec3f(-1.5, 0, 0), 0., 1.f, 100.f, 100.f );
-    wallLeft.setProperties(.75, .75);
-    wallLeft.add();
-    
-    wallRight.create( world.world, ofVec3f(1.5, 0, 0), 0., 1.f, 100.f, 100.f );
-    wallRight.setProperties(.75, .75);
-    wallRight.add();
-    
-    wallFront.create( world.world, ofVec3f(0., 1.5, 0), 0., 100.f, 1.f, 100.f );
-    wallFront.setProperties(.75, .75);
-    wallFront.add();
-    /*
-     ofxBulletCylinder::create( btDiscreteDynamicsWorld* a_world, ofVec3f a_loc, ofQuaternion a_rot, float a_mass, float a_radius, float a_height ) {
-     btTransform tr        = ofGetBtTransformFromVec3f( a_loc );
-     tr.setRotation( btQuaternion(btVector3(a_rot.x(), a_rot.y(), a_rot.z()), a_rot.w()) );
-     */
-    dancerCylinder.create(world.world,ofVec3f(0, 0, -dancerHeight/2.),/* ofQuaternion(0, ofVec3f(0, 0,1)),*/ 1. ,fmaxf(dancerEllipseSize, 0.25),fmaxf(dancerEllipseSize, 0.25), fmaxf(dancerEllipseSize, dancerHeight));
-    
-    
-    //  TODO: Operator grabbing of bullet objects from first view?
-    //	world.enableGrabbing();
-    //	world.enableDebugDraw();
-    //	world.setCamera(&camera);
-    
     gui.setup(parameters);
-    
     
 }
 
-void testApp::setupScene() {
-    
-    if(currentScene == 0) {
-        
-    } else if(currentScene == 1) {
-        
-    }
-    
-}
 
 //--------------------------------------------------------------
 void testApp::update()
@@ -220,18 +134,18 @@ void testApp::update()
             
 		} else if(m.getAddress() == "/Voronoi/x"){
             if(currentScene == 3) {
-            for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
+           /* for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
                 voronoiWall->breakPoints[i].pos.x = m.getArgAsFloat(i);
                 voronoiWall->breakPoints[i].pressure += 0.001;
                 
                 voronoiPlaza->breakPoints[i].pos.x = m.getArgAsFloat(i);
                 voronoiPlaza->breakPoints[i].pressure += 0.001;
-            }
+            }*/
             }
         } else if(m.getAddress() == "/Voronoi/y"){
             if(currentScene == 3) {
             
-                for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
+              /*  for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
                 
                     voronoiWall->breakPoints[i].pos.y = m.getArgAsFloat(i);
                 
@@ -240,14 +154,14 @@ void testApp::update()
                 voronoiPlaza->breakPoints[i].pos.y = m.getArgAsFloat(i);
                 voronoiPlaza->breakPoints[i].pressure += 0.001;
             
-                }
+                }*/
             }
             
         } else if(m.getAddress() == "/Voronoi/z"){
             
-            for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
+            /*for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
                 //voronoiWall->breakPoints[i].pressure = m.getArgAsFloat(i);
-            }
+            }*/
             
         } else if(m.getAddress() == "/planerot/x"){
             ofVec3f rot = ceilingPlane->rotation.get();
@@ -255,10 +169,10 @@ void testApp::update()
             ceilingPlane->rotation.set(rot);
             
         } else if(m.getAddress() == "/breakstrength1/x"){
-            if(currentScene == 3) {
+            /*if(currentScene == 3) {
             voronoiPlaza->wallBreakStrength.set(m.getArgAsFloat(0));
             voronoiWall->wallBreakStrength.set(m.getArgAsFloat(0));
-            }
+            }*/
             
         } else if(m.getAddress() == "/OffsetWall/x"){
             meshOffsetWall.set(ofVec3f(m.getArgAsFloat(0), meshOffsetWall.get().y, meshOffsetWall.get().z));
@@ -275,164 +189,29 @@ void testApp::update()
 
     }
     
-    
-    dancerCylinder.setActivationState( DISABLE_DEACTIVATION );
-    
-    // This is a hack, thigs should not be moved like this in bullet, but it will do for now. This kind of movement makes jutters in the collisions.
-    
-    btTransform tr = dancerCylinder.getRigidBody()->getCenterOfMassTransform();
-    dancerCylinder.getRigidBody()->translate(btVector3(dancerPos->x, dancerPos->y, -dancerHeight/2.)-tr.getOrigin());
-    
-    /* Instead this code should be the correct way of moving objects in bullet, however, right now it's not working.
-     
-     btTransform tr;
-     tr.setIdentity();
-     //    tr.setRotation(btQuaternion(btVector3(1.0, 0, 0), 90));
-     dancerCylinder.getRigidBody()->tran
-     tr.
-     tr.setOrigin(btVector3(dancerPos->x, dancerPos->y, -.5));
-     
-     if(dancerConstraint != NULL){
-     world.world->removeConstraint( dancerConstraint );
-     delete dancerConstraint;
-     dancerConstraint = NULL;
-     }
-     
-     dancerConstraint = new btGeneric6DofConstraint(*dancerCylinder.getRigidBody(), tr, false);
-     dancerConstraint->setLinearLowerLimit(btVector3(0,0,0));
-     dancerConstraint->setLinearUpperLimit(btVector3(0,0,0));
-     dancerConstraint->setAngularLowerLimit(btVector3(0,0,0));
-     dancerConstraint->setAngularUpperLimit(btVector3(0,0,0));
-     
-     world.world->addConstraint(dancerConstraint);
-     
-     dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,0);
-     dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,1);
-     dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,2);
-     dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,3);
-     dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,4);
-     dancerConstraint->setParam(BT_CONSTRAINT_STOP_CFM,0.8,5);
-     
-     dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,0);
-     dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,1);
-     dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,2);
-     dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,3);
-     dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,4);
-     dancerConstraint->setParam(BT_CONSTRAINT_STOP_ERP,0.1,5);
-     
-     dancerConstraint->getFrameOffsetA().setOrigin(btVector3(dancerPos->x, dancerPos->y, -.5));
-    
-     */
-    
     planes[0]->cam.setPosition(camPosFloor.get());
     planes[1]->cam.setPosition(camPosWall.get());
     
     for(int i=0; i<planes.size(); i++) {
         planes[i]->cam.setPhysicalEyeSeparation(eyeSeperation.get());
         planes[i]->update();
-        //cout<<camPos.get()<<endl;
     }
-    
-    /*
-     //TODO: Camera frustrums share position, but with individual viewports
-     planes[1]->cam.setPosition(camPos.get());
-     planes[1]->update();
-     
-     ofVec4f camInScreenSpace = planes[1]->warpLeft.fromWarpToScreenCoord(camPos.get().x, camPos.get().y, camPos.get().z);
-     ofVec4f camInFloorSpace = planes[0]->warpLeft.fromScreenToWarpCoord(camInScreenSpace.x, camInScreenSpace.y, camInScreenSpace.z);
-     planes[0]->cam.setPosition(camInScreenSpace.x, camInScreenSpace.y, camInScreenSpace.z);
-     planes[0]->update();
-     */
-    
-    if(addSphere){
-        ofxBulletSphere * sphere = new ofxBulletSphere();
-        sphere->create(world.world, ofVec3f(ofRandom(-0.1,0.1), ofRandom(-0.1,0.1), -1), 0.05, ofRandom(0.02,0.05));
-        spheres.push_back(sphere);
-        sphere->add();
-        addSphere = false;
+
+    for(int s=0; s<contentScenes.size();s++) {
+        contentScenes[s]->update();
     }
-    
-    if(currentScene == 0) {
-        world.update();
-    }
-    
-    if(currentScene == 1) {
-        wireMesh->update(dancerPos.get());
-    }
-    
-    if(currentScene == 3) {
-        voronoiWall->update();
-    }
-    //voronoiPlaza->update();
-    //ribbon->update();
-    
-    if(currentScene == 2) {
-        boxFloor->update();
-    }
-    
-    if(currentScene == 5) {
-        cmpTest->update();
-    }
-    
-    ceilingPlane->update();
-    lines->update();
     
     
 }
 
 
 
-void testApp::drawBulletFloor(){
-    
-    //TODO:Factor out to seperate class
-    
-    ofPushMatrix(); {
-        //ofRotateY(90);
-        //world.drawDebug();
-        
-        for(int i=0; i<spheres.size(); i++) {
-            spheres[i]->draw();
-        }
-        
-        
-    } ofPopMatrix();
+
+void testApp::drawScenes(int _surfaceId) {
+    for(int s=0; s<contentScenes.size();s++) {
+        contentScenes[s]->drawScene(_surfaceId);
+    }
 }
-
-void testApp::drawFloor() {
-    
-    glPushMatrix();{
-        
-        ofEnableLighting();
-        light.enable();
-        dirLight.enable();
-        
-        // A WHITE FLOOR
-        ofSetColor(255,255,255,255);
-        ofRect(-1,-1, 2, 2);
-        
-        drawBulletFloor();
-        
-        /** Some random moving balls
-         for (int i = 0; i< 200; i++) {
-         ofDrawSphere(ofSignedNoise((ofGetElapsedTimef()*0.01)+i, 0, 0), ofSignedNoise((ofGetElapsedTimef()*0.01)+i, (ofGetElapsedTimef()*0.01)+i, 0), ofSignedNoise(0,0,(ofGetElapsedTimef()*0.01)+i)*0.5,  0.05);
-         }
-         **/
-        
-        light.disable();
-        dirLight.disable();
-        ofDisableLighting();
-        
-        ofDisableDepthTest();
-        ofSetColor(0,0,0,255);
-        ofEllipse(dancerPos->x, dancerPos->y, 0.02, 0.02);
-        ofEnableDepthTest();
-        
-    } glPopMatrix();
-    
-}
-
-
-
 
 //--------------------------------------------------------------
 void testApp::draw()
@@ -443,13 +222,31 @@ void testApp::draw()
     fbo.begin();
     
     ofClear(0, 0, 0);
-
-#pragma mark DRAW FLOOR
     
+    for(int i=0;i < planes.size(); i++) {
+        
+        planes[i]->beginLeft();
+        drawScenes(i);
+        planes[i]->endLeft();
+        
+        planes[i]->beginRight();
+        drawScenes(i);
+        planes[i]->endRight();
+        
+    }
+    
+/*
     floor->beginLeft(); {
         ofPushMatrix();
         
         
+        if(currentScene == 6) {
+            ofPushMatrix();
+            cmpTest->transformFloor();
+            commonWorldDraw();
+            ofPopMatrix();
+        }
+        
         if(currentScene == 0) {
             drawFloor();
         }
@@ -473,19 +270,26 @@ void testApp::draw()
             
         }
         
-        /* this will rotate the floor to match the screen space
+        this will rotate the floor to match the screen space
          ofTranslate(0, -1);
          ofRotate(90, 1, 0, 0);
          ofTranslate(0, 1);
-         */
+         
         //voronoiWall->draw();
         //
         //voronoiWall->draw();
-        ofPopMatrix();
-    } floor->endLeft();
-    
+    //    ofPopMatrix();
+    //} floor->endLeft();
+ 
     floor->beginRight(); {
         ofPushMatrix();
+        
+        if(currentScene == 6) {
+            ofPushMatrix();
+            cmpTest->transformFloor();
+            commonWorldDraw();
+            ofPopMatrix();
+        }
         
         if(currentScene == 0) {
             drawFloor();
@@ -506,21 +310,27 @@ void testApp::draw()
             cmpTest->drawFloor();
         }
         //voronoiWall->draw();
-        /* this will rotate the floor to match the screen space
+        this will rotate the floor to match the screen space
          ofTranslate(0, -1);
          ofRotate(90, 1, 0, 0);
          ofTranslate(0, 1);
-         */
+     
         //voronoiWall->draw();
         //boxFloor->draw( dancerPos.get() );
         //lines->draw();
         //wireMesh->draw(meshOffsetFloor.get());
-        ofPopMatrix();
-    } floor->endRight();
+      //  ofPopMatrix();
+   // } floor->endRight();
     
-#pragma mark DRAW WALL
 
     wall->beginLeft(); {
+        
+        if(currentScene == 6) {
+            ofPushMatrix();
+            cmpTest->transformWall();
+            commonWorldDraw();
+            ofPopMatrix();
+        }
         
         if(currentScene == 1) {
             ofPushMatrix();
@@ -542,6 +352,15 @@ void testApp::draw()
     
     wall->beginRight(); {
         
+        
+        if(currentScene == 6) {
+            ofPushMatrix();
+            cmpTest->transformWall();
+            commonWorldDraw();
+            ofPopMatrix();
+        }
+        
+        
         if(currentScene == 1) {
             ofPushMatrix();
             cmpTest->transformWall();
@@ -559,7 +378,7 @@ void testApp::draw()
         
         
     } wall->endRight();
-    
+    */
     
     ofDisableDepthTest();
     
@@ -587,9 +406,7 @@ void testApp::draw()
     ofPopMatrix();
     
     ofSetColor(255);
-    ofDrawBitmapString(ofToString(ofGetFrameRate()), 40, 40);
-    //activePlane->drawInfo();
-    
+    ofDrawBitmapString(ofToString(ofGetFrameRate()), 20, 20);
     gui.draw();
 }
 
@@ -680,6 +497,10 @@ void testApp::exit() {
     
     for(int i=0; i < planes.size(); i++) {
         planes[i]->exit();
+    }
+    
+    for(int s=0; s<contentScenes.size();s++) {
+        contentScenes[s]->exit();
     }
     
     settings.save("stereoplanes.xml");

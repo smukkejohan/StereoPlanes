@@ -16,6 +16,9 @@
 #include "WireMesh.h"
 #include "Lines.h"
 #include "CommonPerspectiveTest.h"
+#include "Voro3D.h"
+#include "ContentScene.h"
+#include "TestScene.h"
 
 class testApp : public ofBaseApp
 {
@@ -110,6 +113,7 @@ public:
 
     void drawBulletFloor();
     
+    void commonWorldDraw();
     
     VoronoiWall * voronoiWall;
     VoronoiWall * voronoiPlaza;
@@ -119,18 +123,22 @@ public:
     CommonPerspectiveTest * cmpTest;
     
     
-    ofFbo shareTexture;
+    // Scenes
+    
+    void drawScenes(int _surfaceId=0);
+    
+    TestScene * testScene;
+    vector<ContentScene*> contentScenes;
     
     WireMesh * wireMesh;
     ofParameter<ofVec3f> meshOffsetWall;
     ofParameter<ofVec3f> meshOffsetFloor;
     Lines * lines;
     
-    
+    Voro3D * voro3d;
     
     int currentScene = 0;
     ofParameter<int> scene = 0;
     
-    void setupScene();
     
 };

@@ -28,7 +28,6 @@ void BoxFloor::setup(ofParameterGroup * params) {
 }
 
 void BoxFloor::update() {
-    
     boxLight.setPosition(0, 0, lightHeight);
 }
 

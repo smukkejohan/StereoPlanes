@@ -7,33 +7,26 @@
 //
 
 #include "CeilingPlane.h"
-#include "ofxVoronoi.h"
+//#include "ofxVoronoi.h"
 
 ofFbo fbo;
 //ofxVoronoi voro;
 
 void CeilingPlane::setup(ofParameterGroup * params) {
     
-    
     //params->add
-    
     params->add(position.set("Plane position", ofVec3f(-1,-1,0), ofVec3f(-2,-2,-2), ofVec3f(2,2,2)));
-    
     params->add(dimensions.set("Plane dimensions", ofVec3f(2,2,0), ofVec3f(-2,-2,-2), ofVec3f(2,2,2)));
-    
     params->add(rotation.set("Plane rotation", ofVec3f(0,0,0), ofVec3f(-360,-360,-360), ofVec3f(360,360,360)));
     
     fbo.allocate(1000, 1000);
     
-    
 }
-
 
 
 void CeilingPlane::update() {
     
 }
-
 
 
 void CeilingPlane::begin() {
@@ -51,7 +44,6 @@ void CeilingPlane::begin() {
     
     ofSetColor(255);
 
-    
     
 }
 

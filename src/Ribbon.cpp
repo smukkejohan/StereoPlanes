@@ -15,9 +15,9 @@ void Ribbon::setup(ofParameterGroup * params) {
     
     params->add(origin.set("Ribbon origin", ofVec3f(0.1,0.5,0), ofVec3f(-200,-200,-200), ofVec3f(200,200,200)));
     
-    params->add(autoAmp.set("Ribbon auto amplitude", ofVec2f(0.0,0.0), ofVec2f(-200,-200), ofVec2f(200,200)));
+    params->add(  autoAmp.set("Ribbon auto amplitude", ofVec2f(0.0,0.0), ofVec2f(-200,-200), ofVec2f(200,200)));
     params->add(autoSpeed.set("Ribbon auto speed",   ofVec2f(0.0,0.0), ofVec2f(0,0), ofVec2f(1,1)));
-    params->add(autoOn.set("Ribbon auto on"));
+    params->add(   autoOn.set("Ribbon auto on"));
     
     points.push_back(origin.get());
     

@@ -9,8 +9,9 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxVoronoi.h"
-#include "Utils.h"
+//#include "ofxVoronoi.h"
+//#include "Utils.h"
+#include "ofxVoro.h"
 
 
 struct BreakPoint {
@@ -20,7 +21,6 @@ struct BreakPoint {
 };
 
 struct Cell {
-    
     ofMesh mesh;
     ofVec3f offset;
     ofColor color;
@@ -47,12 +47,11 @@ public:
     
     
     ofParameter<float> breakPointRadius;
-    
     ofParameter<bool> autoOn;
     
     vector <ofVec3f> vpts;
     ofRectangle      vbounds;
-    ofxVoronoi       voronoi;
+    //ofxVoronoi       voronoi;
     
     float wallTime = 0;
     void drawVoronoiWall3d();

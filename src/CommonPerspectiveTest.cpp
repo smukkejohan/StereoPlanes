@@ -87,7 +87,6 @@ void CommonPerspectiveTest::draw() {
     light.disable();
     ofDisableLighting();
     ofDisableNormalizedTexCoords();
-    
 }
 
 // wall is primary

@@ -13,7 +13,7 @@ void VoronoiWall::setup(ofParameterGroup * params, ofRectangle bounds) {
     // Voronoi wall
     
     vbounds = bounds;
-    voronoi.setBounds(vbounds);
+    //voronoi.setBounds(vbounds);
     
     genTheVoronoi();
     
@@ -194,6 +194,9 @@ void VoronoiWall::genTheVoronoi() {
     for(int i=0; i<vpts.size(); i++) {
         voronoi.addPoint(vpts[i]);
     }
+    
+    
+    voro::wall
     
     voronoi.generateVoronoi();
 }
