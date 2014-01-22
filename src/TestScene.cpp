@@ -31,7 +31,7 @@ void TestScene::draw(int _surfaceId) {
         // ofRect(-1, -1, 2, 2);
         
         ofSetColor(255,255,255);
-        ofDrawGrid(1);
+        //ofDrawGrid(1);
         
         ofPushMatrix();
         ofRotateX(ofGetElapsedTimef()*10);
@@ -47,7 +47,7 @@ void TestScene::draw(int _surfaceId) {
         light.enable();
         
         ofSetColor(255,255,255);
-        ofDrawGrid(1);
+        //ofDrawGrid(1);
         
         ofPushMatrix();
         ofRotateX(ofGetElapsedTimef()*10);

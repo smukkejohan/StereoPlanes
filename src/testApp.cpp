@@ -39,25 +39,6 @@ void testApp::setup()
     
     oscReceiver.setup(9001);
     
-    /*parameters.setName("Stereo");
-    ofParameterGroup cameraParams;
-    cameraParams.setName("Cameras");
-    cameraParams.add(camPosWall.set("Wall", ofVec3f(0.,0.,-1), ofVec3f(-3,-3,-8.), ofVec3f(3,3,-0.25)));
-    cameraParams.add(camPosFloor.set("Floor", ofVec3f(0.,0.,-1), ofVec3f(-3,-3,-8.), ofVec3f(3,3,-0.25)));
-    cameraParams.add(eyeSeperation.set("Eye Seperation", 6.5, 0., 7.));
-    parameters.add(cameraParams);
-    
-    ofParameterGroup trackingParams;
-    trackingParams.setName("Tracking");
-    trackingParams.add(dancerEllipseSize.set("Dancer Ellipse Size", 0., 0., .5));
-    trackingParams.add(dancerEllipseBrightness.set("Dancer Ellipse Brightness", 0., 0., 1.));
-    trackingParams.add(dancerPos.set("Dancer position", ofVec2f(-1.,-1.), ofVec2f(-1,-1), ofVec2f(1,1)));
-    
-     parameters.add(trackingParams);*/
-    //parameters.add(meshOffsetFloor.set("Mesh Offset Floor", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
-    //parameters.add(meshOffsetWall.set("Mesh Offset Wall", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
-    //parameters.add(scene.set("Scene", 0, 0, 5));
-    
     camPosFloor = ofVec3f(0, 0, -1);
     camPosWall = ofVec3f(0, 0, -1);
     
@@ -81,7 +62,7 @@ void testApp::setup()
     float width = 255-xInit;
     hideGUI = false;
     
-    gui = new ofxUIScrollableCanvas(0, 0, width+xInit, ofGetHeight());
+    gui = new ofxUIScrollableCanvas(20, 0, width+xInit, ofGetHeight());
     
     gui->setScrollAreaToScreenHeight();
     gui->setScrollableDirections(false, true);
@@ -95,17 +76,16 @@ void testApp::setup()
     
     gui->addSlider("Eye seperation", 0, 7, &eyeSeperation);
     
-    gui->add2DPad("Floor cam", ofVec2f(-3, 3), ofVec2f(-3,3), ofVec2f(0, 0));
-    gui->addSlider("Floor Z", -2, 6, &camPosFloor.z);
+    gui->addSlider("Floor X",  -2, 2, &camPosFloor.x);
+    gui->addSlider("Floor Y",  -2, 2, &camPosFloor.y);
+    gui->addSlider("Floor Z",  -2, -0.25, &camPosFloor.z);
     
-    gui->add2DPad("Wall cam", ofVec2f(-3, 3), ofVec2f(-3,3), ofVec2f(0, 0));
-    gui->addSlider("Wall Z",  -2, 6, &camPosWall.z);
+    gui->addSlider("Wall X",  -2, 2, &camPosWall.x);
+    gui->addSlider("Wall Y",  -2, 2, &camPosWall.y);
+    gui->addSlider("Wall Z",  -2, -0.25, &camPosWall.z);
     
-    //gui->add2DPad(<#string _name#>, <#ofxUIVec3f _rangeX#>, <#ofxUIVec3f _rangeY#>, <#ofxUIVec3f *_value#>)
-    
-    //cameraParams.add(camPosWall.set("Wall", ofVec3f(0.,0.,-1), ofVec3f(-3,-3,-8.), ofVec3f(3,3,-0.25)));
-    //cameraParams.add(camPosFloor.set("Floor", ofVec3f(0.,0.,-1), ofVec3f(-3,-3,-8.), ofVec3f(3,3,-0.25)));
-    //cameraParams.add(eyeSeperation.set("Eye Seperation", 6.5, 0., 7.));
+    gui->addSlider("Dancer X",  -1, 1, &dancerPos.x);
+    gui->addSlider("Dancer Y",  -1, 1, &dancerPos.y);
     
     for(int i=0; i<contentScenes.size(); i++) {
         gui->addSpacer(width, 3)->setDrawOutline(true);
@@ -165,35 +145,7 @@ void testApp::update()
 		} else if(m.getAddress() == "/Dancer/y"){
             dancerPos.y = m.getArgAsFloat(0);
             
-		} else if(m.getAddress() == "/Voronoi/x"){
-           /* for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
-                voronoiWall->breakPoints[i].pos.x = m.getArgAsFloat(i);
-                voronoiWall->breakPoints[i].pressure += 0.001;
-                
-                voronoiPlaza->breakPoints[i].pos.x = m.getArgAsFloat(i);
-                voronoiPlaza->breakPoints[i].pressure += 0.001;
-            }*/
-            
-        } else if(m.getAddress() == "/Voronoi/y"){
-            
-              /*  for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
-                
-                    voronoiWall->breakPoints[i].pos.y = m.getArgAsFloat(i);
-                
-                    voronoiWall->breakPoints[i].pressure += 0.001;
-                
-                voronoiPlaza->breakPoints[i].pos.y = m.getArgAsFloat(i);
-                voronoiPlaza->breakPoints[i].pressure += 0.001;
-            
-                }*/
-            
-        } else if(m.getAddress() == "/Voronoi/z"){
-            
-            /*for(int i = 0; i < voronoiWall->breakPoints.size(); i++) {
-                //voronoiWall->breakPoints[i].pressure = m.getArgAsFloat(i);
-            }*/
-            
-        } else if(m.getAddress() == "/planerot/x"){
+		} else if(m.getAddress() == "/planerot/x"){
            /* ofVec3f rot = ceilingPlane->rotation.get();
             rot.x = m.getArgAsFloat(0);
             ceilingPlane->rotation.set(rot);
@@ -216,7 +168,6 @@ void testApp::update()
 		} else if(m.getAddress() == "/OffsetFloor/y"){
             //meshOffsetFloor.set(ofVec3f(meshOffsetFloor.get().x, m.getArgAsFloat(0), meshOffsetWall.get().z));
         }
-
     }
     
     planes[0]->cam.setPosition(camPosFloor);
@@ -264,15 +215,14 @@ void testApp::draw()
         planes[i]->endRight();
     }
     
+    ofDisableDepthTest();
+    ofDisableLighting();
+    
     if(showGrid) {
         for(int i=0; i<planes.size(); i++) {
             planes[i]->drawGrids();
         }
     }
-    
-    ofDisableDepthTest();
-    ofDisableLighting();
-    
     
     // Draw the scenes to the output fbo
     fbo.begin(); {
@@ -374,6 +324,8 @@ void testApp::mouseReleased(int x, int y, int button)
 void testApp::windowResized(int w, int h)
 {
     
+    gui->setScrollAreaToScreenHeight();
+    
 }
 
 //--------------------------------------------------------------
@@ -390,6 +342,9 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 
 void testApp::exit() {
     
+    gui->saveSettings("GUI/guiSettings.xml");
+    delete gui;
+    
     for(int i=0; i < planes.size(); i++) {
         planes[i]->exit();
     }
@@ -397,9 +352,6 @@ void testApp::exit() {
     for(int s=0; s<contentScenes.size();s++) {
         contentScenes[s]->exit();
     }
-    
-    gui->saveSettings("GUI/guiSettings.xml");
-    delete gui;
     
     settings.save("stereoplanes.xml");
     cout<<"exit"<<endl;
@@ -413,17 +365,11 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 	int kind = e.getKind();
 	//cout << "got event from: " << name << endl;
     
-    if(name=="Floor cam") {
-        ofxUI2DPad *pad = (ofxUI2DPad *) e.widget;
-        camPosFloor.x = pad->getScaledValue().x;
-        camPosFloor.y = pad->getScaledValue().y;
-    }
-    
-    if(name=="Wall cam") {
+    /*if(name=="Wall cam") {
         ofxUI2DPad *pad = (ofxUI2DPad *) e.widget;
         camPosWall.x = pad->getScaledValue().x;
         camPosWall.y = pad->getScaledValue().y;
-    }
+    }*/
     
     for(int i=0; i<contentScenes.size(); i++) {
         contentScenes[i]->guiEvent(e);

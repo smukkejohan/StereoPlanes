@@ -20,10 +20,7 @@ public:
     string name = "untitled_scene";
     string oscAddress = "/default";
     
-    // bool syphonDirect;
-    ofParameterGroup parameters;
-    bool enabled = true;
-    
+    bool enabled;
     
     ContentScene() {
     }
@@ -43,7 +40,6 @@ public:
         gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
         gui->addSpacer(width, 1);
         gui->addToggle(indexStr+"Enabled", &enabled);
-        
     }
     
     virtual void guiEvent(ofxUIEventArgs &e) {};
