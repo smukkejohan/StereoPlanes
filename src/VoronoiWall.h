@@ -66,7 +66,8 @@ public:
     
     ofLight light;
     ofLight dirLight;
-
     
+    float darksolid;
+    float knockover;
     
 };
