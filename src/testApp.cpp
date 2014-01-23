@@ -125,7 +125,7 @@ void testApp::update()
             camPosFloor.y = m.getArgAsFloat(0);
             
 		} else if(m.getAddress() == "/Floor/Cameraz/x"){
-                        camPosFloor.z = m.getArgAsFloat(0);
+                camPosFloor.z = m.getArgAsFloat(0);
             
         } else if(m.getAddress() == "/Wall/Camera/x"){
                 camPosWall.x = m.getArgAsFloat(0);
@@ -144,30 +144,7 @@ void testApp::update()
             
 		} else if(m.getAddress() == "/Dancer/y"){
             dancerPos.y = m.getArgAsFloat(0);
-            
-		} else if(m.getAddress() == "/planerot/x"){
-           /* ofVec3f rot = ceilingPlane->rotation.get();
-            rot.x = m.getArgAsFloat(0);
-            ceilingPlane->rotation.set(rot);
-            */
-        } else if(m.getAddress() == "/breakstrength1/x"){
-            /*if(currentScene == 3) {
-            voronoiPlaza->wallBreakStrength.set(m.getArgAsFloat(0));
-            voronoiWall->wallBreakStrength.set(m.getArgAsFloat(0));
-            }*/
-            
-        } else if(m.getAddress() == "/OffsetWall/x"){
-            //meshOffsetWall.set(ofVec3f(m.getArgAsFloat(0), meshOffsetWall.get().y, meshOffsetWall.get().z));
-            
-		} else if(m.getAddress() == "/OffsetWall/y"){
-            //meshOffsetWall.set(ofVec3f(meshOffsetWall.get().x, m.getArgAsFloat(0), meshOffsetWall.get().z));
-        }
-        else if(m.getAddress() == "/OffsetFloor/x"){
-            //meshOffsetFloor.set(ofVec3f(m.getArgAsFloat(0), meshOffsetFloor.get().y, meshOffsetWall.get().z));
-            
-		} else if(m.getAddress() == "/OffsetFloor/y"){
-            //meshOffsetFloor.set(ofVec3f(meshOffsetFloor.get().x, m.getArgAsFloat(0), meshOffsetWall.get().z));
-        }
+		}
     }
     
     planes[0]->cam.setPosition(camPosFloor);

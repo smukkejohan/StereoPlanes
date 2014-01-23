@@ -9,23 +9,17 @@
 #pragma once
 #include "ofMain.h"
 
-class CommonPerspectiveTest {
+class PerspectiveUtils {
     
 public:
-    void drawFloor();
-    void drawWall();
-    void setup(ofParameterGroup * params);
-    void draw();
-    void update();
     
-    void transformWall();
-    void transformFloor();
+    void transformWall() {
+        ofTranslate(0,1);
+    }
     
-    ofBoxPrimitive box;
-    ofCylinderPrimitive cyl;
-    
-    ofTexture tex;
-    ofImage ofLogo;
-    ofLight light;
+    void transformFloor() {
+        ofTranslate(0,-1);
+        ofRotate(90, 1, 0, 0);
+    }
     
 };

@@ -43,14 +43,8 @@ public:
 	void gotMessage(ofMessage msg);
     
     void exit();
-        
-	ofxSyphonServer leftOutputServer;
-	ofxSyphonServer rightOutputServer;
+
     ofxSyphonServer sbsOutputServer;
-    
-    ofLight directionalLight;
-    
-    ofMaterial material;
     
     bool showGrid;
 
@@ -92,21 +86,6 @@ public:
     void drawFloor();
     vector<StereoPlane *> planes;
     ofxXmlSettings settings;
-    
-    // Lights
-    ofLight light;
-    ofLight dirLight;
-    
-    // Bullet
-    ofxBulletWorldRigid			world;
-	ofxBulletBox				ground;
-    ofxBulletBox                wallBack;
-    ofxBulletBox                wallLeft;
-    ofxBulletBox                wallRight;
-    ofxBulletBox                wallFront;
-    ofxBulletBox                dancerCylinder;
-    btGeneric6DofConstraint *   dancerConstraint;
-	vector<ofxBulletSphere*>    spheres;
     
     float dancerHeight;
     
