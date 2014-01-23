@@ -51,7 +51,7 @@ void testApp::setup()
     boxFloor = new BoxFloor( dancerPos );
     contentScenes.push_back(boxFloor);
 
-    attractorControl = new AttractorControl();
+    attractorControl = new AttractorControl( dancerPos );
     contentScenes.push_back(attractorControl);
     
     wireMesh = new WireMesh();

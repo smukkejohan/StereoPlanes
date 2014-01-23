@@ -8,6 +8,12 @@
 
 #include "AttractorControl.h"
 
+AttractorControl::AttractorControl ( ofVec2f &_dancerPos ) {
+    
+    dancerPos = &_dancerPos;
+    
+}
+
 void AttractorControl::setup() {
     
     name = "Attractor Control";
@@ -42,10 +48,10 @@ void AttractorControl::update() {
         bkgColor = 255.0;
         bkgTransparency = 7.0;
         particleColor = 0.0;
-        createStructure = false;
-        hideDancer = false;
-        angleMovement = false;
-        freeze = false;
+        bCreateStructure = false;
+        bHideDancer = false;
+        bAngleMovement = false;
+        bFreeze = false;
         
         started = true;
     }
@@ -53,10 +59,10 @@ void AttractorControl::update() {
     //cout << ofGetCurrentRenderer()->getBgColor() << endl;
     
     for( int i = 0; i < particleList.size(); i++ ){
-        if (!freeze) particleList[i].update( damping, acceleration, ofVec3f(dancerPos.x, dancerPos.y, 0));
+        if (!bFreeze) particleList[i].update( damping, acceleration, ofVec3f(dancerPos->x, dancerPos->y, 0));
     }
     
-    if ( createStructure ) {
+    if ( bCreateStructure ) {
         acceleration = 0.0;
         
         if (explosionCountdown%12== 0) {
@@ -68,9 +74,9 @@ void AttractorControl::update() {
         
         if (explosionCountdown < 0) {
             
-            createStructure = false;
+            bCreateStructure = false;
             explosionCountdown = 60;
-            freeze= true;
+            bFreeze= true;
             acceleration = 1.05;
             
             for( int i = 0; i < particleList.size(); i++ ){
@@ -82,7 +88,7 @@ void AttractorControl::update() {
         }
     }
     
-    if (hideDancer) {
+    if (bHideDancer) {
         
         acceleration = 10.0;
         bkgTransparency = 0.0;
@@ -98,8 +104,8 @@ void AttractorControl::update() {
         
     }
     
-    if (angleMovement) {
-        hideDancer = false;
+    if (bAngleMovement) {
+        bHideDancer = false;
         acceleration = 0.0;
         bkgTransparency = 10.0;
         
@@ -121,7 +127,7 @@ void AttractorControl::draw( int _surfaceId ) {
     
         ofDisableLighting();
         
-        if (!freeze) {
+        if (!bFreeze) {
             
             ofSetColor ( particleColor );
             
@@ -157,10 +163,53 @@ void AttractorControl::setGui(ofxUICanvas * gui, float width){
     //    params->add(showAttractor.set("Show Attractor", false, false, true));
     //    params->add(freeze.set("Freeze", false, false, true));
     
-    gui->addToggle(indexStr+"Create Structure", &createStructure);
-    gui->addToggle(indexStr+"Dissolve Back", &freeze);
-    gui->addToggle(indexStr+"Hide Dancer", &hideDancer);
-    gui->addToggle(indexStr+"Angle Movement", &angleMovement);
+    gui->addToggle(indexStr+"Create Structure", &bCreateStructure);
+    gui->addToggle(indexStr+"Dissolve Back", &bFreeze);
+    gui->addToggle(indexStr+"Hide Dancer", &bHideDancer);
+    gui->addToggle(indexStr+"Angle Movement", &bAngleMovement);
+    
+    
+}
+
+void AttractorControl::guiEvent(ofxUIEventArgs &e)
+{
+    
+    string name = e.getName();
+	int kind = e.getKind();
+	//cout << "got event from: " << name << endl;
+    
+}
+
+void AttractorControl::receiveOsc(ofxOscMessage * m, string rest) {
+    
+    if(rest == "/damping/x" ) {
+        damping = m->getArgAsFloat(0);
+        
+    } else if(rest == "/acceleration/x"){
+        multiplier = m->getArgAsFloat(0);
+        
+    } else if(rest == "/bkgcolor/x"){
+        bkgColor = m->getArgAsFloat(0);
+        
+    } else if(rest == "/bkgtransparency/x"){
+        bkgTransparency = m->getArgAsFloat(0);
+        
+    } else if(rest == "/particleColor/x"){
+        particleColor = m->getArgAsFloat(0);
+        
+    } else if(rest == "/createstructure/x"){
+        bCreateStructure = m->getArgAsFloat(0);
+        
+    } else if(rest == "/bRotation/x"){
+        bHideDancer = m->getArgAsFloat(0);
+    
+    } else if(rest == "/bRotation/x"){
+        bAngleMovement = m->getArgAsFloat(0);
+    
+    } else if(rest == "/bRotation/x"){
+        bFreeze = m->getArgAsFloat(0);
+    
+    }
     
     
 }
