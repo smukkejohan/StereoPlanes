@@ -8,28 +8,17 @@
 
 #include "WireMesh.h"
 
-void WireMesh::setup(ofParameterGroup * params) {
+void WireMesh::setup() {
     
-
-    params->add(lineWidth.set("Line Width", 1, 0.1, 10));
-    params->add(offset.set("Offset", ofVec3f(0, 0, 1), ofVec3f(-4,-4,-4), ofVec3f(4,4,4)));
-    params->add(speed.set("Speed", 0.0005, 0, 0.002));
-    params->add(bgColor.set("Background Color", 150, 0, 255));
-    params->add(whiteMesh.set("White Z Axis", 1, -5, 5));
-    params->add(blackMesh.set("Black Z Axis", 0.00000001, -5, 5));
-    params->add(shadowSize.set("Shadow Size", 0.4, 0.1, 3));
+    name = "Wire Mesh";
+    oscAddress = "/wiremesh";
     
-    params->add(triangles.set("Fill", false, false, true));
-    params->add(reset.set("Reset Mesh", false, false, true));
-    params->add(createVert.set("Create Vertex", false, false, true));
-    params->add(numVerts.set("Number of Vertices", 250, 100, 600));
-    params->add(threshold.set("Connection Threshold", 0.5, 0.1, 1));
- 
     createMesh();
+    
     
 }
 
-void WireMesh::update( ofVec2f dancerPos ) {
+void WireMesh::update() {
     
     int numVerts = mesh.getNumVertices();
     for (int i=0; i<numVerts; i++) {
@@ -43,7 +32,7 @@ void WireMesh::update( ofVec2f dancerPos ) {
         if(ofDist(dancerPos.x,dancerPos.y, vert.x, vert.y) < shadowSize){
             mesh.setColor(i, ofColor(0,0,0));
             mesh.setVertex(i, ofVec3f(vert.x, vert.y, blackMesh));
-        
+            
         }
         else{
             mesh.setColor(i, colors[i]);
@@ -60,25 +49,56 @@ void WireMesh::update( ofVec2f dancerPos ) {
     }
 }
 
+void WireMesh::setGui(ofxUICanvas * gui, float width){
+    ContentScene::setGui(gui, width);
+    
+    
+    gui->addSlider(indexStr+"Line Width", 0.1, 10, &lineWidth);
+    gui->addSlider(indexStr+"Offset X", -4, 4, &offset.x);
+    gui->addSlider(indexStr+"Offset Y", -4, 4, &offset.y);
+    gui->addSlider(indexStr+"Offset Z", -4, 4, &offset.z);
+    gui->addSlider(indexStr+"Dancer X", -4, 4, &dancerPos.x);
+    gui->addSlider(indexStr+"Dancer Y", -4, 4, &dancerPos.y);
+    
+    
+    gui->addSlider(indexStr+"Speed",  0, 0.002, &speed);
+    gui->addSlider(indexStr+"Background Color",  0, 255, &bgColor);
+    gui->addSlider(indexStr+"White Mesh Z",  -5, 5, &whiteMesh);
+    gui->addSlider(indexStr+"Black Mesh Z",  -5, 5, &blackMesh);
+    gui->addSlider(indexStr+"Shadow Size", 0.1, 3, &shadowSize);
+    gui->addSlider(indexStr+"Number of Vertices",  100, 600, &numVerts);
+    gui->addSlider(indexStr+"Connection Threshold",  0.1, 1, &threshold);
+    
+    
+    gui->addToggle(indexStr+"Surface", &mySurface);
+    gui->addToggle(indexStr+"Create Vertex", &createVert);
+    gui->addToggle(indexStr+"Reset Mesh", &reset);
+    
+}
 
-void WireMesh::draw() {
-    
-    glEnable(GL_DEPTH_TEST);
-    
-    //ofSetColor(bgColor);
-    //ofFill();
-    //ofRect(-10, -10, 5, 20, 20);
 
-    ofPushMatrix();
-    ofTranslate(offset->x, offset->y, offset->z);
-    
-    ofDrawGrid(6);
-    
-    ofSetLineWidth(lineWidth);
-    mesh.draw();
-    ofPopMatrix();
 
-    glDisable(GL_DEPTH_TEST);
+void WireMesh::draw(int _surfaceId ) {
+    
+    if (_surfaceId == mySurface) {
+        
+        glEnable(GL_DEPTH_TEST);
+        
+        //ofSetColor(bgColor);
+        //ofFill();
+        //ofRect(-10, -10, 5, 20, 20);
+        
+        ofPushMatrix();
+        ofTranslate(offset.x, offset.y, offset.z);
+        
+        ofDrawGrid(6);
+        
+        ofSetLineWidth(lineWidth);
+        mesh.draw();
+        ofPopMatrix();
+        
+        glDisable(GL_DEPTH_TEST);
+    }
     
 }
 
@@ -86,14 +106,13 @@ void WireMesh::draw() {
 void WireMesh::resetMesh(){
     mesh.clear();
     createMesh();
-    reset.set(false);
-
+    reset = false;
+    
 }
 
 
 void WireMesh::createMesh(){
-    if(triangles) mesh.setMode(OF_PRIMITIVE_TRIANGLES);
-    else mesh.setMode(OF_PRIMITIVE_LINES);
+    mesh.setMode(OF_PRIMITIVE_LINES);
     
     mesh.enableColors();
     mesh.enableIndices();
@@ -130,42 +149,42 @@ void WireMesh::createMesh(){
             }
         }
     }
-
-
+    
+    
 }
 
 
 void WireMesh::createVertex(){
     for(int i = 0; i < 10; i ++){
-    
-    ofColor c;
-
-    float z =ofRandom(-1,1);
-    ofVec3f pos(ofRandom(-0.9, 0.9), ofRandom(-0.9, 0.9), z);
-    mesh.addVertex(pos);
-    
-    if(z > 0.3) c = ofColor(255);
-    else if(z < -0.3) c = ofColor(80);
-    else c = ofColor(175);
-    
-    colors.push_back(c);
-    mesh.addColor(c);
-    
-    numVerts+= 1;
-    
-
-
-  float connectionDistance = threshold;
-  for (int a=1; a<numVerts; ++a) {
-    ofVec3f verta = mesh.getVertex(a);
-    ofVec3f vertb = mesh.getVertex(numVerts-1);
-    float distance = verta.distance(vertb);
-    if (distance <= connectionDistance && ofRandom(1) > 0.5) {
-            mesh.addIndex(a);
-            mesh.addIndex(numVerts-1);
+        
+        ofColor c;
+        
+        float z =ofRandom(-1,1);
+        ofVec3f pos(ofRandom(-0.9, 0.9), ofRandom(-0.9, 0.9), z);
+        mesh.addVertex(pos);
+        
+        if(z > 0.3) c = ofColor(255);
+        else if(z < -0.3) c = ofColor(80);
+        else c = ofColor(175);
+        
+        colors.push_back(c);
+        mesh.addColor(c);
+        
+        numVerts+= 1;
+        
+        
+        
+        float connectionDistance = threshold;
+        for (int a=1; a<numVerts; ++a) {
+            ofVec3f verta = mesh.getVertex(a);
+            ofVec3f vertb = mesh.getVertex(numVerts-1);
+            float distance = verta.distance(vertb);
+            if (distance <= connectionDistance && ofRandom(1) > 0.5) {
+                mesh.addIndex(a);
+                mesh.addIndex(numVerts-1);
+            }
+        }
     }
-  }
-}
     createVert = false;
 }
 

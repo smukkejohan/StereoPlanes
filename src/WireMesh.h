@@ -9,36 +9,28 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ContentScene.h"
 
-class WireMesh {
+class WireMesh : public ContentScene {
     
 public:
-    void setup(ofParameterGroup * params);
-    void draw();
-    void update( ofVec2f dancerPos );
+    void setup();
+    void draw( int _surfaceId );
+    void update();
     void createMesh();
     void resetMesh();
     void createVertex();
-    //ofParameterGroup * parameters;
-
-
-    ofParameter<bool> reset;
-    ofParameter<float> speed;
-    ofParameter<float> numVerts;
-    ofParameter<float> threshold;
-    ofParameter<ofVec3f> offset;
-    ofParameter<float> bgColor;
-    ofParameter<float> shadowSize;
-    ofParameter<float> lineWidth;
-    ofParameter<bool> triangles;
-    ofParameter<float> whiteMesh;
-    ofParameter<float> blackMesh;
-    ofParameter<bool> createVert;
-    ofParameter<bool> state;
-
+    void setGui(ofxUICanvas * gui, float width);
     
-
+    bool reset, createVert;
+    float speed, numVerts, threshold, bgColor, shadowSize, lineWidth,
+    whiteMesh, blackMesh;
+    
+    ofVec3f offset;
     ofMesh mesh;
     vector<ofColor> colors;
-
+    
+    int mySurface;
+    
+    ofVec2f dancerPos;
 };

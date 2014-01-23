@@ -137,7 +137,7 @@ public:
     
     vector<ContentScene*> contentScenes;
     
-    //WireMesh * wireMesh;
+    WireMesh * wireMesh;
     //ofParameter<ofVec3f> meshOffsetWall;
     //ofParameter<ofVec3f> meshOffsetFloor;
     //Lines * lines;
