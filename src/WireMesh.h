@@ -31,6 +31,7 @@ public:
     vector<ofColor> colors;
     
     int mySurface;
+    bool changeSurface;
     
     ofVec2f dancerPos;
 };

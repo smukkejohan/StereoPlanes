@@ -47,6 +47,11 @@ void WireMesh::update() {
     if (createVert) {
         createVertex();
     }
+    
+    if(changeSurface) mySurface = 1;
+    else mySurface = 0;
+    
+    
 }
 
 void WireMesh::setGui(ofxUICanvas * gui, float width){
@@ -70,7 +75,7 @@ void WireMesh::setGui(ofxUICanvas * gui, float width){
     gui->addSlider(indexStr+"Connection Threshold",  0.1, 1, &threshold);
     
     
-    gui->addToggle(indexStr+"Surface", &mySurface);
+    gui->addToggle(indexStr+"Surface", &changeSurface);
     gui->addToggle(indexStr+"Create Vertex", &createVert);
     gui->addToggle(indexStr+"Reset Mesh", &reset);
     
@@ -79,27 +84,22 @@ void WireMesh::setGui(ofxUICanvas * gui, float width){
 
 
 void WireMesh::draw(int _surfaceId ) {
-    
+    ofDisableLighting();
     if (_surfaceId == mySurface) {
         
         glEnable(GL_DEPTH_TEST);
         
-        //ofSetColor(bgColor);
-        //ofFill();
-        //ofRect(-10, -10, 5, 20, 20);
-        
+        ofBackground(bgColor);
         ofPushMatrix();
         ofTranslate(offset.x, offset.y, offset.z);
-        
-        ofDrawGrid(6);
-        
+                
         ofSetLineWidth(lineWidth);
         mesh.draw();
         ofPopMatrix();
         
         glDisable(GL_DEPTH_TEST);
     }
-    
+    ofEnableLighting();
 }
 
 
