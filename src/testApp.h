@@ -20,6 +20,8 @@
 #include "ContentScene.h"
 #include "TestScene.h"
 #include "ofxUI.h"
+#include "AttractorControl.h"
+
 
 class testApp : public ofBaseApp
 {
@@ -131,6 +133,7 @@ public:
     TestScene * testScene;
     VoronoiWall * voronoiWall;
     BoxFloor * boxFloor;
+    AttractorControl * attractorControl;
     
     vector<ContentScene*> contentScenes;
     

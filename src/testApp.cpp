@@ -69,6 +69,10 @@ void testApp::setup()
     
     boxFloor = new BoxFloor();
     contentScenes.push_back(boxFloor);
+
+    attractorControl = new AttractorControl();
+    contentScenes.push_back(attractorControl);
+    
     
     for(int i=0; i<contentScenes.size(); i++) {
         contentScenes[i]->setupScene(i);
@@ -247,7 +251,10 @@ void testApp::drawScenes(int _surfaceId) {
 void testApp::draw()
 {
     
-    ofBackground(ofColor(0,0,0));
+    ofSetColor(0);
+    //ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+    
+    //ofBackground(ofColor(0,0,0));
     
     ofEnableLighting();
     ofEnableDepthTest();
@@ -276,7 +283,7 @@ void testApp::draw()
     
     // Draw the scenes to the output fbo
     fbo.begin(); {
-        ofClear(0, 0, 0);
+        //ofClear(0, 0, 0);
         ofSetColor(255);
         ofFill();
     
@@ -287,7 +294,7 @@ void testApp::draw()
     
     
     // Draw interface and monitor view
-    ofBackground(60,60,60);
+    //ofBackground(60,60,60);
     
     ofPushMatrix();
     ofTranslate(300, 20);
