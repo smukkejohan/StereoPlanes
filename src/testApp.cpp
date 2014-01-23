@@ -57,6 +57,9 @@ void testApp::setup()
     wireMesh = new WireMesh();
     contentScenes.push_back(wireMesh);
     
+    voro3d = new Voro3D();
+    contentScenes.push_back(voro3d);
+    
     for(int i=0; i<contentScenes.size(); i++) {
         contentScenes[i]->setupScene(i);
     }
@@ -78,7 +81,6 @@ void testApp::setup()
     gui->setColorBack(ofColor(10, 10, 10,220));
     
     gui->addLabel("Stereo", OFX_UI_FONT_LARGE);
-    gui->addFPSSlider("FPS");
     
     gui->addSlider("Eye seperation", 0, 7, &eyeSeperation);
     
@@ -165,9 +167,8 @@ void testApp::update()
         contentScenes[s]->update();
     }
     
-    gui->update();
     
-    
+    ofSetWindowTitle(ofToString(ofGetFrameRate()));
 }
 
 
@@ -182,9 +183,6 @@ void testApp::draw()
 {
     
     ofSetColor(0);
-    //ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
-    
-    //ofBackground(ofColor(0,0,0));
     
     ofEnableLighting();
     ofEnableDepthTest();
@@ -224,7 +222,7 @@ void testApp::draw()
     sbsOutputServer.publishTexture(&fbo.getTextureReference());
     
     // Draw interface and monitor view
-    //ofBackground(60,60,60);
+    ofBackground(60,60,60);
     
     ofPushMatrix();
     ofTranslate(300, 20);
@@ -235,11 +233,6 @@ void testApp::draw()
     ofPopMatrix();
     ofPopMatrix();
     
-    ofSetColor(255);
-    ofDrawBitmapString(ofToString(ofGetFrameRate()), 20, 20);
-    gui->draw();
-    
-
 
 }
 
@@ -247,32 +240,13 @@ void testApp::draw()
 void testApp::keyPressed(int key)
 {
     
-	if (key == 'f')
-	{
+	if (key == 'f'){
 		ofToggleFullscreen();
-	} else if (key == 'g')
-	{
+	} else if (key == 'g') {
 		showGrid = !showGrid;
-	} else if (key == 'd')
-	{
-	} else if(key == 's') {
-        addSphere = true;
-	} else if(key == 'r') {
-        activePlane->activateRightControl();
-    } else if(key == 'l') {
-        activePlane->activateLeftControl();
-    } else if(key == 'p') {
-        
-        if(activePlaneIndex == planes.size()-1) {
-            activePlaneIndex = 0;
-        } else {
-            activePlaneIndex++;
-        }
-        
-        activePlane->deactivateControl();
-        activePlane = planes[activePlaneIndex];
-    }
-    
+	} else if (key == 'd') {
+        hideGUI = !hideGUI;
+	}
 }
 
 

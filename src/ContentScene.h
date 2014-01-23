@@ -59,7 +59,6 @@ public:
     
     void drawScene(int _surfaceId=0) {
         if(enabled) {
-            
             glPushMatrix();ofPushMatrix();ofPushStyle();
             draw(_surfaceId);
             ofPopStyle();ofPopMatrix();glPopMatrix();

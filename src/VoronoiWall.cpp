@@ -200,14 +200,6 @@ void VoronoiWall::draw(int _surfaceId) {
 
     }
     
-    /*for(int b=0; b<breakPoints.size(); b++) {
-        ofPushMatrix();
-        ofTranslate(0, 0, -0.1);
-        ofSetColor(0,0,0,20);
-        //ofCircle(breakPoints[b].pos, breakPoints[b].radius);
-        ofPopMatrix();
-    }*/
-    
 }
 
 

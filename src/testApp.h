@@ -3,19 +3,13 @@
 #include "ofMain.h"
 #include "ofxSyphon.h"
 #include "ofxGui.h"
-//#include "ofxOscParameterSync.h"
 #include "ofxXmlSettings.h"
 #include "ofxOscReceiver.h"
-//#include "ofxStereoCamera.h"
 #include "StereoPlane.h"
-#include "ofxBullet.h"
 #include "VoronoiWall.h"
-#include "CeilingPlane.h"
-#include "Ribbon.h"
 #include "BoxFloor.h"
 #include "WireMesh.h"
 #include "Lines.h"
-#include "CommonPerspectiveTest.h"
 #include "Voro3D.h"
 #include "ContentScene.h"
 #include "TestScene.h"
@@ -53,9 +47,6 @@ public:
     ofxOscReceiver oscReceiver;
 //    ofxOscSender oscSender;
     
-    //ofParameter<float> boxOneZ; // a fraction of clock
-    //ofParameter<float> boxTwoZ;
-    
     ofVec3f camPosWall;
     ofVec3f camPosFloor;
     float eyeSeperation;
@@ -63,21 +54,10 @@ public:
     float dancerEllipseSize;
     ofVec2f dancerPos;
     
-    //    ofxOscParameterSync sync;
-    //ofParameterGroup parameters;
-    //ofxPanel gui;
-    
     bool hideGUI;
     
     ofxUIScrollableCanvas *gui;
     void guiEvent(ofxUIEventArgs &e);
-    
-    void drawRibbon();
-    
-    //this holds all of our points
-    vector<ofVec3f> points;
-    //this keeps track of the center of all the points
-    ofVec3f center;
     
     ofFbo fbo;
     StereoPlane * floor;
@@ -91,12 +71,6 @@ public:
     
     float dancerHeight;
     
-    bool addSphere = false;
-
-    void drawBulletFloor();
-    
-    void commonWorldDraw();
-    
     /*VoronoiWall * voronoiWall;
     VoronoiWall * voronoiPlaza;
     CeilingPlane * ceilingPlane;
@@ -105,7 +79,6 @@ public:
     CommonPerspectiveTest * cmpTest;
     */
     
-    
     void drawScenes(int _surfaceId=0);
     
     // Scenes
@@ -113,13 +86,12 @@ public:
     VoronoiWall * voronoiWall;
     BoxFloor * boxFloor;
     AttractorControl * attractorControl;
+    WireMesh * wireMesh;
+    Voro3D * voro3d;
     
     vector<ContentScene*> contentScenes;
     
-    WireMesh * wireMesh;
-    //ofParameter<ofVec3f> meshOffsetWall;
-    //ofParameter<ofVec3f> meshOffsetFloor;
+    
     //Lines * lines;
-    //Voro3D * voro3d;
     
 };

@@ -9,17 +9,8 @@
 #pragma once
 
 #include "ofMain.h"
-//#include "ofxVoronoi.h"
-//#include "Utils.h"
-#include "ofxVoro.h"
 #include "ContentScene.h"
-
-struct Cell {
-    ofMesh mesh;
-    ofVec3f offset;
-    ofColor color;
-    float r = 0;
-};
+#include "VoroUtils.h"
 
 class VoronoiPlane {
     
@@ -89,18 +80,14 @@ struct BreakPoint {
     float pressure;
 };
 
-
-
 class VoronoiWall : public ContentScene {
 
 public:
     void setup();
     void draw(int _surfaceId);
     void update();
-    
     void setGui(ofxUICanvas * gui, float width);
     void guiEvent(ofxUIEventArgs &e);
-    
     void receiveOsc(ofxOscMessage * m, string rest);
     
     ofVec3f wallBreakPos;
