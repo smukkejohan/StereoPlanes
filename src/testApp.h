@@ -20,6 +20,8 @@
 #include "ContentScene.h"
 #include "TestScene.h"
 #include "ofxUI.h"
+#include "AttractorControl.h"
+
 
 class testApp : public ofBaseApp
 {
@@ -110,10 +112,11 @@ public:
     TestScene * testScene;
     VoronoiWall * voronoiWall;
     BoxFloor * boxFloor;
+    AttractorControl * attractorControl;
     
     vector<ContentScene*> contentScenes;
     
-    //WireMesh * wireMesh;
+    WireMesh * wireMesh;
     //ofParameter<ofVec3f> meshOffsetWall;
     //ofParameter<ofVec3f> meshOffsetFloor;
     //Lines * lines;

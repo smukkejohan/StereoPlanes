@@ -48,8 +48,14 @@ void testApp::setup()
     voronoiWall = new VoronoiWall();
     contentScenes.push_back(voronoiWall);
     
-    boxFloor = new BoxFloor();
+    boxFloor = new BoxFloor( dancerPos );
     contentScenes.push_back(boxFloor);
+
+    attractorControl = new AttractorControl( dancerPos );
+    contentScenes.push_back(attractorControl);
+    
+    wireMesh = new WireMesh();
+    contentScenes.push_back(wireMesh);
     
     for(int i=0; i<contentScenes.size(); i++) {
         contentScenes[i]->setupScene(i);
@@ -175,7 +181,10 @@ void testApp::drawScenes(int _surfaceId) {
 void testApp::draw()
 {
     
-    ofBackground(ofColor(0,0,0));
+    ofSetColor(0);
+    //ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+    
+    //ofBackground(ofColor(0,0,0));
     
     ofEnableLighting();
     ofEnableDepthTest();
@@ -203,7 +212,7 @@ void testApp::draw()
     
     // Draw the scenes to the output fbo
     fbo.begin(); {
-        ofClear(0, 0, 0);
+        //ofClear(0, 0, 0);
         ofSetColor(255);
         ofFill();
     
@@ -215,7 +224,7 @@ void testApp::draw()
     sbsOutputServer.publishTexture(&fbo.getTextureReference());
     
     // Draw interface and monitor view
-    ofBackground(60,60,60);
+    //ofBackground(60,60,60);
     
     ofPushMatrix();
     ofTranslate(300, 20);

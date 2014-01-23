@@ -13,20 +13,16 @@
 class BoxFloor : public ContentScene {
     
 public:
+    BoxFloor( ofVec2f &_dancerPos );
     void setup();
     void update();
     void draw( int _surfaceId );
+    
     void setGui(ofxUICanvas * gui, float width);
+    void guiEvent(ofxUIEventArgs &e);
     
-    //ofParameterGroup * parameters;
-    
-//    ofParameter<float> surfaceHeight;
-//    ofParameter<float> waveHeight;
-//    ofParameter<float> speed;
-//    ofParameter<float> plateauHeight;
-//    ofParameter<float> lightHeight;
-//    ofParameter<float> distance;
-//    ofParameter<bool> bRotation;
+    void receiveOsc(ofxOscMessage * m, string rest);
+
     
     float surfaceHeight, waveHeight, speed, plateauHeight, lightHeight, platformRadius;
     bool bRotation;
@@ -35,7 +31,7 @@ public:
     
     vector <float> rotation;
     
-    ofVec2f dancerPos;
+    ofVec2f * dancerPos;
 
     
 };

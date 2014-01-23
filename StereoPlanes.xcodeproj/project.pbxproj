@@ -143,6 +143,8 @@
 		AB6B556918902BD800E70C54 /* ofxSyphonServer.mm in Sources */ = {isa = PBXBuildFile; fileRef = AB6B555F18902BD800E70C54 /* ofxSyphonServer.mm */; };
 		AB6B556A18902BD800E70C54 /* ofxSyphonServerDirectory.mm in Sources */ = {isa = PBXBuildFile; fileRef = AB6B556118902BD800E70C54 /* ofxSyphonServerDirectory.mm */; };
 		AB6B557118902BF800E70C54 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AB6B555518902BD800E70C54 /* Syphon.framework */; };
+		AB6B557718905A3B00E70C54 /* AttractorControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6B557318905A3B00E70C54 /* AttractorControl.cpp */; };
+		AB6B557818905A3B00E70C54 /* AttractorParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6B557518905A3B00E70C54 /* AttractorParticle.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -599,6 +601,10 @@
 		AB6B555F18902BD800E70C54 /* ofxSyphonServer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxSyphonServer.mm; sourceTree = "<group>"; };
 		AB6B556018902BD800E70C54 /* ofxSyphonServerDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSyphonServerDirectory.h; sourceTree = "<group>"; };
 		AB6B556118902BD800E70C54 /* ofxSyphonServerDirectory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxSyphonServerDirectory.mm; sourceTree = "<group>"; };
+		AB6B557318905A3B00E70C54 /* AttractorControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AttractorControl.cpp; sourceTree = "<group>"; };
+		AB6B557418905A3B00E70C54 /* AttractorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttractorControl.h; sourceTree = "<group>"; };
+		AB6B557518905A3B00E70C54 /* AttractorParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AttractorParticle.cpp; sourceTree = "<group>"; };
+		AB6B557618905A3B00E70C54 /* AttractorParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttractorParticle.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -1732,6 +1738,10 @@
 				0420B333188F1F490086D388 /* TestScene.h */,
 				04139F9C18903A64004A28CB /* BulletBalls.cpp */,
 				04139F9D18903A64004A28CB /* BulletBalls.h */,
+				AB6B557318905A3B00E70C54 /* AttractorControl.cpp */,
+				AB6B557418905A3B00E70C54 /* AttractorControl.h */,
+				AB6B557518905A3B00E70C54 /* AttractorParticle.cpp */,
+				AB6B557618905A3B00E70C54 /* AttractorParticle.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1870,6 +1880,7 @@
 				0420B5B2188F8E4F0086D388 /* ofxUISortableList.cpp in Sources */,
 				7AF1C7411885EAD500B38D3B /* ofxTimer.cpp in Sources */,
 				7AF1C73D1885EAD500B38D3B /* GuiMoviePlayer.cpp in Sources */,
+				AB6B557718905A3B00E70C54 /* AttractorControl.cpp in Sources */,
 				04A6C848188099E700B17C45 /* ofxButton.cpp in Sources */,
 				0420B5AC188F8E4F0086D388 /* ofxUIRadio.cpp in Sources */,
 				0420B31C188ECE3F0086D388 /* container_prd.cpp in Sources */,
@@ -1878,6 +1889,7 @@
 				7AF1C7451885EAD500B38D3B /* Utils.cpp in Sources */,
 				0420B5A2188F8E4F0086D388 /* ofxUIImageToggle.cpp in Sources */,
 				04A6C82E188099DE00B17C45 /* OscTypes.cpp in Sources */,
+				AB6B557818905A3B00E70C54 /* AttractorParticle.cpp in Sources */,
 				04A6C85B18809A7500B17C45 /* ofxXmlSettings.cpp in Sources */,
 				0420B2CD188ECD290086D388 /* Voro3D.cpp in Sources */,
 				04A6C833188099DE00B17C45 /* ofxOscSender.cpp in Sources */,
