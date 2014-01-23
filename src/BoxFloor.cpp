@@ -29,6 +29,8 @@ void BoxFloor::update() {
 
 void BoxFloor::draw( int _surfaceId ) {
     
+    ofBackground(0);
+    
     if (_surfaceId == 0) {
     
         ofEnableLighting();

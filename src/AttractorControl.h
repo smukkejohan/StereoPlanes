@@ -47,4 +47,6 @@ public:
     
     ofLight localLight;
     
+    bool started = false;
+    
 };

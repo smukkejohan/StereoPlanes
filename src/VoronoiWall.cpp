@@ -73,6 +73,8 @@ void VoronoiWall::setGui(ofxUICanvas * gui, float width){
 
 void VoronoiWall::draw(int _surfaceId) {
     
+    ofBackground(0);
+    
     if(_surfaceId == 1) {
         
         light.enable();

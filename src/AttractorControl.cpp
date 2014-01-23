@@ -12,18 +12,7 @@ void AttractorControl::setup() {
     
     name = "Attractor Control";
     oscAddress = "/attractorcontrol";
-    
-    damping = 4.0;
-    acceleration = 1.05;
-    multiplier = 2.0;
-    bkgColor = 255.0;
-    bkgTransparency = 7.0;
-    particleColor = 255.0;
-    createStructure = false;
-    hideDancer = false;
-    angleMovement = false;
-    freeze = false;
-    
+        
     attractorPos.set(ofRandom(-1, 1), ofRandom(-1, 1), ofRandom(-1, 1));
     
     ofVec3f particleStartPos = attractorPos;
@@ -46,7 +35,21 @@ void AttractorControl::setup() {
 
 void AttractorControl::update() {
     
-    ofBackground(bkgColor, bkgTransparency);
+    if (!started) {
+        damping = 4.0;
+        acceleration = 1.05;
+        multiplier = 2.0;
+        bkgColor = 255.0;
+        bkgTransparency = 7.0;
+        particleColor = 0.0;
+        createStructure = false;
+        hideDancer = false;
+        angleMovement = false;
+        freeze = false;
+        
+        started = true;
+    }
+    
     //cout << ofGetCurrentRenderer()->getBgColor() << endl;
     
     for( int i = 0; i < particleList.size(); i++ ){
@@ -112,6 +115,8 @@ void AttractorControl::update() {
 
 void AttractorControl::draw( int _surfaceId ) {
     
+    ofBackground(bkgColor, bkgTransparency);
+    
     if ( _surfaceId == 1 ) {
     
         ofDisableLighting();
@@ -124,7 +129,7 @@ void AttractorControl::draw( int _surfaceId ) {
                 particleList[i].draw();
             }
         } else {
-            ofBackground(0, 0);
+            ofBackground(255, 0);
         }
         
     }
@@ -156,5 +161,6 @@ void AttractorControl::setGui(ofxUICanvas * gui, float width){
     gui->addToggle(indexStr+"Dissolve Back", &freeze);
     gui->addToggle(indexStr+"Hide Dancer", &hideDancer);
     gui->addToggle(indexStr+"Angle Movement", &angleMovement);
+    
     
 }
