@@ -48,7 +48,7 @@ void testApp::setup()
     voronoiWall = new VoronoiWall();
     contentScenes.push_back(voronoiWall);
     
-    boxFloor = new BoxFloor();
+    boxFloor = new BoxFloor( dancerPos );
     contentScenes.push_back(boxFloor);
 
     attractorControl = new AttractorControl();
