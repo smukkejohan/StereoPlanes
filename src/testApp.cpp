@@ -54,6 +54,8 @@ void testApp::setup()
     attractorControl = new AttractorControl();
     contentScenes.push_back(attractorControl);
     
+    wireMesh = new WireMesh();
+    contentScenes.push_back(wireMesh);
     
     for(int i=0; i<contentScenes.size(); i++) {
         contentScenes[i]->setupScene(i);
