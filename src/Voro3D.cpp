@@ -148,7 +148,8 @@ void Voro3D::draw(int _surfaceId) {
                     //ofRect(-10,-80,140,125);
                     ofPopMatrix();
                     ofSetColor(255);
-                    //font.drawString(" \\o-o/", 0,0);
+                    //font.drawString(" Cool", 0,0);
+                    //font.drawString(" Glasses! ", 0,-24);
                     font.drawString("\\o-o/", 0,-28);
                     //font.drawString(" \\o-o/ ", 0,-60);
                 }ofPopMatrix();

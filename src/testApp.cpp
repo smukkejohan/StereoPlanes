@@ -105,6 +105,7 @@ void testApp::setup()
     
     gui->setDrawBack(true);
     gui->setScrollAreaToScreenHeight();
+    
     gui->loadSettings("GUI/guiSettings.xml");
     
 }
@@ -113,6 +114,9 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
+    
+    
+    gui->setVisible(hideGUI);
     
     
     while(oscReceiver.hasWaitingMessages()){
@@ -224,6 +228,7 @@ void testApp::draw()
     // Draw interface and monitor view
     //ofBackground(60,60,60);
     
+    if(!hideMonitor) {
     ofPushMatrix();
     ofTranslate(300, 20);
     ofPushMatrix();
@@ -232,8 +237,8 @@ void testApp::draw()
     fbo.draw(0, 0);
     ofPopMatrix();
     ofPopMatrix();
+    }
     
-
 }
 
 //--------------------------------------------------------------
@@ -246,7 +251,12 @@ void testApp::keyPressed(int key)
 		showGrid = !showGrid;
 	} else if (key == 'd') {
         hideGUI = !hideGUI;
-	}
+	
+    } else if (key == 'm') {
+        hideMonitor = !hideMonitor;
+        
+    }
+    
 }
 
 

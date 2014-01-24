@@ -54,7 +54,8 @@ public:
     float dancerEllipseSize;
     ofVec2f dancerPos;
     
-    bool hideGUI;
+    bool hideGUI = false;
+    bool hideMonitor = false;
     
     ofxUIScrollableCanvas *gui;
     void guiEvent(ofxUIEventArgs &e);
