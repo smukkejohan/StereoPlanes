@@ -10,6 +10,7 @@ vector<ofVec3f> points;
 void testApp::setup()
 {
     
+    ofSetLogLevel(OF_LOG_ERROR);
     
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
@@ -156,7 +157,13 @@ void testApp::update()
             
 		} else if(m.getAddress() == "/Dancer/y"){
             dancerPos.y = m.getArgAsFloat(0);
-		}
+            
+		} else if(m.getAddress() == "/activescene/x"){
+            for(int i=0; i<contentScenes.size(); i++) {
+                contentScenes[i]->enabled = false;
+            }
+            contentScenes[m.getArgAsInt32(0)]->enabled = true;
+        }
     }
     
     planes[0]->cam.setPosition(camPosFloor);
@@ -251,10 +258,20 @@ void testApp::keyPressed(int key)
 		showGrid = !showGrid;
 	} else if (key == 'd') {
         hideGUI = !hideGUI;
-	
     } else if (key == 'm') {
         hideMonitor = !hideMonitor;
         
+	} else if (key == 'w'){
+        gui->loadSettings("GUI/wallsetting.xml");
+        
+    } else if(key == 'q'){
+        gui->loadSettings("GUI/floorsetting.xml");
+    } else if (key == 'W'){
+        gui->saveSettings("GUI/wallsetting.xml");
+        
+    }
+    else if(key == 'Q'){
+        gui->saveSettings("GUI/floorsetting.xml");
     }
     
 }

@@ -167,7 +167,7 @@ void Voro3D::draw(int _surfaceId) {
         
         ofPushMatrix(); {
             
-            ofTranslate(0.1, 0.2, -0.38);
+            ofTranslate(0.26, 0.3, -0.25);
             
             ofRotateX(ofGetElapsedTimef()*6);
             ofRotateY(ofGetElapsedTimef()*7);
