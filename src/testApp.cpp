@@ -222,7 +222,7 @@ void testApp::draw()
     sbsOutputServer.publishTexture(&fbo.getTextureReference());
     
     // Draw interface and monitor view
-    ofBackground(60,60,60);
+    //ofBackground(60,60,60);
     
     ofPushMatrix();
     ofTranslate(300, 20);
