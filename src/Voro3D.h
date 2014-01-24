@@ -35,5 +35,9 @@ public:
     VoroCube * floorCube;
     VoroCube * extraCube;
     
+    ofImage logo;
+    
+    ofTrueTypeFont font;
+    
     
 };

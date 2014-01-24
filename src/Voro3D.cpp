@@ -28,13 +28,23 @@ void Voro3D::setup() {
     wallCube = new VoroCube();
     wallCube->setup(0.2,0.2,0.2,40);
 
+    floorCube = new VoroCube();
+    floorCube->setup(0.2,0.2,0.2,10);
+    
     /*
     extraCube = new VoroCube();
     extraCube->setup(0.4,0.01,0.2,60);
     
-    floorCube = new VoroCube();
-    floorCube->setup(0.2,0.2,0.1,100);
+
     */
+    
+    logo.allocate(602, 242, OF_IMAGE_COLOR_ALPHA);
+    logo.loadImage("recoil_logo.png");
+    logo.mirror(true, false);
+    
+    font.loadFont("andale mono", 24);
+    font.setLetterSpacing(0.8);
+    
 }
 
 void Voro3D::draw(int _surfaceId) {
@@ -54,7 +64,7 @@ void Voro3D::draw(int _surfaceId) {
          }*/
         
         
-        ofPushMatrix();
+        ofPushMatrix(); {
         
         ofTranslate(0.15, 0);
         
@@ -63,9 +73,9 @@ void Voro3D::draw(int _surfaceId) {
         ofRotateZ(ofGetElapsedTimef()*8);
         
         for(int i = 0; i < wallCube->cellMeshes.size(); i++){
-            ofPushMatrix();
+            ofPushMatrix(); {
             
-            ofScale(1.8,1.8,1.8);
+            ofScale(1.65,1.65,1.65);
             ofSetColor(255,255,255,255);
             
             float explode = ofMap(ofSignedNoise(ofGetElapsedTimef()), 0, 1, 0.8, 1);
@@ -75,40 +85,129 @@ void Voro3D::draw(int _surfaceId) {
             ofTranslate(-wallCube->cellMeshes[i].getCentroid().x, -wallCube->cellMeshes[i].getCentroid().y, -wallCube->cellMeshes[i].getCentroid().z);
             
             wallCube->cellMeshes[i].drawFaces();
-            ofPopMatrix();
+            } ofPopMatrix();
 
         }
-        ofPopMatrix();
+        } ofPopMatrix();
         
         
-        ofPushMatrix();
+        ofPushMatrix(); {
         ofTranslate(-0.5,-0.1,0.08);
         
         ofTranslate(0,1,0);
         ofRotateX(-90);
         
-        for(int i=0; i<6; i++) {
-            ofPushMatrix();
+        for(int i=0; i<12; i++) {
+            ofPushMatrix(); {
             
-            ofTranslate(0, ofMap(i,0,6,0,-1),0);
+            ofTranslate(0, ofMap(i,0,12,0,-3),0);
+                ofSetColor(ofMap(i,0,12,255,10));
             ofDrawBox(0.6,0.02,0.02);
             
-            ofPopMatrix();
+            } ofPopMatrix();
         }
         
-        ofPopMatrix();
-    
-    
+        } ofPopMatrix();
+        
+        ofPushMatrix(); {
+            
+            ofTranslate(0.1, 0.5, -0.2);
+            
+            ofRotateY(ofMap(ofSignedNoise(ofGetElapsedTimef()/10), 0, 1, 4, -4));
+            ofSetColor(255);
+            logo.draw(0,0, 0.43, 0.2);
+            
+        } ofPopMatrix();
+        
     }
     
     if(_surfaceId == 0) {
     
         
+        ofSetColor(255);
+        // Draw Logo
+
+        
+        // Draw "In Stereo"
+        ofSetColor(255,255,255, 230);
+        ofPushMatrix(); {
+            ofTranslate(-0.9, -0.9, 0.65);
+            ofRotateZ(180);
+            ofRotateY(180);
+            ofPushMatrix();{
+                
+                ofScale(0.005,0.005,0.005);
+                
+                ofPushMatrix(); {
+                    
+                    ofRotateX(70);
+                    ofRotateY(33);
+                    ofPushMatrix();
+                    ofTranslate(0, 0, -0.1);
+                    ofSetColor(255, 255, 255,200);
+                    //ofRect(-10,-80,140,125);
+                    ofPopMatrix();
+                    ofSetColor(255);
+                    //font.drawString(" \\o-o/", 0,0);
+                    font.drawString("\\o-o/", 0,-28);
+                    //font.drawString(" \\o-o/ ", 0,-60);
+                }ofPopMatrix();
+                
+                /*ofPushMatrix();{
+                 //ofRotateY(8);
+                 ofScale(3, 3);
+                 font.drawString("\\o-o/", 12,0);
+                 }ofPopMatrix();*/
+                
+            }ofPopMatrix();
+            
+        } ofPopMatrix();
         
         
-        
-    
-    
+        ofPushMatrix(); {
+            
+            ofTranslate(0.1, 0.2, -0.38);
+            
+            ofRotateX(ofGetElapsedTimef()*6);
+            ofRotateY(ofGetElapsedTimef()*7);
+            ofRotateZ(ofGetElapsedTimef()*8);
+            
+            for(int c=0;c<3;c++) {
+                
+                ofPushMatrix(); {
+                if(c==1) {
+                    
+                    ofTranslate(0.2, 0.2, 0.2);
+                    ofRotateX(ofGetElapsedTimef()*8);
+                    ofRotateY(ofGetElapsedTimef()*9);
+                    ofRotateZ(ofGetElapsedTimef()*7);
+                }
+                if(c==2) {
+                    
+                    ofTranslate(-0.2, -0.2, 0.2);
+                    ofRotateX(ofGetElapsedTimef()*6);
+                    ofRotateY(ofGetElapsedTimef()*5);
+                    ofRotateZ(ofGetElapsedTimef()*3);
+                }
+                
+            ofScale(0.6,0.6,0.6);
+            ofSetColor(255,255,255,200);
+            for(int i = 0; i < floorCube->cellMeshes.size(); i++){
+                ofPushMatrix(); {
+                    
+
+                    
+                    
+                    
+                    
+                    floorCube->cellMeshes[i].drawFaces();
+                } ofPopMatrix();
+            }
+            }ofPopMatrix();
+            }
+        } ofPopMatrix();
+            
+
     
     }
     
