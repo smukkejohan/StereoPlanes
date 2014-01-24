@@ -14,7 +14,6 @@
 
 class AttractorControl : public ContentScene {
 public:
-    AttractorControl ( ofVec2f &_dancerPos );
     void setup();
     void update();
     void draw( int _surfaceId );
@@ -24,7 +23,7 @@ public:
 
     void receiveOsc(ofxOscMessage * m, string rest);
     
-    float damping, acceleration, multiplier, bkgColor, bkgTransparency, particleColor;
+    float damping, acceleration, multiplier, bkgColor, bkgTransparency, particleColor, explosionSize;
     
     bool bCreateStructure, bHideDancer, bAngleMovement, bFreeze;
     
@@ -48,7 +47,7 @@ public:
     int explosionCountdown;
     int finalExplosionCountdown;
     
-    ofVec2f * dancerPos;
+    ofVec2f dancerPos;
     
     ofLight localLight;
     

@@ -8,12 +8,6 @@
 
 #include "BoxFloor.h"
 
-BoxFloor::BoxFloor ( ofVec2f &_dancerPos ) {
-    
-    dancerPos = &_dancerPos;
-    
-}
-
 void BoxFloor::setup() {
     
     name = "Box Floor";
@@ -50,7 +44,7 @@ void BoxFloor::draw( int _surfaceId ) {
                 ofPushMatrix();
                 ofTranslate(x, y, 0);
                 if (bRotation)ofRotateZ (rotation[((x+1) * 10 * 20) + ((y+1) * 10)]);
-                    if (ofDist(dancerPos->x, dancerPos->y, x, y) > platformRadius) {
+                    if (ofDist(dancerPos.x, dancerPos.y, x, y) > platformRadius) {
                         ofDrawBox(0, 0, surfaceHeight, 0.09, 0.09, waveHeight*tempNoise);
                     } else {
                         ofDrawBox(0, 0, surfaceHeight, 0.09, 0.09, plateauHeight);
@@ -59,8 +53,6 @@ void BoxFloor::draw( int _surfaceId ) {
             }
         }
         
-        cout << dancerPos->x << ", " << dancerPos->y << endl;
-
         boxLight.disable();
         ofDisableLighting();
     
@@ -94,7 +86,17 @@ void BoxFloor::guiEvent(ofxUIEventArgs &e)
 
 void BoxFloor::receiveOsc(ofxOscMessage * m, string rest) {
     
-    if(rest == "/surfaceheight/x" ) {
+    //cout << "yay" << endl;
+    //cout << m->getAddress() << endl;
+    //cout << rest << endl;
+        
+    if(rest == "/dancerpos/x" ) {
+        dancerPos.x = m->getArgAsFloat(0);
+
+    } else if(rest == "/dancerpos/y" ) {
+        dancerPos.y = m->getArgAsFloat(0);
+    
+    } else if(rest == "/surfaceheight/x" ) {
         surfaceHeight = m->getArgAsFloat(0);
     
     } else if(rest == "/waveheight/x"){
@@ -109,12 +111,11 @@ void BoxFloor::receiveOsc(ofxOscMessage * m, string rest) {
     } else if(rest == "/lightheight/x"){
         lightHeight = m->getArgAsFloat(0);
         
-    } else if(rest == "/platformRadius/x"){
+    } else if(rest == "/plateauradius/x"){
         platformRadius = m->getArgAsFloat(0);
         
     } else if(rest == "/bRotation/x"){
         bRotation = m->getArgAsFloat(0);
-        
     }
 }
 

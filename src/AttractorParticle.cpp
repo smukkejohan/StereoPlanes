@@ -63,8 +63,8 @@ void AttractorParticle::draw() {
         
         ofVertex(prevPos.x, prevPos.y, prevPos.z);
         ofVertex(pos.x, pos.y, pos.z);
-        ofVertex(pos.x, pos.y+0.01, pos.z);
-        ofVertex(prevPos.x, prevPos.y+0.01, prevPos.z);
+        ofVertex(pos.x, pos.y+0.02, pos.z);
+        ofVertex(prevPos.x, prevPos.y+0.02, prevPos.z);
         
         ofEndShape();
         
