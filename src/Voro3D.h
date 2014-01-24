@@ -8,19 +8,36 @@
 
 #pragma once
 #include "ofMain.h"
-#include "ofxVoro.h"
+#include "ContentScene.h"
+#include "VoroUtils.h"
 
-class Voro3D {
+class Voro3D : public ContentScene {
 public:
     
     void setup();
     void update();
-    void draw();
+    void draw(int _surfaceId);
     
-    void makeTissue(int _nCells, float _width, float _height, float _deep);
+    void setGui(ofxUICanvas * gui, float width);
+    void guiEvent(ofxUIEventArgs &e);
+    void receiveOsc(ofxOscMessage * m, string rest);
+    
     
     vector<ofPoint> cellCentroids;
     vector<float>   cellRadius;
     vector<ofMesh>  cellMeshes;
+    
+    ofLight light;
+    ofLight dirLight;
+    
+    
+    VoroCube * wallCube;
+    VoroCube * floorCube;
+    VoroCube * extraCube;
+    
+    ofImage logo;
+    
+    ofTrueTypeFont font;
+    
     
 };

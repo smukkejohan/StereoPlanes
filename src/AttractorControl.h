@@ -14,14 +14,19 @@
 
 class AttractorControl : public ContentScene {
 public:
+    AttractorControl ( ofVec2f &_dancerPos );
     void setup();
     void update();
     void draw( int _surfaceId );
+    
     void setGui(ofxUICanvas * gui, float width);
+    void guiEvent(ofxUIEventArgs &e);
 
+    void receiveOsc(ofxOscMessage * m, string rest);
+    
     float damping, acceleration, multiplier, bkgColor, bkgTransparency, particleColor;
     
-    bool createStructure, hideDancer, angleMovement, freeze;
+    bool bCreateStructure, bHideDancer, bAngleMovement, bFreeze;
     
 //    ofParameter<float> damping;
 //    ofParameter<float> acceleration;
@@ -43,7 +48,7 @@ public:
     int explosionCountdown;
     int finalExplosionCountdown;
     
-    ofVec2f dancerPos;
+    ofVec2f * dancerPos;
     
     ofLight localLight;
     

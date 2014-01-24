@@ -8,7 +8,6 @@
 
 #include "TestScene.h"
 
-
 void TestScene::setup() {
     name = "Test Scene";
     oscAddress = "/testscene";
@@ -59,12 +58,26 @@ void TestScene::draw(int _surfaceId) {
         light.disable();
         
     }
-    
-    
 }
-
-
-
 
 void TestScene::update() {
 }
+
+
+void TestScene::setGui(ofxUICanvas * gui, float width){
+    ContentScene::setGui(gui, width);
+
+}
+
+void TestScene::receiveOsc(ofxOscMessage * m, string rest) {
+}
+
+void TestScene::guiEvent(ofxUIEventArgs &e)
+{
+    
+    string name = e.getName();
+	int kind = e.getKind();
+	//cout << "got event from: " << name << endl;
+    
+}
+

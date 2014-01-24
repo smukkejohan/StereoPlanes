@@ -48,14 +48,17 @@ void testApp::setup()
     voronoiWall = new VoronoiWall();
     contentScenes.push_back(voronoiWall);
     
-    boxFloor = new BoxFloor();
+    boxFloor = new BoxFloor( dancerPos );
     contentScenes.push_back(boxFloor);
 
-    attractorControl = new AttractorControl();
+    attractorControl = new AttractorControl( dancerPos );
     contentScenes.push_back(attractorControl);
     
     wireMesh = new WireMesh();
     contentScenes.push_back(wireMesh);
+    
+    voro3d = new Voro3D();
+    contentScenes.push_back(voro3d);
     
     for(int i=0; i<contentScenes.size(); i++) {
         contentScenes[i]->setupScene(i);
@@ -78,7 +81,6 @@ void testApp::setup()
     gui->setColorBack(ofColor(10, 10, 10,220));
     
     gui->addLabel("Stereo", OFX_UI_FONT_LARGE);
-    gui->addFPSSlider("FPS");
     
     gui->addSlider("Eye seperation", 0, 7, &eyeSeperation);
     
@@ -131,7 +133,7 @@ void testApp::update()
             camPosFloor.y = m.getArgAsFloat(0);
             
 		} else if(m.getAddress() == "/Floor/Cameraz/x"){
-                        camPosFloor.z = m.getArgAsFloat(0);
+                camPosFloor.z = m.getArgAsFloat(0);
             
         } else if(m.getAddress() == "/Wall/Camera/x"){
                 camPosWall.x = m.getArgAsFloat(0);
@@ -150,30 +152,7 @@ void testApp::update()
             
 		} else if(m.getAddress() == "/Dancer/y"){
             dancerPos.y = m.getArgAsFloat(0);
-            
-		} else if(m.getAddress() == "/planerot/x"){
-           /* ofVec3f rot = ceilingPlane->rotation.get();
-            rot.x = m.getArgAsFloat(0);
-            ceilingPlane->rotation.set(rot);
-            */
-        } else if(m.getAddress() == "/breakstrength1/x"){
-            /*if(currentScene == 3) {
-            voronoiPlaza->wallBreakStrength.set(m.getArgAsFloat(0));
-            voronoiWall->wallBreakStrength.set(m.getArgAsFloat(0));
-            }*/
-            
-        } else if(m.getAddress() == "/OffsetWall/x"){
-            //meshOffsetWall.set(ofVec3f(m.getArgAsFloat(0), meshOffsetWall.get().y, meshOffsetWall.get().z));
-            
-		} else if(m.getAddress() == "/OffsetWall/y"){
-            //meshOffsetWall.set(ofVec3f(meshOffsetWall.get().x, m.getArgAsFloat(0), meshOffsetWall.get().z));
-        }
-        else if(m.getAddress() == "/OffsetFloor/x"){
-            //meshOffsetFloor.set(ofVec3f(m.getArgAsFloat(0), meshOffsetFloor.get().y, meshOffsetWall.get().z));
-            
-		} else if(m.getAddress() == "/OffsetFloor/y"){
-            //meshOffsetFloor.set(ofVec3f(meshOffsetFloor.get().x, m.getArgAsFloat(0), meshOffsetWall.get().z));
-        }
+		}
     }
     
     planes[0]->cam.setPosition(camPosFloor);
@@ -188,9 +167,8 @@ void testApp::update()
         contentScenes[s]->update();
     }
     
-    gui->update();
     
-    
+    ofSetWindowTitle(ofToString(ofGetFrameRate()));
 }
 
 
@@ -205,9 +183,6 @@ void testApp::draw()
 {
     
     ofSetColor(0);
-    //ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
-    
-    //ofBackground(ofColor(0,0,0));
     
     ofEnableLighting();
     ofEnableDepthTest();
@@ -247,7 +222,7 @@ void testApp::draw()
     sbsOutputServer.publishTexture(&fbo.getTextureReference());
     
     // Draw interface and monitor view
-    //ofBackground(60,60,60);
+    ofBackground(60,60,60);
     
     ofPushMatrix();
     ofTranslate(300, 20);
@@ -258,11 +233,6 @@ void testApp::draw()
     ofPopMatrix();
     ofPopMatrix();
     
-    ofSetColor(255);
-    ofDrawBitmapString(ofToString(ofGetFrameRate()), 20, 20);
-    gui->draw();
-    
-
 
 }
 
@@ -270,32 +240,13 @@ void testApp::draw()
 void testApp::keyPressed(int key)
 {
     
-	if (key == 'f')
-	{
+	if (key == 'f'){
 		ofToggleFullscreen();
-	} else if (key == 'g')
-	{
+	} else if (key == 'g') {
 		showGrid = !showGrid;
-	} else if (key == 'd')
-	{
-	} else if(key == 's') {
-        addSphere = true;
-	} else if(key == 'r') {
-        activePlane->activateRightControl();
-    } else if(key == 'l') {
-        activePlane->activateLeftControl();
-    } else if(key == 'p') {
-        
-        if(activePlaneIndex == planes.size()-1) {
-            activePlaneIndex = 0;
-        } else {
-            activePlaneIndex++;
-        }
-        
-        activePlane->deactivateControl();
-        activePlane = planes[activePlaneIndex];
-    }
-    
+	} else if (key == 'd') {
+        hideGUI = !hideGUI;
+	}
 }
 
 
