@@ -8,12 +8,6 @@
 
 #include "AttractorControl.h"
 
-AttractorControl::AttractorControl ( ofVec2f &_dancerPos ) {
-    
-    dancerPos = &_dancerPos;
-    
-}
-
 void AttractorControl::setup() {
     
     name = "Attractor Control";
@@ -52,22 +46,24 @@ void AttractorControl::update() {
         bHideDancer = false;
         bAngleMovement = false;
         bFreeze = false;
+        explosionSize = 0.005;
         
-        started = true;
     }
     
     //cout << ofGetCurrentRenderer()->getBgColor() << endl;
     
     for( int i = 0; i < particleList.size(); i++ ){
-        if (!bFreeze) particleList[i].update( damping, acceleration, ofVec3f(dancerPos->x, dancerPos->y, 0));
+        if (!bFreeze) particleList[i].update( damping, acceleration, ofVec3f(dancerPos.x, dancerPos.y, 0));
     }
     
     if ( bCreateStructure ) {
+        
+        bAngleMovement = false;
         acceleration = 0.0;
         
         if (explosionCountdown%12== 0) {
             for( int i = 0; i < particleList.size(); i++ ){
-                particleList[i].velocity.set(ofRandom(-0.02, 0.02), ofRandom(-0.02, 0.02), ofRandom(-0.015, 0.0));
+                particleList[i].velocity.set(ofRandom(-explosionSize, explosionSize), ofRandom(-explosionSize, explosionSize), ofRandom(-0.015, 0.0));
             }
             
         }
@@ -111,7 +107,7 @@ void AttractorControl::update() {
         
         if (finalExplosionCountdown%24== 0) {
             for( int i = 0; i < particleList.size(); i++ ){
-                particleList[i].velocity.set(ofRandom(-0.02, 0.02), ofRandom(-0.02, 0.02), ofRandom(-0.02, 0.02));
+                particleList[i].velocity.set(ofRandom(-0.02, 0.02), ofRandom(-0.02, 0.02), ofRandom(-0.01, 0.02));
             }
         }
         
@@ -121,7 +117,13 @@ void AttractorControl::update() {
 
 void AttractorControl::draw( int _surfaceId ) {
     
+    if (!started) {
+        ofBackground(255);
+        started = true;
+        
+    } else {
     ofBackground(bkgColor, bkgTransparency);
+    }
     
     if ( _surfaceId == 1 ) {
     
@@ -182,7 +184,13 @@ void AttractorControl::guiEvent(ofxUIEventArgs &e)
 
 void AttractorControl::receiveOsc(ofxOscMessage * m, string rest) {
     
-    if(rest == "/damping/x" ) {
+    if(rest == "/dancerpos/x" ) {
+        dancerPos.x = m->getArgAsFloat(0);
+        
+    } else if(rest == "/dancerpos/y" ) {
+        dancerPos.y = m->getArgAsFloat(0);
+        
+    } else if(rest == "/damping/x" ) {
         damping = m->getArgAsFloat(0);
         
     } else if(rest == "/acceleration/x"){
@@ -197,18 +205,42 @@ void AttractorControl::receiveOsc(ofxOscMessage * m, string rest) {
     } else if(rest == "/particleColor/x"){
         particleColor = m->getArgAsFloat(0);
         
-    } else if(rest == "/createstructure/x"){
-        bCreateStructure = m->getArgAsFloat(0);
         
-    } else if(rest == "/bRotation/x"){
-        bHideDancer = m->getArgAsFloat(0);
+    } else if(rest == "/createstructure/x"){
+        bCreateStructure = true;
+        
+    } else if(rest == "/hidedancer/x"){
+        bFreeze = false;
+        bHideDancer = true;
     
-    } else if(rest == "/bRotation/x"){
-        bAngleMovement = m->getArgAsFloat(0);
+    } else if(rest == "/anglemovement/x"){
+        
+//        for( int i = 0; i < particleList.size(); i++ ){
+//         
+//            particleList[i].pos.set(ofRandom(-1, 1), ofRandom(-1, 1), ofRandom(0, 1));
+//            
+//        }
+        bFreeze = false;
+        bAngleMovement = true;
     
-    } else if(rest == "/bRotation/x"){
-        bFreeze = m->getArgAsFloat(0);
+    } else if(rest == "/freeze/x"){
+        
+        for( int i = 0; i < particleList.size(); i++ ){
+
+            particleList[i].velocity.set(0, 0, 0);
+
+        }
+        
+        acceleration = 1.05;
+        bkgTransparency = 7.0;
+        
+        bFreeze = false;
+        bAngleMovement = false;
+        bHideDancer = false;
     
+    } else if (rest == "/explosionsize/x") {
+        explosionSize = m->getArgAsFloat(0);
+        
     }
     
     

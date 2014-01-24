@@ -75,6 +75,7 @@ public:
         vector<string> adrSplit = ofSplitString(m->getAddress(), "/");
         string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
         //cout<<adrSplit[1]<<"   "<<rest<<endl;
+        //cout << adrSplit[0] << " " << adrSplit[1] << " " <<adrSplit[2] << endl;
         
         if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
             if(rest == "/enable/x" ) {
