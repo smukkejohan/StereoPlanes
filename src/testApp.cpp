@@ -48,10 +48,10 @@ void testApp::setup()
     voronoiWall = new VoronoiWall();
     contentScenes.push_back(voronoiWall);
     
-    boxFloor = new BoxFloor( dancerPos );
+    boxFloor = new BoxFloor();
     contentScenes.push_back(boxFloor);
 
-    attractorControl = new AttractorControl( dancerPos );
+    attractorControl = new AttractorControl();
     contentScenes.push_back(attractorControl);
     
     wireMesh = new WireMesh();

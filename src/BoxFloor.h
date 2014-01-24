@@ -13,7 +13,6 @@
 class BoxFloor : public ContentScene {
     
 public:
-    BoxFloor( ofVec2f &_dancerPos );
     void setup();
     void update();
     void draw( int _surfaceId );
@@ -31,7 +30,7 @@ public:
     
     vector <float> rotation;
     
-    ofVec2f * dancerPos;
+    ofVec2f dancerPos;
 
     
 };
