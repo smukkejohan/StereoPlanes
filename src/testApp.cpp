@@ -48,10 +48,10 @@ void testApp::setup()
     voronoiWall = new VoronoiWall();
     contentScenes.push_back(voronoiWall);
     
-    boxFloor = new BoxFloor( dancerPos );
+    boxFloor = new BoxFloor();
     contentScenes.push_back(boxFloor);
 
-    attractorControl = new AttractorControl( dancerPos );
+    attractorControl = new AttractorControl();
     contentScenes.push_back(attractorControl);
     
     wireMesh = new WireMesh();
@@ -222,7 +222,7 @@ void testApp::draw()
     sbsOutputServer.publishTexture(&fbo.getTextureReference());
     
     // Draw interface and monitor view
-    ofBackground(60,60,60);
+    //ofBackground(60,60,60);
     
     ofPushMatrix();
     ofTranslate(300, 20);

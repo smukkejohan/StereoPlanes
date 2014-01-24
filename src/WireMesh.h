@@ -21,10 +21,10 @@ public:
     void resetMesh();
     void createVertex();
     void setGui(ofxUICanvas * gui, float width);
-    void receiveOsc(ofxOscMessage * m, string rest);
     
     bool reset, createVert;
-    float sliderspeed, speed, numVerts, threshold, bgColor, shadowColor, shadowX, shadowY, lineWidth, whiteMesh, blackMesh;
+    float speed, numVerts, threshold, bgColor, shadowSize, lineWidth,
+    whiteMesh, blackMesh;
     
     ofVec3f offset;
     ofMesh mesh;
@@ -34,21 +34,4 @@ public:
     bool changeSurface;
     
     ofVec2f dancerPos;
-    
-    
-    
-    bool shadInc, shadDec, wCloser, wFurther, bCloser, bFurther, speedInc, speedDec, lightBg, darkBg;
-    
-    
-    void shadowIncrease();
-    void shadowDecrease();
-    void whiteCloser();
-    void whiteFurther();
-    void blackCloser();
-    void blackFurther();
-    void lightenBackground();
-    void darkenBackground();
-    void speedDecrease();
-    void speedIncrease();
-    
 };
