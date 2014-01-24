@@ -1,6 +1,6 @@
 <JZML>
 <PROJECT version="4110" width="1024" height="724" osc_target="-1" midi_target="-1" kbmouse_target="-1" skin="Pixel"/>
-<WINDOW class="JAZZINTERFACE" text="Box Floor" x="0" y="0" width="1024" height="724" id="10" state="1" group="0" font="tahoma,11,0" >
+<WINDOW class="JAZZINTERFACE" text="Box Floor" x="0" y="0" width="1024" height="724" id="10" state="0" group="0" font="tahoma,11,0" >
 <WINDOW class="Multiball" text="BoxFloorDancerPos3" x="0" y="0" width="448" height="454" id="5" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="1596013" cursor="1" ephemere="0" grid="0" grid_steps="1,1" label="1" multicolor="0" multilabel="0" nbr="1" physic="1" polyphony="0" zoom="1.000000">
 <PARAM name="x=" value="0.610256" send="29" osc_target="0" osc_trigger="1" osc_message="/boxfloor/dancerpos/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="-1.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <PARAM name="y=" value="0.477273" send="29" osc_target="0" osc_trigger="1" osc_message="/boxfloor/dancerpos/y" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="1.000000,-1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -65,7 +65,7 @@
 <VARIABLE name="speed=1" send="0" osc_target="0" osc_trigger="1" osc_message="/PlateauRadius/speed" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
 </WINDOW>
-<WINDOW class="JAZZINTERFACE" text="Cameras" x="0" y="0" width="1024" height="724" state="0" group="0" font="tahoma,11,0" >
+<WINDOW class="JAZZINTERFACE" text="Cameras" x="0" y="0" width="1024" height="724" state="1" group="0" font="tahoma,11,0" >
 <WINDOW class="Multiball" text="CameraWall" x="38" y="25" width="448" height="454" id="5" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="1596013" cursor="1" ephemere="0" grid="0" grid_steps="1,1" label="1" multicolor="0" multilabel="0" nbr="1" physic="1" polyphony="0" zoom="1.000000">
 <PARAM name="x=" value="0.485564" send="29" osc_target="0" osc_trigger="1" osc_message="/Wall/Camera/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="-3.000000,3.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <PARAM name="y=" value="0.425047" send="29" osc_target="0" osc_trigger="1" osc_message="/Wall/Camera/y" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="-3.000000,3.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -119,6 +119,14 @@
 <VARIABLE name="attraction=1" send="0" osc_target="0" osc_trigger="1" osc_message="/ZFloor/attraction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="friction=0.9" send="0" osc_target="0" osc_trigger="1" osc_message="/ZFloor/friction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="speed=1" send="0" osc_target="0" osc_trigger="1" osc_message="/ZFloor/speed" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+</WINDOW>
+<WINDOW class="Fader" text="activeScene" x="564" y="619" width="352" height="44" id="11" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="1596013" cursor="0" grid="0" grid_steps="1" label="0" physic="1" precision="3" unit="" value="0" zoom="0.000000">
+<PARAM name="x=" value="0.000000" send="29" osc_target="0" osc_trigger="1" osc_message="/activescene/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,5.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<PARAM name="z=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/activeScene/z" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="value=x" send="0" osc_target="0" osc_trigger="1" osc_message="/activeScene/value" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="attraction=1" send="0" osc_target="0" osc_trigger="1" osc_message="/activeScene/attraction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="friction=0.9" send="0" osc_target="0" osc_trigger="1" osc_message="/activeScene/friction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="speed=1" send="0" osc_target="0" osc_trigger="1" osc_message="/activeScene/speed" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
 </WINDOW>
 <WINDOW class="JAZZINTERFACE" text="Dancer" x="0" y="0" width="1024" height="724" id="1" state="0" group="0" font="tahoma,11,0" >

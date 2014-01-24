@@ -152,7 +152,13 @@ void testApp::update()
             
 		} else if(m.getAddress() == "/Dancer/y"){
             dancerPos.y = m.getArgAsFloat(0);
-		}
+            
+		} else if(m.getAddress() == "/activescene/x"){
+            for(int i=0; i<contentScenes.size(); i++) {
+                contentScenes[i]->enabled = false;
+            }
+            contentScenes[m.getArgAsInt32(0)]->enabled = true;
+        }
     }
     
     planes[0]->cam.setPosition(camPosFloor);
