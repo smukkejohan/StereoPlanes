@@ -253,6 +253,24 @@ void testApp::keyPressed(int key)
 	} else if (key == 'd') {
         hideGUI = !hideGUI;
 	}
+    
+    
+    else if (key == 'w'){
+        gui->loadSettings("GUI/wallsetting.xml");
+        
+    }
+    else if(key == 'q'){
+        gui->loadSettings("GUI/floorsetting.xml");
+    }
+    
+    else if (key == 'W'){
+        gui->saveSettings("GUI/wallsetting.xml");
+        
+    }
+    else if(key == 'Q'){
+        gui->saveSettings("GUI/floorsetting.xml");
+    }
+    
 }
 
 
