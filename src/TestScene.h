@@ -17,6 +17,10 @@ public:
     void update();
     void setup();
     
+    void setGui(ofxUICanvas * gui, float width);
+    void guiEvent(ofxUIEventArgs &e);
+    void receiveOsc(ofxOscMessage * m, string rest);
+    
     ofLight light;
     
 };
