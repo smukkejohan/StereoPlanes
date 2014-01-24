@@ -101,7 +101,7 @@ void Voro3D::draw(int _surfaceId) {
             ofPushMatrix(); {
             
             ofTranslate(0, ofMap(i,0,12,0,-3),0);
-                ofSetColor(ofMap(i,0,12,255,10));
+                ofSetColor(ofMap(i,0,12,180,10));
             ofDrawBox(0.6,0.02,0.02);
             
             } ofPopMatrix();
@@ -195,9 +195,6 @@ void Voro3D::draw(int _surfaceId) {
             for(int i = 0; i < floorCube->cellMeshes.size(); i++){
                 ofPushMatrix(); {
                     
-
-                    
-                    
                     
                     
                     floorCube->cellMeshes[i].drawFaces();
@@ -206,7 +203,24 @@ void Voro3D::draw(int _surfaceId) {
             }ofPopMatrix();
             }
         } ofPopMatrix();
+        
+        ofPushMatrix(); {
+            ofTranslate(0.8, 0.8, 0.08);
             
+            //ofRotateX(-90);
+            
+            for(int i=0; i<12; i++) {
+                ofPushMatrix(); {
+                    
+                    ofTranslate(0, 0, ofMap(i,0,12,0,3));
+                    ofSetColor(ofMap(i,0,12,180,10));
+                    ofDrawBox(0.02,0.4,0.02);
+                    
+                } ofPopMatrix();
+            }
+            
+        } ofPopMatrix();
+        
 
     
     }
