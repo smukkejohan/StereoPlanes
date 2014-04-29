@@ -13,8 +13,6 @@ LIB_BULLET_MATH_RELEASE = "$(OF_PATH)/addons/ofxBullet/libs/bullet2.8.1/lib/osx/
 LIB_BULLET_MINI_CL_RELEASE = "$(OF_PATH)/addons/ofxBullet/libs/bullet2.8.1/lib/osx/i386/libMiniCL.a"
 LIB_BULLET_SOFT_BODY_RELEASE = "$(OF_PATH)/addons/ofxBullet/libs/bullet2.8.1/lib/osx/i386/libBulletSoftBody.a"
 
-LIB_VORONI = "$(OF_PATH)/addons/ofxVoronoi/addon/ofxVoronoi/lib/Voronoi/lib/libvoro++_2d32.a"
-
 //ICONS - NEW IN 0072 
 ICON_NAME_DEBUG = icon-debug.icns
 ICON_NAME_RELEASE = icon.icns
@@ -26,10 +24,12 @@ ICON_FILE_PATH = $(OF_PATH)/libs/openFrameworksCompiled/project/osx/
 OF_OPENCV_HEADERS = "$(OF_PATH)/addons/ofxOpenCv/libs/opencv/include" "$(OF_PATH)/addons/ofxOpenCv/libs/opencv/include/opencv" "$(OF_PATH)/addons/ofxOpenCv/libs/opencv/include/opencv2"
 OF_OPENCV_LIBS = "$(OF_PATH)/addons/ofxOpenCv/libs/opencv/lib/osx/opencv.a"
 
+OSC_ADDON = "../../../addons/ofxOsc/libs/oscpack/src"
+
 LIB_BULLET_ALL_RELEASE = $(LIB_BULLET_COLLISION_RELEASE) $(LIB_BULLET_DYNAMICS_RELEASE) $(LIB_BULLET_MATH_RELEASE) $(LIB_BULLET_MINI_CL_RELEASE) $(LIB_BULLET_SOFT_BODY_RELEASE)
 
-OTHER_LDFLAGS = $(OF_CORE_LIBS) $(LIB_BULLET_ALL_RELEASE) $(OF_OPENCV_LIBS) $(LIB_VORONI)
+OTHER_LDFLAGS = $(OF_CORE_LIBS) $(LIB_BULLET_ALL_RELEASE) $(OF_OPENCV_LIBS)
 
 HEADER_SEARCH_PATHS = $(OF_CORE_HEADERS)
 
-USER_HEADER_SEARCH_PATHS = $(OF_OPENCV_HEADERS) $(HEADER_BULLET) "src"
+USER_HEADER_SEARCH_PATHS = $(OF_OPENCV_HEADERS) $(HEADER_BULLET) "src" $(OSC_ADDON)

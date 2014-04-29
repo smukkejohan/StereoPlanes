@@ -25,7 +25,7 @@ public:
     float height;
     float depth;
     
-    vector<ofMesh>  cellMeshes;
+    vector<ofVboMesh>  cellMeshes;
     int nCells;
     vector<Cell> cells;
     
@@ -61,7 +61,8 @@ public:
             addCellSeed(con, newCell, i, true);
         }
         
-        cellMeshes = getCellsFromContainer(con);
+        cellMeshes = getCellsFromContainer(con, 1);
+        
         
         cells.clear();
         for (int i=0; i < cellMeshes.size(); i++) {

@@ -18,7 +18,7 @@ public:
     
     ofRectangle bounds;
     float depth = 0.005;
-    vector<ofMesh>  cellMeshes;
+    vector<ofVboMesh>  cellMeshes;
     int nCells = 20;
     vector<Cell> cells;
     
@@ -53,7 +53,7 @@ public:
             addCellSeed(con, newCell, i, true);
         }
         
-        cellMeshes = getCellsFromContainer(con);
+        cellMeshes = getCellsFromContainer(con, 1);
         
         cells.clear();
         
