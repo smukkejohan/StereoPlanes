@@ -202,8 +202,6 @@ void VoronoiWall::draw(int _surfaceId) {
     
 }
 
-
-
 void VoronoiWall::update() {
     nCells = round(nCells);
     

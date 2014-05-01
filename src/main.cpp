@@ -5,11 +5,8 @@
 //========================================================================
 int main( ){    
     
-    ofAppGlutWindow window;
-//    window.setDoubleBuffering(false);
-    window.setGlutDisplayString("rgb alpha double samples>=8 depth");
-    
-    ofSetupOpenGL(&window, 1600, 800, OF_WINDOW);
+    ofSetCurrentRenderer(ofGLProgrammableRenderer::TYPE);
+    ofSetupOpenGL(1280, 800, OF_WINDOW);
     
 	// this kicks off the running of my app
 	// can be OF_WINDOW or OF_FULLSCREEN

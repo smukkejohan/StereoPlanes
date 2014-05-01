@@ -12,6 +12,9 @@
 
 void Voro3D::setup() {
     
+    
+    name = "Recoil Presentation";
+    
     light.setPosition(2, 2, -2);
     light.setSpotlight();
     light.lookAt(ofVec3f(0,0,0));
@@ -34,8 +37,6 @@ void Voro3D::setup() {
     /*
     extraCube = new VoroCube();
     extraCube->setup(0.4,0.01,0.2,60);
-    
-
     */
     
     logo.allocate(602, 242, OF_IMAGE_COLOR_ALPHA);
@@ -65,7 +66,6 @@ void Voro3D::draw(int _surfaceId) {
         
         
         ofPushMatrix(); {
-        
         ofTranslate(0.15, 0);
         
         ofRotateX(ofGetElapsedTimef()*6);

@@ -12,7 +12,7 @@ void testApp::setup()
     
     ofSetLogLevel(OF_LOG_ERROR);
     
-    ofSetFrameRate(30);
+    ofSetFrameRate(60);
     ofSetVerticalSync(true);
     ofSetBackgroundAuto(true);
     ofBackground(0);
@@ -21,28 +21,37 @@ void testApp::setup()
     //rightOutputServer.setName("Right");
     sbsOutputServer.setName("Side By Side");
     
-    fbo.allocate(2048, 768);
+    // we output 4x1920x1080 layered in two units
+    
+    int resx = 1920;
+    int resy = 1080;
+    
+    fbo.allocate(resx*3, resy);
     
     settings.load("stereoplanes.xml");
     
     floor = new StereoPlane("floor");
-    floor->setup(512, 768, &settings);
+    floor->setup(resx/2, resy, &settings);
     floor->pos = ofVec2f(0,0);
     planes.push_back(floor);
         
-    wall = new StereoPlane("wall");
-    wall->setup(512, 768, &settings);
-    wall->pos = ofVec2f(1024,0);
+    wall = new StereoPlane("wallLeft");
+    wall->setup(resx/2, resy, &settings);
+    wall->pos = ofVec2f(resx,0);
     planes.push_back(wall);
+    
+    wallRight = new StereoPlane("wallRight");
+    wallRight->setup(resx/2, resy, &settings);
+    wallRight->pos = ofVec2f(resx*2,0);
+    planes.push_back(wallRight);
     
     activePlaneIndex = 0;
     activePlane = planes[activePlaneIndex];
     
     oscReceiver.setup(9001);
     
-    camPosFloor = ofVec3f(0, 0, -1);
-    camPosWall = ofVec3f(0, 0, -1);
     
+    // ####  Setup scenes
     testScene = new TestScene();
     contentScenes.push_back(testScene);
     
@@ -51,74 +60,91 @@ void testApp::setup()
     
     boxFloor = new BoxFloor();
     contentScenes.push_back(boxFloor);
-
-    attractorControl = new AttractorControl();
-    contentScenes.push_back(attractorControl);
-    
-    wireMesh = new WireMesh();
-    contentScenes.push_back(wireMesh);
     
     voro3d = new Voro3D();
     contentScenes.push_back(voro3d);
     
     for(int i=0; i<contentScenes.size(); i++) {
         contentScenes[i]->setupScene(i);
+        contentScenes[i]->mainTimeline = &timeline;
     }
     
-    // add all parameterGroups from scenes to parameters
-    // gui.setup(parameters);
+    
+    // #### Setup timeline
+    timeline.setup();
+    timeline.setupFont("GUI/Arial.ttf", 7);
+    timeline.setDurationInSeconds(60*15);
+    
+    // #### Setup GUI's
     
     float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
-    float width = 255-xInit;
-    hideGUI = false;
+    guiWidth = 255;
+    float w = guiWidth-xInit*2;
     
-    gui = new ofxUIScrollableCanvas(20, 0, width+xInit, ofGetHeight());
+    ofxUIScrollableCanvas * mainGui;
+    mainGui = new ofxUIScrollableCanvas(0, 0, guiWidth-xInit, ofGetHeight());
+    guis.push_back(mainGui);
     
-    gui->setScrollAreaToScreenHeight();
-    gui->setScrollableDirections(false, true);
+    ofxUIScrollableCanvas * sceneGui;
+    sceneGui = new ofxUIScrollableCanvas((guiWidth+xInit)*2, 0, guiWidth-xInit, ofGetHeight());
+    guis.push_back(sceneGui);
     
-    gui->setFont("GUI/Arial.ttf");
-    gui->setWidgetFontSize(OFX_UI_FONT_SMALL);
-    gui->setColorBack(ofColor(10, 10, 10,220));
+    ofxUIScrollableCanvas * planeGui;
+    planeGui = new ofxUIScrollableCanvas(guiWidth+xInit, 0, guiWidth-xInit, ofGetHeight());
+    guis.push_back(planeGui);
     
-    gui->addLabel("Stereo", OFX_UI_FONT_LARGE);
+    for(int i=0; i<guis.size(); i++) {
+        
+        guis[i]->setDrawBack(true);
+        guis[i]->setScrollableDirections(false, true);
+        guis[i]->setFont("GUI/Arial.ttf");
+        guis[i]->setWidgetFontSize(OFX_UI_FONT_SMALL);
+        guis[i]->setColorBack(ofColor(10, 10, 10,220));
     
-    gui->addSlider("Eye seperation", 0, 7, &eyeSeperation);
-    
-    gui->addSlider("Floor X",  -2, 2, &camPosFloor.x);
-    gui->addSlider("Floor Y",  -2, 2, &camPosFloor.y);
-    gui->addSlider("Floor Z",  -2, -0.25, &camPosFloor.z);
-    
-    gui->addSlider("Wall X",  -2, 2, &camPosWall.x);
-    gui->addSlider("Wall Y",  -2, 2, &camPosWall.y);
-    gui->addSlider("Wall Z",  -2, -0.25, &camPosWall.z);
-    
-    gui->addSlider("Dancer X",  -1, 1, &dancerPos.x);
-    gui->addSlider("Dancer Y",  -1, 1, &dancerPos.y);
-    
-    for(int i=0; i<contentScenes.size(); i++) {
-        gui->addSpacer(width, 3)->setDrawOutline(true);
-        contentScenes[i]->setGui(gui, width);
     }
     
-    gui->autoSizeToFitWidgets();
-    ofAddListener(gui->newGUIEvent,this,&testApp::guiEvent);
+    mainGui->setName("Main");
+    mainGui->addLabel("Stereo", OFX_UI_FONT_LARGE);
+    mainGui->addSpacer(w, 3)->setDrawOutline(true);
+    mainGui->addFPS();
+    mainGui->addSlider("Eye seperation", 0, 7, &eyeSeperation);
+    mainGui->addToggle("Draw Checkers", &drawChessboards);
+    mainGui->addToggle("Draw Planes", &drawGrids);
+    mainGui->addToggle("Draw FBOs", &drawFBOs);
     
-    gui->setDrawBack(true);
-    gui->setScrollAreaToScreenHeight();
     
-    gui->loadSettings("GUI/guiSettings.xml");
+    planeGui->setName("Planes");
+    planeGui->addLabel("Surfaces", OFX_UI_FONT_LARGE);
+    for(int i=0; i<planes.size(); i++) {
+        planeGui->addSpacer(w, 3)->setDrawOutline(true);
+        
+        planeGui->addSlider(planes[i]->name + " Cam X",  -2, 2, &planes[i]->camPos.x);
+        planeGui->addSlider(planes[i]->name + " Cam Y",  -2, 2, &planes[i]->camPos.y);
+        planeGui->addSlider(planes[i]->name + " Cam Z",  -2, -0.25, &planes[i]->camPos.z);
+        planeGui->addSlider(planes[i]->name + " Aspect",  0, 2, &planes[i]->aspect);
+        
+    }
+    
+    
+    
+    sceneGui->setName("Scenes");
+    sceneGui->addLabel("Scenes", OFX_UI_FONT_LARGE);
+    for(int i=0; i<contentScenes.size(); i++) {
+        sceneGui->addSpacer(w, 3)->setDrawOutline(true);
+        contentScenes[i]->setGui(sceneGui, w);
+    }
+    
+    for(int i=0; i<guis.size(); i++) {
+        guis[i]->loadSettings("GUI/" + guis[i]->getName());
+        guis[i]->autoSizeToFitWidgets();
+        ofAddListener(guis[i]->newGUIEvent,this,&testApp::guiEvent);
+    }
     
 }
-
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-    
-    
-    gui->setVisible(hideGUI);
-    
     
     while(oscReceiver.hasWaitingMessages()){
 		// get the next message
@@ -129,34 +155,9 @@ void testApp::update()
             contentScenes[i]->parseSceneOsc(&m);
         }
         
-        //cout<<m.getAddress()<<endl;
         
-		if(m.getAddress() == "/Floor/Camera/x"){
-            camPosFloor.x = m.getArgAsFloat(0);
-            
-		} else if(m.getAddress() == "/Floor/Camera/y"){
-            camPosFloor.y = m.getArgAsFloat(0);
-            
-		} else if(m.getAddress() == "/Floor/Cameraz/x"){
-                camPosFloor.z = m.getArgAsFloat(0);
-            
-        } else if(m.getAddress() == "/Wall/Camera/x"){
-                camPosWall.x = m.getArgAsFloat(0);
-            
-        } else if(m.getAddress() == "/Wall/Camera/y"){
-                camPosWall.y = m.getArgAsFloat(0);
-            
-        } else if(m.getAddress() == "/Wall/Cameraz/x"){
-                camPosWall.z = m.getArgAsFloat(0);
-            
-		} else if(m.getAddress() == "/eyeSeperation/x"){
+		if(m.getAddress() == "/eyeSeperation/x"){
 			eyeSeperation = m.getArgAsFloat(0);
-            
-		} else if(m.getAddress() == "/Dancer/x"){
-            dancerPos.x = m.getArgAsFloat(0);
-            
-		} else if(m.getAddress() == "/Dancer/y"){
-            dancerPos.y = m.getArgAsFloat(0);
             
 		} else if(m.getAddress() == "/activescene/x"){
             for(int i=0; i<contentScenes.size(); i++) {
@@ -166,8 +167,6 @@ void testApp::update()
         }
     }
     
-    planes[0]->cam.setPosition(camPosFloor);
-    planes[1]->cam.setPosition(camPosWall);
     
     for(int i=0; i<planes.size(); i++) {
         planes[i]->cam.setPhysicalEyeSeparation(eyeSeperation);
@@ -178,8 +177,7 @@ void testApp::update()
         contentScenes[s]->update();
     }
     
-    
-    ofSetWindowTitle(ofToString(ofGetFrameRate()));
+    //ofSetWindowTitle(ofToString(ofGetFrameRate()));
 }
 
 
@@ -193,27 +191,55 @@ void testApp::drawScenes(int _surfaceId) {
 void testApp::draw()
 {
     
-    ofSetColor(0);
+    float fboHeight = (ofGetWidth())*(fbo.getHeight()*1./fbo.getWidth());
+    //float fboHeight = 200;
     
-    ofEnableLighting();
-    ofEnableDepthTest();
+    for(int i=0; i<guis.size(); i++) {
+        //guis[i]->setPosition(guis[i]->getRect()->x,
+        guis[i]->setScrollArea(guis[i]->getRect()->x, timeline.getHeight()+fboHeight, guiWidth, ofGetHeight()-timeline.getHeight()-fboHeight);
+    }
+    
+    for(int s=0; s<contentScenes.size();s++) {
+        contentScenes[s]->time = timeline.getCurrentTime();
+    }
+    
     ofSetColor(255);
+    ofBackgroundGradient(ofColor::darkGrey, ofColor::gray);
+    //drawScenes(0);
+    
+    ofEnableDepthTest();
     
     // draw scenes to surfaces, they are kept in the cameras fbo
+    
     for(int i=0;i < planes.size(); i++) {
         planes[i]->beginLeft();
+        ofClear(ofColor::black);
+        glPushMatrix();
+        //lights->begin();
         drawScenes(i);
+        //lights->end();
+        glPopMatrix();
         planes[i]->endLeft();
         
         planes[i]->beginRight();
+        ofClear(ofColor::black);
+        glPushMatrix();
+        //lights->begin();
         drawScenes(i);
+        //lights->end();
+        glPopMatrix();
         planes[i]->endRight();
     }
     
     ofDisableDepthTest();
-    ofDisableLighting();
     
-    if(showGrid) {
+    if(drawChessboards) {
+        for(int i=0; i<planes.size(); i++) {
+            planes[i]->drawChessboards();
+        }
+    }
+    
+    if(drawGrids) {
         for(int i=0; i<planes.size(); i++) {
             planes[i]->drawGrids();
         }
@@ -221,30 +247,30 @@ void testApp::draw()
     
     // Draw the scenes to the output fbo
     fbo.begin(); {
-        //ofClear(0, 0, 0);
-        ofSetColor(255);
+        ofClear(0, 0, 0, 0);
+        ofSetColor(255,255);
         ofFill();
-    
         for(int i=0; i<planes.size(); i++) {
             planes[i]->draw();
         }
         
     }fbo.end();
-    sbsOutputServer.publishTexture(&fbo.getTextureReference());
     
-    // Draw interface and monitor view
-    //ofBackground(60,60,60);
-    
-    if(!hideMonitor) {
-    ofPushMatrix();
-    ofTranslate(300, 20);
-    ofPushMatrix();
-    ofScale(0.5,0.5);
-    ofSetColor(255);
-    fbo.draw(0, 0);
-    ofPopMatrix();
-    ofPopMatrix();
+    if(drawFBOs) {
+        ofSetColor(255,255);
+        //fboHeight
+        
+        //float fboWidth = (fboHeight)*(fbo.getHeight()*1./fbo.getWidth());
+
+        fbo.draw(0,timeline.getHeight(),(ofGetWidth()),fboHeight);
     }
+    
+    ofSetColor(64,255);
+    ofRect(timeline.getDrawRect());
+    ofSetColor(255,255);
+    timeline.draw();
+    
+    sbsOutputServer.publishFBO(&fbo);
     
 }
 
@@ -254,24 +280,6 @@ void testApp::keyPressed(int key)
     
 	if (key == 'f'){
 		ofToggleFullscreen();
-	} else if (key == 'g') {
-		showGrid = !showGrid;
-	} else if (key == 'd') {
-        hideGUI = !hideGUI;
-    } else if (key == 'm') {
-        hideMonitor = !hideMonitor;
-        
-	} else if (key == 'w'){
-        gui->loadSettings("GUI/wallsetting.xml");
-        
-    } else if(key == 'q'){
-        gui->loadSettings("GUI/floorsetting.xml");
-    } else if (key == 'W'){
-        gui->saveSettings("GUI/wallsetting.xml");
-        
-    }
-    else if(key == 'Q'){
-        gui->saveSettings("GUI/floorsetting.xml");
     }
     
 }
@@ -312,8 +320,6 @@ void testApp::mouseReleased(int x, int y, int button)
 void testApp::windowResized(int w, int h)
 {
     
-    gui->setScrollAreaToScreenHeight();
-    
 }
 
 //--------------------------------------------------------------
@@ -330,8 +336,11 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 
 void testApp::exit() {
     
-    gui->saveSettings("GUI/guiSettings.xml");
-    delete gui;
+    for(int i=0; i<guis.size(); i++) {
+        guis[i]->saveSettings("GUI/"+guis[i]->getName());
+        delete guis[i];
+        
+    }
     
     for(int i=0; i < planes.size(); i++) {
         planes[i]->exit();

@@ -8,14 +8,12 @@
 #include "StereoPlane.h"
 #include "VoronoiWall.h"
 #include "BoxFloor.h"
-#include "WireMesh.h"
 #include "Lines.h"
 #include "Voro3D.h"
 #include "ContentScene.h"
 #include "TestScene.h"
 #include "ofxUI.h"
-#include "AttractorControl.h"
-
+#include "ofxTimeline.h"
 
 class testApp : public ofBaseApp
 {
@@ -24,9 +22,6 @@ public:
 	void setup();
 	void update();
 	void draw();
-	
-	void drawScene1();
-    void drawScene2();
     
 	void keyPressed(int key);
 	void keyReleased(int key);
@@ -45,25 +40,32 @@ public:
     bool showGrid;
 
     ofxOscReceiver oscReceiver;
-//    ofxOscSender oscSender;
+//  ofxOscSender oscSender;
     
-    ofVec3f camPosWall;
-    ofVec3f camPosFloor;
     float eyeSeperation;
     
-    float dancerEllipseSize;
-    ofVec2f dancerPos;
+    ofxTimeline timeline;
+    
+    bool drawFBOs = false;
+    bool drawChessboards = false;
+    bool drawGrids = false;
+    float aspect = 1.0;
+    
+    float guiWidth;
     
     bool hideGUI = false;
     bool hideMonitor = false;
     
-    ofxUIScrollableCanvas *gui;
+    vector<ofxUIScrollableCanvas *> guis;
+    
     void guiEvent(ofxUIEventArgs &e);
     
     ofFbo fbo;
     StereoPlane * floor;
     StereoPlane * wall;
+    StereoPlane * wallRight;
     StereoPlane * activePlane;
+    
     int activePlaneIndex;
     
     void drawFloor();
@@ -86,13 +88,8 @@ public:
     TestScene * testScene;
     VoronoiWall * voronoiWall;
     BoxFloor * boxFloor;
-    AttractorControl * attractorControl;
-    WireMesh * wireMesh;
     Voro3D * voro3d;
     
     vector<ContentScene*> contentScenes;
-    
-    
-    //Lines * lines;
-    
+        
 };

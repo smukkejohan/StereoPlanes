@@ -10,6 +10,8 @@
 #include "ofMain.h"
 #include "ofxUI.h"
 #include "ofxOsc.h"
+#include "ofxTimeline.h"
+
 
 class ContentScene {
     
@@ -21,6 +23,9 @@ public:
     string oscAddress = "/default";
     
     bool enabled;
+    float time;
+    
+    ofxTimeline * mainTimeline;
     
     ContentScene() {
     }

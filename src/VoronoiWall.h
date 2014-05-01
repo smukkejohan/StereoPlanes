@@ -53,7 +53,7 @@ public:
             addCellSeed(con, newCell, i, true);
         }
         
-        cellMeshes = getCellsFromContainer(con, 1);
+        cellMeshes = getCellsFromContainer(con, 0.01);
         
         cells.clear();
         
