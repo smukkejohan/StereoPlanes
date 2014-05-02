@@ -40,7 +40,6 @@ public:
     virtual void receiveOsc(ofxOscMessage * m, string rest) {};
     
     virtual void setGui(ofxUICanvas * gui, float width){
-        
         gui->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_SMALL));
         gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
         gui->addSpacer(width, 1);
@@ -52,7 +51,6 @@ public:
     void setupScene(int _index) {
         index = _index;
         indexStr = "["+ ofToString(_index) + "] ";
-        
         setup();
     }
     

@@ -53,7 +53,7 @@ public:
             addCellSeed(con, newCell, i, true);
         }
         
-        cellMeshes = getCellsFromContainer(con, 0.01);
+        cellMeshes = getCellsFromContainer(con, 0);
         
         cells.clear();
         
@@ -113,6 +113,7 @@ public:
     
     ofLight light;
     ofLight dirLight;
+    ofMaterial mat;
     vector<ofMesh>  cellMeshes;
     
     float darksolid;
@@ -121,5 +122,7 @@ public:
     
     VoronoiPlane * voroWall;
     VoronoiPlane * voroFloor;
+    
+    //ofLight pointlight;
     
 };

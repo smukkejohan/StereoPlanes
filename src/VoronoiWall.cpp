@@ -27,19 +27,6 @@ void VoronoiWall::setup() {
     
     nCells = 40;
     
-    light.setPosition(2, 2, -4);
-    light.setSpotlight();
-    light.lookAt(ofVec3f(0,0,0));
-    light.setDiffuseColor(ofColor(255,255,255));
-    light.setAmbientColor(ofColor(255,255,255));
-    light.setSpecularColor(ofColor::white);
-    
-    dirLight.setSpotlight();
-    dirLight.setPosition(-1, -1, 1);
-    dirLight.lookAt(ofVec3f(0,0,0));
-    dirLight.setDiffuseColor(ofColor(255,255,255));
-    dirLight.setSpecularColor(ofColor::white);
-        
     voroWall = new VoronoiPlane;
     voroWall->setup(ofRectangle(-2, 0, 4, 1));
     
@@ -54,6 +41,7 @@ void VoronoiWall::setup() {
         breakPoints.push_back(br);
     }
 
+    
 }
 
 void VoronoiWall::setGui(ofxUICanvas * gui, float width){
@@ -82,14 +70,13 @@ void VoronoiWall::draw(int _surfaceId) {
     
     ofBackground(0);
     
-    if(_surfaceId == 1) {
+    
+    
+    //if(_surfaceId == 1) {
         
         ofTranslate(1, 1);
         ofRotateX(rotation);
         ofTranslate(-1, -1);
-        
-        light.enable();
-        dirLight.enable();
         
         ofRectangle bounds = ofRectangle(wallBreakPos.x-wallBreakReach.x/2, wallBreakPos.y-wallBreakReach.y/2, wallBreakReach.x, wallBreakReach.y);
         
@@ -125,14 +112,15 @@ void VoronoiWall::draw(int _surfaceId) {
             
             //ofMap()
             
-            ofColor col = ofColor(ofMap(ofClamp(voroWall->cells[i].offset.z, -0.2,0.2), -0.2, 0.2, 255,100));
-            col.a = 225;
+            //ofColor col = ofColor(ofMap(ofClamp(voroWall->cells[i].offset.z, -0.2,0.2), -0.2, 0.2, 255,100));
+            //col.a = 225;
+            ofColor col = ofColor(255,255,255,255);
             
             if(insideSolid) {
-                voroWall->cells[i].mesh.disableNormals();
+                //voroWall->cells[i].mesh.disableNormals();
                 col.a = ofMap(darksolid, 0, 1, 255,0);
             } else {
-                voroWall->cells[i].mesh.enableNormals();
+                //voroWall->cells[i].mesh.enableNormals();
             }
             
             ofSetColor(col);
@@ -141,14 +129,11 @@ void VoronoiWall::draw(int _surfaceId) {
             
             ofPopMatrix();
         }
-        
-        light.disable();
-        dirLight.disable();
+    
 
-    }
+    //}
     
-    
-    if(_surfaceId == 0 && floor > 0) {
+    /*if(_surfaceId == 0 && floor > 0) {
         
         light.enable();
         dirLight.enable();
@@ -193,12 +178,9 @@ void VoronoiWall::draw(int _surfaceId) {
             ofPopMatrix();
                 
             }
-        }
-        
-        light.disable();
-        dirLight.disable();
+        }*/
 
-    }
+    //}
     
 }
 

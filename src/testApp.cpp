@@ -51,6 +51,12 @@ void testApp::setup()
     oscReceiver.setup(9001);
     
     
+    // #### Setup timeline
+    timeline.setup();
+    timeline.setupFont("GUI/Arial.ttf", 7);
+    timeline.setDurationInSeconds(60*30); // half an hour
+    
+    
     // ####  Setup scenes
     testScene = new TestScene();
     contentScenes.push_back(testScene);
@@ -64,16 +70,18 @@ void testApp::setup()
     voro3d = new Voro3D();
     contentScenes.push_back(voro3d);
     
+    ghostLights = new GhostLights();
+    contentScenes.push_back(ghostLights);
+    
+    lights = new Lights();
+    contentScenes.push_back(lights);
+    
     for(int i=0; i<contentScenes.size(); i++) {
-        contentScenes[i]->setupScene(i);
         contentScenes[i]->mainTimeline = &timeline;
+        contentScenes[i]->setupScene(i);
     }
     
-    
-    // #### Setup timeline
-    timeline.setup();
-    timeline.setupFont("GUI/Arial.ttf", 7);
-    timeline.setDurationInSeconds(60*15);
+
     
     // #### Setup GUI's
     
@@ -215,18 +223,18 @@ void testApp::draw()
         planes[i]->beginLeft();
         ofClear(ofColor::black);
         glPushMatrix();
-        //lights->begin();
+        lights->begin();
         drawScenes(i);
-        //lights->end();
+        lights->end();
         glPopMatrix();
         planes[i]->endLeft();
         
         planes[i]->beginRight();
         ofClear(ofColor::black);
         glPushMatrix();
-        //lights->begin();
+        lights->begin();
         drawScenes(i);
-        //lights->end();
+        lights->end();
         glPopMatrix();
         planes[i]->endRight();
     }

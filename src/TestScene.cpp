@@ -13,10 +13,7 @@ void TestScene::setup() {
     oscAddress = "/testscene";
     light.setPointLight();
     light.setPosition(-2, -2, -2);
-    
-    
 }
-
 
 void TestScene::draw(int _surfaceId) {
     

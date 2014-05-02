@@ -34,9 +34,6 @@ public:
     
     ofVec2f pos;
     
-    //ofxGLWarper warpLeft;
-    //ofxGLWarper warpRight;
-    
     StereoPlane(string n) {
         name = n;
     };
@@ -62,8 +59,6 @@ public:
         
         cam.setup(w, h);
         
-        //observerPosition.set(0,0,2);
-        
         cam.setPhysicalFocusDistance(120);
         cam.setFocusDistance(50);
         
@@ -75,8 +70,8 @@ public:
         
         ofFill();
 
-        ofDrawGrid(1., 10, true);
-        ofDrawGrid(1., 10, true,false,true,false);
+        ofDrawGrid(1., 4, true);
+        ofDrawGrid(1., 4, true,false,true,false);
         
         ofLight l;
         
@@ -108,64 +103,132 @@ public:
         
         ofPushMatrix();
         ofTranslate(0,1,0);
-        ofDrawGrid(1., 10, true,false,true,false);
+        ofDrawGrid(1., 4, true,false,true,false);
         ofPopMatrix();
         
         ofPushMatrix();
         ofTranslate(0,-1,0);
-        ofDrawGrid(1., 10, true,false,true,false);
+        ofDrawGrid(1., 4, true,false,true,false);
         ofPopMatrix();
         
     }
     
     void drawChessboard() {
         
+       
+        
         ofPushStyle();
         ofFill();
         ofDisableDepthTest();
-        float chessSize = 0.05;
         
-        ofPushMatrix();
-        ofScale(1./(aspect*height*1.0/width),1, 1);
         
-        bool white = true;
         
-        ofTranslate(-1, -1);
-        for(float x = 0; x < 2; x+=chessSize){
-            for(float y = 0; y < 2; y+=chessSize){
-                if(white){
-                    ofSetColor(255);
-                } else {
-                    ofSetColor(0);
+            float chessSize = 0.05;
+            
+            ofPushMatrix(); {
+                ofScale(1./(aspect*height*1.0/width),1, 1);
+        
+                bool white = true;
+                bool red = true;
+                int row = 0;
+                
+                ofColor col;
+                
+                ofTranslate(-1, -1);
+                for(float x = 0; x < 2; x+=chessSize){
+
+                    row += 1;
+                    
+                    
+                    for(float y = 0; y < 2; y+=chessSize){
+                        
+                        
+                        col.set(255,255,255);
+                        
+                        if(!white) col.a = 0;
+                        if(row % 4 == 1) col.g = 150;
+                        
+                        ofSetColor(col.r, col.g, col.b, col.a);
+                        
+                        white = !white;
+                        
+                        ofRect(x, y, chessSize, chessSize);
+                    }
                 }
-                white = !white;
-                ofRect(x, y, chessSize, chessSize);
-            }
-        }
-        ofPopMatrix();
+            } ofPopMatrix();
         
+            
         ofPushMatrix();
-        
+
         ofSetColor(255,0,0);
         ofEllipse(0, 0, 1, 1);
-        ofDrawAxis(1);
+        
+        
+        ofSetColor(0,255,0);
+        ofRect(-0.95, -0.95, 1.85, 0.1);
+        ofSetColor(0,155,255);
+        ofRect(-0.95, -0.1, 1.85, 0.1);
+        ofSetColor(255,155,0);
+        ofRect(0, -0.95, 0.1, 1.95);
+        //ofDrawAxis(1);
         ofPopMatrix();
         ofPopStyle();
         
     }
     
-    void drawChessboards() {
-        //warpLeft.begin();
+    
+    /*void drawMappingGrid() {
+        
+        
+        ofPushStyle();
+        ofFill();
+        ofDisableDepthTest();
+        
+        float chessSize = 0.05;
+        
+        ofPushMatrix(); {
+            ofScale(1./(aspect*height*1.0/width),1, 1);
+            
+            
+            ofRect(-1,-1, 0.2, 2);
+            
+            
+        
+        
+        } ofPopMatrix();
+        
+        
+        ofPushMatrix();
+        
+        ofSetColor(255,0,0);
+        ofEllipse(0, 0, 1, 1);
+        //ofDrawAxis(1);
+        ofPopMatrix();
+        ofPopStyle();
+        
+    }
+
+    void drawMappingGrids() {
+        
         beginLeft();
         drawChessboard();
         endLeft();
-        //warpLeft.end();
         
-        //warpRight.begin();
         beginRight();
         drawChessboard();
         endRight();
-        //warpRight.end();
+    }*/
+    
+    
+    void drawChessboards() {
+        
+        beginLeft();
+        drawChessboard();
+        endLeft();
+
+        beginRight();
+        drawChessboard();
+        endRight();
     }
     
     void drawGrids() {
@@ -245,57 +308,12 @@ public:
         ofDrawBitmapString(name, 10, 10);
     }
     
-    /*
-    void onCornerChangeLW(ofxGLWarper::CornerLocation & cornerLocation){
-        switch (cornerLocation) {
-            case ofxGLWarper::TOP_LEFT:
-                lTL = warpLeft.getCorner(cornerLocation);
-                break;
-            case ofxGLWarper::TOP_RIGHT:
-                lTR = warpLeft.getCorner(cornerLocation);
-                break;
-            case ofxGLWarper::BOTTOM_LEFT:
-                lBL = warpLeft.getCorner(cornerLocation);
-                break;
-            case ofxGLWarper::BOTTOM_RIGHT:
-                lBR = warpLeft.getCorner(cornerLocation);
-                break;
-        }
-    }
-    
-    void onCornerChangeRW(ofxGLWarper::CornerLocation & cornerLocation){
-        switch (cornerLocation) {
-            case ofxGLWarper::TOP_LEFT:
-                rTL = warpRight.getCorner(cornerLocation);
-                break;
-            case ofxGLWarper::TOP_RIGHT:
-                rTR = warpRight.getCorner(cornerLocation);
-                break;
-            case ofxGLWarper::BOTTOM_LEFT:
-                rBL = warpRight.getCorner(cornerLocation);
-                break;
-            case ofxGLWarper::BOTTOM_RIGHT:
-                rBR = warpRight.getCorner(cornerLocation);
-                break;
-        }
-    }
-    */
-    
     void exit() {
         
         ofLog(OF_LOG_NOTICE, "Saving data for plane: " + name);
         
         settings->pushTag(name);
-        
-        /*
-        settings->pushTag("warpLeft");
-        warpLeft.saveToXml(*settings);
-        settings->popTag();
-        settings->pushTag("warpRight");
-        warpRight.saveToXml(*settings);
-        settings->popTag();
-        */
-        
+
         settings->popTag();
     }
     

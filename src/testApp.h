@@ -10,10 +10,12 @@
 #include "BoxFloor.h"
 #include "Lines.h"
 #include "Voro3D.h"
+#include "GhostLights.h"
 #include "ContentScene.h"
 #include "TestScene.h"
 #include "ofxUI.h"
 #include "ofxTimeline.h"
+#include "Lights.h"
 
 class testApp : public ofBaseApp
 {
@@ -64,23 +66,14 @@ public:
     StereoPlane * floor;
     StereoPlane * wall;
     StereoPlane * wallRight;
-    StereoPlane * activePlane;
     
+    // --
+    StereoPlane * activePlane;
     int activePlaneIndex;
     
     void drawFloor();
     vector<StereoPlane *> planes;
     ofxXmlSettings settings;
-    
-    float dancerHeight;
-    
-    /*VoronoiWall * voronoiWall;
-    VoronoiWall * voronoiPlaza;
-    CeilingPlane * ceilingPlane;
-    Ribbon * ribbon;
-    BoxFloor * boxFloor;
-    CommonPerspectiveTest * cmpTest;
-    */
     
     void drawScenes(int _surfaceId=0);
     
@@ -89,6 +82,8 @@ public:
     VoronoiWall * voronoiWall;
     BoxFloor * boxFloor;
     Voro3D * voro3d;
+    GhostLights * ghostLights;
+    Lights * lights;
     
     vector<ContentScene*> contentScenes;
         

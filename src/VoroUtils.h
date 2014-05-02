@@ -18,7 +18,6 @@ struct Cell {
 };
 
 class VoroCube {
-    
 public:
     
     float width;
@@ -61,7 +60,7 @@ public:
             addCellSeed(con, newCell, i, true);
         }
         
-        cellMeshes = getCellsFromContainer(con, 1);
+        cellMeshes = getCellsFromContainer(con, 0);
         
         
         cells.clear();
