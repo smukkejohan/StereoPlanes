@@ -13,6 +13,7 @@
 struct Cell {
     ofMesh mesh;
     ofVec3f offset;
+    ofVec3f rotation;
     ofColor color;
     float r = 0;
 };

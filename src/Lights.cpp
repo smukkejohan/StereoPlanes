@@ -11,7 +11,7 @@
 
 void Lights::setup() {
     
-    name = "Lights";
+    name = "World Lights";
     oscAddress = "/lights";
     
     mainTimeline->addPage(name);
@@ -36,7 +36,8 @@ void Lights::setup() {
     
     material.diffuseColor = ofVec4f(1.0, 1.0, 1.0, 1.0);
     material.specularColor = ofVec4f(1.0, 1.0, 1.0, 1.0);
-    material.specularShininess = 2.5;
+    material.specularShininess = 3.5;
+    //material.
     
     flyLight.setNormalisedBrightness(1.0);
     flyLight.setAttenuation(1.0/2.);
@@ -47,7 +48,6 @@ void Lights::setup() {
     skyLight.setTemperature(20000);
     
     noisePoints.numberOfPoints = 0;
-    
 }
 
 void Lights::begin(){

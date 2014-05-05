@@ -24,22 +24,20 @@ void VoronoiWall::setup() {
     
     vbounds.set(-2, 0, 4, 1);
     depth = 0.005;
-    
     nCells = 40;
     
+    mainTimeline->addPage("Wall Left");
     voroWall = new VoronoiPlane;
-    voroWall->setup(ofRectangle(-2, 0, 4, 1));
+    voroWall->setup(ofRectangle(-2, -2, 8, 8), mainTimeline, "L");
     
+    mainTimeline->addPage("Wall Right");
+    voroWallRight = new VoronoiPlane;
+    voroWallRight->setup(ofRectangle(-2, -2, 8, 8), mainTimeline, "R");
+    
+    mainTimeline->addPage("Floor");
     voroFloor = new VoronoiPlane;
-    voroFloor->setup(ofRectangle(-1, 0, 1, 1));
+    voroFloor->setup(ofRectangle(-2, -2, 8, 8), mainTimeline, "F");
     
-    for(int i=0; i<5; i++) {
-        BreakPoint br;
-        br.pos = ofVec3f(0,0,0);
-        br.radius = 0.25;
-        br.pressure = 0;
-        breakPoints.push_back(br);
-    }
 
     
 }
@@ -66,128 +64,99 @@ void VoronoiWall::setGui(ofxUICanvas * gui, float width){
 }
 
 
+void VoronoiPlane::draw() {
+    
+    for(int i=0; i < cells.size(); i++) {
+        cells[i].offset = ofVec3f(0,0,0);
+        
+        for(int b = 0; b<breakZones.size(); b++) {
+            
+            if(cells[i].mesh.getCentroid().distance(breakZones[b]->pos) < breakZones[b]->radius) {
+                cells[i].offset.z += breakZones[b]->strength;
+                
+                // add noise
+                cells[i].offset.z += (ofSignedNoise(breakZones[b]->time + cells[i].r) + cells[i].r)*breakZones[b]->noise;
+                
+                // add rotation
+                //cells[i].offset.z += (ofSignedNoise(tl->getCurrentTime() + cells[i].r) + cells[i].r);
+                
+            }
+            
+        }
+     
+        ofPushMatrix();
+        ofTranslate(cells[i].offset);
+        cells[i].mesh.draw();
+        ofPopMatrix();
+        
+    }
+    
+}
+
+
+
 void VoronoiWall::draw(int _surfaceId) {
     
-    ofBackground(0);
-    
-    
-    
-    //if(_surfaceId == 1) {
+    if(_surfaceId == 1) {
         
         ofTranslate(1, 1);
         ofRotateX(rotation);
         ofTranslate(-1, -1);
         
+        voroWall->draw();
+        
+    
+    }
+    
+    if(_surfaceId == 2) {
+        
         ofRectangle bounds = ofRectangle(wallBreakPos.x-wallBreakReach.x/2, wallBreakPos.y-wallBreakReach.y/2, wallBreakReach.x, wallBreakReach.y);
         
-        for(int i=0; i < voroWall->cells.size(); i++) {
-            
-            bool insideSolid = false;
-            if(!bounds.inside(voroWall->cells[i].mesh.getCentroid())) {
-                
-                if(autoOn) {
-                    voroWall->cells[i].offset.z =(ofSignedNoise(wallTime + voroWall->cells[i].r) + voroWall->cells[i].r) * wallBreakStrength;
-                }
-                
-                /*bool inBreakpoint = false;
-                for(int b=0; b<breakPoints.size(); b++) {
-                    
-                    //todo: break more with distance
-                    if(breakPoints[b].pos.distance(voroWall->cells[i].mesh.getCentroid()) < breakPoints[b].radius) {
-                        voroWall->cells[i].offset.z = ofMap(breakPoints[b].pos.distance(voroWall->cells[i].mesh.getCentroid()), 0, breakPoints[b].radius, breakPoints[b].pressure, 0);
-                        inBreakpoint = true;
-                    }
-                }
-                if(!inBreakpoint) {
-                    voroWall->cells[i].offset.z * 0.6978;
-                }*/
-                
-            } else {
-                voroWall->cells[i].offset.z = 0;
-                insideSolid = true;
-            }
-            
-            ofPushMatrix();
-            ofTranslate(voroWall->cells[i].offset);
-            
-            //ofMap()
-            
-            //ofColor col = ofColor(ofMap(ofClamp(voroWall->cells[i].offset.z, -0.2,0.2), -0.2, 0.2, 255,100));
-            //col.a = 225;
-            ofColor col = ofColor(255,255,255,255);
-            
-            if(insideSolid) {
-                //voroWall->cells[i].mesh.disableNormals();
-                col.a = ofMap(darksolid, 0, 1, 255,0);
-            } else {
-                //voroWall->cells[i].mesh.enableNormals();
-            }
-            
-            ofSetColor(col);
-            
-            voroWall->cells[i].mesh.draw();
-            
-            ofPopMatrix();
-        }
-    
-
-    //}
-    
-    /*if(_surfaceId == 0 && floor > 0) {
         
-        light.enable();
-        dirLight.enable();
-        
-        ofRectangle bounds = ofRectangle(wallBreakPos.x-wallBreakReach.x/2, wallBreakPos.y-wallBreakReach.y/2, wallBreakReach.x, wallBreakReach.y);
-        ofRectangle floorEdge = ofRectangle(-1,-1,2,0.5);
-        
-        
-        for(int i=0; i < voroFloor->cells.size(); i++) {
+        for(int i=0; i < voroWallRight->cells.size(); i++) {
             
-            if(!floorEdge.inside(voroFloor->cells[i].mesh.getCentroid())) {
             
             bool insideSolid = false;
             if(!bounds.inside(voroFloor->cells[i].mesh.getCentroid())) {
-                if(autoOn) {
-                    voroFloor->cells[i].offset.z = (ofSignedNoise(wallTime + voroFloor->cells[i].r) + voroFloor->cells[i].r) * wallBreakStrength ;
-                }
+                    voroWallRight->cells[i].offset.z = (ofSignedNoise(wallTime + voroWallRight->cells[i].r) + voroWallRight->cells[i].r) * wallBreakStrength ;
 
             } else {
-                voroFloor->cells[i].offset.z = 0;
+                voroWallRight->cells[i].offset.z = 0;
                 insideSolid = true;
             }
             
             ofPushMatrix();
-            ofTranslate(voroFloor->cells[i].offset);
+            ofTranslate(voroWallRight->cells[i].offset);
             
-            ofColor col = ofColor(ofMap(ofClamp(voroFloor->cells[i].offset.z, -0.2,0.2), -0.2, 0.2, 255,100));
+            ofColor col = ofColor(ofMap(ofClamp(voroWallRight->cells[i].offset.z, -0.2,0.2), -0.2, 0.2, 255,100));
             col.a = 225;
             
             if(insideSolid) {
-                voroWall->cells[i].mesh.disableNormals();
+                voroWallRight->cells[i].mesh.disableNormals();
                 col.a = ofMap(darksolid, 0, 1, 255,0);
             } else {
-                voroWall->cells[i].mesh.enableNormals();
+                voroWallRight->cells[i].mesh.enableNormals();
             }
             
             col.a *= floor;
             
             ofSetColor(col);
-            
-            voroFloor->cells[i].mesh.draw();
+            voroWallRight->cells[i].mesh.draw();
             ofPopMatrix();
                 
-            }
-        }*/
-
-    //}
+        }
+    }
+    
     
 }
+    
+
 
 void VoronoiWall::update() {
     nCells = round(nCells);
     
     voroFloor->nCells = nCells;
+    voroWallRight->nCells = nCells;
     voroWall->nCells = nCells;
     
     wallTime += 0.01 * wallSpeed;
