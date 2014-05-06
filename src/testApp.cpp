@@ -12,7 +12,7 @@ void testApp::setup()
     
     ofSetLogLevel(OF_LOG_ERROR);
     
-    ofSetFrameRate(60);
+    ofSetFrameRate(30);
     ofSetVerticalSync(true);
     ofSetBackgroundAuto(true);
     ofBackground(0);
@@ -132,7 +132,6 @@ void testApp::setup()
         planeGui->addSlider(planes[i]->name + " Aspect",  0, 2, &planes[i]->aspect);
         
     }
-    
     
     
     sceneGui->setName("Scenes");
@@ -265,6 +264,8 @@ void testApp::draw()
     }fbo.end();
     
     if(drawFBOs) {
+        ofClear(0);
+        ofClearAlpha();
         ofSetColor(255,255);
         //fboHeight
         
@@ -276,7 +277,11 @@ void testApp::draw()
     ofSetColor(64,255);
     ofRect(timeline.getDrawRect());
     ofSetColor(255,255);
+    
+    
     timeline.draw();
+    
+    
     
     sbsOutputServer.publishFBO(&fbo);
     

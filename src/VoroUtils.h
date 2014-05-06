@@ -9,6 +9,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxVoro.h"
+#include "ofxOlaShaderLight.h"
 
 struct Cell {
     ofMesh mesh;
@@ -16,6 +17,7 @@ struct Cell {
     ofVec3f rotation;
     ofColor color;
     float r = 0;
+    ofxOlaShaderLight::Material mat;
 };
 
 class VoroCube {

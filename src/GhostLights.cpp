@@ -19,6 +19,9 @@ void GhostLights::setup() {
     mat.specularColor = ofVec4f(1.0, 1.0, 1.0, 0.5);
     mat.specularShininess = 0.8;
     
+    mainTimeline->addPage("Ghost crystals");
+    
+    
 }
 
 void GhostLights::draw(int _surfaceId) {

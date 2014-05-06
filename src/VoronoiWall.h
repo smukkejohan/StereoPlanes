@@ -77,10 +77,6 @@ public:
     
     void update() {
         
-        //if(tl->getIsPlaying()) {
-            time += 0.01 * speed;
-        //}
-        
         pos.x = x->getValue();
         pos.y = y->getValue();
         
@@ -88,6 +84,8 @@ public:
         radius = tlradius->getValue();
         noise = tlnoise->getValue();
         speed = tlspeed->getValue();
+        
+        time += 0.01 * speed;
         
     };
     
@@ -102,6 +100,8 @@ class VoronoiPlane {
     
 public:
     
+    ofxOlaShaderLight::Material mat;
+    
     ofRectangle bounds;
     float depth = 0.005;
     vector<ofVboMesh>  cellMeshes;
@@ -110,6 +110,9 @@ public:
     float fade = 1;
     
     ofxTimeline * tl;
+    ofxTLCurves * tlcells;
+    ofxTLCurves * tlrotationy;
+    ofxTLCurves * tlrotationfixy;
     
     vector<ofPoint> controlPoints;
     vector<BreakZone *> breakZones;
@@ -121,6 +124,22 @@ public:
         tl = _tl;
         bounds = _bounds;
         name = _name;
+        
+        tlcells = tl->addCurves("Cells");
+        tlcells->setValueRangeMax(600);
+        tlcells->setValueRangeMin(1);
+        
+        tlrotationy = tl->addCurves("Rotate");
+        tlrotationy->setValueRangeMax(-180);
+        tlrotationy->setValueRangeMin(0);
+        
+        tlrotationfixy = tl->addCurves("Rotate around Y");
+        tlrotationfixy->setValueRangeMax(2);
+        tlrotationfixy->setValueRangeMin(-2);
+        
+        mat.diffuseColor = ofVec4f(1.0, 1.0, 1.0, 0.6);
+        mat.specularColor = ofVec4f(1.0, 1.0, 1.0, 0.8);
+        mat.specularShininess = 3.8;
         
         for(int i=0; i <3; i++) {
             BreakZone * br = new BreakZone;
@@ -135,9 +154,10 @@ public:
     void update() {
         
         for(int b = 0; b<breakZones.size(); b++) {
-            
             breakZones[b]->update();
         }
+        
+        nCells = round(tlcells->getValue());
         
         if(nCells != cells.size()) {
             generate();
@@ -159,6 +179,7 @@ public:
         
         while(controlPoints.size() > nCells) {
             controlPoints.pop_back();
+            cells.pop_back();
         }
         
         while(controlPoints.size() < nCells) {
@@ -171,20 +192,27 @@ public:
         
         cellMeshes = getCellsFromContainer(con, 0);
         
-        cells.clear();
+        //cells.clear();
         
-        for (int i=0; i < cellMeshes.size(); i++) {
-            
+        for (int i=cells.size(); cells.size() < cellMeshes.size(); i++) {
             Cell cell;
             cell.mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
             
             cell.offset = ofVec3f(0,0,0);
             int r = ofRandom(0,255);
             cell.r = ofRandom(-1.0,1.0);
-            cell.mesh = cellMeshes[i];
+            
+            cell.mat.diffuseColor = ofVec4f(1.0, 1.0, 1.0, 1.0);
+            cell.mat.specularColor = ofVec4f(1.0, 1.0, 1.0, 1.0);
+            cell.mat.specularShininess = 4.8;
             
             cells.push_back(cell);
         }
+        
+        for (int i=0; i < cellMeshes.size(); i++) {
+            cells[i].mesh = cellMeshes[i];
+        }
+        
     }
 };
 
