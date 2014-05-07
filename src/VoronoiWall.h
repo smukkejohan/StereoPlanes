@@ -137,9 +137,9 @@ public:
         tlrotationfixy->setValueRangeMax(2);
         tlrotationfixy->setValueRangeMin(-2);
         
-        mat.diffuseColor = ofVec4f(1.0, 1.0, 1.0, 0.6);
-        mat.specularColor = ofVec4f(1.0, 1.0, 1.0, 0.8);
-        mat.specularShininess = 3.8;
+        mat.diffuseColor = ofVec4f(1.0, 1.0, 1.0, 0.9);
+        mat.specularColor = ofVec4f(1.0, 1.0, 1.0, 1.0);
+        mat.specularShininess = 6.8;
         
         for(int i=0; i <3; i++) {
             BreakZone * br = new BreakZone;
