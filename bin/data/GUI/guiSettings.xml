@@ -1,0 +1,190 @@
+<Widget>
+    <Kind>4</Kind>
+    <Name>Eye seperation</Name>
+    <Value>7.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>floorCam X</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>floorCam Y</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>floorCam Z</Name>
+    <Value>-1.114372492</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>floorAspect</Name>
+    <Value>1.004048586</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>wallLeftCam X</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>wallLeftCam Y</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>wallLeftCam Z</Name>
+    <Value>-1.114372492</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>wallLeftAspect</Name>
+    <Value>1.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>wallRightCam X</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>wallRightCam Y</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>wallRightCam Z</Name>
+    <Value>-1.128542542</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>wallRightAspect</Name>
+    <Value>1.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Draw Checkers</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Draw Planes</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Draw FBOs</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[0] Enabled</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[1] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[1] Animate</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Break strength</Name>
+    <Value>0.087449394</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Speed</Name>
+    <Value>1.384615421</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Cells</Name>
+    <Value>193.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Solid pos x</Name>
+    <Value>-1.481781363</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Solid pos y</Name>
+    <Value>-1.611335993</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Solid width</Name>
+    <Value>0.372469634</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Solid height</Name>
+    <Value>0.113360323</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Dark solid</Name>
+    <Value>0.255060732</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Rotation</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Floor</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[2] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Surface Height</Name>
+    <Value>-0.510121465</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Wave Height</Name>
+    <Value>0.129554659</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Speed</Name>
+    <Value>0.000761134</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Plateau Height</Name>
+    <Value>0.502024293</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Light Position</Name>
+    <Value>-0.599190295</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Platform Radius</Name>
+    <Value>0.211336046</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[2] Animate</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[3] Enabled</Name>
+    <Value>0</Value>
+</Widget>

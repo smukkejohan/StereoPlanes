@@ -1,0 +1,68 @@
+<positions>
+    <element name="Alpha">
+        <x>0.000000000</x>
+        <y>1087.000000000</y>
+        <width>1280.000000000</width>
+        <height>0.000000000</height>
+    </element>
+    <element name="Noise">
+        <x>0.000000000</x>
+        <y>684.000000000</y>
+        <width>1280.000000000</width>
+        <height>109.000000000</height>
+    </element>
+    <element name="Push">
+        <x>0.000000000</x>
+        <y>999.000000000</y>
+        <width>1280.000000000</width>
+        <height>0.000000000</height>
+    </element>
+    <element name="Radius">
+        <x>0.000000000</x>
+        <y>891.000000000</y>
+        <width>1280.000000000</width>
+        <height>84.000000000</height>
+    </element>
+    <element name="Rotate">
+        <x>0.000000000</x>
+        <y>535.000000000</y>
+        <width>1280.000000000</width>
+        <height>0.000000000</height>
+    </element>
+    <element name="Rotate_0">
+        <x>0.000000000</x>
+        <y>1023.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Shine">
+        <x>0.000000000</x>
+        <y>582.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Speed">
+        <x>0.000000000</x>
+        <y>817.000000000</y>
+        <width>1280.000000000</width>
+        <height>50.000000000</height>
+    </element>
+    <element name="Strength">
+        <x>0.000000000</x>
+        <y>552.000000000</y>
+        <width>1280.000000000</width>
+        <height>108.000000000</height>
+    </element>
+    <element name="X">
+        <x>0.000000000</x>
+        <y>70.000000000</y>
+        <width>1280.000000000</width>
+        <height>183.000000000</height>
+    </element>
+    <element name="Y">
+        <x>0.000000000</x>
+        <y>277.000000000</y>
+        <width>1280.000000000</width>
+        <height>251.000000000</height>
+    </element>
+</positions>

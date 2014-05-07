@@ -1,0 +1,62 @@
+<positions>
+    <element name="Alpha_6">
+        <x>0.000000000</x>
+        <y>690.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Noise_6">
+        <x>0.000000000</x>
+        <y>370.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Push_6">
+        <x>0.000000000</x>
+        <y>562.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Radius_6">
+        <x>0.000000000</x>
+        <y>498.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Rotate_6">
+        <x>0.000000000</x>
+        <y>518.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Rotate_9">
+        <x>0.000000000</x>
+        <y>626.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Speed_6">
+        <x>0.000000000</x>
+        <y>434.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Strength_6">
+        <x>0.000000000</x>
+        <y>198.000000000</y>
+        <width>1280.000000000</width>
+        <height>148.000000000</height>
+    </element>
+    <element name="X_6">
+        <x>0.000000000</x>
+        <y>70.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Y_6">
+        <x>0.000000000</x>
+        <y>134.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+</positions>

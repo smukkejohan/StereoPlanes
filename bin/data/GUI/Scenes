@@ -1,0 +1,65 @@
+<Widget>
+    <Kind>2</Kind>
+    <Name>[0] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[1] Enabled</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[2] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Surface Height</Name>
+    <Value>-0.469135761</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Wave Height</Name>
+    <Value>0.316872418</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Speed</Name>
+    <Value>0.000325103</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Plateau Height</Name>
+    <Value>0.851851881</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Light Position</Name>
+    <Value>-0.798353910</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Platform Radius</Name>
+    <Value>0.202469155</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[2] Animate</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[3] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[5] Enabled</Name>
+    <Value>1</Value>
+</Widget>
