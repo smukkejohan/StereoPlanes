@@ -35,7 +35,7 @@ public:
     
     // Lights
     ofxOlaShaderLight * flyLight;
-    ofxOlaShaderLight::Material material;
+    //ofxOlaShaderLight::Material material;
     
     // Fly
     ofxTLColorTrack * flyLightColor;
@@ -45,5 +45,7 @@ public:
     ofxTLCurves     * flyLightPosZ;
     ofxTLCurves     * flyLightPosNoise;
     ofxTLCurves     * flyLightPosNoiseSpeed;
+    
+    bool drawLights = true;
     
 };

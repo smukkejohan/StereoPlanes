@@ -21,12 +21,7 @@ public:
     
     void beginWorld(int _surfaceId);
     void endWorld(int _surfaceId);
-    
-    void updateCamPos(ofVec3f p);
-    
-    void setMaterial(ofxOlaShaderLight::Material m);
-    void setNoisePoints(ofxOlaShaderLight::NoisePoints n);
-    
+        
     void setGui(ofxUICanvas * gui, float width);
     void guiEvent(ofxUIEventArgs &e);
     void receiveOsc(ofxOscMessage * m, string rest);
@@ -35,7 +30,7 @@ public:
     
     // Lights
     
-    ofxOlaShaderLight flyLight;
+    //ofxOlaShaderLight flyLight;
     ofxOlaShaderLight skyLight;
     ofxOlaShaderLight::Material material;
     
@@ -55,10 +50,10 @@ public:
     ofxTLColorTrack * flyLightDotColor;
     ofxTLCurves     * flyLightDotSize;
     
-    ofVec3f camPos;
-    
     //Sky
     ofxTLColorTrack * skyLightColor;
     ofxTLCurves     * skyLightAttenuation;
+    
+    bool drawLight = false;
     
 };

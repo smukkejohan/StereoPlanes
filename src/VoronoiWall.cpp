@@ -25,13 +25,12 @@ void VoronoiWall::setup() {
     voroWall = new VoronoiPlane;
     voroWall->setup(ofRectangle(-2, -2, 4, 4), mainTimeline, indexStr);
     mainTimeline->addCurves("Cells");
-    
+
 }
 
 void VoronoiWall::setGui(ofxUICanvas * gui, float width){
     ContentScene::setGui(gui, width);
 }
-
 
 void VoronoiPlane::draw() {
     
@@ -65,9 +64,9 @@ void VoronoiPlane::draw() {
         /*cells[i].mat.diffuseColor = ofVec4f(1.0, 1.0, 1.0, ofMap(cells[i].offset.z, -0.2, 0.2, 0.8, 0.0));
         cells[i].mat.specularShininess = 2.8;
         cells[i].mat.specularColor = ofVec4f(1.0, 1.0, 1.0, ofMap(cells[i].offset.z, -0.2, 0.2, 0.8, 0.0));
-        
         ofxOlaShaderLight::setMaterial(cells[i].mat);
         */
+        
         cells[i].mesh.draw();
         ofPopMatrix();
     }

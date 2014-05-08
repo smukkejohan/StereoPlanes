@@ -62,9 +62,8 @@ void testApp::setup()
     
     // #### pointers to lights, a hack for different light on different surfaces
     
-    for(int i=0;i<4;i++) {
-        shaderLights.push_back(new ofxOlaShaderLight);
-    }
+    shaderLights.push_back(new ofxOlaShaderLight);
+    
     
     // ####  Setup scenes
     testScene = new TestScene();

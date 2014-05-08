@@ -38,7 +38,8 @@ public:
     
     ofxTLCurves * tlspeed;
     
-    ofxTLCurves * tlalpha;
+    ofxTLCurves * tldifalpha;
+    ofxTLCurves * tlspecalpha;
     //ofxTLCurves * tlshininess;
     ofxTimeline * tl;
     
@@ -46,19 +47,19 @@ public:
         tl = _tl;
         
         x = tl->addCurves("X");
-        x->setValueRangeMax(4);
-        x->setValueRangeMin(-4);
+        x->setValueRangeMax(3);
+        x->setValueRangeMin(-3);
         
         y = tl->addCurves("Y");
-        y->setValueRangeMax(4);
-        y->setValueRangeMin(-4);
+        y->setValueRangeMax(3);
+        y->setValueRangeMin(-3);
         
         tlstrength = tl->addCurves("Strength");
-        tlstrength->setValueRangeMax(8);
-        tlstrength->setValueRangeMin(-8);
+        tlstrength->setValueRangeMax(6);
+        tlstrength->setValueRangeMin(-1);
         
         tlnoise = tl->addCurves("Noise");
-        tlnoise->setValueRangeMax(4);
+        tlnoise->setValueRangeMax(2);
         tlnoise->setValueRangeMin(0);
         
         tlspeed = tl->addCurves("Speed");
@@ -66,13 +67,15 @@ public:
         tlspeed->setValueRangeMin(0);
         
         tlradius = tl->addCurves("Radius");
-        tlradius->setValueRangeMax(8);
+        tlradius->setValueRangeMax(4);
         tlradius->setValueRangeMin(0);
         
         /*tlpush = tl->addCurves("Push");*/
         /*tlrotate = tl->addCurves("Rotate");*/
         
-        tlalpha = tl->addCurves("Alpha");
+        tldifalpha = tl->addCurves("Specular Alpha");
+        tlspecalpha = tl->addCurves("Diffuse Alpha");
+        
         //tlshininess = tl->addCurves("Shine");
     }
     
@@ -114,6 +117,10 @@ public:
     ofxTLCurves * tlrotationy;
     ofxTLCurves * tlrotationfixy;
     
+    ofxTLCurves * tldifalpha;
+    ofxTLCurves * tlspecalpha;
+    ofxTLCurves * tlshine;
+    
     vector<ofPoint> controlPoints;
     vector<BreakZone *> breakZones;
     string name;
@@ -133,13 +140,20 @@ public:
         tlrotationy->setValueRangeMax(-180);
         tlrotationy->setValueRangeMin(0);
         
+        tldifalpha = tl->addCurves("Diffuse alpha");
+        tlspecalpha = tl->addCurves("Specular alpha");
+        tlshine = tl->addCurves("Shine");
+        tlshine->setValueRangeMax(8);
+        
+        //tldifalpha->setValueRangeMax(-180);
+        //tldifalpha->setValueRangeMin(0);
+        
+        
         tlrotationfixy = tl->addCurves("Rotate around Y");
         tlrotationfixy->setValueRangeMax(2);
         tlrotationfixy->setValueRangeMin(-2);
         
-        mat.diffuseColor = ofVec4f(1.0, 1.0, 1.0, 0.9);
-        mat.specularColor = ofVec4f(1.0, 1.0, 1.0, 1.0);
-        mat.specularShininess = 6.8;
+
         
         for(int i=0; i <3; i++) {
             BreakZone * br = new BreakZone;
@@ -152,6 +166,11 @@ public:
     }
     
     void update() {
+        
+        
+        mat.diffuseColor = ofVec4f(1.0, 1.0, 1.0, tldifalpha->getValue());
+        mat.specularColor = ofVec4f(1.0, 1.0, 1.0, tlspecalpha->getValue());
+        mat.specularShininess = tlshine->getValue();
         
         for(int b = 0; b<breakZones.size(); b++) {
             breakZones[b]->update();
@@ -212,7 +231,6 @@ public:
         for (int i=0; i < cellMeshes.size(); i++) {
             cells[i].mesh = cellMeshes[i];
         }
-        
     }
 };
 
