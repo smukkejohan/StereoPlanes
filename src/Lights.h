@@ -33,7 +33,6 @@ public:
     ofxUICanvas * gui;
     
     // Lights
-    
     ofxOlaShaderLight flyLight;
     ofxOlaShaderLight skyLight;
     ofxOlaShaderLight::Material material;
@@ -62,6 +61,5 @@ public:
     
     ofxTLColorTrack * skyLightColor;
     ofxTLCurves     * skyLightAttenuation;
-    
     
 };

@@ -38,5 +38,9 @@ public:
     VoroCube * floorCube;
     VoroCube * extraCube;
     
+    ofxOlaShaderLight::Material mat;
+    
+    
+    
     
 };

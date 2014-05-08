@@ -34,14 +34,15 @@ void Lights::setup() {
     skyLightColor = mainTimeline->addColors("Sky Light Color");
     skyLightAttenuation = mainTimeline->addCurves("Sky Light Attenuation", ofRange(0.001,40.0));
     
-    material.diffuseColor = ofVec4f(1.0, 1.0, 1.0, 1.0);
-    material.specularColor = ofVec4f(1.0, 1.0, 1.0, 1.0);
-    material.specularShininess = 3.5;
+    material.diffuseColor = ofVec4f(1.0, 1.0, 1.0, 0.4);
+    material.specularColor = ofVec4f(1.0, 1.0, 1.0, 0.6);
+    material.specularShininess = 2.5;
     //material.
     
     flyLight.setNormalisedBrightness(1.0);
     flyLight.setAttenuation(1.0/2.);
     flyLight.setTemperature(4200);
+    flyLight.setSpotConcentration(0.1);
     
     skyLight.setNormalisedBrightness(1.0);
     skyLight.setAttenuation(1./10.);

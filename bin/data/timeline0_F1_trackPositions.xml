@@ -1,25 +1,25 @@
 <positions>
     <element name="Alpha_6">
         <x>0.000000000</x>
-        <y>582.000000000</y>
+        <y>690.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Noise_6">
         <x>0.000000000</x>
-        <y>262.000000000</y>
+        <y>370.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Push_6">
         <x>0.000000000</x>
-        <y>454.000000000</y>
+        <y>562.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Radius_6">
         <x>0.000000000</x>
-        <y>390.000000000</y>
+        <y>498.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -29,9 +29,15 @@
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
+    <element name="Rotate_9">
+        <x>0.000000000</x>
+        <y>626.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
     <element name="Speed_6">
         <x>0.000000000</x>
-        <y>326.000000000</y>
+        <y>434.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -39,7 +45,7 @@
         <x>0.000000000</x>
         <y>198.000000000</y>
         <width>1280.000000000</width>
-        <height>40.000000000</height>
+        <height>148.000000000</height>
     </element>
     <element name="X_6">
         <x>0.000000000</x>
