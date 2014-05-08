@@ -79,9 +79,9 @@ void VoronoiPlane::draw() {
 
 void VoronoiWall::draw(int _surfaceId) {
     
-    if(_surfaceId == primarySurface) {
+    //if(_surfaceId == primarySurface) {
         voroWall->draw();
-    }
+    //}
     
 }
     

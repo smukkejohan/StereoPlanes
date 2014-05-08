@@ -24,19 +24,22 @@ void FlyLight::setup() {
     //material.specularColor = ofVec4f(1.0, 1.0, 1.0, 0.6);
     //material.specularShininess = 2.5;
     
+    flyLight = new ofxOlaShaderLight;
+    
     flyLight->setNormalisedBrightness(1.0);
     flyLight->setAttenuation(1.0/2.);
     flyLight->setTemperature(4200);
     flyLight->setDiffuseColor(flyLightColor->getColor());
+    
 }
 
 void FlyLight::setLightPtr(ofxOlaShaderLight * _light) {
-    flyLight = _light;
+    //flyLight = _light;
 }
 
 void FlyLight::beginWorld(int _surfaceId){
     
-    if(_surfaceId == primarySurface) {
+    //if(_surfaceId == primarySurface) {
         
         ofVec3f pos = (ofVec3f(
                                flyLightPosX->getValue(),
@@ -50,24 +53,24 @@ void FlyLight::beginWorld(int _surfaceId){
         
         ofxOlaShaderLight::begin();
         
-    }
+    //}
     
     //ofxOlaShaderLight::setMaterial(material);    
 }
 
 void FlyLight::endWorld(int _surfaceId){
     
-    if(_surfaceId == primarySurface) {
+    //if(_surfaceId == primarySurface) {
         ofxOlaShaderLight::end();
         
         //ofxOlaShaderLight::end();
-    }
+    //}
 }
 
 
 void FlyLight::draw(int _surfaceId) {
     
-    if(_surfaceId == primarySurface) {
+    //if(_surfaceId == primarySurface) {
         
         if(drawLights) {
             
@@ -84,7 +87,7 @@ void FlyLight::draw(int _surfaceId) {
         }
             
         }
-    }
+    //}
 }
 
 void FlyLight::update() {

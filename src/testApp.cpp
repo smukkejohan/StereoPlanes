@@ -32,21 +32,24 @@ void testApp::setup()
     
     floor = new StereoPlane("floor");
     floor->setup(resx/2, resy, &settings);
-    floor->setViewPort(ofRectangle(-1, -1, 2, 2));
+    //floor->setViewPort(ofRectangle(-1, -1, 2, 2));
+    floor->setViewPort(ofRectangle(-1, 1, 3, 2));
     floor->pos = ofVec2f(0,0);
     planes.push_back(floor);
         
     wall = new StereoPlane("wallLeft");
     wall->setup(resx/2, resy, &settings);
+    //wall->setViewPort(ofRectangle(-1, -1, 2, 2));
     wall->setViewPort(ofRectangle(-1, -1, 2, 2));
     wall->pos = ofVec2f(resx,0);
     planes.push_back(wall);
     
     wallRight = new StereoPlane("wallRight");
     wallRight->setup(resx/2, resy, &settings);
-    wallRight->setViewPort(ofRectangle(-1, -1, 2, 2));
-    wallRight->pos = ofVec2f(resx*2,0);
+    //wallRight->setViewPort(ofRectangle(-1, -1, 2, 2));
+    wallRight->setViewPort(ofRectangle(1, -1, 2, 2));
     
+    wallRight->pos = ofVec2f(resx*2,0);
     planes.push_back(wallRight);
     
     activePlaneIndex = 0;
@@ -57,13 +60,10 @@ void testApp::setup()
     // #### Setup timeline
     timeline.setup();
     timeline.setupFont("GUI/Arial.ttf", 7);
-    timeline.setDurationInSeconds(60*30); // half an hour
-    
+    timeline.setDurationInSeconds(60*20); // half an hour
     
     // #### pointers to lights, a hack for different light on different surfaces
-    
     shaderLights.push_back(new ofxOlaShaderLight);
-    
     
     // ####  Setup scenes
     testScene = new TestScene();
@@ -74,7 +74,7 @@ void testApp::setup()
     voroWallLeft->setName("voroLeft");
     contentScenes.push_back(voroWallLeft);
     
-    voroWallRight = new VoronoiWall();
+    /*voroWallRight = new VoronoiWall();
     voroWallRight->setSurface(2);
     voroWallRight->setName("voroRight");
     contentScenes.push_back(voroWallRight);
@@ -82,7 +82,7 @@ void testApp::setup()
     voroFloor = new VoronoiWall();
     voroFloor->setName("voroFloor");
     voroFloor->setSurface(0);
-    contentScenes.push_back(voroFloor);
+    contentScenes.push_back(voroFloor);*/
     
     ghostLights = new GhostLights();
     contentScenes.push_back(ghostLights);

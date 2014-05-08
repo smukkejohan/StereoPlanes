@@ -12,9 +12,15 @@
         <value>0.842105269</value>
     </key>
     <key>
-        <sampleX>0.000000000</sampleX>
+        <sampleX>0.901346624</sampleX>
         <sampleY>0.564999938</sampleY>
         <time>00:16:39:465</time>
         <value>0.169736862</value>
+    </key>
+    <key>
+        <sampleX>0.805000782</sampleX>
+        <sampleY>0.854999900</sampleY>
+        <time>00:17:38:906</time>
+        <value>0.175000012</value>
     </key>
 </keyframes>
