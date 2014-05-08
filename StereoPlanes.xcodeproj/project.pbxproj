@@ -110,32 +110,6 @@
 		08A3E25219139DBC00350A10 /* GhostLights.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A3E25019139DBC00350A10 /* GhostLights.cpp */; };
 		08A3E2571913A1F200350A10 /* Lights.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A3E2551913A1F200350A10 /* Lights.cpp */; };
 		08A3E37C1913A21700350A10 /* ofxOlaShaderLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A3E25A1913A21700350A10 /* ofxOlaShaderLight.cpp */; };
-		08A3E37D1913A21700350A10 /* libola.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3151913A21700350A10 /* libola.a */; };
-		08A3E37E1913A21700350A10 /* libolaartnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3191913A21700350A10 /* libolaartnet.a */; };
-		08A3E37F1913A21700350A10 /* libolaartnetconf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E31D1913A21700350A10 /* libolaartnetconf.a */; };
-		08A3E3801913A21700350A10 /* libolacommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3211913A21700350A10 /* libolacommon.a */; };
-		08A3E3811913A21700350A10 /* liboladummy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3251913A21700350A10 /* liboladummy.a */; };
-		08A3E3821913A21700350A10 /* libolae131.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3291913A21700350A10 /* libolae131.a */; };
-		08A3E3831913A21700350A10 /* libolae131conf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E32D1913A21700350A10 /* libolae131conf.a */; };
-		08A3E3841913A21700350A10 /* libolaespnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3311913A21700350A10 /* libolaespnet.a */; };
-		08A3E3851913A21700350A10 /* libolahttp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3351913A21700350A10 /* libolahttp.a */; };
-		08A3E3861913A21700350A10 /* libolakarate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3391913A21700350A10 /* libolakarate.a */; };
-		08A3E3871913A21700350A10 /* libolakinet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E33D1913A21700350A10 /* libolakinet.a */; };
-		08A3E3881913A21700350A10 /* libolamilinst.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3411913A21700350A10 /* libolamilinst.a */; };
-		08A3E3891913A21700350A10 /* libolaopendmx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3451913A21700350A10 /* libolaopendmx.a */; };
-		08A3E38A1913A21700350A10 /* libolapathport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3491913A21700350A10 /* libolapathport.a */; };
-		08A3E38B1913A21700350A10 /* libolarenard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E34D1913A21700350A10 /* libolarenard.a */; };
-		08A3E38C1913A21700350A10 /* libolasandnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3511913A21700350A10 /* libolasandnet.a */; };
-		08A3E38D1913A21700350A10 /* libolaserver.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3551913A21700350A10 /* libolaserver.a */; };
-		08A3E38E1913A21700350A10 /* libolashownet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3591913A21700350A10 /* libolashownet.a */; };
-		08A3E38F1913A21700350A10 /* libolaslpclient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E35D1913A21700350A10 /* libolaslpclient.a */; };
-		08A3E3901913A21700350A10 /* libolaslpcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3611913A21700350A10 /* libolaslpcore.a */; };
-		08A3E3911913A21700350A10 /* libolaslpserver.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3651913A21700350A10 /* libolaslpserver.a */; };
-		08A3E3921913A21700350A10 /* libolastageprofi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3691913A21700350A10 /* libolastageprofi.a */; };
-		08A3E3931913A21700350A10 /* libolatrigger.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E36D1913A21700350A10 /* libolatrigger.a */; };
-		08A3E3941913A21700350A10 /* libolausbdmx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3711913A21700350A10 /* libolausbdmx.a */; };
-		08A3E3951913A21700350A10 /* libolausbpro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3751913A21700350A10 /* libolausbpro.a */; };
-		08A3E3961913A21700350A10 /* libolausbproconf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A3E3791913A21700350A10 /* libolausbproconf.a */; };
 		08A3E39B1913A32800350A10 /* ofxUbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A3E3991913A32800350A10 /* ofxUbo.cpp */; };
 		08A6D79F1911259D00A66762 /* ofxHotKeys_impl_linux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A6D7371911259D00A66762 /* ofxHotKeys_impl_linux.cpp */; };
 		08A6D7A01911259D00A66762 /* ofxHotKeys_impl_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 08A6D7381911259D00A66762 /* ofxHotKeys_impl_mac.mm */; };
@@ -173,9 +147,7 @@
 		08A6D7C01911259D00A66762 /* EFX-Util.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A6D78A1911259D00A66762 /* EFX-Util.lib */; };
 		08A6D7C11911259D00A66762 /* OpenAL32.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A6D78B1911259D00A66762 /* OpenAL32.lib */; };
 		08A6D7C21911259D00A66762 /* EFX-Util.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A6D78E1911259D00A66762 /* EFX-Util.lib */; };
-		08A6D7C31911259D00A66762 /* EFX-Util.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A6D7901911259D00A66762 /* EFX-Util.lib */; };
 		08A6D7C41911259D00A66762 /* OpenAL32.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A6D7911911259D00A66762 /* OpenAL32.lib */; };
-		08A6D7C51911259D00A66762 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A6D7981911259D00A66762 /* libsndfile.a */; };
 		08A6D7E41911259D00A66762 /* ofxEasing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A6D7CA1911259D00A66762 /* ofxEasing.cpp */; };
 		08A6D7E51911259D00A66762 /* ofxEasingBack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A6D7CC1911259D00A66762 /* ofxEasingBack.cpp */; };
 		08A6D7E61911259D00A66762 /* ofxEasingBounce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A6D7CE1911259D00A66762 /* ofxEasingBounce.cpp */; };
@@ -973,58 +945,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08A3E38B1913A21700350A10 /* libolarenard.a in Frameworks */,
 				E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */,
 				08A6D7C21911259D00A66762 /* EFX-Util.lib in Frameworks */,
 				E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */,
-				08A3E37F1913A21700350A10 /* libolaartnetconf.a in Frameworks */,
-				08A3E3851913A21700350A10 /* libolahttp.a in Frameworks */,
-				08A3E3871913A21700350A10 /* libolakinet.a in Frameworks */,
 				04A6C9221882166800B17C45 /* opencv.a in Frameworks */,
-				08A3E3881913A21700350A10 /* libolamilinst.a in Frameworks */,
 				E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */,
-				08A3E38C1913A21700350A10 /* libolasandnet.a in Frameworks */,
 				E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */,
 				E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */,
-				08A3E3821913A21700350A10 /* libolae131.a in Frameworks */,
 				08A6D7C41911259D00A66762 /* OpenAL32.lib in Frameworks */,
-				08A3E3891913A21700350A10 /* libolaopendmx.a in Frameworks */,
 				08A6D7C01911259D00A66762 /* EFX-Util.lib in Frameworks */,
-				08A6D7C51911259D00A66762 /* libsndfile.a in Frameworks */,
-				08A3E37E1913A21700350A10 /* libolaartnet.a in Frameworks */,
 				E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */,
-				08A3E3951913A21700350A10 /* libolausbpro.a in Frameworks */,
-				08A3E38D1913A21700350A10 /* libolaserver.a in Frameworks */,
-				08A3E38E1913A21700350A10 /* libolashownet.a in Frameworks */,
 				E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */,
-				08A3E37D1913A21700350A10 /* libola.a in Frameworks */,
-				08A3E3961913A21700350A10 /* libolausbproconf.a in Frameworks */,
 				083B996F190FD22800600B48 /* Syphon.framework in Frameworks */,
 				E45BE97E0E8CC7DD009D7055 /* Carbon.framework in Frameworks */,
 				08A6D7C11911259D00A66762 /* OpenAL32.lib in Frameworks */,
 				E45BE97F0E8CC7DD009D7055 /* CoreAudio.framework in Frameworks */,
 				E45BE9800E8CC7DD009D7055 /* CoreFoundation.framework in Frameworks */,
-				08A3E38F1913A21700350A10 /* libolaslpclient.a in Frameworks */,
-				08A3E3931913A21700350A10 /* libolatrigger.a in Frameworks */,
-				08A3E3941913A21700350A10 /* libolausbdmx.a in Frameworks */,
-				08A3E3811913A21700350A10 /* liboladummy.a in Frameworks */,
-				08A6D7C31911259D00A66762 /* EFX-Util.lib in Frameworks */,
-				08A3E3841913A21700350A10 /* libolaespnet.a in Frameworks */,
-				08A3E38A1913A21700350A10 /* libolapathport.a in Frameworks */,
-				08A3E3831913A21700350A10 /* libolae131conf.a in Frameworks */,
 				E45BE9810E8CC7DD009D7055 /* CoreServices.framework in Frameworks */,
-				08A3E3911913A21700350A10 /* libolaslpserver.a in Frameworks */,
 				E45BE9830E8CC7DD009D7055 /* OpenGL.framework in Frameworks */,
-				08A3E3861913A21700350A10 /* libolakarate.a in Frameworks */,
 				E45BE9840E8CC7DD009D7055 /* QuickTime.framework in Frameworks */,
-				08A3E3921913A21700350A10 /* libolastageprofi.a in Frameworks */,
 				E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */,
 				E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */,
-				08A3E3901913A21700350A10 /* libolaslpcore.a in Frameworks */,
 				E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */,
 				E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */,
 				08A6D7BF1911259D00A66762 /* EFX-Util.lib in Frameworks */,
-				08A3E3801913A21700350A10 /* libolacommon.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3166,6 +3110,7 @@
 					/Users/mariapaulasaba/Documents/openframeworks_0080/addons/ofxSyphon/libs/Syphon/lib/osx,
 					/Users/bernardoschorr/Documents/openFrameworks/of_v0.8.0_osx_release/addons/ofxSyphon/libs/Syphon/lib/osx,
 					/Users/recoil/dev/openFrameworks/addons/ofxSyphon/libs/Syphon/lib/osx,
+					/Users/johan/Development/openFrameworks/addons/ofxSyphon/libs/Syphon/lib/osx,
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3310,6 +3255,7 @@
 					/Users/mariapaulasaba/Documents/openframeworks_0080/addons/ofxSyphon/libs/Syphon/lib/osx,
 					/Users/bernardoschorr/Documents/openFrameworks/of_v0.8.0_osx_release/addons/ofxSyphon/libs/Syphon/lib/osx,
 					/Users/recoil/dev/openFrameworks/addons/ofxSyphon/libs/Syphon/lib/osx,
+					/Users/johan/Development/openFrameworks/addons/ofxSyphon/libs/Syphon/lib/osx,
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
