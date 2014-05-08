@@ -11,18 +11,18 @@
 #include "ContentScene.h"
 #include "ofxOlaShaderLight.h"
 
-class Lights : public ContentScene {
+class FlyLight : public ContentScene {
     
 public:
-    
     void draw(int _surfaceId);
     void update();
+    
+    void setLightPtr(ofxOlaShaderLight * _light);
+    
     void setup();
     
     void beginWorld(int _surfaceId);
     void endWorld(int _surfaceId);
-    
-    void updateCamPos(ofVec3f p);
     
     void setMaterial(ofxOlaShaderLight::Material m);
     void setNoisePoints(ofxOlaShaderLight::NoisePoints n);
@@ -34,17 +34,10 @@ public:
     ofxUICanvas * gui;
     
     // Lights
-    
-    ofxOlaShaderLight flyLight;
-    ofxOlaShaderLight skyLight;
+    ofxOlaShaderLight * flyLight;
     ofxOlaShaderLight::Material material;
     
-    ofxOlaShaderLight::NoisePoints noisePoints;
-    
-    ofxTLCurves     * lightShading;
-    ofxTLCurves     * lightsVertexNoise;
     // Fly
-    
     ofxTLColorTrack * flyLightColor;
     ofxTLCurves     * flyLightAttenuation;
     ofxTLCurves     * flyLightPosX;
@@ -52,13 +45,5 @@ public:
     ofxTLCurves     * flyLightPosZ;
     ofxTLCurves     * flyLightPosNoise;
     ofxTLCurves     * flyLightPosNoiseSpeed;
-    ofxTLColorTrack * flyLightDotColor;
-    ofxTLCurves     * flyLightDotSize;
-    
-    ofVec3f camPos;
-    
-    //Sky
-    ofxTLColorTrack * skyLightColor;
-    ofxTLCurves     * skyLightAttenuation;
     
 };

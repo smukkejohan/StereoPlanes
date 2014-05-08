@@ -29,7 +29,7 @@ void GhostLights::draw(int _surfaceId) {
     ofxOlaShaderLight::setMaterial(mat);
     
     //ofBackground(0);
-    if(_surfaceId == 0) {
+    //if(_surfaceId == 0) {
 
         ofPushMatrix(); {
             ofTranslate(0, 0, -0.8);
@@ -56,8 +56,7 @@ void GhostLights::draw(int _surfaceId) {
             }
         } ofPopMatrix();
         
-    }
-    
+    //}
 }
 
 void GhostLights::update() {

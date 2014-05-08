@@ -57,6 +57,7 @@
 		04A6C9271882166800B17C45 /* ofxCvHaarFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A6C91A1882166800B17C45 /* ofxCvHaarFinder.cpp */; };
 		04A6C9281882166800B17C45 /* ofxCvImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A6C91C1882166800B17C45 /* ofxCvImage.cpp */; };
 		04A6C9291882166800B17C45 /* ofxCvShortImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A6C91F1882166800B17C45 /* ofxCvShortImage.cpp */; };
+		04EB17C2191B8C65003C8EE1 /* Lights.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04EB17C1191B8C65003C8EE1 /* Lights.cpp */; };
 		083B992F190FD0BC00600B48 /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 083B98D2190FD0BB00600B48 /* ofxUI2DGraph.cpp */; };
 		083B9930190FD0BC00600B48 /* ofxUI2DPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 083B98D4190FD0BB00600B48 /* ofxUI2DPad.cpp */; };
 		083B9931190FD0BC00600B48 /* ofxUIBaseDraws.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 083B98D6190FD0BB00600B48 /* ofxUIBaseDraws.cpp */; };
@@ -108,7 +109,7 @@
 		083B9970190FD22800600B48 /* SyphonNameboundClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 083B996B190FD22800600B48 /* SyphonNameboundClient.m */; };
 		083B9971190FD61200600B48 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 083B9968190FD22800600B48 /* Syphon.framework */; };
 		08A3E25219139DBC00350A10 /* GhostLights.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A3E25019139DBC00350A10 /* GhostLights.cpp */; };
-		08A3E2571913A1F200350A10 /* Lights.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A3E2551913A1F200350A10 /* Lights.cpp */; };
+		08A3E2571913A1F200350A10 /* FlyLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A3E2551913A1F200350A10 /* FlyLight.cpp */; };
 		08A3E37C1913A21700350A10 /* ofxOlaShaderLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A3E25A1913A21700350A10 /* ofxOlaShaderLight.cpp */; };
 		08A3E39B1913A32800350A10 /* ofxUbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A3E3991913A32800350A10 /* ofxUbo.cpp */; };
 		08A6D79F1911259D00A66762 /* ofxHotKeys_impl_linux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A6D7371911259D00A66762 /* ofxHotKeys_impl_linux.cpp */; };
@@ -425,6 +426,8 @@
 		04A6C91F1882166800B17C45 /* ofxCvShortImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvShortImage.cpp; sourceTree = "<group>"; };
 		04A6C9201882166800B17C45 /* ofxCvShortImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvShortImage.h; sourceTree = "<group>"; };
 		04A6C9211882166800B17C45 /* ofxOpenCv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOpenCv.h; sourceTree = "<group>"; };
+		04EB17C1191B8C65003C8EE1 /* Lights.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lights.cpp; sourceTree = "<group>"; };
+		04EB17C3191B8C76003C8EE1 /* Lights.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lights.h; sourceTree = "<group>"; };
 		083B98D1190FD0BB00600B48 /* ofxUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
 		083B98D2190FD0BB00600B48 /* ofxUI2DGraph.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUI2DGraph.cpp; sourceTree = "<group>"; };
 		083B98D3190FD0BB00600B48 /* ofxUI2DGraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxUI2DGraph.h; sourceTree = "<group>"; };
@@ -531,8 +534,8 @@
 		083B996B190FD22800600B48 /* SyphonNameboundClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyphonNameboundClient.m; sourceTree = "<group>"; };
 		08A3E25019139DBC00350A10 /* GhostLights.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GhostLights.cpp; sourceTree = "<group>"; };
 		08A3E25119139DBC00350A10 /* GhostLights.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GhostLights.h; sourceTree = "<group>"; };
-		08A3E2551913A1F200350A10 /* Lights.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lights.cpp; sourceTree = "<group>"; };
-		08A3E2561913A1F200350A10 /* Lights.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lights.h; sourceTree = "<group>"; };
+		08A3E2551913A1F200350A10 /* FlyLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlyLight.cpp; sourceTree = "<group>"; };
+		08A3E2561913A1F200350A10 /* FlyLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyLight.h; sourceTree = "<group>"; };
 		08A3E25A1913A21700350A10 /* ofxOlaShaderLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOlaShaderLight.cpp; sourceTree = "<group>"; };
 		08A3E25B1913A21700350A10 /* ofxOlaShaderLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOlaShaderLight.h; sourceTree = "<group>"; };
 		08A3E2601913A21700350A10 /* ActionQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActionQueue.h; sourceTree = "<group>"; };
@@ -2685,8 +2688,10 @@
 				0420B330188F18470086D388 /* ContentScene.h */,
 				0420B332188F1F490086D388 /* TestScene.cpp */,
 				0420B333188F1F490086D388 /* TestScene.h */,
-				08A3E2551913A1F200350A10 /* Lights.cpp */,
-				08A3E2561913A1F200350A10 /* Lights.h */,
+				04EB17C1191B8C65003C8EE1 /* Lights.cpp */,
+				04EB17C3191B8C76003C8EE1 /* Lights.h */,
+				08A3E2551913A1F200350A10 /* FlyLight.cpp */,
+				08A3E2561913A1F200350A10 /* FlyLight.h */,
 				0420B5FD189023E80086D388 /* VoronoiWall.cpp */,
 				0420B5FE189023E80086D388 /* VoronoiWall.h */,
 				043C51CF1888664100ADD204 /* BoxFloor.cpp */,
@@ -2919,6 +2924,7 @@
 				0420B5FF189023E80086D388 /* VoronoiWall.cpp in Sources */,
 				08A6D7EA1911259D00A66762 /* ofxEasingExpo.cpp in Sources */,
 				043C51D11888664100ADD204 /* BoxFloor.cpp in Sources */,
+				04EB17C2191B8C65003C8EE1 /* Lights.cpp in Sources */,
 				083B993C190FD0BC00600B48 /* ofxUIImageButton.cpp in Sources */,
 				04A6C9261882166800B17C45 /* ofxCvGrayscaleImage.cpp in Sources */,
 				08A6D7A31911259D00A66762 /* ofxTimeline.cpp in Sources */,
@@ -2946,7 +2952,7 @@
 				08A6D7E91911259D00A66762 /* ofxEasingElastic.cpp in Sources */,
 				04A6C9291882166800B17C45 /* ofxCvShortImage.cpp in Sources */,
 				04A6C826188099DE00B17C45 /* IpEndpointName.cpp in Sources */,
-				08A3E2571913A1F200350A10 /* Lights.cpp in Sources */,
+				08A3E2571913A1F200350A10 /* FlyLight.cpp in Sources */,
 				083B994D190FD0BC00600B48 /* ofxUISlider.cpp in Sources */,
 				08A6D79F1911259D00A66762 /* ofxHotKeys_impl_linux.cpp in Sources */,
 				083B993F190FD0BC00600B48 /* ofxUIImageToggle.cpp in Sources */,

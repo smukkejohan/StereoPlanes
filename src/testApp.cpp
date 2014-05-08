@@ -32,17 +32,21 @@ void testApp::setup()
     
     floor = new StereoPlane("floor");
     floor->setup(resx/2, resy, &settings);
+    floor->setViewPort(ofRectangle(-1, -1, 2, 2));
     floor->pos = ofVec2f(0,0);
     planes.push_back(floor);
         
     wall = new StereoPlane("wallLeft");
     wall->setup(resx/2, resy, &settings);
+    wall->setViewPort(ofRectangle(-1, -1, 2, 2));
     wall->pos = ofVec2f(resx,0);
     planes.push_back(wall);
     
     wallRight = new StereoPlane("wallRight");
     wallRight->setup(resx/2, resy, &settings);
+    wallRight->setViewPort(ofRectangle(-1, -1, 2, 2));
     wallRight->pos = ofVec2f(resx*2,0);
+    
     planes.push_back(wallRight);
     
     activePlaneIndex = 0;
@@ -50,25 +54,36 @@ void testApp::setup()
     
     oscReceiver.setup(9001);
     
-    
     // #### Setup timeline
     timeline.setup();
     timeline.setupFont("GUI/Arial.ttf", 7);
     timeline.setDurationInSeconds(60*30); // half an hour
     
     
+    // #### pointers to lights, a hack for different light on different surfaces
+    
+    for(int i=0;i<4;i++) {
+        shaderLights.push_back(new ofxOlaShaderLight);
+    }
+    
     // ####  Setup scenes
     testScene = new TestScene();
     contentScenes.push_back(testScene);
     
-    voronoiWall = new VoronoiWall();
-    contentScenes.push_back(voronoiWall);
+    voroWallLeft = new VoronoiWall();
+    voroWallLeft->setSurface(1);
+    voroWallLeft->setName("voroLeft");
+    contentScenes.push_back(voroWallLeft);
     
-    boxFloor = new BoxFloor();
-    contentScenes.push_back(boxFloor);
+    voroWallRight = new VoronoiWall();
+    voroWallRight->setSurface(2);
+    voroWallRight->setName("voroRight");
+    contentScenes.push_back(voroWallRight);
     
-    voro3d = new Voro3D();
-    contentScenes.push_back(voro3d);
+    voroFloor = new VoronoiWall();
+    voroFloor->setName("voroFloor");
+    voroFloor->setSurface(0);
+    contentScenes.push_back(voroFloor);
     
     ghostLights = new GhostLights();
     contentScenes.push_back(ghostLights);
@@ -76,15 +91,31 @@ void testApp::setup()
     lights = new Lights();
     contentScenes.push_back(lights);
     
+    flyLightLeft = new FlyLight();
+    flyLightLeft->setName("flyLightLeft");
+    flyLightLeft->setLightPtr(shaderLights[0]);
+    flyLightLeft->setSurface(1);
+    contentScenes.push_back(flyLightLeft);
+    
+    flyLightRight = new FlyLight();
+    flyLightRight->setName("flyLightRight");
+    flyLightRight->setLightPtr(shaderLights[0]);
+    flyLightRight->setSurface(2);
+    contentScenes.push_back(flyLightRight);
+    
+    flyLightFloor = new FlyLight();
+    flyLightFloor->setName("flyLightFloor");
+    flyLightFloor->setLightPtr(shaderLights[0]);
+    flyLightFloor->setSurface(0);
+    contentScenes.push_back(flyLightFloor);
+    
+    
     for(int i=0; i<contentScenes.size(); i++) {
         contentScenes[i]->mainTimeline = &timeline;
         contentScenes[i]->setupScene(i);
     }
-    
 
-    
     // #### Setup GUI's
-    
     float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
     guiWidth = 255;
     float w = guiWidth-xInit*2;
@@ -116,10 +147,9 @@ void testApp::setup()
     mainGui->addSpacer(w, 3)->setDrawOutline(true);
     mainGui->addFPS();
     mainGui->addSlider("Eye seperation", 0, 7, &eyeSeperation);
-    mainGui->addToggle("Draw Checkers", &drawChessboards);
-    mainGui->addToggle("Draw Planes", &drawGrids);
+    mainGui->addToggle("Draw checkers", &drawChessboards);
+    mainGui->addToggle("Draw planes", &drawGrids);
     mainGui->addToggle("Draw FBOs", &drawFBOs);
-    
     
     planeGui->setName("Planes");
     planeGui->addLabel("Surfaces", OFX_UI_FONT_LARGE);
@@ -142,7 +172,7 @@ void testApp::setup()
     }
     
     for(int i=0; i<guis.size(); i++) {
-        guis[i]->loadSettings("GUI/" + guis[i]->getName());
+        guis[i]->loadSettings("GUI/" + guis[i]->getName() + ".xml");
         guis[i]->autoSizeToFitWidgets();
         ofAddListener(guis[i]->newGUIEvent,this,&testApp::guiEvent);
     }
@@ -162,7 +192,6 @@ void testApp::update()
             contentScenes[i]->parseSceneOsc(&m);
         }
         
-        
 		if(m.getAddress() == "/eyeSeperation/x"){
 			eyeSeperation = m.getArgAsFloat(0);
             
@@ -181,7 +210,7 @@ void testApp::update()
     }
 
     for(int s=0; s<contentScenes.size();s++) {
-        contentScenes[s]->update();
+        contentScenes[s]->updateScene();
     }
     
     //ofSetWindowTitle(ofToString(ofGetFrameRate()));
@@ -189,9 +218,24 @@ void testApp::update()
 
 
 void testApp::drawScenes(int _surfaceId) {
+    
+    ofClear(ofColor::black);
+    glPushMatrix();
+    
+    for(int s=0; s<contentScenes.size();s++) {
+        contentScenes[s]->beginSceneWorld(_surfaceId);
+    }
+    
     for(int s=0; s<contentScenes.size();s++) {
         contentScenes[s]->drawScene(_surfaceId);
     }
+    
+    for(int s=0; s<contentScenes.size();s++) {
+        contentScenes[s]->endSceneWorld(_surfaceId);
+    }
+    
+    glPopMatrix();
+    
 }
 
 //--------------------------------------------------------------
@@ -220,21 +264,11 @@ void testApp::draw()
     
     for(int i=0;i < planes.size(); i++) {
         planes[i]->beginLeft();
-        ofClear(ofColor::black);
-        glPushMatrix();
-        lights->begin();
         drawScenes(i);
-        lights->end();
-        glPopMatrix();
         planes[i]->endLeft();
         
         planes[i]->beginRight();
-        ofClear(ofColor::black);
-        glPushMatrix();
-        lights->begin();
         drawScenes(i);
-        lights->end();
-        glPopMatrix();
         planes[i]->endRight();
     }
     
@@ -350,7 +384,7 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 void testApp::exit() {
     
     for(int i=0; i<guis.size(); i++) {
-        guis[i]->saveSettings("GUI/"+guis[i]->getName());
+        guis[i]->saveSettings("GUI/"+guis[i]->getName() + ".xml");
         delete guis[i];
         
     }

@@ -19,7 +19,7 @@ public:
     
     int index;
     string indexStr;
-    string name = "untitled_scene";
+    string name = "";
     string oscAddress = "/default";
     
     bool enabled;
@@ -28,15 +28,12 @@ public:
     ofxTimeline * mainTimeline;
     
     ContentScene() {
-    }
+    };
     
     virtual ~ContentScene(){}
     
-    virtual void setup(){}
-    virtual void update(){}
-    virtual void draw(int _surfaceId=0){}
-    virtual void debugDraw(int _surfaceId=0) {}
-    virtual void exit(){}
+    virtual void debugDraw(int _surfaceId=0) {};
+    virtual void exit(){};
     virtual void receiveOsc(ofxOscMessage * m, string rest) {};
     
     virtual void setGui(ofxUICanvas * gui, float width){
@@ -48,18 +45,29 @@ public:
     
     virtual void guiEvent(ofxUIEventArgs &e) {};
     
+    
+    void setName(string _name) {
+        setName(_name, "/"+_name);
+    }
+    
+    void setName(string _name, string _osc) {
+        name = _name;
+        oscAddress = _osc;
+    }
+    
     void setupScene(int _index) {
+        if(name == "") setName("scene-" + ofToString(_index));
+        
         index = _index;
         indexStr = "["+ ofToString(_index) + "] ";
         setup();
-    }
+    };
     
     void updateScene() {
         if(enabled) {
             update();
         }
-    }
-    
+    };
     void drawScene(int _surfaceId=0) {
         if(enabled) {
             glPushMatrix();ofPushMatrix();ofPushStyle();
@@ -70,7 +78,17 @@ public:
             debugDraw(_surfaceId);
             ofPopStyle();ofPopMatrix();glPopMatrix();
         }
-    }
+    };
+    void beginSceneWorld(int _surfaceId=0){
+        if(enabled) {
+            beginWorld(_surfaceId);
+        }
+    };
+    void endSceneWorld(int _surfaceId=0){
+        if(enabled) {
+            endWorld(_surfaceId);
+        }
+    };
     
     void parseSceneOsc(ofxOscMessage * m){
         
@@ -86,5 +104,21 @@ public:
             receiveOsc(m, rest);
         }
     }
+    
+    
+    void setSurface(int _surfaceId) {
+        primarySurface = _surfaceId;
+    }
+    
+    int primarySurface = 0;
+    
+private:
+    virtual void setup(){};
+    virtual void update(){};
+    virtual void beginWorld(int _surfaceId=0){};
+    virtual void endWorld(int _surfaceId=0){};
+    virtual void draw(int _surfaceId=0){};
+    
+    
     
 };

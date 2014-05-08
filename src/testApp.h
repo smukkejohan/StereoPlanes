@@ -16,6 +16,7 @@
 #include "ofxUI.h"
 #include "ofxTimeline.h"
 #include "Lights.h"
+#include "FlyLight.h"
 
 class testApp : public ofBaseApp
 {
@@ -24,6 +25,7 @@ public:
 	void setup();
 	void update();
 	void draw();
+    
     
 	void keyPressed(int key);
 	void keyReleased(int key);
@@ -36,7 +38,6 @@ public:
 	void gotMessage(ofMessage msg);
     
     void exit();
-
     ofxSyphonServer sbsOutputServer;
     
     bool showGrid;
@@ -78,12 +79,21 @@ public:
     void drawScenes(int _surfaceId=0);
     
     // Scenes
-    TestScene * testScene;
-    VoronoiWall * voronoiWall;
-    BoxFloor * boxFloor;
-    Voro3D * voro3d;
-    GhostLights * ghostLights;
+    
     Lights * lights;
+    
+    FlyLight * flyLightLeft;
+    FlyLight * flyLightRight;
+    FlyLight * flyLightFloor;
+    
+    TestScene * testScene;
+    VoronoiWall * voroWallLeft;
+    VoronoiWall * voroWallRight;
+    VoronoiWall * voroFloor;
+    
+    GhostLights * ghostLights;
+    
+    vector<ofxOlaShaderLight *> shaderLights;
     
     vector<ContentScene*> contentScenes;
         

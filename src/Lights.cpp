@@ -51,7 +51,8 @@ void Lights::setup() {
     noisePoints.numberOfPoints = 0;
 }
 
-void Lights::begin(){
+
+void Lights::beginWorld(int _surfaceId){
     ofxOlaShaderLight::begin();
     ofxOlaShaderLight::setMaterial(material);
     
@@ -62,7 +63,7 @@ void Lights::begin(){
     skyLight.setAttenuation(1./skyLightAttenuation->getValue());
 }
 
-void Lights::end(){
+void Lights::endWorld(int _surfaceId){
     ofxOlaShaderLight::end();
 }
 
@@ -82,6 +83,7 @@ void Lights::draw(int _surfaceId) {
     }
     ofSetColor(flyLightDotColor->getColor());
     ofDrawSphere(flyLight.getGlobalPosition(), flyLightDotSize->getValue());
+    
     if(lightWasEnabled){
         ofxOlaShaderLight::begin();
     }

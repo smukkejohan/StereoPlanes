@@ -46,31 +46,32 @@ public:
         tl = _tl;
         
         x = tl->addCurves("X");
-        x->setValueRangeMax(2);
-        x->setValueRangeMin(-2);
+        x->setValueRangeMax(4);
+        x->setValueRangeMin(-4);
         
         y = tl->addCurves("Y");
-        y->setValueRangeMax(2);
-        y->setValueRangeMin(-2);
+        y->setValueRangeMax(4);
+        y->setValueRangeMin(-4);
         
         tlstrength = tl->addCurves("Strength");
-        tlstrength->setValueRangeMax(6);
-        tlstrength->setValueRangeMin(-2);
+        tlstrength->setValueRangeMax(8);
+        tlstrength->setValueRangeMin(-8);
         
         tlnoise = tl->addCurves("Noise");
-        tlnoise->setValueRangeMax(2);
+        tlnoise->setValueRangeMax(4);
         tlnoise->setValueRangeMin(0);
         
         tlspeed = tl->addCurves("Speed");
-        tlspeed->setValueRangeMax(2);
+        tlspeed->setValueRangeMax(4);
         tlspeed->setValueRangeMin(0);
         
         tlradius = tl->addCurves("Radius");
-        tlradius->setValueRangeMax(4);
+        tlradius->setValueRangeMax(8);
         tlradius->setValueRangeMin(0);
         
-        tlpush = tl->addCurves("Push");
-        tlrotate = tl->addCurves("Rotate");
+        /*tlpush = tl->addCurves("Push");*/
+        /*tlrotate = tl->addCurves("Rotate");*/
+        
         tlalpha = tl->addCurves("Alpha");
         //tlshininess = tl->addCurves("Shine");
     }
@@ -86,7 +87,6 @@ public:
         speed = tlspeed->getValue();
         
         time += 0.01 * speed;
-        
     };
     
     void debugDraw() {
@@ -222,6 +222,7 @@ public:
 class VoronoiWall : public ContentScene {
 
 public:
+    
     void setup();
     void draw(int _surfaceId);
     void update();
@@ -259,9 +260,6 @@ public:
     float floor;
     
     VoronoiPlane * voroWall;
-    VoronoiPlane * voroWallRight;
-    VoronoiPlane * voroFloor;
-    
     
     //ofLight pointlight;
     

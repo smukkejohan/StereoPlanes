@@ -56,7 +56,6 @@ public:
 		fovy_tan = tanf(PI * left.getFov() / 360.);
 		fovx_tan = fovy_tan * aspect;
          */
-        
 		//zNear = left.getNearClip();
 		//zFar  = left.getFarClip();
         

@@ -20,6 +20,8 @@ public:
     
     ofxCoolGlasses cam;
     
+    ofRectangle viewport;
+    
     int width;
     int height;
     
@@ -45,6 +47,8 @@ public:
     
     void setup(int w, int h, ofxXmlSettings * s) {
         
+        viewport = ofRectangle(-1, -1, 2, 2);
+        
         settings = s;
         
         if( !settings->tagExists(name) ) {
@@ -63,6 +67,10 @@ public:
         cam.setFocusDistance(50);
         
 
+    };
+    
+    void setViewPort(ofRectangle _viewport) {
+        viewport = _viewport;
     };
     
     void drawGrid() {
@@ -271,12 +279,10 @@ public:
     }
     
     void drawLeft() {
-        
         ofPushMatrix();
         ofTranslate(pos.x, pos.y);
         cam.leftFbo.draw(0,0,width,height);
         ofPopMatrix();
-        
     }
     
     void drawRight() {
@@ -301,7 +307,7 @@ public:
         // observerPosition.set(sin(ofGetElapsedTimef()), cos(ofGetElapsedTimef()), -1);
         cam.setPosition(camPos);
         // cam.setFocusDistance( cam.left.getGlobalPosition().length() );
-        cam.update(ofRectangle(-1, -1, 2, 2));
+        cam.update(viewport);
     }
     
     void drawInfo() {
