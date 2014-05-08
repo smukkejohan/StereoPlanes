@@ -17,9 +17,9 @@ void FlyLight::setup() {
     flyLightPosX = mainTimeline->addCurves("Fly Light Pos X", ofRange(-3.0, 3.0));
     flyLightPosY = mainTimeline->addCurves("Fly Light Pos Y", ofRange(-3.0, 3.0));
     flyLightPosZ = mainTimeline->addCurves("Fly Light Pos Z", ofRange(-6.0, 9.0));
+    
     //flyLightPosNoise = mainTimeline->addCurves("Fly Light Pos Noise", ofRange(0.0, 1.0));
     //flyLightPosNoiseSpeed = mainTimeline->addCurves("Fly Light Pos Noise Speed", ofRange(-1.0, 1.0));
-    
     //material.diffuseColor = ofVec4f(1.0, 1.0, 1.0, 0.4);
     //material.specularColor = ofVec4f(1.0, 1.0, 1.0, 0.6);
     //material.specularShininess = 2.5;
@@ -59,8 +59,6 @@ void FlyLight::endWorld(int _surfaceId){
     
     if(_surfaceId == primarySurface) {
         ofxOlaShaderLight::end();
-        
-        //ofxOlaShaderLight::end();
     }
 }
 

@@ -19,11 +19,11 @@
 void VoronoiWall::setup() {
     
     depth = 0.015;
-    nCells = 20;
+    nCells = 2;
     
     mainTimeline->addPage(name);
     voroWall = new VoronoiPlane;
-    voroWall->setup(ofRectangle(-2, -2, 4, 4), mainTimeline, indexStr);
+    voroWall->setup(ofRectangle(-1, -1, 2, 2), mainTimeline, indexStr);
     mainTimeline->addCurves("Cells");
 
 }
@@ -34,15 +34,21 @@ void VoronoiWall::setGui(ofxUICanvas * gui, float width){
 
 void VoronoiPlane::draw() {
     
-    ofxOlaShaderLight::setMaterial(mat);
+
     
     ofPushMatrix();
     
-    ofTranslate(1, 1);
+    ofTranslate(tlrotationfixx->getValue(), tlrotationfixy->getValue());
     ofRotateX(tlrotationy->getValue());
-    ofTranslate(-1, -1);
+    ofRotateY(tlrotationx->getValue());
+    ofTranslate(-tlrotationfixx->getValue(), -tlrotationfixy->getValue());
     
     for(int i=0; i < cells.size(); i++) {
+        
+        cells[i].mat.diffuseColor = ofVec4f(1.0, 1.0, 1.0, tldifalpha->getValue());
+        cells[i].mat.specularColor = ofVec4f(1.0, 1.0, 1.0, tlspecalpha->getValue());
+        cells[i].mat.specularShininess = tlshine->getValue();
+        
         cells[i].offset = ofVec3f(0,0,0);
         
         for(int b = 0; b<breakZones.size(); b++) {
@@ -55,6 +61,11 @@ void VoronoiPlane::draw() {
                 
                 // add rotation
                 //cells[i].offset.z += (ofSignedNoise(tl->getCurrentTime() + cells[i].r) + cells[i].r);
+                
+                cells[i].mat.diffuseColor = ofVec4f(1.0, 1.0, 1.0, cells[i].mat.diffuseColor.w  * breakZones[b]->tldifalpha->getValue());
+                cells[i].mat.specularColor = ofVec4f(1.0, 1.0, 1.0, cells[i].mat.specularColor.w * breakZones[b]->tlspecalpha->getValue());
+                //mat.specularShininess = tlshine->getValue();
+                
             }
         }
         
@@ -66,6 +77,9 @@ void VoronoiPlane::draw() {
         cells[i].mat.specularColor = ofVec4f(1.0, 1.0, 1.0, ofMap(cells[i].offset.z, -0.2, 0.2, 0.8, 0.0));
         ofxOlaShaderLight::setMaterial(cells[i].mat);
         */
+        
+        
+        ofxOlaShaderLight::setMaterial(cells[i].mat);
         
         cells[i].mesh.draw();
         ofPopMatrix();

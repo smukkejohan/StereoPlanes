@@ -115,7 +115,12 @@ public:
     ofxTimeline * tl;
     ofxTLCurves * tlcells;
     ofxTLCurves * tlrotationy;
+    
+    ofxTLCurves * tlrotationx;
+    
     ofxTLCurves * tlrotationfixy;
+    
+    ofxTLCurves * tlrotationfixx;
     
     ofxTLCurves * tldifalpha;
     ofxTLCurves * tlspecalpha;
@@ -136,10 +141,6 @@ public:
         tlcells->setValueRangeMax(600);
         tlcells->setValueRangeMin(1);
         
-        tlrotationy = tl->addCurves("Rotate");
-        tlrotationy->setValueRangeMax(-180);
-        tlrotationy->setValueRangeMin(0);
-        
         tldifalpha = tl->addCurves("Diffuse alpha");
         tlspecalpha = tl->addCurves("Specular alpha");
         tlshine = tl->addCurves("Shine");
@@ -148,12 +149,22 @@ public:
         //tldifalpha->setValueRangeMax(-180);
         //tldifalpha->setValueRangeMin(0);
         
+        tlrotationy = tl->addCurves("Rotate y");
+        tlrotationy->setValueRangeMax(180);
+        tlrotationy->setValueRangeMin(-180);
         
         tlrotationfixy = tl->addCurves("Rotate around Y");
-        tlrotationfixy->setValueRangeMax(2);
-        tlrotationfixy->setValueRangeMin(-2);
+        tlrotationfixy->setValueRangeMax(1);
+        tlrotationfixy->setValueRangeMin(-1);
         
-
+        tlrotationx = tl->addCurves("Rotate x");
+        tlrotationx->setValueRangeMax(180);
+        tlrotationx->setValueRangeMin(-180);
+        
+        tlrotationfixx = tl->addCurves("Rotate around x");
+        tlrotationfixx->setValueRangeMax(1);
+        tlrotationfixx->setValueRangeMin(-1);
+        
         
         for(int i=0; i <3; i++) {
             BreakZone * br = new BreakZone;
@@ -166,11 +177,6 @@ public:
     }
     
     void update() {
-        
-        
-        mat.diffuseColor = ofVec4f(1.0, 1.0, 1.0, tldifalpha->getValue());
-        mat.specularColor = ofVec4f(1.0, 1.0, 1.0, tlspecalpha->getValue());
-        mat.specularShininess = tlshine->getValue();
         
         for(int b = 0; b<breakZones.size(); b++) {
             breakZones[b]->update();

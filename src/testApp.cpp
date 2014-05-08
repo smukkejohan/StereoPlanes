@@ -88,24 +88,28 @@ void testApp::setup()
     contentScenes.push_back(ghostLights);
     
     lights = new Lights();
+    lights->enabled = true;
     contentScenes.push_back(lights);
     
     flyLightLeft = new FlyLight();
     flyLightLeft->setName("flyLightLeft");
     flyLightLeft->setLightPtr(shaderLights[0]);
     flyLightLeft->setSurface(1);
+    flyLightLeft->enabled = true;
     contentScenes.push_back(flyLightLeft);
     
     flyLightRight = new FlyLight();
     flyLightRight->setName("flyLightRight");
     flyLightRight->setLightPtr(shaderLights[0]);
     flyLightRight->setSurface(2);
+    flyLightRight->enabled = true;
     contentScenes.push_back(flyLightRight);
     
     flyLightFloor = new FlyLight();
     flyLightFloor->setName("flyLightFloor");
     flyLightFloor->setLightPtr(shaderLights[0]);
     flyLightFloor->setSurface(0);
+    flyLightFloor->enabled = true;
     contentScenes.push_back(flyLightFloor);
     
     
