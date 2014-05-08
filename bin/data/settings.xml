@@ -1,0 +1,96 @@
+<floor>
+    <warpLeft>
+        <corners>
+            <corner>
+                <x>0.000000000</x>
+                <y>0.000000000</y>
+            </corner>
+            <corner>
+                <x>0.250000000</x>
+                <y>0.000000000</y>
+            </corner>
+            <corner>
+                <x>0.250000000</x>
+                <y>1.000000000</y>
+            </corner>
+            <corner>
+                <x>0.000000000</x>
+                <y>1.000000000</y>
+            </corner>
+        </corners>
+    </warpLeft>
+    <warpRight>
+        <corners>
+            <corner>
+                <x>0.250000000</x>
+                <y>0.000000000</y>
+            </corner>
+            <corner>
+                <x>0.500000000</x>
+                <y>0.000000000</y>
+            </corner>
+            <corner>
+                <x>0.500000000</x>
+                <y>1.000000000</y>
+            </corner>
+            <corner>
+                <x>0.250000000</x>
+                <y>1.000000000</y>
+            </corner>
+        </corners>
+    </warpRight>
+</floor>
+<wall>
+    <warpLeft>
+        <corners>
+            <corner>
+                <x>0.500000000</x>
+                <y>0.000000000</y>
+            </corner>
+            <corner>
+                <x>0.750000000</x>
+                <y>0.000000000</y>
+            </corner>
+            <corner>
+                <x>0.750000000</x>
+                <y>1.000000000</y>
+            </corner>
+            <corner>
+                <x>0.500000000</x>
+                <y>1.000000000</y>
+            </corner>
+        </corners>
+    </warpLeft>
+    <warpRight>
+        <corners>
+            <corner>
+                <x>0.750000000</x>
+                <y>0.000000000</y>
+            </corner>
+            <corner>
+                <x>1.000000000</x>
+                <y>0.000000000</y>
+            </corner>
+            <corner>
+                <x>1.000000000</x>
+                <y>1.000000000</y>
+            </corner>
+            <corner>
+                <x>0.750000000</x>
+                <y>1.000000000</y>
+            </corner>
+        </corners>
+    </warpRight>
+</wall>
+<Stereo>
+    <Cameras>
+        <Wall>0, 0, -1</Wall>
+        <Floor>0, 0, -1</Floor>
+        <Eye_Seperation>6.5</Eye_Seperation>
+    </Cameras>
+    <Tracking>
+        <Dancer_Ellipse_Size>0</Dancer_Ellipse_Size>
+        <Dancer_Ellipse_Brightness>0</Dancer_Ellipse_Brightness>
+        <Dancer_position>-1, -1</Dancer_position>
+    </Tracking>
+</Stereo>

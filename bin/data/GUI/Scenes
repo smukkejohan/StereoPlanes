@@ -1,0 +1,120 @@
+<Widget>
+    <Kind>2</Kind>
+    <Name>[0] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[1] Enabled</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[1] Animate</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Break strength</Name>
+    <Value>1.051851869</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Speed</Name>
+    <Value>1.423868299</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Cells</Name>
+    <Value>200.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Solid pos x</Name>
+    <Value>-2.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Solid pos y</Name>
+    <Value>-2.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Solid width</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Solid height</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Dark solid</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Rotation</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Floor</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[2] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Surface Height</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Wave Height</Name>
+    <Value>0.497942388</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Speed</Name>
+    <Value>0.000288066</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Plateau Height</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Light Position</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Platform Radius</Name>
+    <Value>0.402469158</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[2] Animate</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[3] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[5] Enabled</Name>
+    <Value>0</Value>
+</Widget>

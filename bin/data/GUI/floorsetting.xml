@@ -1,0 +1,360 @@
+<Widget>
+    <Kind>4</Kind>
+    <Name>Eye seperation</Name>
+    <Value>7.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Floor X</Name>
+    <Value>-0.007672787</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Floor Y</Name>
+    <Value>1.606060505</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Floor Z</Name>
+    <Value>-2.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Wall X</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Wall Y</Name>
+    <Value>0.267206430</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Wall Z</Name>
+    <Value>-1.708933830</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Dancer X</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Dancer Y</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[0] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[1] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[1] Animate</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Break strength</Name>
+    <Value>0.291497976</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Speed</Name>
+    <Value>0.793522239</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Cells</Name>
+    <Value>167.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Solid pos x</Name>
+    <Value>-0.186234832</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Solid pos y</Name>
+    <Value>-1.093117476</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Solid width</Name>
+    <Value>2.931174040</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Solid height</Name>
+    <Value>1.344129562</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Dark solid</Name>
+    <Value>0.951417029</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Rotation</Name>
+    <Value>-90.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[1] Floor</Name>
+    <Value>0.829959512</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[2] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Surface Height</Name>
+    <Value>0.082191706</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Wave Height</Name>
+    <Value>0.993150651</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Speed</Name>
+    <Value>0.000242915</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Plateau Height</Name>
+    <Value>0.095890410</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Light Position</Name>
+    <Value>-0.554794550</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] Platform Radius</Name>
+    <Value>0.484931529</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[2] Animate</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[3] Enabled</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[3] Damping</Name>
+    <Value>4.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[3] Acceleration</Name>
+    <Value>1.049999952</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[3] Multiplier</Name>
+    <Value>2.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[3] Background Color</Name>
+    <Value>255.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[3] Background Transparency</Name>
+    <Value>7.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[3] Particle Color</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[3] Create Structure</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[3] Dissolve Back</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[3] Hide Dancer</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[3] Angle Movement</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Enabled</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Line Width</Name>
+    <Value>2.122580528</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Offset X</Name>
+    <Value>-0.015444040</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Offset Y</Name>
+    <Value>0.056872368</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Offset Z</Name>
+    <Value>0.933333397</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Dancer X</Name>
+    <Value>0.007721901</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Dancer Y</Name>
+    <Value>-0.123222828</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Speed</Name>
+    <Value>0.000227027</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Background Color</Name>
+    <Value>56.022727966</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Shadow Color</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] White Mesh Z</Name>
+    <Value>-1.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Black Mesh Z</Name>
+    <Value>-0.831977844</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Shadow X</Name>
+    <Value>0.351187974</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Shadow Y</Name>
+    <Value>0.462050200</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Number of Vertices</Name>
+    <Value>600.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Connection Threshold</Name>
+    <Value>0.424291462</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Surface</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Create Vertex</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Reset Mesh</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[4] Animation speed</Name>
+    <Value>0.000100000</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Decrease shadow</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Increase shadow</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Take White further</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Bring White closer</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Take Black further</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Bring Black closer</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Lighten Background</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Darken Background</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Increase Speed</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[4] Decrease Speed</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[5] Enabled</Name>
+    <Value>0</Value>
+</Widget>
