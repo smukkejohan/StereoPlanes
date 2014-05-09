@@ -129,8 +129,6 @@ public:
         ofFill();
         ofDisableDepthTest();
         
-        
-        
             float chessSize = 0.05;
             
             ofPushMatrix(); {
@@ -147,17 +145,13 @@ public:
 
                     row += 1;
                     
-                    
                     for(float y = 0; y < 2; y+=chessSize){
                         
-                        
-                        col.set(255,255,255);
+                        col.set(200,200,200);
                         
                         if(!white) col.a = 0;
-                        if(row % 4 == 1) col.g = 150;
                         
                         ofSetColor(col.r, col.g, col.b, col.a);
-                        
                         white = !white;
                         
                         ofRect(x, y, chessSize, chessSize);
@@ -168,16 +162,27 @@ public:
             
         ofPushMatrix();
 
-        ofSetColor(255,0,0);
-        ofEllipse(0, 0, 1, 1);
+        ofSetColor(255,255,255);
+        ofEllipse(0, 0, 0.5, 0.5);
         
         
-        ofSetColor(0,255,0);
-        ofRect(-0.95, -0.95, 1.85, 0.1);
+        ofSetColor(255,255,0);
+        
+        ofCircle(-0.9, -0.9, 0.04);
+        ofCircle(0.9, 0.9, 0.04);
+        ofCircle(-0.9, 0.9, 0.04);
+        ofCircle(0.9, -0.9, 0.04);
+        
+        ofCircle(0, 0.9, 0.04);
+        ofCircle(0, -0.9, 0.04);
+        
+        
+        /*ofRect(-0.95, -0.95, 1.85, 0.1);
         ofSetColor(0,155,255);
         ofRect(-0.95, -0.1, 1.85, 0.1);
         ofSetColor(255,155,0);
-        ofRect(0, -0.95, 0.1, 1.95);
+        ofRect(0, -0.95, 0.1, 1.95);*/
+         
         //ofDrawAxis(1);
         ofPopMatrix();
         ofPopStyle();

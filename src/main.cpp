@@ -1,6 +1,6 @@
 #include "ofMain.h"
 #include "testApp.h"
-#include <ofAppGlutWindow.h>
+#include "ofGlProgrammableRenderer.h"
 
 //========================================================================
 int main( ){    

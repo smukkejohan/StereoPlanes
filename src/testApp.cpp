@@ -23,6 +23,8 @@ void testApp::setup()
     
     // we output 4x1920x1080 layered in two units
     
+    ofSeedRandom(10);
+    
     int resx = 1920;
     int resy = 1080;
     
@@ -59,6 +61,8 @@ void testApp::setup()
     timeline.setupFont("GUI/Arial.ttf", 7);
     timeline.setDurationInSeconds(60*30); // half an hour
     
+    tlAudioMain = timeline.addAudioTrack("Samlet lyd");
+    tlAudioMain->loadSoundfile("audio/SAMLET_stereo_click.wav");
     
     // #### pointers to lights, a hack for different light on different surfaces
     
@@ -136,13 +140,11 @@ void testApp::setup()
     guis.push_back(planeGui);
     
     for(int i=0; i<guis.size(); i++) {
-        
         guis[i]->setDrawBack(true);
         guis[i]->setScrollableDirections(false, true);
         guis[i]->setFont("GUI/Arial.ttf");
         guis[i]->setWidgetFontSize(OFX_UI_FONT_SMALL);
         guis[i]->setColorBack(ofColor(10, 10, 10,220));
-    
     }
     
     mainGui->setName("Main");
@@ -291,8 +293,8 @@ void testApp::draw()
     
     // Draw the scenes to the output fbo
     fbo.begin(); {
-        ofClear(0, 0, 0, 0);
-        ofSetColor(255,255);
+        //ofClear(0.0, 0.0, 0.0, 1.0); // This causes flickering if alpha gets cleared
+        ofSetColor(255);
         ofFill();
         for(int i=0; i<planes.size(); i++) {
             planes[i]->draw();
@@ -304,10 +306,8 @@ void testApp::draw()
         ofClear(0);
         ofClearAlpha();
         ofSetColor(255,255);
-        //fboHeight
         
         //float fboWidth = (fboHeight)*(fbo.getHeight()*1./fbo.getWidth());
-
         fbo.draw(0,timeline.getHeight(),(ofGetWidth()),fboHeight);
     }
     
@@ -316,18 +316,18 @@ void testApp::draw()
     ofSetColor(255,255);
     
     
+    
     timeline.draw();
-    
-    
+    for(int i=0; i<guis.size(); i++) {
+        guis[i]->draw();
+    }
     
     sbsOutputServer.publishFBO(&fbo);
-    
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-    
 	if (key == 'f'){
 		ofToggleFullscreen();
     }

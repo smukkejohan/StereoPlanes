@@ -46,6 +46,6 @@ public:
     ofxTLCurves     * flyLightPosNoise;
     ofxTLCurves     * flyLightPosNoiseSpeed;
     
-    bool drawLights = true;
+    bool drawLights = false;
     
 };

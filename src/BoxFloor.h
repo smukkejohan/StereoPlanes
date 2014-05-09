@@ -22,7 +22,6 @@ public:
     
     void receiveOsc(ofxOscMessage * m, string rest);
 
-    
     float surfaceHeight, waveHeight, speed, plateauHeight, lightHeight, platformRadius;
     bool bRotation;
     

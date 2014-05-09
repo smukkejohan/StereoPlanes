@@ -12,7 +12,6 @@
 #include "ofxOsc.h"
 #include "ofxTimeline.h"
 
-
 class ContentScene {
     
 public:

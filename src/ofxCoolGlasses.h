@@ -16,8 +16,16 @@ public:
         height = 2.;
         width = height *(w/h);
         
-		leftFbo.allocate(w, h, GL_RGBA);
-		rightFbo.allocate(w, h, GL_RGBA);
+        ofFbo::Settings settings;
+        
+        settings.height = h;
+        settings.width = w;
+        settings.numSamples = 8;
+        settings.useDepth = true;
+        //settings.colorFormats = GL_RGBA;
+        
+        leftFbo.allocate(settings);
+		rightFbo.allocate(settings);
         
         left.setScale(1, 1, 1);
         left.setNearClip(0.1);

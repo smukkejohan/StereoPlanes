@@ -23,8 +23,7 @@ void VoronoiWall::setup() {
     
     mainTimeline->addPage(name);
     voroWall = new VoronoiPlane;
-    voroWall->setup(ofRectangle(-1, -1, 2, 2), mainTimeline, indexStr);
-    mainTimeline->addCurves("Cells");
+    voroWall->setup(ofRectangle(-2, -2, 4, 4), mainTimeline, indexStr);
 
 }
 
@@ -69,9 +68,9 @@ void VoronoiPlane::draw() {
         ofTranslate(cells[i].offset);
         
         
-        if(tlbackalphamax->getValue() > 0) {
+        if(tlbackalphamax->getValue() < tlbackalphamax->getValueRange().max) {
         
-            float a = ofMap(ofClamp(abs(cells[i].offset.z), 0, tlbackalphamax->getValue()), 0, tlbackalphamax->getValue(), 1.0, 0.0);
+            float a = ofMap(ofClamp(abs(cells[i].offset.z), 0, tlbackalphamax->getValue()+0.001), 0, tlbackalphamax->getValue()+0.001, 1.0, 0.0);
         
         cells[i].mat.diffuseColor.w *= a;
         cells[i].mat.specularColor.w *= a;

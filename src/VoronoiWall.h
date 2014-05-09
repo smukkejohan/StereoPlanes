@@ -127,6 +127,21 @@ public:
     ofxTLCurves * tlshine;
     
     
+    int fixedPointsLength = 11;
+    ofPoint fixedPoints [11] = {
+        ofPoint(0.0,0.0),
+        ofPoint(0.5,0.5),
+        ofPoint(-0.4,0.4),
+        ofPoint(0.5,-0.4),
+        ofPoint(-0.5,-0.2),
+        ofPoint(0.9,-0.8),
+        ofPoint(1.0,0.6),
+        ofPoint(-1.5,0.5),
+        ofPoint(0.5,0.8),
+        ofPoint(1.0,-1.0),
+        ofPoint(0.9,-0.2) };
+
+    
     ofxTLCurves * tlbackalphamax;
     
     vector<ofPoint> controlPoints;
@@ -208,18 +223,27 @@ public:
                             false,false,false, // set true to flow beyond box
                             8);
         
-        while(controlPoints.size() > nCells) {
-            controlPoints.pop_back();
+        if(controlPoints.size() == 0) {
+            controlPoints.assign(fixedPoints,fixedPoints+fixedPointsLength);
+        }
+        
+        while(cells.size() > nCells) {
             cells.pop_back();
         }
         
         while(controlPoints.size() < nCells) {
+            
             controlPoints.push_back(ofPoint(ofRandom(-bounds.width,bounds.width),
                                             ofRandom(-bounds.height,bounds.height),
                                             ofRandom(-depth,depth)));
         }
         
-        addCellsSeeds(con, controlPoints);
+        vector<ofPoint> ourControlPoints;
+        
+        //ourControlPoints.assign(controlPoints.begin(), controlPoints.begin()+nCells);
+        ourControlPoints = vector<ofPoint>(controlPoints.begin(), controlPoints.begin()+nCells);
+        
+        addCellsSeeds(con, ourControlPoints);
         
         cellMeshes = getCellsFromContainer(con, 0);
         

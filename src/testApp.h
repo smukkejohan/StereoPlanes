@@ -78,6 +78,8 @@ public:
     
     void drawScenes(int _surfaceId=0);
     
+    ofxTLAudioTrack * tlAudioMain;
+    
     // Scenes
     
     Lights * lights;
