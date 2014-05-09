@@ -126,6 +126,9 @@ public:
     ofxTLCurves * tlspecalpha;
     ofxTLCurves * tlshine;
     
+    
+    ofxTLCurves * tlbackalphamax;
+    
     vector<ofPoint> controlPoints;
     vector<BreakZone *> breakZones;
     string name;
@@ -150,20 +153,23 @@ public:
         //tldifalpha->setValueRangeMin(0);
         
         tlrotationy = tl->addCurves("Rotate y");
-        tlrotationy->setValueRangeMax(180);
-        tlrotationy->setValueRangeMin(-180);
+        tlrotationy->setValueRangeMax(110);
+        tlrotationy->setValueRangeMin(-110);
         
         tlrotationfixy = tl->addCurves("Rotate around Y");
         tlrotationfixy->setValueRangeMax(1);
         tlrotationfixy->setValueRangeMin(-1);
         
         tlrotationx = tl->addCurves("Rotate x");
-        tlrotationx->setValueRangeMax(180);
-        tlrotationx->setValueRangeMin(-180);
+        tlrotationx->setValueRangeMax(110);
+        tlrotationx->setValueRangeMin(-110);
         
         tlrotationfixx = tl->addCurves("Rotate around x");
         tlrotationfixx->setValueRangeMax(1);
         tlrotationfixx->setValueRangeMin(-1);
+        
+        tlbackalphamax = tl->addCurves("Fade out in distance");
+        tlbackalphamax->setValueRangeMax(8);
         
         
         for(int i=0; i <3; i++) {
