@@ -57,7 +57,7 @@ void VoronoiPlane::draw() {
                 cells[i].offset.z = breakZones[b]->strength;
                 
                 // add noise
-                cells[i].offset.z += (ofSignedNoise(breakZones[b]->time + cells[i].r) + cells[i].r)*breakZones[b]->noise;
+                cells[i].offset.z += (ofSignedNoise(breakZones[b]->time + cells[i].r) + cells[i].r) * breakZones[b]->noise;
                 
                 // add rotation
                 //cells[i].offset.z += (ofSignedNoise(tl->getCurrentTime() + cells[i].r) + cells[i].r);
