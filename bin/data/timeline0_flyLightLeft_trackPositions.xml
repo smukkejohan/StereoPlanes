@@ -1,0 +1,98 @@
+<positions>
+    <element name="Fly Light Attenuation">
+        <x>0.000000000</x>
+        <y>153.000000000</y>
+        <width>1280.000000000</width>
+        <height>37.000000000</height>
+    </element>
+    <element name="Fly Light Attenuation_0">
+        <x>0.000000000</x>
+        <y>134.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Fly Light Color">
+        <x>0.000000000</x>
+        <y>70.000000000</y>
+        <width>1280.000000000</width>
+        <height>59.000000000</height>
+    </element>
+    <element name="Fly Light Color_0">
+        <x>0.000000000</x>
+        <y>70.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Fly Light Pos Noise">
+        <x>0.000000000</x>
+        <y>390.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Fly Light Pos Noise Speed">
+        <x>0.000000000</x>
+        <y>454.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Fly Light Pos Noise Speed_0">
+        <x>0.000000000</x>
+        <y>454.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Fly Light Pos Noise_0">
+        <x>0.000000000</x>
+        <y>390.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Fly Light Pos X">
+        <x>0.000000000</x>
+        <y>214.000000000</y>
+        <width>1280.000000000</width>
+        <height>59.000000000</height>
+    </element>
+    <element name="Fly Light Pos X_0">
+        <x>0.000000000</x>
+        <y>198.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Fly Light Pos Y">
+        <x>0.000000000</x>
+        <y>297.000000000</y>
+        <width>1280.000000000</width>
+        <height>43.000000000</height>
+    </element>
+    <element name="Fly Light Pos Y_0">
+        <x>0.000000000</x>
+        <y>262.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Fly Light Pos Z">
+        <x>0.000000000</x>
+        <y>364.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Fly Light Pos Z_0">
+        <x>0.000000000</x>
+        <y>326.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Shading">
+        <x>0.000000000</x>
+        <y>70.000000000</y>
+        <width>1920.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Vertex Noise_0">
+        <x>0.000000000</x>
+        <y>582.000000000</y>
+        <width>1920.000000000</width>
+        <height>40.000000000</height>
+    </element>
+</positions>

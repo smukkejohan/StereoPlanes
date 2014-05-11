@@ -12,4 +12,4 @@ build/
 *.mode2v3
 
 xcuserdata
-bin/
+bin/StereoPlanesDebug.app

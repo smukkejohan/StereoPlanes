@@ -2,13 +2,25 @@
     <key>
         <easefunc>0</easefunc>
         <easetype>0</easetype>
-        <time>00:02:12:064</time>
-        <value>0.286000073</value>
+        <time>00:00:00:000</time>
+        <value>1.000000000</value>
     </key>
     <key>
         <easefunc>0</easefunc>
         <easetype>0</easetype>
-        <time>00:15:05:625</time>
-        <value>0.774999976</value>
+        <time>00:00:03:330</time>
+        <value>0.000000000</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:03:34:882</time>
+        <value>0.000000000</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:04:03:260</time>
+        <value>0.492994308</value>
     </key>
 </keyframes>

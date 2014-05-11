@@ -73,8 +73,10 @@ public:
         /*tlpush = tl->addCurves("Push");*/
         /*tlrotate = tl->addCurves("Rotate");*/
         
-        tldifalpha = tl->addCurves("Specular Alpha");
-        tlspecalpha = tl->addCurves("Diffuse Alpha");
+        tldifalpha = tl->addCurves("Diffuse alpha");
+        //tldifalpha->setValueRangeMin(-0.1);
+        tlspecalpha = tl->addCurves("Specular alpha");
+        //tlspecalpha->setValueRangeMin(-0.1);
         
         //tlshininess = tl->addCurves("Shine");
     }
@@ -129,10 +131,10 @@ public:
     
     int fixedPointsLength = 11;
     ofPoint fixedPoints [11] = {
-        ofPoint(0.0,0.0),
-        ofPoint(0.5,0.5),
+        ofPoint(0.8,-0.12),
+        ofPoint(-0.7,0.4),
         ofPoint(-0.4,0.4),
-        ofPoint(0.5,-0.4),
+        ofPoint(0.85,-0.4),
         ofPoint(-0.5,-0.2),
         ofPoint(0.9,-0.8),
         ofPoint(1.0,0.6),
@@ -156,7 +158,7 @@ public:
         name = _name;
         
         tlcells = tl->addCurves("Cells");
-        tlcells->setValueRangeMax(600);
+        tlcells->setValueRangeMax(100);
         tlcells->setValueRangeMin(1);
         
         tldifalpha = tl->addCurves("Diffuse alpha");

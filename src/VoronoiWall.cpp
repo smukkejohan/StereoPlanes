@@ -23,8 +23,7 @@ void VoronoiWall::setup() {
     
     mainTimeline->addPage(name);
     voroWall = new VoronoiPlane;
-    voroWall->setup(ofRectangle(-2, -2, 4, 4), mainTimeline, indexStr);
-
+    voroWall->setup(ofRectangle(-2, -2,  4, 4), mainTimeline, indexStr);
 }
 
 void VoronoiWall::setGui(ofxUICanvas * gui, float width){
@@ -33,6 +32,8 @@ void VoronoiWall::setGui(ofxUICanvas * gui, float width){
 
 void VoronoiPlane::draw() {
     
+    bool matChanged = true;
+    
     ofPushMatrix();
     
     ofTranslate(tlrotationfixx->getValue(), tlrotationfixy->getValue());
@@ -40,26 +41,36 @@ void VoronoiPlane::draw() {
     ofRotateY(tlrotationx->getValue());
     ofTranslate(-tlrotationfixx->getValue(), -tlrotationfixy->getValue());
     
+    mat.diffuseColor = ofVec4f(1.0, 1.0, 1.0, tldifalpha->getValue());
+    mat.specularColor = ofVec4f(1.0, 1.0, 1.0, tlspecalpha->getValue());
+    mat.specularShininess = tlshine->getValue();
+    
     for(int i=0; i < cells.size(); i++) {
         
-        cells[i].mat.diffuseColor = ofVec4f(1.0, 1.0, 1.0, tldifalpha->getValue());
-        cells[i].mat.specularColor = ofVec4f(1.0, 1.0, 1.0, tlspecalpha->getValue());
-        cells[i].mat.specularShininess = tlshine->getValue();
+        cells[i].mat = mat;
         
         cells[i].offset = ofVec3f(0,0,0);
         
         for(int b = 0; b<breakZones.size(); b++) {
             
             if(cells[i].mesh.getCentroid().distance(breakZones[b]->pos) < breakZones[b]->radius) {
-                cells[i].offset.z += breakZones[b]->strength;
+                cells[i].offset.z = breakZones[b]->strength;
                 
                 // add noise
                 cells[i].offset.z += (ofSignedNoise(breakZones[b]->time + cells[i].r) + cells[i].r)*breakZones[b]->noise;
                 
                 // add rotation
                 //cells[i].offset.z += (ofSignedNoise(tl->getCurrentTime() + cells[i].r) + cells[i].r);
-                cells[i].mat.diffuseColor.w  = cells[i].mat.diffuseColor.w  * breakZones[b]->tldifalpha->getValue();
-                cells[i].mat.specularColor.w = cells[i].mat.specularColor.w * breakZones[b]->tlspecalpha->getValue();
+                //if(breakZones[b]->tldifalpha->getValue() > 0) {
+                    cells[i].mat.diffuseColor.w  = cells[i].mat.diffuseColor.w * breakZones[b]->tldifalpha->getValue();
+                    //matChanged = true;
+                //}
+                
+                //if(breakZones[b]->tlspecalpha->getValue() > 0) {
+                    cells[i].mat.specularColor.w =  cells[i].mat.specularColor.w * breakZones[b]->tlspecalpha->getValue();
+                    //matChanged = true;
+                //}
+                
                 //mat.specularShininess = tlshine->getValue();
             }
         }
@@ -72,12 +83,15 @@ void VoronoiPlane::draw() {
         
             float a = ofMap(ofClamp(abs(cells[i].offset.z), 0, tlbackalphamax->getValue()+0.001), 0, tlbackalphamax->getValue()+0.001, 1.0, 0.0);
         
-        cells[i].mat.diffuseColor.w *= a;
-        cells[i].mat.specularColor.w *= a;
+            cells[i].mat.diffuseColor.w *= a;
+            cells[i].mat.specularColor.w *= a;
             
         }
         
-        ofxOlaShaderLight::setMaterial(cells[i].mat);
+        //if(matChanged) {
+            ofxOlaShaderLight::setMaterial(cells[i].mat);
+        //    matChanged = false;
+        //}
         
         // if we have really high alpha we don't bother drawing, saves a bit of performance
         if(cells[i].mat.diffuseColor.w + cells[i].mat.specularColor.w > 0.005) {
