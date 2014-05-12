@@ -88,8 +88,15 @@ void testApp::setup()
     voroFloor->setSurface(0);
     contentScenes.push_back(voroFloor);
     
-    ghostLights = new GhostLights();
-    contentScenes.push_back(ghostLights);
+    crystalsLeft = new GhostLights();
+    crystalsLeft->setSurface(1);
+    crystalsLeft->setName("Crystal left");
+    contentScenes.push_back(crystalsLeft);
+    
+    crystalsRight = new GhostLights();
+    crystalsRight->setSurface(2);
+    crystalsRight->setName("Crystal right");
+    contentScenes.push_back(crystalsRight);
     
     lights = new Lights();
     lights->enabled = true;

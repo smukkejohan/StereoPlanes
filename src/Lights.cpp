@@ -31,9 +31,9 @@ void Lights::setup() {
     //flyLightDotSize = mainTimeline->addCurves("Fly Light Dot Size", ofRange(0.0, 1.0));
     
     //lightsVertexNoise = mainTimeline->addCurves("Vertex Noise", ofRange(0.0,1.0));
-    
+    skyLightAttenuation = mainTimeline->addCurves("Sky Light Attenuation", ofRange(0.001,40.0));    
     skyLightColor = mainTimeline->addColors("Sky Light Color");
-    skyLightAttenuation = mainTimeline->addCurves("Sky Light Attenuation", ofRange(0.001,40.0));
+
     
     material.diffuseColor = ofVec4f(1.0, 1.0, 1.0, 1.0);
     material.specularColor = ofVec4f(1.0, 1.0, 1.0, 1.0);

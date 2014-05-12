@@ -93,7 +93,8 @@ public:
     VoronoiWall * voroWallRight;
     VoronoiWall * voroFloor;
     
-    GhostLights * ghostLights;
+    GhostLights * crystalsRight;
+    GhostLights * crystalsLeft;
     
     vector<ofxOlaShaderLight *> shaderLights;
     

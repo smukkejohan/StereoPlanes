@@ -105,6 +105,12 @@ public:
     
     ofxOlaShaderLight::Material mat;
     
+    ofxTLCurves * tlx;
+    ofxTLCurves * tly;
+    ofxTLCurves * tlz;
+    ofxTLCurves * tlscale;
+    
+    ofxTLCurves * tlenabled;
     
     
     

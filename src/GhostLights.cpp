@@ -10,8 +10,6 @@
 
 void GhostLights::setup() {
     
-    name = "Ghost Lights";
-    
     wallCube = new VoroGhost();
     wallCube->setup(0.2,0.2,0.2,100);
     
@@ -19,20 +17,38 @@ void GhostLights::setup() {
     mat.specularColor = ofVec4f(1.0, 1.0, 1.0, 0.5);
     mat.specularShininess = 0.8;
     
-    mainTimeline->addPage("Ghost crystals");
+    mainTimeline->addPage(name);
+    
+    tlenabled = mainTimeline->addCurves("Enabled");
+    
+    tlexplode = mainTimeline->addCurves("Explode");
+    
+    tlscale = mainTimeline->addCurves("Scale");
+    tlscale->setValueRangeMax(3);
+    
+    tlx = mainTimeline->addCurves("X");
+    tlx->setValueRangeMax(3);
+    tlx->setValueRangeMin(-3);
+    
+    tly = mainTimeline->addCurves("Y");
+    tly->setValueRangeMax(3);
+    tly->setValueRangeMin(-3);
+    
+    tlz = mainTimeline->addCurves("Z");
+    tlz->setValueRangeMax(6);
+    tlz->setValueRangeMin(-2);
     
     
 }
 
 void GhostLights::draw(int _surfaceId) {
     
-    ofxOlaShaderLight::setMaterial(mat);
+    if(_surfaceId == primarySurface) {
     
-    //ofBackground(0);
-    //if(_surfaceId == 0) {
+        ofxOlaShaderLight::setMaterial(mat);
 
         ofPushMatrix(); {
-            ofTranslate(0, 0, -0.8);
+            ofTranslate(tlx->getValue(), tly->getValue(), tlz->getValue());
             
             ofRotateX(ofGetElapsedTimef()*6);
             ofRotateY(ofGetElapsedTimef()*7);
@@ -43,8 +59,8 @@ void GhostLights::draw(int _surfaceId) {
                     
                     //wallCube->cellMeshes[i].setColor(, const ofFloatColor &c)
                     
-                    ofScale(1.65,1.65,1.65);
-                    float explode = 0.4; //ofMap(ofSignedNoise(ofGetElapsedTimef()), 0, 1, 0.8, 1);
+                    ofScale(tlscale->getValue(),tlscale->getValue(),tlscale->getValue());
+                    float explode = tlexplode->getValue(); //ofMap(ofSignedNoise(ofGetElapsedTimef()), 0, 1, 0.8, 1);
                     
                     ofTranslate(wallCube->cellMeshes[i].getCentroid().x, wallCube->cellMeshes[i].getCentroid().y, wallCube->cellMeshes[i].getCentroid().z);
                     ofScale(explode,explode,explode);
@@ -56,10 +72,11 @@ void GhostLights::draw(int _surfaceId) {
             }
         } ofPopMatrix();
         
-    //}
+    }
 }
 
 void GhostLights::update() {
+    enabled = tlenabled->getValue();
     wallCube->update();
     
 }
