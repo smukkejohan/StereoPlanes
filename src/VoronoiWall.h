@@ -117,6 +117,7 @@ public:
     
     ofRectangle bounds;
     float depth = 0.005;
+    float gap = 0.0;
     vector<ofVboMesh>  cellMeshes;
     int nCells = 20;
     vector<Cell> cells;
@@ -135,6 +136,8 @@ public:
     ofxTLCurves * tldifalpha;
     ofxTLCurves * tlspecalpha;
     ofxTLCurves * tlshine;
+    
+    ofxTLCurves * tldepth;
     
     
     int fixedPointsLength = 11;
@@ -196,6 +199,10 @@ public:
         tlbackalphamax = tl->addCurves("Fade out in distance");
         tlbackalphamax->setValueRangeMax(8);
         
+        tldepth = tl->addCurves("Depth");
+        tldepth->setValueRangeMax(10);
+        tldepth->setValueRangeMin(1);
+        
         
         for(int i=0; i <3; i++) {
             BreakZone * br = new BreakZone;
@@ -255,7 +262,7 @@ public:
         
         addCellsSeeds(con, ourControlPoints);
         
-        cellMeshes = getCellsFromContainer(con, 0);
+        cellMeshes = getCellsFromContainer(con, gap);
         
         //cells.clear();
         

@@ -18,7 +18,7 @@
 
 void VoronoiWall::setup() {
     
-    depth = 0.015;
+    depth = 0.025;
     nCells = 2;
     
     mainTimeline->addPage(name);
@@ -26,7 +26,10 @@ void VoronoiWall::setup() {
     
     //ofRectangle(-2, -2,  4, 4)
     if(name == "voroFloor") {
-        voroWall->setup(ofRectangle(-2.0, -1.2,  4.0, 2.4), mainTimeline, indexStr);
+        
+        depth = 0.0;
+        voroWall->setup(ofRectangle(-1.2, -1.2,  2.4, 2.4), mainTimeline, indexStr);
+        
     } else {
         voroWall->setup(ofRectangle(-1.1, -1.1,  2.2, 2.2), mainTimeline, indexStr);
     }
@@ -41,7 +44,6 @@ void VoronoiPlane::draw() {
     bool matChanged = true;
     
     ofPushMatrix();
-    
     ofTranslate(tlrotationfixx->getValue(), tlrotationfixy->getValue());
     ofRotateX(tlrotationy->getValue());
     ofRotateY(tlrotationx->getValue());
@@ -81,6 +83,7 @@ void VoronoiPlane::draw() {
         ofPushMatrix();
         ofTranslate(cells[i].offset);
         
+        ofScale(1,1,tldepth->getValue());
         
         if(tlbackalphamax->getValue() < tlbackalphamax->getValueRange().max) {
             float a = 1;
