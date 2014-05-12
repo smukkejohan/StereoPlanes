@@ -23,7 +23,13 @@ void VoronoiWall::setup() {
     
     mainTimeline->addPage(name);
     voroWall = new VoronoiPlane;
-    voroWall->setup(ofRectangle(-2, -2,  4, 4), mainTimeline, indexStr);
+    
+    //ofRectangle(-2, -2,  4, 4)
+    if(name == "voroFloor") {
+        voroWall->setup(ofRectangle(-2.0, -1.2,  4.0, 2.4), mainTimeline, indexStr);
+    } else {
+        voroWall->setup(ofRectangle(-1.1, -1.1,  2.2, 2.2), mainTimeline, indexStr);
+    }
 }
 
 void VoronoiWall::setGui(ofxUICanvas * gui, float width){
@@ -46,15 +52,12 @@ void VoronoiPlane::draw() {
     mat.specularShininess = tlshine->getValue();
     
     for(int i=0; i < cells.size(); i++) {
-        
         cells[i].mat = mat;
-        
         cells[i].offset = ofVec3f(0,0,0);
-        
         for(int b = 0; b<breakZones.size(); b++) {
             
             if(cells[i].mesh.getCentroid().distance(breakZones[b]->pos) < breakZones[b]->radius) {
-                cells[i].offset.z = breakZones[b]->strength;
+                cells[i].offset.z += breakZones[b]->strength * breakZones[b]->multiplier;
                 
                 // add noise
                 cells[i].offset.z += (ofSignedNoise(breakZones[b]->time + cells[i].r) + cells[i].r) * breakZones[b]->noise;
@@ -80,11 +83,17 @@ void VoronoiPlane::draw() {
         
         
         if(tlbackalphamax->getValue() < tlbackalphamax->getValueRange().max) {
-        
-            float a = ofMap(ofClamp(abs(cells[i].offset.z), 0, tlbackalphamax->getValue()+0.001), 0, tlbackalphamax->getValue()+0.001, 1.0, 0.0);
-        
-            cells[i].mat.diffuseColor.w *= a;
-            cells[i].mat.specularColor.w *= a;
+            float a = 1;
+            if(cells[i].offset.z > 0) {
+                a = ofMap(ofClamp(abs(cells[i].offset.z), 0, tlbackalphamax->getValue()+0.001), 0, tlbackalphamax->getValue()+0.001, 1.0, 0.0);
+            }
+                        cells[i].mat.diffuseColor.x *= a;
+            cells[i].mat.diffuseColor.y *= a;
+            cells[i].mat.diffuseColor.z *= a;
+            
+            cells[i].mat.specularColor.x *= a;
+            cells[i].mat.specularColor.y *= a;
+            cells[i].mat.specularColor.z *= a;
             
         }
         

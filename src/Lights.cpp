@@ -106,7 +106,7 @@ void Lights::update() {
     
     skyLight.setGlobalPosition(0,-1,-1);
     
-    ofxOlaShaderLight::setShadingType(ofxOlaShaderLight::OFX_OLA_SHADER_LIGHT_GOURAUD);
+    ofxOlaShaderLight::setShadingType(ofxOlaShaderLight::OFX_OLA_SHADER_LIGHT_FLAT);
     
     /*switch (int(lightShading->getValue())) {
         case 0:

@@ -11,7 +11,6 @@ void testApp::setup()
 {
     
     ofSetLogLevel(OF_LOG_ERROR);
-    
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
     ofSetBackgroundAuto(true);
@@ -22,7 +21,6 @@ void testApp::setup()
     sbsOutputServer.setName("Side By Side");
     
     // we output 4x1920x1080 layered in two units
-    
     ofSeedRandom(10);
     
     int resx = 1920;

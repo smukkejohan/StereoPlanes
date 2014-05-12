@@ -1,32 +1,38 @@
 <positions>
-    <element name="Explode_0">
+    <element name="Enabled_0">
         <x>0.000000000</x>
         <y>70.000000000</y>
-        <width>1488.000000000</width>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Explode_0">
+        <x>0.000000000</x>
+        <y>134.000000000</y>
+        <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Scale_0">
         <x>0.000000000</x>
-        <y>134.000000000</y>
-        <width>1488.000000000</width>
+        <y>198.000000000</y>
+        <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="X_9">
         <x>0.000000000</x>
-        <y>198.000000000</y>
-        <width>1488.000000000</width>
+        <y>262.000000000</y>
+        <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Y_9">
         <x>0.000000000</x>
-        <y>262.000000000</y>
-        <width>1488.000000000</width>
+        <y>326.000000000</y>
+        <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Z_0">
         <x>0.000000000</x>
-        <y>326.000000000</y>
-        <width>1488.000000000</width>
+        <y>390.000000000</y>
+        <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
 </positions>

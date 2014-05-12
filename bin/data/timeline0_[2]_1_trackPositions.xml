@@ -13,13 +13,19 @@
     </element>
     <element name="Diffuse alpha_5">
         <x>0.000000000</x>
-        <y>454.000000000</y>
+        <y>612.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Multiplier_3">
+        <x>0.000000000</x>
+        <y>356.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Noise_3">
         <x>0.000000000</x>
-        <y>262.000000000</y>
+        <y>420.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -31,7 +37,7 @@
     </element>
     <element name="Radius_3">
         <x>0.000000000</x>
-        <y>390.000000000</y>
+        <y>548.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -49,13 +55,13 @@
     </element>
     <element name="Specular alpha_5">
         <x>0.000000000</x>
-        <y>518.000000000</y>
+        <y>676.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Speed_3">
         <x>0.000000000</x>
-        <y>326.000000000</y>
+        <y>484.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -63,7 +69,7 @@
         <x>0.000000000</x>
         <y>198.000000000</y>
         <width>1280.000000000</width>
-        <height>40.000000000</height>
+        <height>134.000000000</height>
     </element>
     <element name="X_3">
         <x>0.000000000</x>

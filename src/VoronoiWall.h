@@ -27,9 +27,12 @@ public:
     float time = 0;
     float speed;
     
+    float multiplier;
+    
     ofxTLCurves * x;
     ofxTLCurves * y;
     
+    ofxTLCurves * tlmultiplier;
     ofxTLCurves * tlstrength;
     ofxTLCurves * tlnoise;
     ofxTLCurves * tlradius;
@@ -57,6 +60,10 @@ public:
         tlstrength = tl->addCurves("Strength");
         tlstrength->setValueRangeMax(6);
         tlstrength->setValueRangeMin(-1);
+        
+        tlmultiplier = tl->addCurves("Multiplier");
+        tlmultiplier->setValueRangeMax(10);
+        tlmultiplier->setValueRangeMin(0);
         
         tlnoise = tl->addCurves("Noise");
         tlnoise->setValueRangeMax(2);
@@ -90,6 +97,7 @@ public:
         radius = tlradius->getValue();
         noise = tlnoise->getValue();
         speed = tlspeed->getValue();
+        multiplier = tlmultiplier->getValue();
         
         time += 0.01 * speed;
     };
@@ -158,13 +166,13 @@ public:
         name = _name;
         
         tlcells = tl->addCurves("Cells");
-        tlcells->setValueRangeMax(100);
+        tlcells->setValueRangeMax(400);
         tlcells->setValueRangeMin(1);
         
         tldifalpha = tl->addCurves("Diffuse alpha");
         tlspecalpha = tl->addCurves("Specular alpha");
         tlshine = tl->addCurves("Shine");
-        tlshine->setValueRangeMax(8);
+        tlshine->setValueRangeMax(20);
         
         //tldifalpha->setValueRangeMax(-180);
         //tldifalpha->setValueRangeMin(0);

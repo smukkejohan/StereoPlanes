@@ -5,4 +5,22 @@
         <time>00:03:03:923</time>
         <value>0.000000000</value>
     </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:05:37:724</time>
+        <value>0.149999976</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:05:41:877</time>
+        <value>0.350000024</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:08:00:848</time>
+        <value>0.375000000</value>
+    </key>
 </keyframes>
