@@ -25,6 +25,7 @@ public:
     float time;
     
     ofxTimeline * mainTimeline;
+    ofxTLCurves * tlenabled;
     
     ContentScene() {
     };
@@ -39,11 +40,10 @@ public:
         gui->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_SMALL));
         gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
         gui->addSpacer(width, 1);
-        gui->addToggle(indexStr+"Enabled", &enabled);
+        //gui->addToggle(indexStr+"Enabled", &enabled);
     }
     
     virtual void guiEvent(ofxUIEventArgs &e) {};
-    
     
     void setName(string _name) {
         setName(_name, "/"+_name);
@@ -59,14 +59,23 @@ public:
         
         index = _index;
         indexStr = "["+ ofToString(_index) + "] ";
+
         setup();
+        
+        mainTimeline->setCurrentPage("Page One");
+        tlenabled = mainTimeline->addCurves("Enable " + name);
+
     };
     
     void updateScene() {
+        
+        enabled = (tlenabled->getValue() == 1);
+        
         if(enabled) {
             update();
         }
     };
+    
     void drawScene(int _surfaceId=0) {
         if(enabled) {
             glPushMatrix();ofPushMatrix();ofPushStyle();

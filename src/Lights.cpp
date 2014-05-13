@@ -34,7 +34,6 @@ void Lights::setup() {
     skyLightAttenuation = mainTimeline->addCurves("Sky Light Attenuation", ofRange(0.001,40.0));    
     skyLightColor = mainTimeline->addColors("Sky Light Color");
 
-    
     material.diffuseColor = ofVec4f(1.0, 1.0, 1.0, 1.0);
     material.specularColor = ofVec4f(1.0, 1.0, 1.0, 1.0);
     material.specularShininess = 2.5;
@@ -49,6 +48,10 @@ void Lights::setup() {
     skyLight.setAttenuation(1./10.);
     skyLight.setTemperature(20000);
     
+    skyLight2.setNormalisedBrightness(1.0);
+    skyLight2.setAttenuation(1./10.);
+    skyLight2.setTemperature(20000);
+    
 }
 
 void Lights::beginWorld(int _surfaceId){
@@ -60,6 +63,10 @@ void Lights::beginWorld(int _surfaceId){
     
     skyLight.setDiffuseColor(skyLightColor->getColor());
     skyLight.setAttenuation(1./skyLightAttenuation->getValue());
+    
+    skyLight2.setDiffuseColor(skyLightColor->getColor());
+    skyLight2.setAttenuation(1./skyLightAttenuation->getValue());
+    
 }
 
 void Lights::endWorld(int _surfaceId){
@@ -103,10 +110,10 @@ void Lights::update() {
     
     flyLight.setGlobalPosition(pos);
     */
+    skyLight.setGlobalPosition(0,-4,-0.5);
+    skyLight2.setGlobalPosition(0,-4,0.5);
     
-    skyLight.setGlobalPosition(0,-1,-1);
-    
-    ofxOlaShaderLight::setShadingType(ofxOlaShaderLight::OFX_OLA_SHADER_LIGHT_FLAT);
+    ofxOlaShaderLight::setShadingType(ofxOlaShaderLight::OFX_OLA_SHADER_LIGHT_GOURAUD);
     
     /*switch (int(lightShading->getValue())) {
         case 0:
@@ -122,15 +129,6 @@ void Lights::update() {
             ofxOlaShaderLight::setShadingType(ofxOlaShaderLight::OFX_OLA_SHADER_LIGHT_PHONG);
             break;
     }*/
-    
-    bool lightWasEnabled = ofxOlaShaderLight::isEnabled();
-    if(!lightWasEnabled){
-        ofxOlaShaderLight::begin();
-    }
-    
-    if(!lightWasEnabled){
-        ofxOlaShaderLight::end();
-    }
     
     ofxOlaShaderLight::update();
 }

@@ -62,6 +62,8 @@ void testApp::setup()
     tlAudioMain = timeline.addAudioTrack("Samlet lyd");
     tlAudioMain->loadSoundfile("audio/SAMLET_stereo_click.wav");
     
+    tlAudioMain->setUseFFTEnvelope(false);
+    
     // #### pointers to lights, a hack for different light on different surfaces
     
     shaderLights.push_back(new ofxOlaShaderLight);
@@ -159,7 +161,7 @@ void testApp::setup()
     mainGui->addSlider("Eye seperation", 0, 7, &eyeSeperation);
     mainGui->addToggle("Draw checkers", &drawChessboards);
     mainGui->addToggle("Draw planes", &drawGrids);
-    mainGui->addToggle("Draw FBOs", &drawFBOs);
+    mainGui->addToggle("Draw FBOs", &drawMonitor);
     
     planeGui->setName("Planes");
     planeGui->addLabel("Surfaces", OFX_UI_FONT_LARGE);
@@ -184,6 +186,7 @@ void testApp::setup()
     for(int i=0; i<guis.size(); i++) {
         guis[i]->loadSettings("GUI/" + guis[i]->getName() + ".xml");
         guis[i]->autoSizeToFitWidgets();
+        guis[i]->setAutoDraw(false);
         ofAddListener(guis[i]->newGUIEvent,this,&testApp::guiEvent);
     }
     
@@ -252,22 +255,16 @@ void testApp::drawScenes(int _surfaceId) {
 void testApp::draw()
 {
     
-    float fboHeight = (ofGetWidth())*(fbo.getHeight()*1./fbo.getWidth());
-    //float fboHeight = 200;
+    float fboHeight = 200;//(ofGetWidth())*(fbo.getHeight()*1./fbo.getWidth());
+    float fboWidth = fbo.getWidth() * (fboHeight/fbo.getHeight());
     
-    for(int i=0; i<guis.size(); i++) {
-        //guis[i]->setPosition(guis[i]->getRect()->x,
-        guis[i]->setScrollArea(guis[i]->getRect()->x, timeline.getHeight()+fboHeight, guiWidth, ofGetHeight()-timeline.getHeight()-fboHeight);
-    }
+    //float fboHeight = 200;
     
     for(int s=0; s<contentScenes.size();s++) {
         contentScenes[s]->time = timeline.getCurrentTime();
     }
     
     ofSetColor(255);
-    ofBackgroundGradient(ofColor::darkGrey, ofColor::gray);
-    //drawScenes(0);
-    
     ofEnableDepthTest();
     
     // draw scenes to surfaces, they are kept in the cameras fbo
@@ -307,24 +304,33 @@ void testApp::draw()
         
     }fbo.end();
     
-    if(drawFBOs) {
-        ofClear(0);
-        ofClearAlpha();
+    ofBackground(20);
+    
+    if(drawMonitor) {
         ofSetColor(255,255);
+        fbo.draw(0,0,fboWidth,fboHeight);
         
-        //float fboWidth = (fboHeight)*(fbo.getHeight()*1./fbo.getWidth());
-        fbo.draw(0,timeline.getHeight(),(ofGetWidth()),fboHeight);
+    } else {
+        fboHeight = 0;
     }
     
-    ofSetColor(64,255);
-    ofRect(timeline.getDrawRect());
-    ofSetColor(255,255);
+    
+    if(drawTimeline) {
+        timeline.setOffset(ofVec2f(0,fboHeight));
+        timeline.draw();
+    }
     
     
-    
-    timeline.draw();
-    for(int i=0; i<guis.size(); i++) {
-        guis[i]->draw();
+        
+        for(int i=0; i<guis.size(); i++) {
+            guis[i]->setScrollArea(guis[i]->getRect()->x, ofGetHeight()-200, guiWidth, 200);
+            guis[i]->setPosition(guis[i]->getRect()->x, ofGetHeight()-200);
+            if(drawGUI) {
+                guis[i]->setVisible(true);
+                guis[i]->draw();
+            } else {
+                guis[i]->setVisible(false);
+            }
     }
     
     sbsOutputServer.publishFBO(&fbo);
@@ -335,6 +341,15 @@ void testApp::keyPressed(int key)
 {
 	if (key == 'f'){
 		ofToggleFullscreen();
+    } else if(key=='t') {
+        
+        drawTimeline = !drawTimeline;
+        
+    } else if(key=='g') {
+        drawGUI = !drawGUI;
+        
+    } else if(key=='p') {
+        drawMonitor = !drawMonitor;
     }
     
 }

@@ -32,6 +32,7 @@ public:
     
     //ofxOlaShaderLight flyLight;
     ofxOlaShaderLight skyLight;
+    ofxOlaShaderLight skyLight2;
     ofxOlaShaderLight::Material material;
     
     ofxOlaShaderLight::NoisePoints noisePoints;

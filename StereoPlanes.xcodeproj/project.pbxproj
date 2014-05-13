@@ -259,6 +259,13 @@
 		042E838B1891BD8600007697 /* VoroUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoroUtils.h; sourceTree = "<group>"; };
 		043C51CF1888664100ADD204 /* BoxFloor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoxFloor.cpp; sourceTree = "<group>"; };
 		043C51D01888664100ADD204 /* BoxFloor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxFloor.h; sourceTree = "<group>"; };
+		0469E91D19215F6D009965DF /* frag.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = frag.glsl; sourceTree = "<group>"; };
+		0469E91E19215F6D009965DF /* geom.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = geom.glsl; sourceTree = "<group>"; };
+		0469E91F19215F6D009965DF /* lightTexture.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = lightTexture.frag; sourceTree = "<group>"; };
+		0469E92019215F6D009965DF /* lightTexture.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = lightTexture.vert; sourceTree = "<group>"; };
+		0469E92119215F6D009965DF /* phongShading.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = phongShading.frag; sourceTree = "<group>"; };
+		0469E92219215F6D009965DF /* phongShading.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = phongShading.vert; sourceTree = "<group>"; };
+		0469E92319215F6D009965DF /* vert.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = vert.glsl; sourceTree = "<group>"; };
 		048AD359188D7342007E345A /* PerspectiveUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerspectiveUtils.h; sourceTree = "<group>"; };
 		04A6C800188099DE00B17C45 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		04A6C801188099DE00B17C45 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
@@ -1040,6 +1047,21 @@
 				0420B312188ECE3F0086D388 /* ofxVoro.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		0469E91C19215F6D009965DF /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				0469E91D19215F6D009965DF /* frag.glsl */,
+				0469E91E19215F6D009965DF /* geom.glsl */,
+				0469E91F19215F6D009965DF /* lightTexture.frag */,
+				0469E92019215F6D009965DF /* lightTexture.vert */,
+				0469E92119215F6D009965DF /* phongShading.frag */,
+				0469E92219215F6D009965DF /* phongShading.vert */,
+				0469E92319215F6D009965DF /* vert.glsl */,
+			);
+			name = shaders;
+			path = bin/data/shaders;
 			sourceTree = "<group>";
 		};
 		04A6C7FB188099DE00B17C45 /* ofxOsc */ = {
@@ -2664,6 +2686,7 @@
 				7AF1C3BD18859C8200B38D3B /* stereoplanes.xml */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
+				0469E91C19215F6D009965DF /* shaders */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,

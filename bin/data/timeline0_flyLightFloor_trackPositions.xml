@@ -1,4 +1,64 @@
 <positions>
+    <element name="Enable Crystal left">
+        <x>0.000000000</x>
+        <y>686.000000000</y>
+        <width>1725.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Enable Crystal right">
+        <x>0.000000000</x>
+        <y>750.000000000</y>
+        <width>1725.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Enable Test Scene">
+        <x>0.000000000</x>
+        <y>430.000000000</y>
+        <width>1725.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Enable World Light">
+        <x>0.000000000</x>
+        <y>814.000000000</y>
+        <width>1725.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Enable flyLightFloor">
+        <x>0.000000000</x>
+        <y>430.000000000</y>
+        <width>1280.000000000</width>
+        <height>5.000000000</height>
+    </element>
+    <element name="Enable flyLightLeft">
+        <x>0.000000000</x>
+        <y>878.000000000</y>
+        <width>1725.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Enable flyLightRight">
+        <x>0.000000000</x>
+        <y>942.000000000</y>
+        <width>1725.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Enable voroFloor">
+        <x>0.000000000</x>
+        <y>622.000000000</y>
+        <width>1725.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Enable voroLeft">
+        <x>0.000000000</x>
+        <y>494.000000000</y>
+        <width>1725.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Enable voroRight">
+        <x>0.000000000</x>
+        <y>558.000000000</y>
+        <width>1725.000000000</width>
+        <height>40.000000000</height>
+    </element>
     <element name="Fly Light Attenuation_1">
         <x>0.000000000</x>
         <y>197.000000000</y>

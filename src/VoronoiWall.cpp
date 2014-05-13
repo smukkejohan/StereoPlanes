@@ -18,7 +18,7 @@
 
 void VoronoiWall::setup() {
     
-    depth = 0.025;
+    depth = 0.035;
     nCells = 2;
     
     mainTimeline->addPage(name);
@@ -26,13 +26,13 @@ void VoronoiWall::setup() {
     
     //ofRectangle(-2, -2,  4, 4)
     if(name == "voroFloor") {
-        
         depth = 0.0;
-        voroWall->setup(ofRectangle(-1.2, -1.2,  2.4, 2.4), mainTimeline, indexStr);
+        voroWall->setup(ofRectangle(-1.5, -1.2,  3, 2.4), mainTimeline, indexStr);
         
     } else {
         voroWall->setup(ofRectangle(-1.1, -1.1,  2.2, 2.2), mainTimeline, indexStr);
     }
+    
 }
 
 void VoronoiWall::setGui(ofxUICanvas * gui, float width){
@@ -75,7 +75,6 @@ void VoronoiPlane::draw() {
                     cells[i].mat.specularColor.w =  cells[i].mat.specularColor.w * breakZones[b]->tlspecalpha->getValue();
                     //matChanged = true;
                 //}
-                
                 //mat.specularShininess = tlshine->getValue();
             }
         }
@@ -87,10 +86,12 @@ void VoronoiPlane::draw() {
         
         if(tlbackalphamax->getValue() < tlbackalphamax->getValueRange().max) {
             float a = 1;
+            
             if(cells[i].offset.z > 0) {
                 a = ofMap(ofClamp(abs(cells[i].offset.z), 0, tlbackalphamax->getValue()+0.001), 0, tlbackalphamax->getValue()+0.001, 1.0, 0.0);
             }
-                        cells[i].mat.diffuseColor.x *= a;
+            
+            cells[i].mat.diffuseColor.x *= a;
             cells[i].mat.diffuseColor.y *= a;
             cells[i].mat.diffuseColor.z *= a;
             
@@ -100,14 +101,20 @@ void VoronoiPlane::draw() {
             
         }
         
+        
+        
         //if(matChanged) {
-            ofxOlaShaderLight::setMaterial(cells[i].mat);
+        
         //    matChanged = false;
         //}
         
         // if we have really high alpha we don't bother drawing, saves a bit of performance
         if(cells[i].mat.diffuseColor.w + cells[i].mat.specularColor.w > 0.005) {
-            cells[i].mesh.draw();
+            
+            ofxOlaShaderLight::setMaterial(cells[i].mat);
+            
+            cells[i].mesh.drawFaces();
+
         }
         
         ofPopMatrix();

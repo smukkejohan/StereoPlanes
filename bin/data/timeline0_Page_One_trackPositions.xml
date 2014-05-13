@@ -1,7 +1,67 @@
 <positions>
+    <element name="Enable Crystal left">
+        <x>0.000000000</x>
+        <y>609.000000000</y>
+        <width>1280.000000000</width>
+        <height>17.000000000</height>
+    </element>
+    <element name="Enable Crystal right">
+        <x>0.000000000</x>
+        <y>650.000000000</y>
+        <width>1280.000000000</width>
+        <height>10.000000000</height>
+    </element>
+    <element name="Enable Test Scene">
+        <x>0.000000000</x>
+        <y>461.000000000</y>
+        <width>1280.000000000</width>
+        <height>15.000000000</height>
+    </element>
+    <element name="Enable World Light">
+        <x>0.000000000</x>
+        <y>684.000000000</y>
+        <width>1280.000000000</width>
+        <height>7.000000000</height>
+    </element>
+    <element name="Enable flyLightFloor">
+        <x>0.000000000</x>
+        <y>781.000000000</y>
+        <width>1280.000000000</width>
+        <height>44.000000000</height>
+    </element>
+    <element name="Enable flyLightLeft">
+        <x>0.000000000</x>
+        <y>715.000000000</y>
+        <width>1280.000000000</width>
+        <height>9.000000000</height>
+    </element>
+    <element name="Enable flyLightRight">
+        <x>0.000000000</x>
+        <y>748.000000000</y>
+        <width>1280.000000000</width>
+        <height>9.000000000</height>
+    </element>
+    <element name="Enable voroFloor">
+        <x>0.000000000</x>
+        <y>574.000000000</y>
+        <width>1280.000000000</width>
+        <height>11.000000000</height>
+    </element>
+    <element name="Enable voroLeft">
+        <x>0.000000000</x>
+        <y>500.000000000</y>
+        <width>1280.000000000</width>
+        <height>15.000000000</height>
+    </element>
+    <element name="Enable voroRight">
+        <x>0.000000000</x>
+        <y>539.000000000</y>
+        <width>1280.000000000</width>
+        <height>11.000000000</height>
+    </element>
     <element name="Samlet lyd">
         <x>0.000000000</x>
-        <y>52.000000000</y>
+        <y>270.000000000</y>
         <width>1280.000000000</width>
         <height>167.000000000</height>
     </element>

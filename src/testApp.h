@@ -49,15 +49,15 @@ public:
     
     ofxTimeline timeline;
     
-    bool drawFBOs = false;
     bool drawChessboards = false;
     bool drawGrids = false;
     float aspect = 1.0;
     
     float guiWidth;
     
-    bool hideGUI = false;
-    bool hideMonitor = false;
+    bool drawTimeline;
+    bool drawGUI;
+    bool drawMonitor;
     
     vector<ofxUIScrollableCanvas *> guis;
     

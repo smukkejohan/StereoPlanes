@@ -18,9 +18,7 @@ void GhostLights::setup() {
     mat.specularShininess = 0.8;
     
     mainTimeline->addPage(name);
-    
     tlenabled = mainTimeline->addCurves("Enabled");
-    
     tlexplode = mainTimeline->addCurves("Explode");
     
     tlscale = mainTimeline->addCurves("Scale");
@@ -71,12 +69,11 @@ void GhostLights::draw(int _surfaceId) {
                 
             }
         } ofPopMatrix();
-        
     }
 }
 
 void GhostLights::update() {
-    enabled = tlenabled->getValue();
+    enabled = (tlenabled->getValue());
     wallCube->update();
     
 }

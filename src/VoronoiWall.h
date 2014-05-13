@@ -141,6 +141,7 @@ public:
     
     
     int fixedPointsLength = 11;
+    
     ofPoint fixedPoints [11] = {
         ofPoint(0.8,-0.12),
         ofPoint(-0.7,0.4),
@@ -283,6 +284,8 @@ public:
         
         for (int i=0; i < cellMeshes.size(); i++) {
             cells[i].mesh = cellMeshes[i];
+            
+            cells[i].mesh.clearNormals();
         }
     }
 };
