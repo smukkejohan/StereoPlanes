@@ -13,20 +13,20 @@
     </element>
     <element name="Diffuse alpha_9">
         <x>0.000000000</x>
-        <y>674.000000000</y>
-        <width>1280.000000000</width>
+        <y>901.000000000</y>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Multiplier_6">
         <x>0.000000000</x>
-        <y>286.000000000</y>
-        <width>1280.000000000</width>
-        <height>40.000000000</height>
+        <y>384.000000000</y>
+        <width>1791.000000000</width>
+        <height>169.000000000</height>
     </element>
     <element name="Noise_6">
         <x>0.000000000</x>
-        <y>350.000000000</y>
-        <width>1280.000000000</width>
+        <y>577.000000000</y>
+        <width>1791.000000000</width>
         <height>172.000000000</height>
     </element>
     <element name="Push_6">
@@ -37,8 +37,8 @@
     </element>
     <element name="Radius_6">
         <x>0.000000000</x>
-        <y>610.000000000</y>
-        <width>1280.000000000</width>
+        <y>837.000000000</y>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Rotate_9">
@@ -55,32 +55,32 @@
     </element>
     <element name="Specular alpha_9">
         <x>0.000000000</x>
-        <y>738.000000000</y>
-        <width>1280.000000000</width>
+        <y>965.000000000</y>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Speed_6">
         <x>0.000000000</x>
-        <y>546.000000000</y>
-        <width>1280.000000000</width>
+        <y>773.000000000</y>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Strength_6">
         <x>0.000000000</x>
         <y>198.000000000</y>
-        <width>1280.000000000</width>
-        <height>64.000000000</height>
+        <width>1791.000000000</width>
+        <height>162.000000000</height>
     </element>
     <element name="X_6">
         <x>0.000000000</x>
         <y>70.000000000</y>
-        <width>1280.000000000</width>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Y_6">
         <x>0.000000000</x>
         <y>134.000000000</y>
-        <width>1280.000000000</width>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
 </positions>

@@ -9,6 +9,30 @@
         <easefunc>0</easefunc>
         <easetype>0</easetype>
         <time>00:03:08:568</time>
+        <value>0.425000012</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:05:59:255</time>
+        <value>0.425000012</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:06:15:468</time>
+        <value>0.213999927</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:10:35:425</time>
+        <value>0.205882370</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:10:46:070</time>
         <value>1.000000000</value>
     </key>
 </keyframes>

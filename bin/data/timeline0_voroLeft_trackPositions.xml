@@ -2,25 +2,25 @@
     <element name="Cells">
         <x>0.000000000</x>
         <y>70.000000000</y>
-        <width>1280.000000000</width>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Depth">
         <x>0.000000000</x>
-        <y>613.000000000</y>
-        <width>1280.000000000</width>
+        <y>1059.000000000</y>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Diffuse alpha">
         <x>0.000000000</x>
         <y>134.000000000</y>
-        <width>1280.000000000</width>
-        <height>40.000000000</height>
+        <width>1791.000000000</width>
+        <height>260.000000000</height>
     </element>
     <element name="Fade out in distance">
         <x>0.000000000</x>
-        <y>543.000000000</y>
-        <width>1280.000000000</width>
+        <y>989.000000000</y>
+        <width>1791.000000000</width>
         <height>46.000000000</height>
     </element>
     <element name="Rotate">
@@ -31,38 +31,38 @@
     </element>
     <element name="Rotate around Y">
         <x>0.000000000</x>
-        <y>390.000000000</y>
-        <width>1280.000000000</width>
+        <y>808.000000000</y>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Rotate around x">
         <x>0.000000000</x>
-        <y>518.000000000</y>
-        <width>1280.000000000</width>
-        <height>1.000000000</height>
+        <y>936.000000000</y>
+        <width>1791.000000000</width>
+        <height>29.000000000</height>
     </element>
     <element name="Rotate x">
         <x>0.000000000</x>
-        <y>454.000000000</y>
-        <width>1280.000000000</width>
+        <y>872.000000000</y>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Rotate y">
         <x>0.000000000</x>
-        <y>326.000000000</y>
-        <width>1280.000000000</width>
+        <y>744.000000000</y>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Shine">
         <x>0.000000000</x>
-        <y>262.000000000</y>
-        <width>1280.000000000</width>
+        <y>680.000000000</y>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Specular alpha">
         <x>0.000000000</x>
-        <y>198.000000000</y>
-        <width>1280.000000000</width>
-        <height>40.000000000</height>
+        <y>418.000000000</y>
+        <width>1791.000000000</width>
+        <height>238.000000000</height>
     </element>
 </positions>

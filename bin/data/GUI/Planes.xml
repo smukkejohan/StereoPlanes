@@ -1,7 +1,7 @@
 <Widget>
     <Kind>4</Kind>
     <Name>floor Cam X</Name>
-    <Value>0.057613134</Value>
+    <Value>-0.057613134</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
@@ -11,27 +11,27 @@
 <Widget>
     <Kind>4</Kind>
     <Name>floor Cam Z</Name>
-    <Value>-1.697530866</Value>
+    <Value>-1.776749015</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>floor Aspect</Name>
-    <Value>0.329218119</Value>
+    <Value>0.370370358</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>wallLeft Cam X</Name>
-    <Value>-0.041152239</Value>
+    <Value>-0.156378627</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>wallLeft Cam Y</Name>
-    <Value>0.238683224</Value>
+    <Value>0.041152239</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>wallLeft Cam Z</Name>
-    <Value>-0.737500191</Value>
+    <Value>-1.675925970</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
@@ -41,12 +41,12 @@
 <Widget>
     <Kind>4</Kind>
     <Name>wallRight Cam X</Name>
-    <Value>0.008230448</Value>
+    <Value>-0.189300418</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>wallRight Cam Y</Name>
-    <Value>0.172839403</Value>
+    <Value>0.057613134</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>

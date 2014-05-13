@@ -14,19 +14,19 @@
     <element name="Diffuse alpha_5">
         <x>0.000000000</x>
         <y>612.000000000</y>
-        <width>1280.000000000</width>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Multiplier_3">
         <x>0.000000000</x>
         <y>356.000000000</y>
-        <width>1280.000000000</width>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Noise_3">
         <x>0.000000000</x>
         <y>420.000000000</y>
-        <width>1280.000000000</width>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Push_3">
@@ -38,7 +38,7 @@
     <element name="Radius_3">
         <x>0.000000000</x>
         <y>548.000000000</y>
-        <width>1280.000000000</width>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Rotate_5">
@@ -56,31 +56,31 @@
     <element name="Specular alpha_5">
         <x>0.000000000</x>
         <y>676.000000000</y>
-        <width>1280.000000000</width>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Speed_3">
         <x>0.000000000</x>
         <y>484.000000000</y>
-        <width>1280.000000000</width>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Strength_3">
         <x>0.000000000</x>
         <y>198.000000000</y>
-        <width>1280.000000000</width>
+        <width>1791.000000000</width>
         <height>134.000000000</height>
     </element>
     <element name="X_3">
         <x>0.000000000</x>
         <y>70.000000000</y>
-        <width>1280.000000000</width>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Y_3">
         <x>0.000000000</x>
         <y>134.000000000</y>
-        <width>1280.000000000</width>
+        <width>1791.000000000</width>
         <height>40.000000000</height>
     </element>
 </positions>

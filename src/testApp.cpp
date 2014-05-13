@@ -323,8 +323,13 @@ void testApp::draw()
     
         
         for(int i=0; i<guis.size(); i++) {
-            guis[i]->setScrollArea(guis[i]->getRect()->x, ofGetHeight()-200, guiWidth, 200);
-            guis[i]->setPosition(guis[i]->getRect()->x, ofGetHeight()-200);
+            
+            /*guis[i]->setScrollArea(guis[i]->getRect()->x, ofGetHeight()-200, guiWidth, 200);
+            */
+            
+            guis[i]->setPosition(guis[i]->getRect()->x, ofGetHeight()-400);
+            guis[i]->setScrollAreaHeight(400);
+            
             if(drawGUI) {
                 guis[i]->setVisible(true);
                 guis[i]->draw();
