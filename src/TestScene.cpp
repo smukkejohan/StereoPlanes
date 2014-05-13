@@ -24,12 +24,10 @@ void TestScene::draw(int _surfaceId) {
         light.enable();
     
         ofSetColor(255,255,255);
-    
         ofPushMatrix();
         ofRotateX(ofGetElapsedTimef()*10);
         ofDrawBox(0.5);
         ofPopMatrix();
-        
         light.disable();
     
 }
@@ -40,7 +38,6 @@ void TestScene::update() {
 
 void TestScene::setGui(ofxUICanvas * gui, float width){
     ContentScene::setGui(gui, width);
-
 }
 
 void TestScene::receiveOsc(ofxOscMessage * m, string rest) {

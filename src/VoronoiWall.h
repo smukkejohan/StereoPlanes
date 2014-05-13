@@ -119,6 +119,7 @@ public:
     float depth = 0.005;
     float gap = 0.0;
     vector<ofVboMesh>  cellMeshes;
+    vector<ofVboMesh>  cellMeshesNoNormals;
     int nCells = 20;
     vector<Cell> cells;
     float fade = 1;
@@ -138,7 +139,7 @@ public:
     ofxTLCurves * tlshine;
     
     ofxTLCurves * tldepth;
-    
+    ofxTLCurves * tlnormals;
     
     int fixedPointsLength = 11;
     
@@ -204,6 +205,7 @@ public:
         tldepth->setValueRangeMax(10);
         tldepth->setValueRangeMin(1);
         
+        tlnormals = tl->addCurves("Normals");
         
         for(int i=0; i <3; i++) {
             BreakZone * br = new BreakZone;
@@ -285,7 +287,9 @@ public:
         for (int i=0; i < cellMeshes.size(); i++) {
             cells[i].mesh = cellMeshes[i];
             
-            cells[i].mesh.clearNormals();
+            if(tlnormals->getValue() == 0) {
+                cells[i].mesh.clearNormals();
+            }
         }
     }
 };
