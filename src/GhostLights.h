@@ -79,6 +79,8 @@ public:
 class GhostLights : public ContentScene {
 public:
     
+    float time = 0;
+    
     void setup();
     void update();
     void draw(int _surfaceId);
@@ -87,14 +89,12 @@ public:
     void guiEvent(ofxUIEventArgs &e);
     void receiveOsc(ofxOscMessage * m, string rest);
     
-    
     vector<ofPoint> cellCentroids;
     vector<float>   cellRadius;
     vector<ofMesh>  cellMeshes;
     
     ofLight light;
     ofLight dirLight;
-    
     
     ofxTLCurves * tlexplode;
     float explode;
@@ -110,8 +110,7 @@ public:
     ofxTLCurves * tlz;
     ofxTLCurves * tlscale;
     
-    ofxTLCurves * tlenabled;
-    
+    ofxTLCurves * speed;
     
     
 };

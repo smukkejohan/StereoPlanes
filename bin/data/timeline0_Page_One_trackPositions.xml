@@ -3,13 +3,13 @@
         <x>0.000000000</x>
         <y>435.000000000</y>
         <width>1280.000000000</width>
-        <height>0.000000000</height>
+        <height>190.000000000</height>
     </element>
     <element name="Enable Crystal right">
         <x>0.000000000</x>
-        <y>459.000000000</y>
+        <y>649.000000000</y>
         <width>1280.000000000</width>
-        <height>0.000000000</height>
+        <height>212.000000000</height>
     </element>
     <element name="Enable Test Scene">
         <x>0.000000000</x>
@@ -19,25 +19,25 @@
     </element>
     <element name="Enable World Light">
         <x>0.000000000</x>
-        <y>483.000000000</y>
+        <y>885.000000000</y>
         <width>1280.000000000</width>
         <height>0.000000000</height>
     </element>
     <element name="Enable flyLightFloor">
         <x>0.000000000</x>
-        <y>555.000000000</y>
+        <y>957.000000000</y>
         <width>1280.000000000</width>
-        <height>0.000000000</height>
+        <height>171.000000000</height>
     </element>
     <element name="Enable flyLightLeft">
         <x>0.000000000</x>
-        <y>507.000000000</y>
+        <y>909.000000000</y>
         <width>1280.000000000</width>
         <height>0.000000000</height>
     </element>
     <element name="Enable flyLightRight">
         <x>0.000000000</x>
-        <y>531.000000000</y>
+        <y>933.000000000</y>
         <width>1280.000000000</width>
         <height>0.000000000</height>
     </element>

@@ -93,12 +93,14 @@ void VoronoiPlane::draw() {
             //}
             
             cells[i].mat.diffuseColor.w *= a;
-            //cells[i].mat.diffuseColor.y *= a;
-            //cells[i].mat.diffuseColor.z *= a;
+            cells[i].mat.diffuseColor.x *= a;
+            cells[i].mat.diffuseColor.y *= a;
+            cells[i].mat.diffuseColor.z *= a;
             
             cells[i].mat.specularColor.w *= a;
-            //cells[i].mat.specularColor.y *= a;
-            //cells[i].mat.specularColor.z *= a;
+            cells[i].mat.specularColor.x *= a;
+            cells[i].mat.specularColor.y *= a;
+            cells[i].mat.specularColor.z *= a;
         }
         
         
@@ -110,7 +112,7 @@ void VoronoiPlane::draw() {
         
         // if we have really high alpha we don't bother drawing, saves a bit of performance
         
-        if(cells[i].mat.diffuseColor.w + cells[i].mat.specularColor.w > 0.005) {
+        if(cells[i].mat.diffuseColor.w + cells[i].mat.specularColor.w > 0.05) {
             
             ofxOlaShaderLight::setMaterial(cells[i].mat);
             

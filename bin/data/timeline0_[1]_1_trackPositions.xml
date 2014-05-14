@@ -13,19 +13,19 @@
     </element>
     <element name="Diffuse alpha_1">
         <x>0.000000000</x>
-        <y>834.000000000</y>
+        <y>634.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Multiplier_0">
         <x>0.000000000</x>
-        <y>514.000000000</y>
+        <y>314.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Noise_0">
         <x>0.000000000</x>
-        <y>578.000000000</y>
+        <y>378.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -37,13 +37,13 @@
     </element>
     <element name="Radius_0">
         <x>0.000000000</x>
-        <y>706.000000000</y>
+        <y>506.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Reset_0">
         <x>0.000000000</x>
-        <y>770.000000000</y>
+        <y>570.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -61,31 +61,31 @@
     </element>
     <element name="Specular alpha_1">
         <x>0.000000000</x>
-        <y>898.000000000</y>
+        <y>698.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Speed_0">
         <x>0.000000000</x>
-        <y>642.000000000</y>
+        <y>442.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Strength_0">
         <x>0.000000000</x>
-        <y>398.000000000</y>
+        <y>198.000000000</y>
         <width>1280.000000000</width>
         <height>92.000000000</height>
     </element>
     <element name="X_0">
         <x>0.000000000</x>
-        <y>270.000000000</y>
+        <y>70.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Y_0">
         <x>0.000000000</x>
-        <y>334.000000000</y>
+        <y>134.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>

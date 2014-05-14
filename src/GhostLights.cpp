@@ -18,8 +18,9 @@ void GhostLights::setup() {
     mat.specularShininess = 0.8;
     
     mainTimeline->addPage(name);
-    tlenabled = mainTimeline->addCurves("Enabled");
     tlexplode = mainTimeline->addCurves("Explode");
+    
+    speed = mainTimeline->addCurves("Speed");
     
     tlscale = mainTimeline->addCurves("Scale");
     tlscale->setValueRangeMax(3);
@@ -35,7 +36,6 @@ void GhostLights::setup() {
     tlz = mainTimeline->addCurves("Z");
     tlz->setValueRangeMax(6);
     tlz->setValueRangeMin(-2);
-    
     
 }
 
@@ -57,8 +57,10 @@ void GhostLights::draw(int _surfaceId) {
                     
                     //wallCube->cellMeshes[i].setColor(, const ofFloatColor &c)
                     
-                    ofScale(tlscale->getValue(),tlscale->getValue(),tlscale->getValue());
-                    float explode = tlexplode->getValue(); //ofMap(ofSignedNoise(ofGetElapsedTimef()), 0, 1, 0.8, 1);
+                    ofScale(tlscale->getValue(),tlscale->getValue(),tlscale->getValue());                    
+                    
+                    explode = tlexplode->getValue(); //ofMap(ofSignedNoise(time), 0, 1, tlexplode->getValue(), 1);
+                    
                     
                     ofTranslate(wallCube->cellMeshes[i].getCentroid().x, wallCube->cellMeshes[i].getCentroid().y, wallCube->cellMeshes[i].getCentroid().z);
                     ofScale(explode,explode,explode);
@@ -73,7 +75,8 @@ void GhostLights::draw(int _surfaceId) {
 }
 
 void GhostLights::update() {
-    enabled = (tlenabled->getValue());
+    
+    time += 0.01 * speed->getValue();
     wallCube->update();
     
 }

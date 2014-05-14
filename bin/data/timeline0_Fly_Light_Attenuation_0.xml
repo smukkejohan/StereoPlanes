@@ -138,9 +138,15 @@
         <value>0.102191761</value>
     </key>
     <key>
-        <easefunc>9</easefunc>
+        <easefunc>0</easefunc>
         <easetype>2</easetype>
         <time>00:17:25:611</time>
         <value>0.054246571</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:18:23:906</time>
+        <value>0.186915874</value>
     </key>
 </keyframes>
