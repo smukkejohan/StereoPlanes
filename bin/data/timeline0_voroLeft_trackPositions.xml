@@ -7,7 +7,7 @@
     </element>
     <element name="Depth">
         <x>0.000000000</x>
-        <y>1059.000000000</y>
+        <y>801.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -15,17 +15,17 @@
         <x>0.000000000</x>
         <y>134.000000000</y>
         <width>1280.000000000</width>
-        <height>260.000000000</height>
+        <height>99.000000000</height>
     </element>
     <element name="Fade out in distance">
         <x>0.000000000</x>
-        <y>989.000000000</y>
+        <y>731.000000000</y>
         <width>1280.000000000</width>
         <height>46.000000000</height>
     </element>
     <element name="Normals">
         <x>0.000000000</x>
-        <y>1123.000000000</y>
+        <y>865.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -37,38 +37,38 @@
     </element>
     <element name="Rotate around Y">
         <x>0.000000000</x>
-        <y>808.000000000</y>
+        <y>550.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Rotate around x">
         <x>0.000000000</x>
-        <y>936.000000000</y>
+        <y>678.000000000</y>
         <width>1280.000000000</width>
         <height>29.000000000</height>
     </element>
     <element name="Rotate x">
         <x>0.000000000</x>
-        <y>872.000000000</y>
+        <y>614.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Rotate y">
         <x>0.000000000</x>
-        <y>744.000000000</y>
+        <y>486.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Shine">
         <x>0.000000000</x>
-        <y>680.000000000</y>
+        <y>422.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Specular alpha">
         <x>0.000000000</x>
-        <y>418.000000000</y>
+        <y>257.000000000</y>
         <width>1280.000000000</width>
-        <height>238.000000000</height>
+        <height>141.000000000</height>
     </element>
 </positions>

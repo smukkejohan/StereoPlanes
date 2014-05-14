@@ -27,10 +27,10 @@ void VoronoiWall::setup() {
     //ofRectangle(-2, -2,  4, 4)
     if(name == "voroFloor") {
         depth = 0.0;
-        voroWall->setup(ofRectangle(-1.5, -1.2,  3, 2.4), mainTimeline, indexStr);
+        voroWall->setup(ofRectangle(-2, -2,  4., 4.), mainTimeline, indexStr);
         
     } else {
-        voroWall->setup(ofRectangle(-1., -1.,  2., 2.), mainTimeline, indexStr);
+        voroWall->setup(ofRectangle(-2., -2.,  4., 4.0), mainTimeline, indexStr);
     }
     
 }
