@@ -7,13 +7,13 @@
     </element>
     <element name="Sky Light Attenuation">
         <x>0.000000000</x>
-        <y>70.000000000</y>
+        <y>270.000000000</y>
         <width>1280.000000000</width>
         <height>205.000000000</height>
     </element>
     <element name="Sky Light Color">
         <x>0.000000000</x>
-        <y>299.000000000</y>
+        <y>499.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>

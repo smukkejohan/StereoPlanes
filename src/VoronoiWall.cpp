@@ -30,7 +30,7 @@ void VoronoiWall::setup() {
         voroWall->setup(ofRectangle(-1.5, -1.2,  3, 2.4), mainTimeline, indexStr);
         
     } else {
-        voroWall->setup(ofRectangle(-1.1, -1.1,  2.2, 2.2), mainTimeline, indexStr);
+        voroWall->setup(ofRectangle(-1., -1.,  2., 2.), mainTimeline, indexStr);
     }
     
 }
@@ -62,9 +62,9 @@ void VoronoiPlane::draw() {
                 cells[i].offset.z += breakZones[b]->strength * breakZones[b]->multiplier;
                 
                 // add noise
-                cells[i].offset.z += (ofSignedNoise(breakZones[b]->time + cells[i].r) + cells[i].r) * breakZones[b]->noise;
+                cells[i].offset.z += (ofSignedNoise(breakZones[b]->time + cells[i].r) + cells[i].r/10) * breakZones[b]->noise;
                 
-                // add rotation
+                //add rotation
                 //cells[i].offset.z += (ofSignedNoise(tl->getCurrentTime() + cells[i].r) + cells[i].r);
                 //if(breakZones[b]->tldifalpha->getValue() > 0) {
                     cells[i].mat.diffuseColor.w  = cells[i].mat.diffuseColor.w * breakZones[b]->tldifalpha->getValue();
@@ -76,6 +76,8 @@ void VoronoiPlane::draw() {
                     //matChanged = true;
                 //}
                 //mat.specularShininess = tlshine->getValue();
+                
+                cells[i].offset.z *= breakZones[b]->tlreset->getValue();
             }
         }
         
@@ -83,12 +85,11 @@ void VoronoiPlane::draw() {
         ofTranslate(cells[i].offset);
         
         ofScale(1,1,tldepth->getValue());
-        
         if(tlbackalphamax->getValue() < tlbackalphamax->getValueRange().max) {
             float a = 1;
             
             //if(cells[i].offset.z > 0) {
-                a = ofMap(ofClamp(abs(cells[i].offset.z), 0, tlbackalphamax->getValue()+0.001), 0, tlbackalphamax->getValue()+0.001, 1.0, 0.0);
+                a = ofMap(ofClamp(abs(cells[i].offset.z), 0, tlbackalphamax->getValue()+0.001), 0, tlbackalphamax->getValue()+0.001, 1.0, 0.2);
             //}
             
             cells[i].mat.diffuseColor.w *= a;
@@ -113,7 +114,7 @@ void VoronoiPlane::draw() {
             
             ofxOlaShaderLight::setMaterial(cells[i].mat);
             
-            cells[i].mesh.drawFaces();
+            cells[i].mesh.draw();
 
         }
         

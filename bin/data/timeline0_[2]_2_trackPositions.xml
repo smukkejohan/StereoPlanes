@@ -25,7 +25,7 @@
     </element>
     <element name="Diffuse alpha_6">
         <x>0.000000000</x>
-        <y>518.000000000</y>
+        <y>736.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -57,6 +57,12 @@
         <x>0.000000000</x>
         <y>454.000000000</y>
         <width>1280.000000000</width>
+        <height>194.000000000</height>
+    </element>
+    <element name="Reset_4">
+        <x>0.000000000</x>
+        <y>672.000000000</y>
+        <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Rotate around Y_1">
@@ -85,7 +91,7 @@
     </element>
     <element name="Specular alpha_6">
         <x>0.000000000</x>
-        <y>582.000000000</y>
+        <y>800.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>

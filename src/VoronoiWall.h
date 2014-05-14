@@ -43,6 +43,9 @@ public:
     
     ofxTLCurves * tldifalpha;
     ofxTLCurves * tlspecalpha;
+    
+    ofxTLCurves * tlreset;
+    
     //ofxTLCurves * tlshininess;
     ofxTimeline * tl;
     
@@ -66,7 +69,7 @@ public:
         tlmultiplier->setValueRangeMin(0);
         
         tlnoise = tl->addCurves("Noise");
-        tlnoise->setValueRangeMax(2);
+        tlnoise->setValueRangeMax(10);
         tlnoise->setValueRangeMin(0);
         
         tlspeed = tl->addCurves("Speed");
@@ -76,6 +79,8 @@ public:
         tlradius = tl->addCurves("Radius");
         tlradius->setValueRangeMax(4);
         tlradius->setValueRangeMin(0);
+        
+        tlreset = tl->addCurves("Reset");
         
         /*tlpush = tl->addCurves("Push");*/
         /*tlrotate = tl->addCurves("Rotate");*/

@@ -266,7 +266,8 @@ void testApp::draw()
     
     ofSetColor(255);
     ofEnableDepthTest();
-    
+    ofEnableAlphaBlending();
+    glEnable(GL_DEPTH_TEST);
     // draw scenes to surfaces, they are kept in the cameras fbo
     
     for(int i=0;i < planes.size(); i++) {
@@ -321,13 +322,12 @@ void testApp::draw()
     }
     
     
-        
         for(int i=0; i<guis.size(); i++) {
             
             /*guis[i]->setScrollArea(guis[i]->getRect()->x, ofGetHeight()-200, guiWidth, 200);
             */
             
-            guis[i]->setPosition(guis[i]->getRect()->x, ofGetHeight()-400);
+            guis[i]->setPosition(guis[i]->getRect()->x, ofGetHeight()-600);
             guis[i]->setScrollAreaHeight(400);
             
             if(drawGUI) {
@@ -406,7 +406,6 @@ void testApp::gotMessage(ofMessage msg)
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo)
 {
-    
 }
 
 void testApp::exit() {
