@@ -7,9 +7,9 @@
     </element>
     <element name="Fly Light Attenuation_0">
         <x>0.000000000</x>
-        <y>134.000000000</y>
+        <y>334.000000000</y>
         <width>1280.000000000</width>
-        <height>40.000000000</height>
+        <height>214.000000000</height>
     </element>
     <element name="Fly Light Attenuation_1">
         <x>0.000000000</x>
@@ -25,7 +25,7 @@
     </element>
     <element name="Fly Light Color_0">
         <x>0.000000000</x>
-        <y>70.000000000</y>
+        <y>270.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -79,7 +79,7 @@
     </element>
     <element name="Fly Light Pos X_0">
         <x>0.000000000</x>
-        <y>198.000000000</y>
+        <y>572.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -97,7 +97,7 @@
     </element>
     <element name="Fly Light Pos Y_0">
         <x>0.000000000</x>
-        <y>262.000000000</y>
+        <y>636.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -115,7 +115,7 @@
     </element>
     <element name="Fly Light Pos Z_0">
         <x>0.000000000</x>
-        <y>326.000000000</y>
+        <y>700.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>

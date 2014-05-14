@@ -53,12 +53,12 @@ public:
         tl = _tl;
         
         x = tl->addCurves("X");
-        x->setValueRangeMax(3);
-        x->setValueRangeMin(-3);
+        x->setValueRangeMax(5);
+        x->setValueRangeMin(-5);
         
         y = tl->addCurves("Y");
-        y->setValueRangeMax(3);
-        y->setValueRangeMin(-3);
+        y->setValueRangeMax(5);
+        y->setValueRangeMin(-5);
         
         tlstrength = tl->addCurves("Strength");
         tlstrength->setValueRangeMax(6);
