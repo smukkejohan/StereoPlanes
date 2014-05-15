@@ -30,7 +30,7 @@ void VoronoiWall::setup() {
         voroWall->setup(ofRectangle(-2, -2,  4., 4.), mainTimeline, indexStr);
         
     } else {
-        voroWall->setup(ofRectangle(-2., -2.,  4., 4.0), mainTimeline, indexStr);
+        voroWall->setup(ofRectangle(-2., -1.,  4., 2.0), mainTimeline, indexStr);
     }
     
 }
