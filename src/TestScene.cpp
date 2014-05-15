@@ -18,9 +18,7 @@ void TestScene::setup() {
 void TestScene::draw(int _surfaceId) {
     
     ofBackground (0);
-    
     // A scene can draw to multiple surfaces
-    
         light.enable();
     
         ofSetColor(255,255,255);

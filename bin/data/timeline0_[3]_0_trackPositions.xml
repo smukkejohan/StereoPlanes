@@ -13,7 +13,7 @@
     </element>
     <element name="Diffuse alpha_8">
         <x>0.000000000</x>
-        <y>703.000000000</y>
+        <y>766.000000000</y>
         <width>1280.000000000</width>
         <height>24.000000000</height>
     </element>
@@ -27,7 +27,7 @@
         <x>0.000000000</x>
         <y>383.000000000</y>
         <width>1280.000000000</width>
-        <height>64.000000000</height>
+        <height>127.000000000</height>
     </element>
     <element name="Push_5">
         <x>0.000000000</x>
@@ -37,13 +37,13 @@
     </element>
     <element name="Radius_5">
         <x>0.000000000</x>
-        <y>562.000000000</y>
+        <y>625.000000000</y>
         <width>1280.000000000</width>
         <height>53.000000000</height>
     </element>
     <element name="Reset_5">
         <x>0.000000000</x>
-        <y>639.000000000</y>
+        <y>702.000000000</y>
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
@@ -61,13 +61,13 @@
     </element>
     <element name="Specular alpha_8">
         <x>0.000000000</x>
-        <y>751.000000000</y>
+        <y>814.000000000</y>
         <width>1280.000000000</width>
         <height>23.000000000</height>
     </element>
     <element name="Speed_5">
         <x>0.000000000</x>
-        <y>471.000000000</y>
+        <y>534.000000000</y>
         <width>1280.000000000</width>
         <height>67.000000000</height>
     </element>

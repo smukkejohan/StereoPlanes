@@ -25,8 +25,8 @@
     </element>
     <element name="Diffuse alpha_6">
         <x>0.000000000</x>
-        <y>1022.000000000</y>
-        <width>1920.000000000</width>
+        <y>848.000000000</y>
+        <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Enable voroRight">
@@ -37,14 +37,14 @@
     </element>
     <element name="Multiplier_4">
         <x>0.000000000</x>
-        <y>650.000000000</y>
-        <width>1920.000000000</width>
+        <y>450.000000000</y>
+        <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Noise_4">
         <x>0.000000000</x>
-        <y>714.000000000</y>
-        <width>1920.000000000</width>
+        <y>514.000000000</y>
+        <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Push_4">
@@ -55,14 +55,14 @@
     </element>
     <element name="Radius_4">
         <x>0.000000000</x>
-        <y>842.000000000</y>
-        <width>1920.000000000</width>
+        <y>668.000000000</y>
+        <width>1280.000000000</width>
         <height>92.000000000</height>
     </element>
     <element name="Reset_4">
         <x>0.000000000</x>
-        <y>958.000000000</y>
-        <width>1920.000000000</width>
+        <y>784.000000000</y>
+        <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Rotate around Y_1">
@@ -91,32 +91,32 @@
     </element>
     <element name="Specular alpha_6">
         <x>0.000000000</x>
-        <y>1086.000000000</y>
-        <width>1920.000000000</width>
+        <y>912.000000000</y>
+        <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Speed_4">
         <x>0.000000000</x>
-        <y>778.000000000</y>
-        <width>1920.000000000</width>
-        <height>40.000000000</height>
+        <y>578.000000000</y>
+        <width>1280.000000000</width>
+        <height>66.000000000</height>
     </element>
     <element name="Strength_4">
         <x>0.000000000</x>
-        <y>586.000000000</y>
-        <width>1920.000000000</width>
+        <y>386.000000000</y>
+        <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="X_4">
         <x>0.000000000</x>
-        <y>270.000000000</y>
-        <width>1920.000000000</width>
+        <y>70.000000000</y>
+        <width>1280.000000000</width>
         <height>107.000000000</height>
     </element>
     <element name="Y_4">
         <x>0.000000000</x>
-        <y>401.000000000</y>
-        <width>1920.000000000</width>
+        <y>201.000000000</y>
+        <width>1280.000000000</width>
         <height>161.000000000</height>
     </element>
 </positions>

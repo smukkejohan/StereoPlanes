@@ -48,9 +48,9 @@ void GhostLights::draw(int _surfaceId) {
         ofPushMatrix(); {
             ofTranslate(tlx->getValue(), tly->getValue(), tlz->getValue());
             
-            ofRotateX(ofGetElapsedTimef()*6);
-            ofRotateY(ofGetElapsedTimef()*7);
-            ofRotateZ(ofGetElapsedTimef()*8);
+            //ofRotateX(ofGetElapsedTimef()*6);
+            //ofRotateY(ofGetElapsedTimef()*7);
+            //ofRotateZ(ofGetElapsedTimef()*8);
             
             for(int i = 0; i < wallCube->cellMeshes.size(); i++){
                 ofPushMatrix(); {

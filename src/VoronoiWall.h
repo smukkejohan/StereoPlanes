@@ -133,6 +133,8 @@ public:
     vector<Cell> cells;
     float fade = 1;
     
+    string scenename;
+    
     ofxTimeline * tl;
     ofxTLCurves * tlcells;
     ofxTLCurves * tlrotationy;
@@ -183,7 +185,13 @@ public:
         name = _name;
         
         tlcells = tl->addCurves("Cells");
-        tlcells->setValueRangeMax(400);
+        
+        if(scenename == "voroFloor") {
+            tlcells->setValueRangeMax(800);
+        } else {
+            tlcells->setValueRangeMax(400);
+        }
+        
         tlcells->setValueRangeMin(1);
         
         tldifalpha = tl->addCurves("Diffuse alpha");

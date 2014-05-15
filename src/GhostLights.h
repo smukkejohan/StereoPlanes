@@ -24,7 +24,7 @@ public:
     int nCells;
     vector<Cell> cells;
     
-    void setup(float _w = 0.2, float _h = 0.2, float _d = 0.2, int _c = 40) {
+    void setup(float _w = 0.2, float _h = 0.2, float _d = 0.2, int _c = 20) {
         width  = _w;
         height = _h;
         depth  = _d;
@@ -56,7 +56,7 @@ public:
             addCellSeed(con, newCell, i, true);
         }
         
-        cellMeshes = getCellsFromContainer(con, 0);
+        cellMeshes = getCellsFromContainer(con, 0.01);
         
         
         cells.clear();
