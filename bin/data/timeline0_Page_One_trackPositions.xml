@@ -1,68 +1,68 @@
 <positions>
     <element name="Enable Crystal left">
         <x>0.000000000</x>
-        <y>235.000000000</y>
-        <width>1280.000000000</width>
+        <y>435.000000000</y>
+        <width>1920.000000000</width>
         <height>11.000000000</height>
     </element>
     <element name="Enable Crystal right">
         <x>0.000000000</x>
-        <y>270.000000000</y>
-        <width>1280.000000000</width>
+        <y>470.000000000</y>
+        <width>1920.000000000</width>
         <height>191.000000000</height>
     </element>
     <element name="Enable Test Scene">
         <x>0.000000000</x>
-        <y>139.000000000</y>
-        <width>1280.000000000</width>
+        <y>339.000000000</y>
+        <width>1920.000000000</width>
         <height>0.000000000</height>
     </element>
     <element name="Enable World Light">
         <x>0.000000000</x>
-        <y>485.000000000</y>
-        <width>1280.000000000</width>
+        <y>685.000000000</y>
+        <width>1920.000000000</width>
         <height>0.000000000</height>
     </element>
     <element name="Enable flyLightFloor">
         <x>0.000000000</x>
-        <y>557.000000000</y>
-        <width>1280.000000000</width>
+        <y>757.000000000</y>
+        <width>1920.000000000</width>
         <height>14.000000000</height>
     </element>
     <element name="Enable flyLightLeft">
         <x>0.000000000</x>
-        <y>509.000000000</y>
-        <width>1280.000000000</width>
+        <y>709.000000000</y>
+        <width>1920.000000000</width>
         <height>0.000000000</height>
     </element>
     <element name="Enable flyLightRight">
         <x>0.000000000</x>
-        <y>533.000000000</y>
-        <width>1280.000000000</width>
+        <y>733.000000000</y>
+        <width>1920.000000000</width>
         <height>0.000000000</height>
     </element>
     <element name="Enable voroFloor">
         <x>0.000000000</x>
-        <y>211.000000000</y>
-        <width>1280.000000000</width>
+        <y>411.000000000</y>
+        <width>1920.000000000</width>
         <height>0.000000000</height>
     </element>
     <element name="Enable voroLeft">
         <x>0.000000000</x>
-        <y>163.000000000</y>
-        <width>1280.000000000</width>
+        <y>363.000000000</y>
+        <width>1920.000000000</width>
         <height>0.000000000</height>
     </element>
     <element name="Enable voroRight">
         <x>0.000000000</x>
-        <y>187.000000000</y>
-        <width>1280.000000000</width>
+        <y>387.000000000</y>
+        <width>1920.000000000</width>
         <height>0.000000000</height>
     </element>
     <element name="Samlet lyd">
         <x>0.000000000</x>
-        <y>70.000000000</y>
-        <width>1280.000000000</width>
+        <y>270.000000000</y>
+        <width>1920.000000000</width>
         <height>45.000000000</height>
     </element>
 </positions>
