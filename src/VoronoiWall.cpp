@@ -44,6 +44,9 @@ void VoronoiPlane::draw() {
     bool matChanged = true;
     
     ofPushMatrix();
+    
+    ofTranslate(tltransformx->getValue(), tltransformy->getValue());
+    
     ofTranslate(tlrotationfixx->getValue(), tlrotationfixy->getValue());
     ofRotateX(tlrotationy->getValue());
     ofRotateY(tlrotationx->getValue());

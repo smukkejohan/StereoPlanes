@@ -41,6 +41,10 @@ public:
     
     ofxTLCurves * tlspeed;
     
+    ofxTLCurves * tltransformx;
+    ofxTLCurves * tltransformy;
+    
+    
     ofxTLCurves * tldifalpha;
     ofxTLCurves * tlspecalpha;
     
@@ -146,6 +150,9 @@ public:
     ofxTLCurves * tldepth;
     ofxTLCurves * tlnormals;
     
+    ofxTLCurves * tltransformx;
+    ofxTLCurves * tltransformy;
+    
     int fixedPointsLength = 11;
     
     ofPoint fixedPoints [11] = {
@@ -211,6 +218,14 @@ public:
         tldepth->setValueRangeMin(1);
         
         tlnormals = tl->addCurves("Normals");
+        
+        tltransformx = tl->addCurves("Transform x");
+        tltransformx->setValueRangeMax(5);
+        tltransformx->setValueRangeMin(-5);
+        
+        tltransformy = tl->addCurves("Transform y");
+        tltransformy->setValueRangeMax(5);
+        tltransformy->setValueRangeMin(-5);
         
         for(int i=0; i <3; i++) {
             BreakZone * br = new BreakZone;

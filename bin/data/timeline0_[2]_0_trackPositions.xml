@@ -13,20 +13,20 @@
     </element>
     <element name="Diffuse alpha_4">
         <x>0.000000000</x>
-        <y>760.000000000</y>
-        <width>1280.000000000</width>
+        <y>1089.000000000</y>
+        <width>1920.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Multiplier_2">
         <x>0.000000000</x>
-        <y>265.000000000</y>
-        <width>1280.000000000</width>
+        <y>594.000000000</y>
+        <width>1920.000000000</width>
         <height>50.000000000</height>
     </element>
     <element name="Noise_2">
         <x>0.000000000</x>
-        <y>339.000000000</y>
-        <width>1280.000000000</width>
+        <y>668.000000000</y>
+        <width>1920.000000000</width>
         <height>157.000000000</height>
     </element>
     <element name="Push_2">
@@ -37,14 +37,14 @@
     </element>
     <element name="Radius_2">
         <x>0.000000000</x>
-        <y>615.000000000</y>
-        <width>1280.000000000</width>
+        <y>944.000000000</y>
+        <width>1920.000000000</width>
         <height>57.000000000</height>
     </element>
     <element name="Reset_2">
         <x>0.000000000</x>
-        <y>696.000000000</y>
-        <width>1280.000000000</width>
+        <y>1025.000000000</y>
+        <width>1920.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Rotate_4">
@@ -61,32 +61,32 @@
     </element>
     <element name="Specular alpha_4">
         <x>0.000000000</x>
-        <y>824.000000000</y>
-        <width>1280.000000000</width>
+        <y>1153.000000000</y>
+        <width>1920.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Speed_2">
         <x>0.000000000</x>
-        <y>520.000000000</y>
-        <width>1280.000000000</width>
+        <y>849.000000000</y>
+        <width>1920.000000000</width>
         <height>71.000000000</height>
     </element>
     <element name="Strength_2">
         <x>0.000000000</x>
-        <y>198.000000000</y>
-        <width>1280.000000000</width>
-        <height>43.000000000</height>
+        <y>398.000000000</y>
+        <width>1920.000000000</width>
+        <height>172.000000000</height>
     </element>
     <element name="X_2">
         <x>0.000000000</x>
-        <y>70.000000000</y>
-        <width>1280.000000000</width>
+        <y>270.000000000</y>
+        <width>1920.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="Y_2">
         <x>0.000000000</x>
-        <y>134.000000000</y>
-        <width>1280.000000000</width>
+        <y>334.000000000</y>
+        <width>1920.000000000</width>
         <height>40.000000000</height>
     </element>
 </positions>

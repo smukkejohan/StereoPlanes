@@ -113,4 +113,16 @@
         <width>1280.000000000</width>
         <height>40.000000000</height>
     </element>
+    <element name="Transform x_1">
+        <x>0.000000000</x>
+        <y>822.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="Transform y_1">
+        <x>0.000000000</x>
+        <y>886.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
 </positions>
